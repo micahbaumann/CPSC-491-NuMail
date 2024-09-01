@@ -1,7 +1,7 @@
 import socket
 
 def verify_with_second_user(info):
-    second_user_host = '127.0.0.1'  # Change to second user's IP address
+    second_user_host = '192.168.1.12'#'127.0.0.1'  # Change to second user's IP address
     second_user_port = 8888
     
     # Connect to the second user's server
@@ -27,7 +27,7 @@ def handle_first_user(conn):
 
 def start_first_user_server():
     host = '0.0.0.0'
-    port = 8889
+    port = 8888
     
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_socket:
         server_socket.bind((host, port))
