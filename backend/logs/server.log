@@ -1,0 +1,21 @@
+[2024-09-02 00:40:58.391297] [message] Server listening on 127.0.0.1 port 7777
+[2024-09-02 00:40:58.391400] [message] Server listening on 127.0.0.1 port 7778
+[2024-09-02 00:40:58.391467] [message] Server listening on 127.0.0.1 port 7779
+[2024-09-02 00:41:00.117764] [message] Shutting down
+[2024-09-02 00:41:00.118197] [message] Shutdown 127.0.0.1 port 7777
+[2024-09-02 00:41:00.118410] [message] Shutdown 127.0.0.1 port 7778
+[2024-09-02 00:41:00.118590] [message] Shutdown 127.0.0.1 port 7779
+[2024-09-02 00:41:49.205411] [error] NuMail Server Error 7.2.1: Error starting server:
+[Errno 13] error while attempting to bind on address ('127.0.0.1', 7): [errno 13] permission denied
+[2024-09-02 00:42:02.475353] [error] NuMail Server Error 7.2.1: Error starting server:
+[Errno 13] error while attempting to bind on address ('127.0.0.1', 7): [errno 13] permission denied
+[2024-09-02 00:45:42.754328] [message] Server listening on 127.0.0.1 port 7777
+[2024-09-02 00:45:46.864798] [message] Shutting down
+[2024-09-02 00:45:46.864994] [message] Shutdown 127.0.0.1 port 7777
+[2024-09-02 00:45:56.836668] [message] Server listening on 127.0.0.1 port 7777
+[2024-09-02 00:45:56.836764] [message] Server listening on 127.0.0.1 port 7778
+[2024-09-02 00:45:56.836829] [message] Server listening on 127.0.0.1 port 7779
+[2024-09-02 00:45:59.792327] [message] Shutting down
+[2024-09-02 00:45:59.792722] [message] Shutdown 127.0.0.1 port 7777
+[2024-09-02 00:45:59.792907] [message] Shutdown 127.0.0.1 port 7778
+[2024-09-02 00:45:59.793045] [message] Shutdown 127.0.0.1 port 7779

@@ -114,9 +114,72 @@
 
 
 # NOT FROM CHAT GPT FROM https://superfastpython.com/asyncio-server-background-task/
+# import asyncio
+# import signal
+ 
+# # handler for client connections
+# async def handler(reader, writer):
+#     addr = writer.get_extra_info('peername')
+#     print(f"Connection from {addr}")
+
+#     while True:
+#         data = await reader.read(100)
+#         message = data.decode()
+#         if not message:
+#             print(f"Connection from {addr} closed")
+#             break
+
+#         print(f"Received {message} from {addr}")
+#         response = f"Echo: {message}"
+#         writer.write(response.encode())
+#         await writer.drain()
+
+#     writer.close()
+#     await writer.wait_closed()
+ 
+# # task for running the server in the background
+# async def background_server():
+#     # create an asyncio server
+#     server = await asyncio.start_server(handler, '127.0.0.1', 8888)
+#     # report the details of the server
+#     print(server)
+#     try:
+#         # ensure the server is closed correctly
+#         async with server:
+#             # accept client connections forever (kill via control-c)
+#             await server.serve_forever()
+#     finally:
+#         print(f'Server closed: serving={server.is_serving()}')
+ 
+# # main coroutine
+# async def main():
+#     # start and run the server as a background task
+#     server_task = asyncio.create_task(background_server())
+#     def shutdown_handler():
+#         print("Received shutdown signal...")
+#         server_task.cancel()
+
+#     loop = asyncio.get_running_loop()
+#     loop.add_signal_handler(signal.SIGINT, shutdown_handler)
+#     loop.add_signal_handler(signal.SIGTSTP, shutdown_handler)
+#     # wait for the server to shutdown
+#     try:
+#         await server_task
+#     except asyncio.CancelledError:
+#         pass
+ 
+# # start the asyncio event loop
+# if __name__ == "__main__":
+#     try:
+#         asyncio.run(main())
+#     except KeyboardInterrupt:
+#         print("Program interrupted, shutting down...")
+
+
+# FROM CHAT GPT based off of https://superfastpython.com/asyncio-server-background-task/
 import asyncio
 import signal
- 
+
 # handler for client connections
 async def handler(reader, writer):
     addr = writer.get_extra_info('peername')
@@ -136,38 +199,42 @@ async def handler(reader, writer):
 
     writer.close()
     await writer.wait_closed()
- 
+
 # task for running the server in the background
-async def background_server():
+async def background_server(port):
     # create an asyncio server
-    server = await asyncio.start_server(handler, '127.0.0.1', 8888)
+    server = await asyncio.start_server(handler, '127.0.0.1', port)
     # report the details of the server
-    print(server)
+    print(f"Serving on port {port}")
     try:
         # ensure the server is closed correctly
         async with server:
             # accept client connections forever (kill via control-c)
             await server.serve_forever()
     finally:
-        print(f'Server closed: serving={server.is_serving()}')
- 
+        print(f'Server on port {port} closed: serving={server.is_serving()}')
+
 # main coroutine
 async def main():
-    # start and run the server as a background task
-    server_task = asyncio.create_task(background_server())
+    # create tasks for each server
+    ports = [7777, 7778, 7779]
+    server_tasks = [asyncio.create_task(background_server(port)) for port in ports]
+
     def shutdown_handler():
         print("Received shutdown signal...")
-        server_task.cancel()
+        for task in server_tasks:
+            task.cancel()
 
     loop = asyncio.get_running_loop()
     loop.add_signal_handler(signal.SIGINT, shutdown_handler)
     loop.add_signal_handler(signal.SIGTSTP, shutdown_handler)
-    # wait for the server to shutdown
+
+    # wait for the servers to shutdown
     try:
-        await server_task
+        await asyncio.gather(*server_tasks)
     except asyncio.CancelledError:
         pass
- 
+
 # start the asyncio event loop
 if __name__ == "__main__":
     try:

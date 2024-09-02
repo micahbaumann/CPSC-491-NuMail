@@ -10,9 +10,9 @@ class NuMailLogger:
         self.path.mkdir(parents=True, exist_ok=True)
         self.file = file
     
-    def log(self, msg: str) -> None:
+    def log(self, msg: str, type: str | None = "message") -> None:
         abs_file = self.path / self.file
         with open(abs_file.resolve(), "a") as file:
-            file.write(f"[{datetime.now()}] {msg}\n")
+            file.write(f"[{datetime.now()}] [{type}] {msg}\n")
 
 server_log = NuMailLogger("server.log")

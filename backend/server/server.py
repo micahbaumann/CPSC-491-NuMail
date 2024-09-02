@@ -12,25 +12,52 @@ async def handle_request(reader, writer):
     pass
 
 
+async def background_server(ip, port):
+    try:
+        server = await asyncio.start_server(handle_request, ip, port)
+        if server.is_serving():
+            print(f"Server listening on {ip} port {port}")
+            server_log.log(f"Server listening on {ip} port {port}")
+        else:
+            raise NuMailError(code="7.2.1", message="Error starting server")
+        
+    except OSError as e:
+        if e.errno == 98:
+            raise NuMailError(code="7.2.2", message="Port and/or address already in use", other=e)
+        else:
+            raise NuMailError(code="7.2.1", message=f"Error starting server:\n{e}", other=e)
+        
+    try:
+        async with server:
+            await server.serve_forever()
+    finally:
+        print(f"Shutdown {ip} port {port}")
+        server_log.log(f"Shutdown {ip} port {port}")
+
+def shutdown_handler(servers):
+        print(f"Shutting down...")
+        server_log.log(f"Shutting down")
+        for server in servers:
+            server.cancel()
+
 async def main():
     servers = []
-    for port in server_settings["port"]:
-        try:
-            server = await asyncio.start_server(handle_request, server_settings["ip"], port)
-            servers.append(server)
-        except OSError as e:
-            if e.errno == 98:
-                raise NuMailError(code="7.2.2", message="Port and/or address already in use", other=e)
-            else:
-                raise NuMailError(code="7.2.1", message=f"Error starting server:\n{e}", other=e)
+    if isinstance(server_settings["port"], str):
+        ports = [server_settings["port"]]
+    else:
+        ports = server_settings["port"]
+        
+    for port in ports:
+        servers.append(asyncio.create_task(background_server(server_settings["ip"], port)))
     
-    async with asyncio.TaskGroup() as group:
-        for server in servers:
-            group.create_task(server.serve_forever())
-            if server.is_serving():
-                print(f"Server listening on {server.sockets[0].getsockname()[0]}:{server.sockets[0].getsockname()[1]}")
-            else:
-                raise NuMailError(code="7.2.1", message="Error starting server")
+    server_loop = asyncio.get_running_loop()
+    server_loop.add_signal_handler(signal.SIGINT, lambda: shutdown_handler(servers))
+    server_loop.add_signal_handler(signal.SIGTSTP, lambda: shutdown_handler(servers))
+
+    try:
+        await asyncio.gather(*servers)
+    except asyncio.CancelledError:
+        pass
 
 
 if __name__ == "__main__":
@@ -50,34 +77,14 @@ if __name__ == "__main__":
             if config_path.exists():
                 server_config(config_path.resolve())
 
-        # async def handle_client(reader, writer):
-        #     print('New client connected...')
-        #     line = str()
-        #     while line.strip() != 'quit':
-        #         line = (await reader.readline()).decode('utf8')
-        #         if line.strip() == '': continue
-        #         print(f'Received: {line.strip()}')
-        #         writer.write(line.encode('utf8'))
-        #     writer.close()
-        #     print('Client disconnected...')
-
-        # async def run_server(host, port):
-        #     server = await asyncio.start_server(handle_client, host, port)
-        #     print(f'Listening on {host}:{port}...')
-        #     async with server:
-        #         await server.serve_forever()
-
-        # try:
-        #     asyncio.run(run_server(host='localhost', port=int(sys.argv[1])))
-        # except KeyboardInterrupt:
-        #     print("Server stopped.")
-
-        
         asyncio.run(main())
         
     except KeyboardInterrupt:
         print("Server stopped.")
+        server_log.log("Server stopped")
     except NuMailError as e:
         print(e)
+        server_log.log(e, type="error")
     except Exception as e:
-        print(f"An error has occured:\n{e}")
+        print(f"An error has occurred:\n{e}")
+        server_log.log(f"An error has occurred:\n{e}", type="error")
