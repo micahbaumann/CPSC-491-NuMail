@@ -9,9 +9,9 @@ from errors.nuerrors import NuMailError
 from logger.logger import server_log
 from config import server_config, server_settings
 
-from collections import defaultdict
+# from collections import defaultdict
 
-topics = defaultdict(lambda: [])
+# topics = defaultdict(lambda: [])
 
 async def handle_request(reader, writer):
     # Example 1
