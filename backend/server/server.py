@@ -35,7 +35,7 @@ async def background_server(ip, port):
         server_log.log(f"Shutdown {ip} port {port}")
 
 def shutdown_handler(servers):
-        print(f"Shutting down...")
+        print(f"\nShutting down...")
         server_log.log(f"Shutting down")
         for server in servers:
             server.cancel()
