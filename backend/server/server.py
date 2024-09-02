@@ -1,6 +1,7 @@
 import asyncio
 import argparse
 import signal
+import ast
 
 from pathlib import Path
 
@@ -8,7 +9,48 @@ from errors.nuerrors import NuMailError
 from logger.logger import server_log
 from config import server_config, server_settings
 
+from collections import defaultdict
+
+topics = defaultdict(lambda: [])
+
 async def handle_request(reader, writer):
+    # Example 1
+    # addr = writer.get_extra_info('peername')
+    # print(f"New connection: {addr}")
+    # server_log.log(f"New connection: {addr}")
+
+    # while True:
+    #     data = await reader.read(int(server_settings["buffer"]))
+    #     message = data.decode()
+    #     if not message:
+    #         print(f"Connection from {addr} closed")
+    #         break
+
+    #     print(f"Received {message} from {addr}")
+    #     response = f"Echo: {message}"
+    #     writer.write(response.encode())
+    #     await writer.drain()
+
+    # writer.close()
+    # await writer.wait_closed()
+
+
+    # Example 2
+    # print('New client connected...')
+    # line = str()
+    # while line.strip() != 'quit':
+    #     line = (await reader.readline()).decode('utf8')
+    #     if line.strip() == '': continue
+    #     print(f'Received: {line.strip()}')
+    #     cmd = ast.literal_eval(line)
+    #     if cmd['command'] == 'subscribe':
+    #         topics[cmd['topic']].append(writer)
+    #     elif cmd['command'] == 'send':
+    #         writers = topics[cmd['topic']]
+    #         for w in writers:
+    #             w.write(line.encode('utf8'))
+    # writer.close()
+    # print('Client disconnected...')
     pass
 
 
