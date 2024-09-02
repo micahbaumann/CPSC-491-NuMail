@@ -5,7 +5,7 @@ import signal
 from pathlib import Path
 
 from errors.nuerrors import NuMailError
-from logger.logger import NuMailLogger, server_log
+from logger.logger import server_log
 from config import server_config, server_settings
 
 async def handle_request(reader, writer):

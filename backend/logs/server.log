@@ -26,3 +26,10 @@
 [2024-09-02 00:54:09.777794] [message] Shutdown 127.0.0.1 port 7777
 [2024-09-02 00:54:09.777967] [message] Shutdown 127.0.0.1 port 7778
 [2024-09-02 00:54:09.778192] [message] Shutdown 127.0.0.1 port 7779
+[2024-09-02 00:59:18.317263] [message] Server listening on 127.0.0.1 port 7777
+[2024-09-02 00:59:18.317360] [message] Server listening on 127.0.0.1 port 7778
+[2024-09-02 00:59:18.317420] [message] Server listening on 127.0.0.1 port 7779
+[2024-09-02 00:59:24.264122] [message] Shutting down
+[2024-09-02 00:59:24.264287] [message] Shutdown 127.0.0.1 port 7777
+[2024-09-02 00:59:24.264367] [message] Shutdown 127.0.0.1 port 7778
+[2024-09-02 00:59:24.264438] [message] Shutdown 127.0.0.1 port 7779
