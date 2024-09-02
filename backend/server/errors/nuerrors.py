@@ -5,6 +5,10 @@ Config Errors:
     7.1.0: Config Error
     7.1.1: Error opening config file
     7.1.2: Syntax error in Config File
+Server Errors
+    7.2.0 Server Error
+    7.2.1 Error starting server
+    7.2.2 Port and/or address in use
 """
 
 class NuMailError(Exception):

@@ -40,6 +40,8 @@ def server_config(file, rules={}, flexrules={}):
                         value += char
                 
                 if mode == 1:
+                    if value.find(",") > 0:
+                        value = [s.strip() for s in value.split(",")]
                     server_settings[setting] = value
                 else:
                     if not mode == 4:
