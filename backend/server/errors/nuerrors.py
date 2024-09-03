@@ -11,7 +11,19 @@ Server Errors
     7.2.2 Port and/or address in use
 """
 
+"""
+Exception class for NuMail
+"""
 class NuMailError(Exception):
+    """
+    Initializes the object
+    Arguments:
+    code (default "7.0.0"): the NuMail Server error code
+    message (default ""): The description of the error
+    other (optional): a place to pass on prevous exceptions that may have triggered the current one
+    line (optional): the line number the error occured on
+    file (optional): the file the error occured in
+    """
     def __init__(self, code="7.0.0", message="", other=None, line=None, file=None):
         self.code = code
         self.message = message
@@ -20,9 +32,15 @@ class NuMailError(Exception):
         self.file = file
         super().__init__(f"NuMail Error {self.code}: {self.message}")
     
+    """
+    Returns the full description and error code in a string
+    """
     def __str__(self):
         return f"NuMail Server Error {self.code}: {self.message}"
     
+    """
+    Returns a dictionary with all the object data in it
+    """
     def info(self):
         return {
             "code": self.code,

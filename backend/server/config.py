@@ -10,6 +10,7 @@ server_settings = {
 
 """
 Sets global config settings from a file
+Arguments:
 file: the config file name
 rules: manully set rules that overide rules in the file
 flexrules: manully set rules that rules in the file will overide

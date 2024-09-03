@@ -14,6 +14,9 @@ from messagelib.MessageLine import MessageLine
 
 # topics = defaultdict(lambda: [])
 
+"""
+Handles the input and output of incoming requests
+"""
 async def handle_request(reader, writer):
     # Example 1
     addr = writer.get_extra_info('peername')
@@ -82,7 +85,12 @@ async def handle_request(reader, writer):
     # writer.close()
     # print('Client disconnected...')
 
-
+"""
+Starts a new server listening on the port and IP provided
+Arguments:
+ip: the ip to run the server on
+port: the port to run the server on
+"""
 async def background_server(ip, port):
     try:
         server = await asyncio.start_server(handle_request, ip, port)
@@ -105,12 +113,20 @@ async def background_server(ip, port):
         print(f"Shutdown {ip} port {port}")
         server_log.log(f"Shutdown {ip} port {port}")
 
+"""
+Safely shuts down all servers.
+Arguments:
+servers: a list of asyncio tasks
+"""
 def shutdown_handler(servers):
         print(f"\nShutting down...")
         server_log.log(f"Shutting down")
         for server in servers:
             server.cancel()
 
+"""
+The main function that controls the server
+"""
 async def main():
     servers = []
     if isinstance(server_settings["port"], str):
@@ -131,6 +147,7 @@ async def main():
         pass
 
 
+# Main Code
 if __name__ == "__main__":
     try:
         argparser = argparse.ArgumentParser()
