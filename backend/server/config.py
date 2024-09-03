@@ -1,5 +1,7 @@
 from errors.nuerrors import NuMailError
 
+NUMAIL_SERVER_VERSION = "1.0.0"
+
 # Global Config Settings
 server_settings = {
     "ip": "127.0.0.1",

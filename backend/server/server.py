@@ -7,7 +7,8 @@ from pathlib import Path
 
 from errors.nuerrors import NuMailError
 from logger.logger import server_log
-from config import server_config, server_settings
+from config import server_config, server_settings, NUMAIL_SERVER_VERSION
+from messagelib.MessageLine import MessageLine
 
 # from collections import defaultdict
 
@@ -15,24 +16,53 @@ from config import server_config, server_settings
 
 async def handle_request(reader, writer):
     # Example 1
-    # addr = writer.get_extra_info('peername')
-    # print(f"New connection: {addr}")
-    # server_log.log(f"New connection: {addr}")
+    addr = writer.get_extra_info('peername')
+    print(f"New connection: {addr}")
+    server_log.log(f"New connection: {addr}")
 
-    # while True:
-    #     data = await reader.read(int(server_settings["buffer"]))
-    #     message = data.decode()
-    #     if not message:
-    #         print(f"Connection from {addr} closed")
-    #         break
+    if server_settings["domain"]:
+        server_self = server_settings["domain"]
+    else:
+        server_self = server_settings["ip"]
+    
+    writer.write(MessageLine(f"220 {server_self} NuMail Server {NUMAIL_SERVER_VERSION}").bytes())
+    await writer.drain()
 
-    #     print(f"Received {message} from {addr}")
-    #     response = f"Echo: {message}"
-    #     writer.write(response.encode())
-    #     await writer.drain()
+    while True:
+        try:
+            data = await asyncio.wait_for(reader.read(int(server_settings["buffer"])), float(server_settings["read_timeout"]))
+            message = data.decode("ascii")
+            if not message:
+                print(f"Connection from {addr} closed")
+                break
 
-    # writer.close()
-    # await writer.wait_closed()
+            print(f"Received {message} from {addr}")
+            response = f"Echo: {message}"
+            writer.write(response.encode("ascii"))
+            await writer.drain()
+        except TimeoutError:
+            print(f"Connection from {addr} timed out.")
+            writer.write("Error: Connection timed out\r\n".encode("ascii"))
+            await writer.drain()
+            break
+        except UnicodeDecodeError as e:
+            print(f"UnicodeDecodeError: {e}")
+            error_message = "Error: Invalid character\r\n"
+            writer.write(error_message.encode("ascii"))
+            await writer.drain()
+            break
+        except Exception as e:
+            print(f"Exception: {e}")
+            error_message = "Error: Unexpected error\r\n"
+            writer.write(error_message.encode("ascii"))
+            await writer.drain()
+            break
+
+        
+    writer.write("Closing\r\n".encode("ascii"))
+    await writer.drain()
+    writer.close()
+    await writer.wait_closed()
 
 
     # Example 2
@@ -51,7 +81,6 @@ async def handle_request(reader, writer):
     #             w.write(line.encode('utf8'))
     # writer.close()
     # print('Client disconnected...')
-    pass
 
 
 async def background_server(ip, port):
