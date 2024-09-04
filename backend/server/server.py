@@ -10,10 +10,6 @@ from logger.logger import server_log
 from config import server_config, server_settings, NUMAIL_SERVER_VERSION
 from messagelib.MessageLine import MessageLine
 
-# from collections import defaultdict
-
-# topics = defaultdict(lambda: [])
-
 """
 Handles the input and output of incoming requests
 Arguments:
@@ -47,10 +43,10 @@ async def handle_request(reader, writer):
                 print(f"Connection from {addr} closed")
                 break
 
-            print(f"Received {message} from {addr}")
-            response = f"Echo: {message}"
-            writer.write(response.encode("ascii"))
-            await writer.drain()
+            # print(f"Received {message} from {addr}")
+            # response = f"Echo: {message}"
+            # writer.write(response.encode("ascii"))
+            # await writer.drain()
         except TimeoutError:
             writer.write(MessageLine("500 Connection timed out").bytes())
             await writer.drain()
