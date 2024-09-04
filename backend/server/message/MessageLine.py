@@ -7,11 +7,11 @@ class MessageLine:
     Initializes the object
     Arguments:
     line (default ""): the line to format
-    msg_stack (optional): a list of recent messages
+    msg_stack (optional): the message object
     """
     def __init__(self, line:str|None = "", msg_stack=None) -> None:
         self.line = line
-        msg_stack.append(["server", f"{self.line}\r\n".encode('ascii', 'replace').decode("ascii")])
+        msg_stack.append("server", f"{self.line}\r\n".encode('ascii', 'replace').decode("ascii"))
 
     
     """
