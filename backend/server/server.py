@@ -6,9 +6,11 @@ import ast
 from pathlib import Path
 
 from errors.nuerrors import NuMailError
-from logger.logger import server_log
+from logger.logger import server_log, NuMailLogger
 from config import server_config, server_settings, NUMAIL_SERVER_VERSION
-from messagelib.MessageLine import MessageLine
+from message.MessageLine import MessageLine
+from message.email.email import email_parse
+from message.numail.numail import numail_parse
 
 """
 Handles the input and output of incoming requests
@@ -18,8 +20,8 @@ writer: asyncio writer object
 """
 async def handle_request(reader, writer):
     addr = writer.get_extra_info('peername')
-    print(f"New connection: {addr}")
-    server_log.log(f"New connection: {addr}")
+    print(f"New connection from {addr[0]} port {addr[1]}")
+    server_log.log(f"New connection from {addr[0]} port {addr[1]}")
 
     if "domain" in server_settings and server_settings["domain"]:
         server_self = server_settings["domain"]
@@ -28,48 +30,73 @@ async def handle_request(reader, writer):
     else:
         server_self = server_settings["ip"]
     
-    writer.write(MessageLine(f"220 {server_self} NuMail Server {NUMAIL_SERVER_VERSION}").bytes())
+    message_stack = []
+    writer.write(MessageLine(f"220 {server_self} NuMail Server {NUMAIL_SERVER_VERSION}", message_stack).bytes())
     await writer.drain()
 
+    check_numail = False
+    client_self_id = ""
+    client_numail_version = ""
     while True:
         try:
             data = await asyncio.wait_for(reader.read(int(server_settings["buffer"])), float(server_settings["read_timeout"]))
             message = data.decode("ascii")
+            message_stack.append(["client", message])
+            trim_message = message.strip()
             if not message:
-                print(f"Connection from {addr} closed")
+                print(f"Connection from {addr[0]} port {addr[1]} closed")
                 break
 
-            if message.strip() == "QUIT".strip():
-                print(f"Connection from {addr} closed")
+            if trim_message == "QUIT":
+                print(f"Connection from {addr[0]} port {addr[1]} closed")
                 break
+            elif check_numail:
+                if trim_message == "NUML" or (len(trim_message) > 4 and trim_message[:5] == "NUML "):
+                    client_numail_version = trim_message[4:].trim()
+                    await numail_parse(reader, writer, message_stack)
+                else:
+                    await email_parse(reader, writer, message_stack)
 
+            elif trim_message == "EHLO" or (len(trim_message) > 4 and trim_message[:5] == "EHLO "):
+                if len(trim_message) > 4:
+                    client_self_id = trim_message[4:].trim()
+                writer.write(MessageLine(f"NUMAIL Hello {client_self_id}", message_stack).bytes())
+                await writer.drain()
+
+            elif trim_message == "HELO" or (len(trim_message) > 4 and trim_message[:5] == "HELO "):
+                await email_parse(reader, writer, message_stack)
+            else:
+                writer.write(MessageLine("500 Command unrecognized", message_stack).bytes())
+                await writer.drain()
+            
             # print(f"Received {message} from {addr}")
             # response = f"Echo: {message}"
             # writer.write(response.encode("ascii"))
             # await writer.drain()
         except TimeoutError:
-            writer.write(MessageLine("500 Connection timed out").bytes())
+            writer.write(MessageLine("500 Connection timed out", message_stack).bytes())
             await writer.drain()
-            server_log.log(f"Connection {addr} timeout", type="request_warning")
+            server_log.log(f"Connection {addr[0]} port {addr[1]} timeout", type="request_warning")
             break
         except UnicodeDecodeError as e:
-            writer.write(MessageLine("500 Invalid character").bytes())
+            writer.write(MessageLine("500 Invalid character", message_stack).bytes())
             await writer.drain()
-            server_log.log(f"Connection {addr} invalid character", type="request_error")
+            server_log.log(f"Connection {addr[0]} port {addr[1]} invalid character", type="request_error")
             break
         except Exception as e:
-            writer.write(MessageLine("500 Unexpected error").bytes())
+            writer.write(MessageLine("500 Unexpected error", message_stack).bytes())
             await writer.drain()
-            server_log.log(f"Connection {addr}:\n{e}", type="request_error")
+            server_log.log(f"Connection {addr[0]} port {addr[1]}:\n{e}", type="request_error")
             break
 
         
-    writer.write(MessageLine(f"221 2.0.0 {server_self} closing connection").bytes())
+    writer.write(MessageLine(f"221 2.0.0 {server_self} closing connection", message_stack).bytes())
     await writer.drain()
     writer.close()
     await writer.wait_closed()
-    server_log.log(f"Connection {addr} closed")
-    print(f"Connection {addr} closed")
+    server_log.log(f"Connection {addr[0]} port {addr[1]} closed")
+    print(f"Connection {addr[0]} port {addr[1]} closed")
+    message_receipt.log(message_stack, type=None)
 
 
     # Example 2
@@ -168,6 +195,8 @@ if __name__ == "__main__":
             config_path = Path(__file__).parent.parent / "config" / "settings.conf"
             if config_path.exists():
                 server_config(config_path.resolve())
+
+        message_receipt = NuMailLogger("messages.log")
 
         asyncio.run(main())
         
