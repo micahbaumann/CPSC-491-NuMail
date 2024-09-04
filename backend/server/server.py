@@ -16,15 +16,19 @@ from messagelib.MessageLine import MessageLine
 
 """
 Handles the input and output of incoming requests
+Arguments:
+reader: asyncio reader object
+writer: asyncio writer object
 """
 async def handle_request(reader, writer):
-    # Example 1
     addr = writer.get_extra_info('peername')
     print(f"New connection: {addr}")
     server_log.log(f"New connection: {addr}")
 
-    if server_settings["domain"]:
+    if "domain" in server_settings and server_settings["domain"]:
         server_self = server_settings["domain"]
+    elif "public_ip" in server_settings and server_settings["public_ip"]:
+        server_self = server_settings["public_ip"]
     else:
         server_self = server_settings["ip"]
     
@@ -38,6 +42,10 @@ async def handle_request(reader, writer):
             if not message:
                 print(f"Connection from {addr} closed")
                 break
+            
+            if message.strip() == "QUIT".strip():
+                print(f"Connection from {addr} closed")
+                break
 
             print(f"Received {message} from {addr}")
             response = f"Echo: {message}"
@@ -47,18 +55,21 @@ async def handle_request(reader, writer):
             print(f"Connection from {addr} timed out.")
             writer.write("Error: Connection timed out\r\n".encode("ascii"))
             await writer.drain()
+            server_log.log(f"Connection {addr} timeout", type="request_warning")
             break
         except UnicodeDecodeError as e:
             print(f"UnicodeDecodeError: {e}")
             error_message = "Error: Invalid character\r\n"
             writer.write(error_message.encode("ascii"))
             await writer.drain()
+            server_log.log(f"Connection {addr} invalid character", type="request_error")
             break
         except Exception as e:
             print(f"Exception: {e}")
             error_message = "Error: Unexpected error\r\n"
             writer.write(error_message.encode("ascii"))
             await writer.drain()
+            server_log.log(f"Connection {addr}:\n{e}", type="request_error")
             break
 
         
@@ -66,6 +77,8 @@ async def handle_request(reader, writer):
     await writer.drain()
     writer.close()
     await writer.wait_closed()
+    server_log.log(f"Connection {addr} closed")
+    print(f"Connection {addr} closed")
 
 
     # Example 2
