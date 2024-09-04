@@ -64,7 +64,7 @@ async def handle_request(reader, writer):
             break
 
         
-    writer.write(MessageLine("221 Closing").bytes())
+    writer.write(MessageLine(f"221 2.0.0 {server_self} closing connection").bytes())
     await writer.drain()
     writer.close()
     await writer.wait_closed()
