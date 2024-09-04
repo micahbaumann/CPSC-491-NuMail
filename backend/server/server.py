@@ -42,7 +42,7 @@ async def handle_request(reader, writer):
             if not message:
                 print(f"Connection from {addr} closed")
                 break
-            
+
             if message.strip() == "QUIT".strip():
                 print(f"Connection from {addr} closed")
                 break
@@ -52,28 +52,23 @@ async def handle_request(reader, writer):
             writer.write(response.encode("ascii"))
             await writer.drain()
         except TimeoutError:
-            print(f"Connection from {addr} timed out.")
-            writer.write("Error: Connection timed out\r\n".encode("ascii"))
+            writer.write(MessageLine("500 Connection timed out").bytes())
             await writer.drain()
             server_log.log(f"Connection {addr} timeout", type="request_warning")
             break
         except UnicodeDecodeError as e:
-            print(f"UnicodeDecodeError: {e}")
-            error_message = "Error: Invalid character\r\n"
-            writer.write(error_message.encode("ascii"))
+            writer.write(MessageLine("500 Invalid character").bytes())
             await writer.drain()
             server_log.log(f"Connection {addr} invalid character", type="request_error")
             break
         except Exception as e:
-            print(f"Exception: {e}")
-            error_message = "Error: Unexpected error\r\n"
-            writer.write(error_message.encode("ascii"))
+            writer.write(MessageLine("500 Unexpected error").bytes())
             await writer.drain()
             server_log.log(f"Connection {addr}:\n{e}", type="request_error")
             break
 
         
-    writer.write("Closing\r\n".encode("ascii"))
+    writer.write(MessageLine("221 Closing").bytes())
     await writer.drain()
     writer.close()
     await writer.wait_closed()
