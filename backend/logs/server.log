@@ -191,3 +191,7 @@
 [2024-09-03 21:27:52.144884] [message] Shutdown 127.0.0.1 port 7777
 [2024-09-03 21:27:52.145130] [message] Shutdown 127.0.0.1 port 7778
 [2024-09-03 21:27:52.145354] [message] Shutdown 127.0.0.1 port 7779
+[2024-09-03 23:01:12.496017] [message] Shutting down
+[2024-09-03 23:01:12.497721] [message] Shutdown 127.0.0.1 port 7777
+[2024-09-03 23:01:12.497812] [message] Shutdown 127.0.0.1 port 7778
+[2024-09-03 23:01:12.497870] [message] Shutdown 127.0.0.1 port 7779
