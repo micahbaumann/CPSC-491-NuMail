@@ -9,8 +9,7 @@ from errors.nuerrors import NuMailError
 from logger.logger import server_log, NuMailLogger
 from config import server_config, server_settings, NUMAIL_SERVER_VERSION
 from message.MessageLine import MessageLine
-from message.email.email import email_parse
-from message.numail.numail import numail_parse
+from message.message_parse import email_parse, numail_parse
 from message.NuMailMessage import NuMailMessage
 
 """
@@ -33,6 +32,7 @@ async def handle_request(reader, writer):
     
     # message_stack = []
     message_info = NuMailMessage()
+    message_info.set_client_ip(addr)
     writer.write(MessageLine(f"220 {server_self} NuMail Server {NUMAIL_SERVER_VERSION}", message_info).bytes())
     await writer.drain()
 
