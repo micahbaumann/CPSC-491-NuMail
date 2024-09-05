@@ -1,7 +1,7 @@
 import asyncio
 
-# from MessageLine import MessageLine
-# from NuMailMessage import NuMailMessage
+from message.MessageLine import MessageLine
+from message.NuMailMessage import NuMailMessage
 
 async def numail_parse(reader, writer, message_stack):
     writer.write(b"numail\r\n")
