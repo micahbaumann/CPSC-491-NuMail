@@ -341,3 +341,12 @@ NuMailMessage.append() missing 1 required positional argument: 'content'
 [2024-09-05 19:19:43.986312] [message] Shutdown 127.0.0.1 port 7778
 [2024-09-05 19:19:43.986552] [message] Shutdown 127.0.0.1 port 7779
 [2024-09-05 19:19:43.987096] [message] Shutdown 127.0.0.1 port 7777
+[2024-09-05 19:49:27.091629] [message] Server listening on 127.0.0.1 port 7777
+[2024-09-05 19:49:27.093415] [message] Server listening on 127.0.0.1 port 7778
+[2024-09-05 19:49:27.093635] [message] Server listening on 127.0.0.1 port 7779
+[2024-09-05 19:49:47.536003] [message] New connection from 127.0.0.1 port 35194
+[2024-09-05 19:49:51.250020] [message] Connection 127.0.0.1 port 35194 closed
+[2024-09-05 19:49:55.523000] [message] Shutting down
+[2024-09-05 19:49:55.523774] [message] Shutdown 127.0.0.1 port 7777
+[2024-09-05 19:49:55.524496] [message] Shutdown 127.0.0.1 port 7778
+[2024-09-05 19:49:55.525105] [message] Shutdown 127.0.0.1 port 7779

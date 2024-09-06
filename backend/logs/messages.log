@@ -12,3 +12,4 @@
 [2024-09-04 01:13:55.801110] [numail] [['server', '220 127.0.0.1 NuMail Server 1.0.0\r\n'], ['client', 'EHLO example.com\r\n'], ['server', '500 Unexpected error\r\n'], ['server', '221 2.0.0 127.0.0.1 closing connection\r\n']]
 [2024-09-04 01:14:32.935890] [numail] [['server', '220 127.0.0.1 NuMail Server 1.0.0\r\n'], ['client', 'EHLO example.com\r\n'], ['server', '500 Unexpected error\r\n'], ['server', '221 2.0.0 127.0.0.1 closing connection\r\n']]
 [2024-09-04 01:17:45.689296] [numail] [['server', '220 127.0.0.1 NuMail Server 1.0.0\r\n'], ['client', 'EHLO example.com\r\n'], ['server', 'NUMAIL Hello example.com\r\n'], ['client', 'NUML 1.0\r\n'], ['client', 'QUIT\r\n'], ['server', '221 2.0.0 127.0.0.1 closing connection\r\n']]
+[2024-09-05 19:49:51.250295] [numail] [['server', '220 127.0.0.1 NuMail Server 1.0.0\r\n'], ['client', 'QUIT\r\n'], ['server', '221 2.0.0 127.0.0.1 closing connection\r\n']]
