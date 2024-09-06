@@ -37,3 +37,13 @@ class NuMailMessage:
     
     def get_client_ip(self) -> tuple:
         return self.client_ip
+    
+    def get_details(self) -> dict:
+        return {
+            "message_stack": self.message_stack,
+            "type": self.type,
+            "numail": self.numail,
+            "email": self.email,
+            "client_self_id": self.client_self_id,
+            "client_ip": self.client_ip
+        }

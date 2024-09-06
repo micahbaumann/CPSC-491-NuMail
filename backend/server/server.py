@@ -47,7 +47,8 @@ async def handle_request(reader, writer):
             if not message:
                 print(f"Connection from {addr[0]} port {addr[1]} closed")
                 break
-
+            
+            parse_end = "continue"
             if trim_message == "QUIT":
                 print(f"Connection from {addr[0]} port {addr[1]} closed")
                 break
@@ -55,25 +56,27 @@ async def handle_request(reader, writer):
                 if trim_message == "NUML" or (len(trim_message) > 4 and trim_message[:5] == "NUML "):
                     message_info.set_type("numail")
                     message_info.details()["client_numail_version"] = trim_message[4:].strip()
-                    await numail_parse(reader, writer, message_info)
+                    parse_end = await numail_parse(reader, writer, message_info)
                 else:
                     message_info.set_type("email")
-                    await email_parse(reader, writer, message_info)
+                    parse_end = await email_parse(reader, writer, message_info)
 
             elif trim_message == "EHLO" or (len(trim_message) > 4 and trim_message[:5] == "EHLO "):
                 check_numail = True
                 if len(trim_message) > 4:
                     message_info.set_client_self_id(trim_message[4:].strip())
-                writer.write(MessageLine(f"NUMAIL Hello {message_info.get_client_self_id()}", message_info).bytes())
+                writer.write(MessageLine(f"250 NUMAIL Hello {message_info.get_client_self_id()}", message_info).bytes())
                 await writer.drain()
 
             elif trim_message == "HELO" or (len(trim_message) > 4 and trim_message[:5] == "HELO "):
                 message_info.set_type("email")
-                await email_parse(reader, writer, message_info)
+                parse_end = await email_parse(reader, writer, message_info)
             else:
                 writer.write(MessageLine("500 Command unrecognized", message_info).bytes())
                 await writer.drain()
             
+            if parse_end == "exit":
+                break
             # print(f"Received {message} from {addr}")
             # response = f"Echo: {message}"
             # writer.write(response.encode("ascii"))
@@ -101,7 +104,7 @@ async def handle_request(reader, writer):
     await writer.wait_closed()
     server_log.log(f"Connection {addr[0]} port {addr[1]} closed")
     print(f"Connection {addr[0]} port {addr[1]} closed")
-    message_receipt.log(message_info.stack(), type=message_info.get_type())
+    message_receipt.log(["THIS IS WHERE THE MESSAGE ID WILL GO WHEN IMPLEMENTED", message_info.stack()], type=message_info.get_type())
 
 
     # Example 2
