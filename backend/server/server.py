@@ -65,22 +65,22 @@ async def handle_request(reader, writer):
                 check_numail = True
                 if len(trim_message) > 4:
                     message_info.set_client_self_id(trim_message[4:].strip())
-                writer.write(MessageLine(f"250 NUMAIL Hello {message_info.get_client_self_id()}", message_info).bytes())
+                writer.write(MessageLine(f"250-NUMAIL Hello {message_info.get_client_self_id()}", message_info).bytes())
+                writer.write(MessageLine(f"250 AUTH LOGIN", message_info).bytes())
                 await writer.drain()
 
             elif trim_message == "HELO" or (len(trim_message) > 4 and trim_message[:5] == "HELO "):
                 message_info.set_type("email")
                 parse_end = await email_parse(reader, writer, message_info)
+            elif trim_message == "NOOP" or (len(trim_message) > 4 and trim_message[:5] == "NOOP "):
+                writer.write(MessageLine(f"250 Ok", message_info).bytes())
+                await writer.drain()
             else:
                 writer.write(MessageLine("500 Command unrecognized", message_info).bytes())
                 await writer.drain()
             
             if parse_end == "exit":
                 break
-            # print(f"Received {message} from {addr}")
-            # response = f"Echo: {message}"
-            # writer.write(response.encode("ascii"))
-            # await writer.drain()
         except TimeoutError:
             writer.write(MessageLine("500 Connection timed out", message_info).bytes())
             await writer.drain()

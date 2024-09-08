@@ -1,9 +1,20 @@
 import asyncio
+import base64
 
 from message.MessageLine import MessageLine
 from message.NuMailMessage import NuMailMessage
 from logger.logger import server_log
 from config import server_settings
+
+def check_command(string:str, equals:str, commands=2) -> bool:
+    retn = None
+    if commands == 0:
+        retn = string == equals or (len(string) > 4 and string[:5] == equals + " ")
+    elif commands == 1:
+        retn = len(string) > 4 and string[:5] == equals + " "
+    else:
+        retn = string == equals
+    return retn
 
 async def numail_parse(reader, writer, message_stack):
     # writer.write(b"numail\r\n")
@@ -22,16 +33,29 @@ async def numail_parse(reader, writer, message_stack):
             if not message:
                 print(f"Connection from {addr[0]} port {addr[1]} closed")
                 break
-
+            
             if trim_message == "QUIT":
                 return "exit"
-            elif trim_message == "EHLO" or (len(trim_message) > 4 and trim_message[:5] == "EHLO "):
-                writer.write(MessageLine(f"250 NUMAIL Hello {message_stack.get_client_self_id()}", message_stack).bytes())
+            elif check_command(trim_message, "EHLO", 0):
+                writer.write(MessageLine(f"503 Bad sequence of commands", message_stack).bytes())
                 await writer.drain()
-
-            elif trim_message == "HELO" or (len(trim_message) > 4 and trim_message[:5] == "HELO "):
-                writer.write(MessageLine(f"250 Hello {message_stack.get_client_self_id()}", message_stack).bytes())
+            elif check_command(trim_message, "HELO", 0):
+                writer.write(MessageLine(f"503 Bad sequence of commands", message_stack).bytes())
                 await writer.drain()
+            elif check_command(trim_message, "RSET", 0):
+                writer.write(MessageLine(f"250 Ok", message_stack).bytes())
+                await writer.drain()
+                return "continue"
+            elif check_command(trim_message, "NOOP", 0):
+                writer.write(MessageLine(f"250 Ok", message_stack).bytes())
+                await writer.drain()
+            elif check_command(trim_message, "AUTH", 1):
+                if trim_message[5:] == "LOGIN":
+                    writer.write(MessageLine(f"334 {base64.b64encode(b"Username:").decode('ascii')}", message_stack).bytes())
+                    await writer.drain()
+                else:
+                    writer.write(MessageLine(f"504 \"{trim_message[5:]}\" not implemented", message_stack).bytes())
+                    await writer.drain()
             else:
                 writer.write(MessageLine("500 Command unrecognized", message_stack).bytes())
                 await writer.drain()
@@ -52,6 +76,7 @@ async def numail_parse(reader, writer, message_stack):
             await writer.drain()
             server_log.log(f"Connection {addr[0]} port {addr[1]}:\n{e}", type="request_error")
             break
+    return "exit"
 
 async def email_parse(reader, writer, message_stack):
     writer.write(b"email\r\n")
