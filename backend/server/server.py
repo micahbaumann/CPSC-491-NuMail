@@ -168,10 +168,10 @@ The main function that controls the server
 """
 async def main():
     servers = []
-    if isinstance(server_settings["port"], str):
-        ports = [server_settings["port"]]
-    else:
+    if isinstance(server_settings["port"], list):
         ports = server_settings["port"]
+    else:
+        ports = [server_settings["port"]]
         
     for port in ports:
         servers.append(asyncio.create_task(background_server(server_settings["ip"], port)))

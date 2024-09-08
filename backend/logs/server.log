@@ -382,3 +382,92 @@ NuMailMessage.append() missing 1 required positional argument: 'content'
 [2024-09-06 01:37:23.432485] [message] Shutdown 127.0.0.1 port 7777
 [2024-09-06 01:37:23.432740] [message] Shutdown 127.0.0.1 port 7778
 [2024-09-06 01:37:23.432912] [message] Shutdown 127.0.0.1 port 7779
+[2024-09-07 19:19:22.842142] [message] Server listening on 127.0.0.1 port 7777
+[2024-09-07 19:19:22.842519] [message] Server listening on 127.0.0.1 port 7778
+[2024-09-07 19:19:22.842596] [message] Server listening on 127.0.0.1 port 7779
+[2024-09-07 19:19:25.390877] [message] Shutting down
+[2024-09-07 19:19:25.391039] [message] Shutdown 127.0.0.1 port 7777
+[2024-09-07 19:19:25.391117] [message] Shutdown 127.0.0.1 port 7778
+[2024-09-07 19:19:25.391194] [message] Shutdown 127.0.0.1 port 7779
+[2024-09-07 19:19:40.177379] [error] An error has occurred:
+'int' object is not iterable
+[2024-09-07 19:19:51.123019] [error] An error has occurred:
+'int' object is not iterable
+[2024-09-07 19:21:28.084990] [message] Server listening on 127.0.0.1 port 7777
+[2024-09-07 19:21:32.034976] [message] Shutting down
+[2024-09-07 19:21:32.035453] [message] Shutdown 127.0.0.1 port 7777
+[2024-09-07 19:22:00.853413] [error] NuMail Server Error 7.2.1: Error starting server:
+[Errno 13] error while attempting to bind on address ('127.0.0.1', 25): [errno 13] permission denied
+[2024-09-07 19:22:21.574173] [message] Server listening on 127.0.0.1 port 7777
+[2024-09-07 19:22:21.574273] [message] Server listening on 127.0.0.1 port 7778
+[2024-09-07 19:22:21.574337] [message] Server listening on 127.0.0.1 port 7779
+[2024-09-07 19:22:27.472149] [message] Shutting down
+[2024-09-07 19:22:27.472441] [message] Shutdown 127.0.0.1 port 7777
+[2024-09-07 19:22:27.472627] [message] Shutdown 127.0.0.1 port 7778
+[2024-09-07 19:22:27.472775] [message] Shutdown 127.0.0.1 port 7779
+[2024-09-07 19:22:28.730593] [message] Server listening on 127.0.0.1 port 7777
+[2024-09-07 19:22:28.730727] [message] Server listening on 127.0.0.1 port 7778
+[2024-09-07 19:22:28.730786] [message] Server listening on 127.0.0.1 port 7779
+[2024-09-07 19:22:28.730913] [message] Shutdown 127.0.0.1 port 7778
+[2024-09-07 19:22:28.730985] [message] Shutdown 127.0.0.1 port 7779
+[2024-09-07 19:22:28.731041] [message] Shutdown 127.0.0.1 port 7777
+[2024-09-07 19:22:28.731217] [error] NuMail Server Error 7.2.1: Error starting server:
+[Errno 13] error while attempting to bind on address ('127.0.0.1', 25): [errno 13] permission denied
+[2024-09-07 19:48:54.927322] [message] Server listening on 127.0.0.1 port 7777
+[2024-09-07 19:48:54.927417] [message] Server listening on 127.0.0.1 port 7778
+[2024-09-07 19:48:54.927486] [message] Server listening on 127.0.0.1 port 7779
+[2024-09-07 19:48:56.224591] [message] Shutting down
+[2024-09-07 19:48:56.225120] [message] Shutdown 127.0.0.1 port 7777
+[2024-09-07 19:48:56.225429] [message] Shutdown 127.0.0.1 port 7778
+[2024-09-07 19:48:56.225666] [message] Shutdown 127.0.0.1 port 7779
+[2024-09-07 19:49:03.351296] [message] Server listening on 127.0.0.1 port 7777
+[2024-09-07 19:49:04.496920] [message] Shutting down
+[2024-09-07 19:49:04.497400] [message] Shutdown 127.0.0.1 port 7777
+[2024-09-07 19:49:15.661480] [message] Server listening on 127.0.0.1 port 7777
+[2024-09-07 19:49:19.279322] [message] Shutting down
+[2024-09-07 19:49:19.279750] [message] Shutdown 127.0.0.1 port 7777
+[2024-09-07 19:49:42.880224] [message] Server listening on 127.0.0.1 port 7777
+[2024-09-07 19:49:44.337330] [message] Shutting down
+[2024-09-07 19:49:44.337499] [message] Shutdown 127.0.0.1 port 7777
+[2024-09-07 19:50:15.318665] [message] Server listening on 127.0.0.1 port 7777
+[2024-09-07 19:50:16.706344] [message] Shutting down
+[2024-09-07 19:50:16.706770] [message] Shutdown 127.0.0.1 port 7777
+[2024-09-07 19:50:30.351807] [message] Server listening on 127.0.0.1 port 7777
+[2024-09-07 19:50:31.328270] [message] Shutting down
+[2024-09-07 19:50:31.328610] [message] Shutdown 127.0.0.1 port 7777
+[2024-09-07 19:51:23.319672] [message] Server listening on 127.0.0.1 port 7777
+[2024-09-07 19:52:22.494411] [message] Shutting down
+[2024-09-07 19:52:22.494963] [message] Shutdown 127.0.0.1 port 7777
+[2024-09-07 19:52:23.912574] [message] Server listening on 127.0.0.1 port 7777
+[2024-09-07 19:53:00.209844] [message] Shutting down
+[2024-09-07 19:53:00.210308] [message] Shutdown 127.0.0.1 port 7777
+[2024-09-07 19:53:01.493599] [message] Server listening on 127.0.0.1 port 7777
+[2024-09-07 19:53:16.112494] [message] Shutting down
+[2024-09-07 19:53:16.112815] [message] Shutdown 127.0.0.1 port 7777
+[2024-09-07 19:54:38.762833] [message] Server listening on 127.0.0.1 port 7777
+[2024-09-07 20:04:26.689585] [message] Shutting down
+[2024-09-07 20:04:26.691115] [message] Shutdown 127.0.0.1 port 7777
+[2024-09-07 20:07:10.508105] [error] NuMail Server Error 7.1.2: Syntax error in config file on line 1
+[2024-09-07 20:13:04.944569] [message] Server listening on 127.0.0.1 port 7776
+[2024-09-07 20:13:09.857746] [message] Shutting down
+[2024-09-07 20:13:09.858077] [message] Shutdown 127.0.0.1 port 7776
+[2024-09-07 20:13:35.287418] [message] Server listening on 127.0.0.1 port 7776
+[2024-09-07 20:13:36.619976] [message] Shutting down
+[2024-09-07 20:13:36.620216] [message] Shutdown 127.0.0.1 port 7776
+[2024-09-07 20:13:46.021362] [error] NuMail Server Error 7.2.1: Error starting server:
+[Errno 13] error while attempting to bind on address ('127.0.0.1', 25): [errno 13] permission denied
+[2024-09-07 20:14:06.250655] [error] NuMail Server Error 7.2.1: Error starting server:
+[Errno 13] error while attempting to bind on address ('127.0.0.1', 25): [errno 13] permission denied
+[2024-09-07 20:17:31.316684] [message] Server listening on 127.0.0.1 port 25
+[2024-09-07 20:17:33.965944] [message] Shutting down
+[2024-09-07 20:17:33.966276] [message] Shutdown 127.0.0.1 port 25
+[2024-09-07 20:18:32.444486] [message] Server listening on 127.0.0.1 port 25
+[2024-09-07 20:18:34.049164] [message] Shutting down
+[2024-09-07 20:18:34.049617] [message] Shutdown 127.0.0.1 port 25
+[2024-09-07 20:18:40.943633] [message] Server listening on 127.0.0.1 port 7777
+[2024-09-07 20:18:40.943731] [message] Server listening on 127.0.0.1 port 7778
+[2024-09-07 20:18:40.943779] [message] Server listening on 127.0.0.1 port 7779
+[2024-09-07 20:18:44.635255] [message] Shutting down
+[2024-09-07 20:18:44.635408] [message] Shutdown 127.0.0.1 port 7777
+[2024-09-07 20:18:44.635492] [message] Shutdown 127.0.0.1 port 7778
+[2024-09-07 20:18:44.635564] [message] Shutdown 127.0.0.1 port 7779

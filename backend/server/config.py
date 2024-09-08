@@ -5,7 +5,9 @@ NUMAIL_SERVER_VERSION = "1.0.0"
 # Global Config Settings
 server_settings = {
     "ip": "127.0.0.1",
-    "port": 7777,
+    "port": 25,
+    "buffer": 1024,
+    "read_timeout": 300,
 }
 
 """
@@ -25,29 +27,35 @@ def server_config(file, rules={}, flexrules={}):
         for line in f:
             clean_line = line.strip()
             if clean_line:
+                total_line = ""
                 setting = ""
                 value = ""
                 mode = 0
                 for char in clean_line:
                     if char == "#":
-                        mode = 4
+                        if total_line == "":
+                            mode = 2
                         break
                     elif char == "=":
+                        total_line += char
                         if mode == 1:
                             mode = 3
                             break
                         mode = 1
                     elif mode == 0:
                         setting += char
+                        total_line += char
                     elif mode == 1:
                         value += char
+                        total_line += char
                 
                 if mode == 1:
-                    if value.find(",") > 0:
-                        value = [s.strip() for s in value.split(",")]
-                    server_settings[setting] = value
+                    if value.find(",") >= 0:
+                        server_settings[setting] = [s.strip() for s in value.split(",")]
+                    else:
+                        server_settings[setting] = value
                 else:
-                    if not mode == 4:
+                    if mode != 2:
                         f.close()
                         raise NuMailError(file=file, line=counter, code="7.1.2", message=f"Syntax error in config file on line {counter}")
             counter += 1
