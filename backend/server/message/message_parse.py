@@ -6,70 +6,43 @@ from message.NuMailMessage import NuMailMessage
 from logger.logger import server_log
 from config import server_settings
 
-# def numail_server_parser(reader, writer, message_stack):
-#     def inner(func):
-#         async def wrapper(*args, **kwargs):
-#             addr = message_stack.get_client_ip()
-#             while True:
-#                 try:
-#                     data = await asyncio.wait_for(reader.read(int(server_settings["buffer"])), float(server_settings["read_timeout"]))
-#                     message = data.decode("ascii")
-#                     message_stack.append("client", message)
-#                     trim_message = message.strip()
-#                     if not message:
-#                         print(f"Connection from {addr[0]} port {addr[1]} closed")
-#                         break
+def numail_server_parser(reader, writer, message_stack):
+    def inner(func):
+        async def wrapper(*args, **kwargs):
+            addr = message_stack.get_client_ip()
+            local_stack = []
+            result = "continue"
+            while result == "continue" or result == None:
+                try:
+                    data = await asyncio.wait_for(reader.read(int(server_settings["buffer"])), float(server_settings["read_timeout"]))
+                    message = data.decode("ascii")
+                    message_stack.append("client", message)
+                    trim_message = message.strip()
+                    local_stack.append(trim_message)
+                    if not message:
+                        print(f"Connection from {addr[0]} port {addr[1]} closed")
+                        break
                     
-#                     if trim_message == "QUIT":
-#                         return "exit"
-#                     elif check_command(trim_message, "EHLO", 0):
-#                         writer.write(MessageLine(f"503 Bad sequence of commands", message_stack).bytes())
-#                         await writer.drain()
-#                     elif check_command(trim_message, "HELO", 0):
-#                         writer.write(MessageLine(f"503 Bad sequence of commands", message_stack).bytes())
-#                         await writer.drain()
-#                     elif check_command(trim_message, "RSET", 0):
-#                         writer.write(MessageLine(f"250 Ok", message_stack).bytes())
-#                         await writer.drain()
-#                         return "continue"
-#                     elif check_command(trim_message, "NOOP", 0):
-#                         writer.write(MessageLine(f"503 Bad sequence of commands", message_stack).bytes())
-#                         await writer.drain()
-#                     elif check_command(trim_message, "AUTH", 1):
-#                         if trim_message[5:] == "LOGIN":
-#                             writer.write(MessageLine(f"334 {base64.b64encode(b"Username:").decode('ascii')}", message_stack).bytes())
-#                             await writer.drain()
-#                         else:
-#                             writer.write(MessageLine(f"504 \"{trim_message[5:]}\" not implemented", message_stack).bytes())
-#                             await writer.drain()
-#                     else:
-#                         writer.write(MessageLine("500 Command unrecognized", message_stack).bytes())
-#                         await writer.drain()
-
+                    result = await func(reader, writer, message_stack, local_stack, *args, **kwargs)
                     
-#                 except TimeoutError:
-#                     writer.write(MessageLine("500 Connection timed out", message_stack).bytes())
-#                     await writer.drain()
-#                     server_log.log(f"Connection {addr[0]} port {addr[1]} timeout", type="request_warning")
-#                     break
-#                 except UnicodeDecodeError as e:
-#                     writer.write(MessageLine("500 Invalid character", message_stack).bytes())
-#                     await writer.drain()
-#                     server_log.log(f"Connection {addr[0]} port {addr[1]} invalid character", type="request_error")
-#                     break
-#                 except Exception as e:
-#                     writer.write(MessageLine("500 Unexpected error", message_stack).bytes())
-#                     await writer.drain()
-#                     server_log.log(f"Connection {addr[0]} port {addr[1]}:\n{e}", type="request_error")
-#                     break
-#             return "exit"
-        
-
-#             result = await func(reader, writer, message_stack, *args, **kwargs)
-
-#             return result
-#         return wrapper
-#     return inner
+                except TimeoutError:
+                    writer.write(MessageLine("500 Connection timed out", message_stack).bytes())
+                    await writer.drain()
+                    server_log.log(f"Connection {addr[0]} port {addr[1]} timeout", type="request_warning")
+                    return "exit"
+                except UnicodeDecodeError as e:
+                    writer.write(MessageLine("500 Invalid character", message_stack).bytes())
+                    await writer.drain()
+                    server_log.log(f"Connection {addr[0]} port {addr[1]} invalid character", type="request_error")
+                    return "exit"
+                except Exception as e:
+                    writer.write(MessageLine("500 Unexpected error", message_stack).bytes())
+                    await writer.drain()
+                    server_log.log(f"Connection {addr[0]} port {addr[1]}:\n{e}", type="request_error")
+                    return "exit"
+            return result
+        return wrapper
+    return inner
 
 def check_command(string:str, equals:str, commands=2) -> bool:
     retn = None
@@ -118,6 +91,7 @@ async def numail_parse(reader, writer, message_stack):
                 if trim_message[5:] == "LOGIN":
                     writer.write(MessageLine(f"334 {base64.b64encode(b"Username:").decode('ascii')}", message_stack).bytes())
                     await writer.drain()
+                    
                 else:
                     writer.write(MessageLine(f"504 \"{trim_message[5:]}\" not implemented", message_stack).bytes())
                     await writer.drain()
