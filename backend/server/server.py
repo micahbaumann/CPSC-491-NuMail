@@ -91,6 +91,13 @@ async def handle_request(reader, writer):
             await writer.drain()
             server_log.log(f"Connection {addr[0]} port {addr[1]} invalid character", type="request_error")
             break
+        except NuMailError as e:
+            writer.write(MessageLine("500 Unexpected error", message_info).bytes())
+            await writer.drain()
+            server_log.log(f"Connection {addr[0]} port {addr[1]}:\n{e}", type="request_error")
+            if e.shutdown == True:
+                raise e
+            break
         except Exception as e:
             writer.write(MessageLine("500 Unexpected error", message_info).bytes())
             await writer.drain()
@@ -144,6 +151,8 @@ async def background_server(ip, port):
             raise NuMailError(code="7.2.2", message="Port and/or address already in use", other=e)
         else:
             raise NuMailError(code="7.2.1", message=f"Error starting server:\n{e}", other=e)
+    except NuMailError as e:
+        raise e
         
     try:
         async with server:

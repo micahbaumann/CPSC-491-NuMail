@@ -9,6 +9,9 @@ Server Errors
     7.2.0 Server Error
     7.2.1 Error starting server
     7.2.2 Port and/or address in use
+Module Errors
+    7.3.0 Module Error
+    7.3.1 Required module parameters not found
 """
 
 """
@@ -24,12 +27,13 @@ class NuMailError(Exception):
     line (optional): the line number the error occured on
     file (optional): the file the error occured in
     """
-    def __init__(self, code="7.0.0", message="", other=None, line=None, file=None):
+    def __init__(self, code="7.0.0", message="", other=None, line=None, file=None, shutdown=False):
         self.code = code
         self.message = message
         self.other = other
         self.line = line
         self.file = file
+        self.shutdown = shutdown
         super().__init__(f"NuMail Error {self.code}: {self.message}")
     
     """
@@ -48,4 +52,5 @@ class NuMailError(Exception):
             "line": self.line,
             "file": self.file,
             "other": self.other,
+            "shutdown": self.shutdown,
         }
