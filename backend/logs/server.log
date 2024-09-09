@@ -806,3 +806,12 @@ list assignment index out of range
 [2024-09-09 02:25:28.401697] [message] Shutdown 127.0.0.1 port 7777
 [2024-09-09 02:25:28.401875] [message] Shutdown 127.0.0.1 port 7778
 [2024-09-09 02:25:28.402017] [message] Shutdown 127.0.0.1 port 7779
+[2024-09-09 14:36:29.969024] [message] Server listening on 127.0.0.1 port 7777
+[2024-09-09 14:36:29.969465] [message] Server listening on 127.0.0.1 port 7778
+[2024-09-09 14:36:29.969946] [message] Server listening on 127.0.0.1 port 7779
+[2024-09-09 14:36:31.750245] [message] New connection from 127.0.0.1 port 40458
+[2024-09-09 14:36:57.001281] [request_error] Connection 127.0.0.1 port 40458 invalid character
+[2024-09-09 14:37:25.107326] [message] Connection 127.0.0.1 port 40458 closed
+[2024-09-09 14:37:34.917170] [message] New connection from 127.0.0.1 port 44828
+[2024-09-09 14:38:10.439448] [request_error] Connection 127.0.0.1 port 44828 invalid character
+[2024-09-09 14:38:29.701537] [message] Connection 127.0.0.1 port 44828 closed

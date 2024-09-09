@@ -56,6 +56,8 @@ async def handle_request(reader, writer):
                 if trim_message == "NUML" or (len(trim_message) > 4 and trim_message[:5] == "NUML "):
                     message_info.set_type("numail")
                     message_info.details()["client_numail_version"] = trim_message[4:].strip()
+                    writer.write(MessageLine(f"650 NuMail1.0", message_info).bytes())
+                    await writer.drain()
                     parse_end = await numail_parse(reader, writer, message_info)
                 else:
                     message_info.set_type("email")
