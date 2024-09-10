@@ -1,5 +1,6 @@
 from datetime import datetime
 from pathlib import Path
+import logging.config
 
 """
 Creates and updates NuMail Server logs
@@ -23,7 +24,7 @@ class NuMailLogger:
     Appends the log file
     Arguments:
     msg: The message to log
-    type (default "message"): The type of message (message, error, warning, etc.). None does does not put any type
+    type (default "message"): The type of message (message, error, warning, etc.). None does not put any type
     """
     def log(self, msg: str, type: str | None = "message") -> None:
         abs_file = self.path / self.file
