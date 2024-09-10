@@ -1,6 +1,5 @@
 from datetime import datetime
 from pathlib import Path
-import logging.config
 
 """
 Creates and updates NuMail Server logs
