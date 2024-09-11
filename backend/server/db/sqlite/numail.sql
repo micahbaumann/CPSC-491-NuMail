@@ -11,23 +11,12 @@ CREATE TABLE Users (
     isAdmin BOOLEAN NOT NULL DEFAULT 0
 );
 
--- CREATE TABLE Permissions (
---     permissionsUId INTEGER PRIMARY KEY NOT NULL UNIQUE,
---     manageUsers BOOLEAN NOT NULL DEFAULT 0,
---     addUser BOOLEAN NOT NULL DEFAULT 0,
---     addUser BOOLEAN NOT NULL DEFAULT 0,
---     addUser BOOLEAN NOT NULL DEFAULT 0,
---     addUser BOOLEAN NOT NULL DEFAULT 0,
---     addUser BOOLEAN NOT NULL DEFAULT 0,
---     addUser BOOLEAN NOT NULL DEFAULT 0,
---     addUser BOOLEAN NOT NULL DEFAULT 0,
---     addUser BOOLEAN NOT NULL DEFAULT 0,
---     addUser BOOLEAN NOT NULL DEFAULT 0,
---     addUser BOOLEAN NOT NULL DEFAULT 0,
---     addUser BOOLEAN NOT NULL DEFAULT 0,
---     addUser BOOLEAN NOT NULL DEFAULT 0,
---     FOREIGN KEY (permissionsUId) REFERENCES Users(userId)
--- );
+CREATE TABLE Permissions (
+    permissionsUId INTEGER PRIMARY KEY NOT NULL UNIQUE,
+    permission INTEGER NOT NULL DEFAULT 0,
+    permissionUser INTEGER NOT NULL DEFAULT 0,
+    FOREIGN KEY (permissionsUId) REFERENCES Users(userId)
+);
 
 -- CREATE TABLE Classes (
 --     ClassID INT NOT NULL UNIQUE,
