@@ -16,9 +16,9 @@ CREATE TABLE Permissions (
     permissionsUId INTEGER PRIMARY KEY NOT NULL AUTOINCREMENT,
     permission INTEGER NOT NULL DEFAULT 0,
     permissionUser INTEGER NOT NULL DEFAULT 0,
-    permissionModUser INTEGER NOT NULL DEFAULT 0,
+    appliesToUser INTEGER NOT NULL DEFAULT 0,
     FOREIGN KEY (permissionUser) REFERENCES Users(userId),
-    FOREIGN KEY (permissionModUser) REFERENCES Users(userId)
+    FOREIGN KEY (appliesToUser) REFERENCES Users(userId)
 );
 
 -- CREATE TABLE Classes (
