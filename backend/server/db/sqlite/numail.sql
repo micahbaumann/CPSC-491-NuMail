@@ -2,32 +2,31 @@ PRAGMA foreign_keys=ON;
 BEGIN TRANSACTION;
 
 CREATE TABLE Users (
-    UserId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    Username VARCHAR(30) NOT NULL UNIQUE,
-    FirstName VARCHAR(100),
-    LastName VARCHAR(100),
-    DisplayName VARCHAR(100) NOT NULL,
-    Password TEXT NOT NULL,
-    IsAdmin BOOLEAN NOT NULL DEFAULT 0
+    userId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    userName VARCHAR(30) NOT NULL UNIQUE,
+    firstName VARCHAR(100),
+    lastName VARCHAR(100),
+    displayName VARCHAR(100) NOT NULL,
+    password TEXT NOT NULL,
+    isAdmin BOOLEAN NOT NULL DEFAULT 0
 );
 
 -- CREATE TABLE Permissions (
---     PermissionsUId INTEGER PRIMARY KEY NOT NULL UNIQUE,
---     ManageUsers BOOLEAN NOT NULL DEFAULT 0,
---     AddUser BOOLEAN NOT NULL DEFAULT 0,
---     AddUser BOOLEAN NOT NULL DEFAULT 0,
---     AddUser BOOLEAN NOT NULL DEFAULT 0,
---     AddUser BOOLEAN NOT NULL DEFAULT 0,
---     AddUser BOOLEAN NOT NULL DEFAULT 0,
---     AddUser BOOLEAN NOT NULL DEFAULT 0,
---     AddUser BOOLEAN NOT NULL DEFAULT 0,
---     AddUser BOOLEAN NOT NULL DEFAULT 0,
---     AddUser BOOLEAN NOT NULL DEFAULT 0,
---     AddUser BOOLEAN NOT NULL DEFAULT 0,
---     AddUser BOOLEAN NOT NULL DEFAULT 0,
---     AddUser BOOLEAN NOT NULL DEFAULT 0,
---     AddUser BOOLEAN NOT NULL DEFAULT 0,
---     FOREIGN KEY (PermissionsUId) REFERENCES Users(UserId)
+--     permissionsUId INTEGER PRIMARY KEY NOT NULL UNIQUE,
+--     manageUsers BOOLEAN NOT NULL DEFAULT 0,
+--     addUser BOOLEAN NOT NULL DEFAULT 0,
+--     addUser BOOLEAN NOT NULL DEFAULT 0,
+--     addUser BOOLEAN NOT NULL DEFAULT 0,
+--     addUser BOOLEAN NOT NULL DEFAULT 0,
+--     addUser BOOLEAN NOT NULL DEFAULT 0,
+--     addUser BOOLEAN NOT NULL DEFAULT 0,
+--     addUser BOOLEAN NOT NULL DEFAULT 0,
+--     addUser BOOLEAN NOT NULL DEFAULT 0,
+--     addUser BOOLEAN NOT NULL DEFAULT 0,
+--     addUser BOOLEAN NOT NULL DEFAULT 0,
+--     addUser BOOLEAN NOT NULL DEFAULT 0,
+--     addUser BOOLEAN NOT NULL DEFAULT 0,
+--     FOREIGN KEY (permissionsUId) REFERENCES Users(userId)
 -- );
 
 -- CREATE TABLE Classes (
@@ -42,34 +41,34 @@ CREATE TABLE Users (
 -- );
 
 CREATE TABLE UserSettings (
-    UserSettingsId INTEGER PRIMARY KEY NOT NULL UNIQUE,
-    FOREIGN KEY (UserSettingsId) REFERENCES Users(UserId)
+    userSettingsId INTEGER PRIMARY KEY NOT NULL UNIQUE,
+    FOREIGN KEY (userSettingsId) REFERENCES Users(userId)
 );
 
 CREATE TABLE Mailboxes (
-    MailboxId INTEGER PRIMARY KEY NOT NULL UNIQUE,
-    MBType INTEGER NOT NULL DEFAULT 0,
-    MBSend BOOLEAN NOT NULL DEFAULT 1,
-    MBReceive BOOLEAN NOT NULL DEFAULT 1,
-    FOREIGN KEY (MailboxId) REFERENCES Users(UserId)
+    mailboxId INTEGER PRIMARY KEY NOT NULL UNIQUE,
+    mbType INTEGER NOT NULL DEFAULT 0,
+    mbSend BOOLEAN NOT NULL DEFAULT 1,
+    mbReceive BOOLEAN NOT NULL DEFAULT 1,
+    FOREIGN KEY (mailboxId) REFERENCES Users(userId)
 );
 
 CREATE TABLE Messages (
-    MessageId INTEGER PRIMARY KEY NOT NULL UNIQUE,
-    MessageTimestamp DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    MessageType INTEGER NOT NULL DEFAULT 0,
-    IsSent BOOLEAN NOT NULL DEFAULT 0, -- 0 means you received the message
-    MessageFrom VARCHAR(100) NOT NULL,
-    MessageTo VARCHAR(100) NOT NULL,
-    MessageContent TEXT NOT NULL,
-    DeliveryConfirm BOOLEAN NOT NULL DEFAULT 1,
-    ReadConfirm BOOLEAN NOT NULL DEFAULT 0,
-    FOREIGN KEY (MessageId) REFERENCES Mailboxes(MailboxId)
+    messageId INTEGER PRIMARY KEY NOT NULL UNIQUE,
+    messageTimestamp DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    messageType INTEGER NOT NULL DEFAULT 0,
+    isSent BOOLEAN NOT NULL DEFAULT 0, -- 0 means you received the message
+    messageFrom VARCHAR(100) NOT NULL,
+    messageTo VARCHAR(100) NOT NULL,
+    messageContent TEXT NOT NULL,
+    deliveryConfirm BOOLEAN NOT NULL DEFAULT 1,
+    readConfirm BOOLEAN NOT NULL DEFAULT 0,
+    FOREIGN KEY (messageId) REFERENCES Mailboxes(mailboxId)
 );
 
 CREATE TABLE Attachments (
-    AttachmentId INTEGER PRIMARY KEY NOT NULL UNIQUE,
-    FOREIGN KEY (AttachmentId) REFERENCES Messages(MessageId)
+    attachmentId INTEGER PRIMARY KEY NOT NULL UNIQUE,
+    FOREIGN KEY (attachmentId) REFERENCES Messages(messageId)
 );
 
 -- CREATE TABLE Enrollments (
