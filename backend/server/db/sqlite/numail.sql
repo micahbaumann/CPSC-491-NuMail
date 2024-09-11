@@ -7,15 +7,18 @@ CREATE TABLE Users (
     firstName VARCHAR(100),
     lastName VARCHAR(100),
     displayName VARCHAR(100) NOT NULL,
+    company VARCHAR(100) DEFAULT NULL,
     password TEXT NOT NULL,
     isAdmin BOOLEAN NOT NULL DEFAULT 0
 );
 
 CREATE TABLE Permissions (
-    permissionsUId INTEGER PRIMARY KEY NOT NULL UNIQUE,
+    permissionsUId INTEGER PRIMARY KEY NOT NULL AUTOINCREMENT,
     permission INTEGER NOT NULL DEFAULT 0,
     permissionUser INTEGER NOT NULL DEFAULT 0,
-    FOREIGN KEY (permissionsUId) REFERENCES Users(userId)
+    permissionModUser INTEGER NOT NULL DEFAULT 0,
+    FOREIGN KEY (permissionUser) REFERENCES Users(userId),
+    FOREIGN KEY (permissionModUser) REFERENCES Users(userId)
 );
 
 -- CREATE TABLE Classes (
