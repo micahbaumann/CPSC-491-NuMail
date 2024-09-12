@@ -13,12 +13,18 @@ CREATE TABLE Users (
 );
 
 CREATE TABLE Permissions (
-    permissionsUId INTEGER PRIMARY KEY NOT NULL AUTOINCREMENT,
+    permissionsId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    permissionName VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE UserPermissions (
+    userPermissionsId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     permission INTEGER NOT NULL DEFAULT 0,
     permissionUser INTEGER NOT NULL DEFAULT 0,
     appliesToUser INTEGER NOT NULL DEFAULT 0,
     FOREIGN KEY (permissionUser) REFERENCES Users(userId),
-    FOREIGN KEY (appliesToUser) REFERENCES Users(userId)
+    FOREIGN KEY (appliesToUser) REFERENCES Users(userId),
+    FOREIGN KEY (permission) REFERENCES Permissions(permissionsId)
 );
 
 -- CREATE TABLE Classes (
