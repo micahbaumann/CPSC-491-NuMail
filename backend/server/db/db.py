@@ -4,6 +4,8 @@ import secrets
 import hashlib
 import base64
 
+from logger.logger import NuMailLogger
+
 def get_db():
     with contextlib.closing(sqlite3.connect("./sqlite/numail.db")) as db:
         try:
@@ -21,7 +23,22 @@ def hash_password(pwd):
 
 def createUser(user_name: str, display_name: str, password: str, isAdmin: bool = False, first_name: str | None = None, last_name: str | None = None, company: str | None = None):
     with get_db() as db:
-        pwd = hash_password(password)
-        db.execute(f"INSERT INTO Users(userName, firstName, lastName, displayName, company, password, isAdmin) VALUES (?, ?, ?, ?, ?, ?, ?)", (user_name, first_name, last_name, display_name, company, pwd, isAdmin))
+        user_exists = db.execute("SELECT * FROM Users WHERE userName = ?", (user_name,)).fetchone()
+        if user_exists:
+            raise NuMailLogger(code="7.4.1", message=f"User \"{user_name}\" already exists")
+        else:
+            pwd = hash_password(password)
+            db.execute("INSERT INTO Users(userName, firstName, lastName, displayName, company, password, isAdmin) VALUES (?, ?, ?, ?, ?, ?, ?)", (user_name, first_name, last_name, display_name, company, pwd, isAdmin))
 
-        db.commit()
+            db.commit()
+            user = db.execute("SELECT * FROM Users WHERE userName = ?", (user_name,)).fetchone()
+            return {
+                "user_id": user["userId"],
+                "user_name": user["userName"],
+                "first_name": user["firstName"],
+                "last_name": user["lastName"],
+                "display_name": user["displayName"],
+                "company": user["company"],
+                "is_admin": user["isAdmin"],
+
+            }
