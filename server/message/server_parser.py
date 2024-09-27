@@ -2,10 +2,10 @@ import asyncio
 
 from functools import wraps
 
-from message.MessageLine import MessageLine
+from server.message.MessageLine import MessageLine
 from errors.nuerrors import NuMailError
 from logger.logger import server_log
-from config import server_settings
+from config.config import server_settings
 
 def numail_server_parser(func):
     @wraps(func)

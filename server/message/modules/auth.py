@@ -1,7 +1,7 @@
 import base64
 
-from message.MessageLine import MessageLine
-from message.server_parser import numail_server_parser
+from server.message.MessageLine import MessageLine
+from server.message.server_parser import numail_server_parser
 
 @numail_server_parser
 async def mod_auth(reader, writer, message, local_stack, state, method="LOGIN"):
