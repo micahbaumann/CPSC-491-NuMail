@@ -824,3 +824,45 @@ list assignment index out of range
 [2024-10-02 00:56:07.771656] [message] Shutdown 127.0.0.1 port 7777
 [2024-10-02 00:56:07.771830] [message] Shutdown 127.0.0.1 port 7778
 [2024-10-02 00:56:07.771972] [message] Shutdown 127.0.0.1 port 7779
+[2024-10-02 14:38:14.691640] [message] Server listening on 127.0.0.1 port 7777
+[2024-10-02 14:38:14.691819] [message] Server listening on 127.0.0.1 port 7778
+[2024-10-02 14:38:14.691936] [message] Server listening on 127.0.0.1 port 7779
+[2024-10-02 14:38:28.689402] [message] New connection from 127.0.0.1 port 33300
+[2024-10-02 14:39:24.347402] [message] Connection 127.0.0.1 port 33300 closed
+[2024-10-02 14:39:29.377418] [message] Shutting down
+[2024-10-02 14:39:29.377737] [message] Shutdown 127.0.0.1 port 7777
+[2024-10-02 14:39:29.378018] [message] Shutdown 127.0.0.1 port 7778
+[2024-10-02 14:39:29.378302] [message] Shutdown 127.0.0.1 port 7779
+[2024-10-02 14:48:33.579385] [message] Server listening on 127.0.0.1 port 7777
+[2024-10-02 14:48:33.579547] [message] Server listening on 127.0.0.1 port 7778
+[2024-10-02 14:48:33.579658] [message] Server listening on 127.0.0.1 port 7779
+[2024-10-02 14:48:35.656489] [message] New connection from 127.0.0.1 port 44698
+[2024-10-02 14:48:42.889685] [request_error] Connection 127.0.0.1 port 44698:
+cannot unpack non-iterable NoneType object
+[2024-10-02 14:53:42.940532] [request_warning] Connection 127.0.0.1 port 44698 timeout
+[2024-10-02 14:53:42.941114] [message] Connection 127.0.0.1 port 44698 closed
+[2024-10-02 15:26:06.973041] [message] Shutting down
+[2024-10-02 15:26:06.988545] [message] Shutdown 127.0.0.1 port 7777
+[2024-10-02 15:26:06.989504] [message] Shutdown 127.0.0.1 port 7778
+[2024-10-02 15:26:06.989868] [message] Shutdown 127.0.0.1 port 7779
+[2024-10-02 15:26:09.521567] [message] Server listening on 127.0.0.1 port 7777
+[2024-10-02 15:26:09.521875] [message] Server listening on 127.0.0.1 port 7778
+[2024-10-02 15:26:09.522084] [message] Server listening on 127.0.0.1 port 7779
+[2024-10-02 15:27:09.698752] [message] New connection from 127.0.0.1 port 50646
+[2024-10-02 15:27:16.837472] [request_error] Connection 127.0.0.1 port 50646:
+can't multiply sequence by non-int of type 'ParserController'
+[2024-10-02 15:32:16.844049] [request_warning] Connection 127.0.0.1 port 50646 timeout
+[2024-10-02 15:32:16.844914] [message] Connection 127.0.0.1 port 50646 closed
+[2024-10-02 15:32:28.732374] [message] Shutting down
+[2024-10-02 15:32:28.732870] [message] Shutdown 127.0.0.1 port 7777
+[2024-10-02 15:32:28.733235] [message] Shutdown 127.0.0.1 port 7778
+[2024-10-02 15:32:28.733586] [message] Shutdown 127.0.0.1 port 7779
+[2024-10-02 15:32:31.416117] [message] Server listening on 127.0.0.1 port 7777
+[2024-10-02 15:32:31.416281] [message] Server listening on 127.0.0.1 port 7778
+[2024-10-02 15:32:31.416429] [message] Server listening on 127.0.0.1 port 7779
+[2024-10-02 15:32:33.487372] [message] New connection from 127.0.0.1 port 46540
+[2024-10-02 15:32:59.069251] [message] Connection 127.0.0.1 port 46540 closed
+[2024-10-02 15:33:01.602621] [message] Shutting down
+[2024-10-02 15:33:01.603157] [message] Shutdown 127.0.0.1 port 7777
+[2024-10-02 15:33:01.603614] [message] Shutdown 127.0.0.1 port 7778
+[2024-10-02 15:33:01.604164] [message] Shutdown 127.0.0.1 port 7779

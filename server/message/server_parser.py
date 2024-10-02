@@ -7,6 +7,19 @@ from errors.nuerrors import NuMailError
 from logger.logger import server_log
 from config.config import server_settings
 
+class ParserController:
+    def __init__(self) -> None:
+        self.loop = 0
+    
+    def continueLoop(self) -> None:
+        self.loop = 0
+    
+    def returnLoop(self) -> None:
+        self.loop = 1
+    
+    def exitLoop(self) -> None:
+        self.loop = 2
+
 def numail_server_parser(func):
     @wraps(func)
     async def wrapper(*args, **kwargs):
@@ -18,9 +31,9 @@ def numail_server_parser(func):
             addr = message_stack.get_client_ip()
             local_stack = [message_stack.stack()[-1][0].strip()]
             state = {}
-            result = "continue"
+            loop = ParserController()
             first = True
-            while result == "continue" or result == None:
+            while loop.loop == 0 or loop.loop == None:
                 try:
                     if first == False:
                         data = await asyncio.wait_for(reader.read(int(server_settings["buffer"])), float(server_settings["read_timeout"]))
@@ -34,7 +47,7 @@ def numail_server_parser(func):
                     else:
                         first = False
                     
-                    result = await func(local_stack=local_stack, state=state, *args, **kwargs)
+                    result = await func(local_stack=local_stack, state=state, loop=loop, *args, **kwargs)
                     
                 except TimeoutError:
                     writer.write(MessageLine("500 Connection timed out", message_stack).bytes())
