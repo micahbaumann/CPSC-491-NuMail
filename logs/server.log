@@ -815,3 +815,12 @@ list assignment index out of range
 [2024-09-09 14:37:34.917170] [message] New connection from 127.0.0.1 port 44828
 [2024-09-09 14:38:10.439448] [request_error] Connection 127.0.0.1 port 44828 invalid character
 [2024-09-09 14:38:29.701537] [message] Connection 127.0.0.1 port 44828 closed
+[2024-10-02 00:54:11.325880] [message] Server listening on 127.0.0.1 port 7777
+[2024-10-02 00:54:11.326064] [message] Server listening on 127.0.0.1 port 7778
+[2024-10-02 00:54:11.326125] [message] Server listening on 127.0.0.1 port 7779
+[2024-10-02 00:54:22.798132] [message] New connection from 127.0.0.1 port 60408
+[2024-10-02 00:56:04.992350] [message] Connection 127.0.0.1 port 60408 closed
+[2024-10-02 00:56:07.771358] [message] Shutting down
+[2024-10-02 00:56:07.771656] [message] Shutdown 127.0.0.1 port 7777
+[2024-10-02 00:56:07.771830] [message] Shutdown 127.0.0.1 port 7778
+[2024-10-02 00:56:07.771972] [message] Shutdown 127.0.0.1 port 7779

@@ -48,7 +48,6 @@ def check_user_pwd(user_name: str, password: str) -> bool:
     with get_db() as db:
         user_exists = db.execute("SELECT * FROM Users WHERE userName = ?", (user_name,)).fetchone()
         if not user_exists:
-            print("fale")
             return False
         else:
             user_pwd = db.execute("SELECT password FROM Users WHERE userName = ?", (user_name,)).fetchone()

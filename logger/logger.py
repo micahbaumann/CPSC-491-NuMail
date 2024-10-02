@@ -13,7 +13,7 @@ class NuMailLogger:
     """
     def __init__(self, file, path: Path | None = None) -> None:
         if path is None:
-            self.path = Path(__file__).parent.parent.parent / "logs"
+            self.path = Path(__file__).parent.parent / "logs"
         else:
             self.path = path
         self.path.mkdir(parents=True, exist_ok=True)

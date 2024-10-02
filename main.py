@@ -14,7 +14,7 @@ if __name__ == "__main__":
             else:
                 raise NuMailError(code="7.1.1", message=f"Error opening config file \"{config_path.resolve()}\"")
         else:
-            config_path = Path(__file__).parent.parent / "config" / "settings.conf"
+            config_path = Path(__file__).parent / "config" / "settings.conf"
             if config_path.exists():
                 server_config(config_path.resolve())
 
