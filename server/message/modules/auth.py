@@ -25,10 +25,13 @@ async def mod_auth(reader, writer, message, local_stack, state, loop, method="LO
             except:
                 state["password"] = ""
             state["mode"] = 2
+            result = [None, None]
             if check_user_pwd(state["username"], state["password"]):
                 writer.write(MessageLine(f"235 2.7.0 Authentication successful", message).bytes())
+                result = [True, state["username"]]
             else:
                 writer.write(MessageLine(f"535 5.7.8 Authentication credentials invalid", message).bytes())
+                result = [False, None]
             await writer.drain()
             loop.returnLoop()
-            return "result1"
+            return result

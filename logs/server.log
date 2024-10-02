@@ -866,3 +866,28 @@ can't multiply sequence by non-int of type 'ParserController'
 [2024-10-02 15:33:01.603157] [message] Shutdown 127.0.0.1 port 7777
 [2024-10-02 15:33:01.603614] [message] Shutdown 127.0.0.1 port 7778
 [2024-10-02 15:33:01.604164] [message] Shutdown 127.0.0.1 port 7779
+[2024-10-02 15:38:30.162981] [message] Server listening on 127.0.0.1 port 7777
+[2024-10-02 15:38:30.163147] [message] Server listening on 127.0.0.1 port 7778
+[2024-10-02 15:38:30.163345] [message] Server listening on 127.0.0.1 port 7779
+[2024-10-02 15:38:32.035750] [message] New connection from 127.0.0.1 port 36402
+[2024-10-02 15:41:02.046992] [message] Shutting down
+[2024-10-02 15:41:02.047328] [message] Shutdown 127.0.0.1 port 7778
+[2024-10-02 15:41:02.047547] [message] Shutdown 127.0.0.1 port 7779
+[2024-10-02 15:41:02.048161] [message] Shutdown 127.0.0.1 port 7777
+[2024-10-02 15:42:13.771988] [message] Server listening on 127.0.0.1 port 7777
+[2024-10-02 15:42:13.772210] [message] Server listening on 127.0.0.1 port 7778
+[2024-10-02 15:42:13.772446] [message] Server listening on 127.0.0.1 port 7779
+[2024-10-02 15:42:15.769370] [message] New connection from 127.0.0.1 port 48222
+[2024-10-02 15:42:35.251928] [message] Shutting down
+[2024-10-02 15:42:35.252307] [message] Shutdown 127.0.0.1 port 7778
+[2024-10-02 15:42:35.252987] [message] Shutdown 127.0.0.1 port 7779
+[2024-10-02 15:42:35.253896] [message] Shutdown 127.0.0.1 port 7777
+[2024-10-02 15:42:53.609322] [message] Server listening on 127.0.0.1 port 7777
+[2024-10-02 15:42:53.609497] [message] Server listening on 127.0.0.1 port 7778
+[2024-10-02 15:42:53.609676] [message] Server listening on 127.0.0.1 port 7779
+[2024-10-02 15:42:55.206715] [message] New connection from 127.0.0.1 port 47786
+[2024-10-02 15:44:00.344489] [message] Connection 127.0.0.1 port 47786 closed
+[2024-10-02 15:44:01.894490] [message] Shutting down
+[2024-10-02 15:44:01.895097] [message] Shutdown 127.0.0.1 port 7777
+[2024-10-02 15:44:01.895495] [message] Shutdown 127.0.0.1 port 7778
+[2024-10-02 15:44:01.895722] [message] Shutdown 127.0.0.1 port 7779

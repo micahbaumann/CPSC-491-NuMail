@@ -54,8 +54,7 @@ async def numail_parse(reader, writer, message_stack):
                 await writer.drain()
             elif check_command(trim_message, "AUTH", 1):
                 if trim_message[5:] == "LOGIN":
-                    result = await mod_auth(reader=reader, writer=writer, message=message_stack, method="LOGIN")
-                    print(result)
+                    login, username = await mod_auth(reader=reader, writer=writer, message=message_stack, method="LOGIN")
                 else:
                     writer.write(MessageLine(f"504 \"{trim_message[5:]}\" not implemented", message_stack).bytes())
                     await writer.drain()
