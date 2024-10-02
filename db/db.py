@@ -44,11 +44,12 @@ def createUser(user_name: str, display_name: str, password: str, isAdmin: bool =
 
             }
 
-def check_user_pwd(user_name: str, password: str):
+def check_user_pwd(user_name: str, password: str) -> bool:
     with get_db() as db:
         user_exists = db.execute("SELECT * FROM Users WHERE userName = ?", (user_name,)).fetchone()
         if not user_exists:
-            raise NuMailError(code="7.4.1", message=f"User \"{user_name}\" does not exists")
+            print("fale")
+            return False
         else:
             user_pwd = db.execute("SELECT password FROM Users WHERE userName = ?", (user_name,)).fetchone()
             return bcrypt.checkpw(password.encode('utf-8'), user_pwd[0])

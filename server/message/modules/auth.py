@@ -12,12 +12,18 @@ async def mod_auth(reader, writer, message, local_stack, state, method="LOGIN"):
             await writer.drain()
             state["mode"] = 0
         elif state["mode"] == 0:
-            state["username"] = base64.b64decode(local_stack[-1].encode('ascii')).decode('ascii')
+            try:
+                state["username"] = base64.b64decode(local_stack[-1].encode('ascii')).decode('ascii')
+            except:
+                state["username"] = ""
             state["mode"] = 1
             writer.write(MessageLine(f"334 {base64.b64encode(b"Password:").decode('ascii')}", message).bytes())
             await writer.drain()
         elif state["mode"] == 1:
-            state["password"] = base64.b64decode(local_stack[-1].encode('ascii')).decode('ascii')
+            try:
+                state["password"] = base64.b64decode(local_stack[-1].encode('ascii')).decode('ascii')
+            except:
+                state["password"] = ""
             state["mode"] = 2
             if check_user_pwd(state["username"], state["password"]):
                 writer.write(MessageLine(f"235 2.7.0 Authentication successful", message).bytes())

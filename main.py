@@ -1,6 +1,5 @@
 from server.server import *
 
-
 # Main Code
 if __name__ == "__main__":
     try:
