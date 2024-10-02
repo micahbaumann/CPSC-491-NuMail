@@ -6,6 +6,7 @@ from errors.nuerrors import NuMailError
 from logger.logger import server_log
 from config.config import server_settings
 from server.message.modules.auth import mod_auth
+from db.db import get_db
 
 
 def check_command(string:str, equals:str, commands=2) -> bool:

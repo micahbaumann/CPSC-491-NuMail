@@ -2,6 +2,7 @@ import base64
 
 from server.message.MessageLine import MessageLine
 from server.message.server_parser import numail_server_parser
+from db.db import check_user_pwd
 
 @numail_server_parser
 async def mod_auth(reader, writer, message, local_stack, state, method="LOGIN"):
@@ -18,6 +19,9 @@ async def mod_auth(reader, writer, message, local_stack, state, method="LOGIN"):
         elif state["mode"] == 1:
             state["password"] = base64.b64decode(local_stack[-1].encode('ascii')).decode('ascii')
             state["mode"] = 2
-            writer.write(MessageLine(f"235 2.7.0 Authentication successful ({state["username"]} : {state["password"]})", message).bytes())
+            if check_user_pwd(state["username"], state["password"]):
+                writer.write(MessageLine(f"235 2.7.0 Authentication successful", message).bytes())
+            else:
+                writer.write(MessageLine(f"535 5.7.8 Authentication credentials invalid", message).bytes())
             await writer.drain()
             return "return"

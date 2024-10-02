@@ -14,7 +14,8 @@ Module Errors
     7.3.1 Required module parameters not found
 User Errors
     7.4.0 User Error
-    7.4.1 User already exists
+    7.4.1 User already exsists
+    7.4.2 User does not exsist
 """
 
 """
