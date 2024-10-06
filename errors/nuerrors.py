@@ -16,6 +16,10 @@ User Errors
     7.4.0 User Error
     7.4.1 User already exsists
     7.4.2 User does not exsist
+Mailbox Errors
+    7.5.0 Mailbox Error
+    7.5.1 Mailbox already exsists
+    7.5.2 Mailbox does not exsist
 """
 
 """

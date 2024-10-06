@@ -52,3 +52,29 @@ def check_user_pwd(user_name: str, password: str) -> bool:
         else:
             user_pwd = db.execute("SELECT password FROM Users WHERE userName = ?", (user_name,)).fetchone()
             return bcrypt.checkpw(password.encode('utf-8'), user_pwd[0])
+
+
+def create_mailbox(mb_name: str, user_name: str, mb_type: int = 0, mb_send: bool = False, mb_receive: bool = False) -> None:
+    with get_db() as db:
+        user_exists = db.execute("SELECT * FROM Users WHERE userName = ?", (user_name,)).fetchone()
+        if not user_exists:
+            raise NuMailError(code="7.4.2", message=f"User \"{user_name}\" does not exists")
+        else:
+            mb_exists = db.execute("SELECT * FROM Mailboxes WHERE mbName = ?", (mb_name,)).fetchone()
+            if not mb_exists:
+                db.execute("INSERT INTO Mailboxes(mbUser, mbName, mbType, mbSend, mbReceive) VALUES (?, ?, ?, ?, ?)", (user_exists["userId"], mb_name, mb_type, mb_send, mb_receive))
+                db.commit()
+            else:
+                raise NuMailError(code="7.5.1", message=f"Mailbox \"{mb_name}\" already exists")
+
+def get_mailbox(mb_name: str, user_name: str) -> dict | bool:
+    with get_db() as db:
+        user_exists = db.execute("SELECT * FROM Users WHERE userName = ?", (user_name,)).fetchone()
+        if not user_exists:
+            return False
+        else:
+            mb_exists = db.execute("SELECT * FROM Mailboxes WHERE mbUser = ? AND mbName = ?", (user_exists["userId"], mb_name)).fetchone()
+            if mb_exists:
+                return dict(mb_exists)
+            else:
+                return False

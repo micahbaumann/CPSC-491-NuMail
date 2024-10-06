@@ -6,7 +6,7 @@ from errors.nuerrors import NuMailError
 from logger.logger import server_log
 from config.config import server_settings
 from server.message.modules.auth import mod_auth
-from db.db import get_db
+from db.db import get_mailbox
 
 
 def check_command(string:str, equals:str, commands=2) -> bool:
@@ -55,6 +55,26 @@ async def numail_parse(reader, writer, message_stack):
             elif check_command(trim_message, "AUTH", 1):
                 if trim_message[5:] == "LOGIN":
                     login, username = await mod_auth(reader=reader, writer=writer, message=message_stack, method="LOGIN")
+                    if login:
+                        message_stack.set_client_username(username)
+                else:
+                    writer.write(MessageLine(f"504 \"{trim_message[5:]}\" not implemented", message_stack).bytes())
+                    await writer.drain()
+            elif check_command(trim_message, "MAIL", 1):
+                if len(trim_message) > 9 and trim_message[5:10] == "FROM:":
+                    
+                    if len(message_stack.get_client_username()) > 0:
+                        # mailbox = get_mailbox(user_name=message_stack.get_client_username() mb_name=)
+
+
+
+
+                        # Finish this
+                        pass
+
+
+
+
                 else:
                     writer.write(MessageLine(f"504 \"{trim_message[5:]}\" not implemented", message_stack).bytes())
                     await writer.drain()
