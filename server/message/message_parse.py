@@ -37,7 +37,7 @@ async def numail_parse(reader, writer, message_stack):
             if not message:
                 print(f"Connection from {addr[0]} port {addr[1]} closed")
                 break
-            
+
             if trim_message == "QUIT":
                 return "exit"
             elif check_command(trim_message, "EHLO", 0):
@@ -79,20 +79,9 @@ async def numail_parse(reader, writer, message_stack):
                         if full_email:
                             mailbox = get_mailbox(user_name=message_stack.get_client_username(), mb_name=full_email.group(1))
                             if mailbox and server_self == full_email.group(2):
-                                print(f"{full_email.group(1)}@{full_email.group(2)}")
                                 message_stack.set_from_addr(f"{full_email.group(1)}@{full_email.group(2)}")
-                                print(f"{full_email.group(1)}@{full_email.group(2)}")
-
-
-
-
-
-                                # FIX THIS
-
-
-
-
-
+                                writer.write(MessageLine(f"250 2.1.0 {full_email.group(1)}@{full_email.group(2)}... Sender ok", message_stack).bytes())
+                                await writer.drain()
                             else:
                                 writer.write(MessageLine(f"550 Invalid mailbox", message_stack).bytes())
                                 await writer.drain()
@@ -100,13 +89,28 @@ async def numail_parse(reader, writer, message_stack):
                             mailbox = get_mailbox(user_name=message_stack.get_client_username(), mb_name=part_email.group(1))
                             if mailbox:
                                 message_stack.set_from_addr(f"{part_email.group(1)}@{server_self}")
+                                writer.write(MessageLine(f"250 2.1.0 {part_email.group(1)}@{server_self}... Sender ok", message_stack).bytes())
+                                await writer.drain()
                             else:
                                 writer.write(MessageLine(f"550 Invalid mailbox", message_stack).bytes())
                                 await writer.drain()
                         else:
                             writer.write(MessageLine(f"501 Invalid parameters", message_stack).bytes())
                             await writer.drain()
-                        email = trim_message[10:]
+                    else:
+                        pass
+
+
+
+
+
+                        # FINISH THIS
+
+
+
+
+
+
                 else:
                     writer.write(MessageLine(f"504 \"{trim_message[5:]}\" not implemented", message_stack).bytes())
                     await writer.drain()
