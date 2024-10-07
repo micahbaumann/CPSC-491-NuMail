@@ -8,6 +8,7 @@ class NuMailMessage:
         self.client_self_id = ""
         self.client_ip = ()
         self.client_username = ""
+        self.from_addr = ""
     
     def stack(self) -> list:
         return self.message_stack
@@ -44,6 +45,12 @@ class NuMailMessage:
     
     def set_client_username(self, username:str) -> None:
         self.client_username = username
+
+    def get_from_addr(self) -> str:
+        return self.from_addr
+    
+    def set_from_addr(self, from_addr:str) -> None:
+        self.from_addr = from_addr
     
     def get_details(self) -> dict:
         return {
@@ -53,5 +60,6 @@ class NuMailMessage:
             "email": self.email,
             "client_self_id": self.client_self_id,
             "client_ip": self.client_ip,
-            "client_username": self.client_username
+            "client_username": self.client_username,
+            "from_addr": self.from_addr
         }

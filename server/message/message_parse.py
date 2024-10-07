@@ -1,4 +1,5 @@
 import asyncio
+import re
 
 from server.message.MessageLine import MessageLine
 from server.message.NuMailMessage import NuMailMessage
@@ -64,17 +65,48 @@ async def numail_parse(reader, writer, message_stack):
                 if len(trim_message) > 9 and trim_message[5:10] == "FROM:":
                     
                     if len(message_stack.get_client_username()) > 0:
-                        # mailbox = get_mailbox(user_name=message_stack.get_client_username() mb_name=)
+                        full_email = re.search(r"^\s*<\s*([a-zA-Z0-9.!#$%&'*+\-/=?^_`{|}~]+)@([a-zA-Z0-9._\-]+)\s*>\s*$", trim_message[10:], re.MULTILINE)
+                        part_email = re.search(r"^\s*<\s*([a-zA-Z0-9.!#$%&'*+\-/=?^_`{|}~]+)\s*>\s*$", trim_message[10:], re.MULTILINE)
+
+                        server_self = ""
+                        if "domain" in server_settings and server_settings["domain"]:
+                            server_self = server_settings["domain"]
+                        elif "public_ip" in server_settings and server_settings["public_ip"]:
+                            server_self = server_settings["public_ip"]
+                        else:
+                            server_self = server_settings["ip"]
+                        
+                        if full_email:
+                            mailbox = get_mailbox(user_name=message_stack.get_client_username(), mb_name=full_email.group(1))
+                            if mailbox and server_self == full_email.group(2):
+                                print(f"{full_email.group(1)}@{full_email.group(2)}")
+                                message_stack.set_from_addr(f"{full_email.group(1)}@{full_email.group(2)}")
+                                print(f"{full_email.group(1)}@{full_email.group(2)}")
 
 
 
 
-                        # Finish this
-                        pass
+
+                                # FIX THIS
 
 
 
 
+
+                            else:
+                                writer.write(MessageLine(f"550 Invalid mailbox", message_stack).bytes())
+                                await writer.drain()
+                        elif part_email:
+                            mailbox = get_mailbox(user_name=message_stack.get_client_username(), mb_name=part_email.group(1))
+                            if mailbox:
+                                message_stack.set_from_addr(f"{part_email.group(1)}@{server_self}")
+                            else:
+                                writer.write(MessageLine(f"550 Invalid mailbox", message_stack).bytes())
+                                await writer.drain()
+                        else:
+                            writer.write(MessageLine(f"501 Invalid parameters", message_stack).bytes())
+                            await writer.drain()
+                        email = trim_message[10:]
                 else:
                     writer.write(MessageLine(f"504 \"{trim_message[5:]}\" not implemented", message_stack).bytes())
                     await writer.drain()
