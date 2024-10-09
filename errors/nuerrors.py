@@ -20,6 +20,13 @@ Mailbox Errors
     7.5.0 Mailbox Error
     7.5.1 Mailbox already exsists
     7.5.2 Mailbox does not exsist
+NuMail Request Errors
+    7.6.0 NuMail request error
+    7.6.1 Cannot connect to server
+    7.6.2 Another connection already open
+    7.6.3 Connection not open
+    7.6.4 Connection reset
+    7.6.5 Connection timeout
 """
 
 """
