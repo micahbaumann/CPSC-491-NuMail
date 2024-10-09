@@ -8,6 +8,13 @@ from logger.logger import NuMailLogger
 
 message_receipt = NuMailLogger("sent.log")
 
+
+
+# MODIFY MESSAGE RECEIPT TO WORK FOR THIS
+
+
+
+
 class NuMailRequest:
     async def __init__(self, host, port) -> None:
         self.host = host
