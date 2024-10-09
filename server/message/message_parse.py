@@ -7,6 +7,7 @@ from errors.nuerrors import NuMailError
 from logger.logger import server_log
 from config.config import server_settings
 from server.message.modules.auth import mod_auth
+from server.message.modules.chck import mod_chck
 from db.db import get_mailbox
 
 
@@ -58,13 +59,14 @@ async def numail_parse(reader, writer, message_stack):
                     login, username = await mod_auth(reader=reader, writer=writer, message=message_stack, method="LOGIN")
                     if login:
                         message_stack.set_client_username(username)
+                        message_stack.set_is_send(True)
                 else:
                     writer.write(MessageLine(f"504 \"{trim_message[5:]}\" not implemented", message_stack).bytes())
                     await writer.drain()
             elif check_command(trim_message, "MAIL", 1):
                 if len(trim_message) > 9 and trim_message[5:10] == "FROM:":
                     
-                    if len(message_stack.get_client_username()) > 0:
+                    if len(message_stack.get_client_username()) > 0 or message_stack.get_is_send():
                         full_email = re.search(r"^\s*<\s*([a-zA-Z0-9.!#$%&'*+\-/=?^_`{|}~]+)@([a-zA-Z0-9._\-]+)\s*>\s*$", trim_message[10:], re.MULTILINE)
                         part_email = re.search(r"^\s*<\s*([a-zA-Z0-9.!#$%&'*+\-/=?^_`{|}~]+)\s*>\s*$", trim_message[10:], re.MULTILINE)
 
@@ -98,19 +100,21 @@ async def numail_parse(reader, writer, message_stack):
                             writer.write(MessageLine(f"501 Invalid parameters", message_stack).bytes())
                             await writer.drain()
                     else:
-                        pass
-
-
-
-
-
-                        # FINISH THIS
-
-
-
-
-
-
+                        full_email = re.search(r"^\s*<\s*([a-zA-Z0-9.!#$%&'*+\-/=?^_`{|}~]+)@([a-zA-Z0-9._\-]+)\s*>\s*$", trim_message[10:], re.MULTILINE)
+                        if full_email and full_email.group(2) == message_stack.get_client_self_id():
+                            message_stack.set_from_addr(f"{full_email.group(1)}@{full_email.group(2)}")
+                            writer.write(MessageLine(f"250 2.1.0 {full_email.group(1)}@{full_email.group(2)}... Sender ok", message_stack).bytes())
+                            await writer.drain()
+                        else:
+                            writer.write(MessageLine(f"501 Invalid parameters", message_stack).bytes())
+                            await writer.drain()
+                else:
+                    writer.write(MessageLine(f"504 \"{trim_message[5:]}\" not implemented", message_stack).bytes())
+                    await writer.drain()
+            elif check_command(trim_message, "CHCK", 1):
+                if len(trim_message) > 17 and trim_message[5:18] == "RECEIVE MAIL:":
+                    result = await mod_chck(reader=reader, writer=writer, message=message_stack, action="RECEIVE", what="MAIL", params=trim_message[18:])
+                    print(result)
                 else:
                     writer.write(MessageLine(f"504 \"{trim_message[5:]}\" not implemented", message_stack).bytes())
                     await writer.drain()

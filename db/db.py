@@ -78,3 +78,11 @@ def get_mailbox(mb_name: str, user_name: str) -> dict | bool:
                 return dict(mb_exists)
             else:
                 return False
+
+def search_mailbox(mb_name: str) -> dict | bool:
+    with get_db() as db:
+        mb_exists = db.execute("SELECT * FROM Mailboxes WHERE AND mbName = ?", (mb_name,)).fetchone()
+        if mb_exists:
+            return dict(mb_exists)
+        else:
+            return False

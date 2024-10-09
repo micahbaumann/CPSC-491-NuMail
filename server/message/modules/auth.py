@@ -3,6 +3,7 @@ import base64
 from server.message.MessageLine import MessageLine
 from server.message.server_parser import numail_server_parser
 from db.db import check_user_pwd
+from errors.nuerrors import NuMailError
 
 @numail_server_parser
 async def mod_auth(reader, writer, message, local_stack, state, loop, method="LOGIN"):
@@ -35,3 +36,5 @@ async def mod_auth(reader, writer, message, local_stack, state, loop, method="LO
             await writer.drain()
             loop.returnLoop()
             return result
+    else:
+        raise NuMailError(code="7.3.0", message="Module Error")

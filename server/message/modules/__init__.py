@@ -1,3 +1,4 @@
-__all__ = ["auth"]
+__all__ = ["auth", "chck"]
 
 from . import auth
+from . import chck
