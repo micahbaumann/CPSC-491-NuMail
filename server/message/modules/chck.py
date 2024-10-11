@@ -5,6 +5,7 @@ from errors.nuerrors import NuMailError
 from server.message.MessageLine import MessageLine
 from config.config import server_settings
 from db.db import search_mailbox
+from server.client.client import NuMailRequest
 
 @numail_server_parser
 async def mod_chck(reader, writer, message, local_stack, state, loop, action="", what="", params=""):
@@ -25,17 +26,10 @@ async def mod_chck(reader, writer, message, local_stack, state, loop, action="",
                         writer.write(MessageLine(f"550 Invalid mailbox", message).bytes())
                         await writer.drain()
                 else:
-                    
-
-
-
-
-
-
-                    # FINISH THIS. NEEDS TO CONNECT TO ANOTHER SERVER AND GET RESPONSE
-                    pass
-
-
+                    try:
+                        request = NuMailRequest(full_email.group(2), 7777)
+                    except:
+                        pass
 
 
             else:
