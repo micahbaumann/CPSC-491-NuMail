@@ -32,6 +32,11 @@ async def mod_chck(reader, writer, message, local_stack, state, loop, action="",
                         pass
 
 
+
+
+                    # TEST THIS
+
+
             else:
                 writer.write(MessageLine(f"501 Invalid parameters", message).bytes())
                 await writer.drain()
