@@ -16,11 +16,24 @@ message_receipt = NuMailLogger("sent.log")
 
 
 class NuMailRequest:
-    async def __init__(self, host, port) -> None:
+    # async def __init__(self, host, port) -> None:
+    #     self.host = host
+    #     self.port = port
+    #     self.message_info = NuMailMessage()
+    #     self.message_info.set_is_client(True)
+    #     try:
+    #         self.reader, self.writer = await asyncio.open_connection(self.host, self.port)
+    #     except (ConnectionRefusedError, OSError) as e:
+    #         raise NuMailError(code="7.6.1", message="Cannot connect to server")
+    def __init__(self, host, port) -> None:
         self.host = host
         self.port = port
         self.message_info = NuMailMessage()
         self.message_info.set_is_client(True)
+        self.reader = None
+        self.writer = None
+    
+    async def connect(self) -> None:
         try:
             self.reader, self.writer = await asyncio.open_connection(self.host, self.port)
         except (ConnectionRefusedError, OSError) as e:
