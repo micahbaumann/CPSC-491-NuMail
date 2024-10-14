@@ -1,4 +1,4 @@
-from db.db import createUser, check_user_pwd, get_mailbox, create_mailbox
+from db.db import createUser, check_user_pwd, get_mailbox, create_mailbox, search_mailbox
 from errors.nuerrors import NuMailError
 
 try:
@@ -29,6 +29,8 @@ try:
     print(create_mailbox(
         user_name="micah",
         mb_name="micah",
+        mb_send=True,
+        mb_receive=True
     ))
 except NuMailError as e:
     print(e)
@@ -38,6 +40,15 @@ except Exception as e:
 try:
     print(get_mailbox(
         user_name="micah",
+        mb_name="micah"
+    ))
+except NuMailError as e:
+    print(e)
+except Exception as e:
+    print(e)
+
+try:
+    print(search_mailbox(
         mb_name="micah"
     ))
 except NuMailError as e:

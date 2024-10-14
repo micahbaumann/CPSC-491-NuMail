@@ -5,6 +5,8 @@ NUMAIL_SERVER_VERSION = "1.0.0"
 # Global Config Settings
 server_settings = {
     "ip": "127.0.0.1",
+    "public_ip": "",
+    "domain": "",
     "port": 25,
     "buffer": 1024,
     "read_timeout": 300,

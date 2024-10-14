@@ -1069,3 +1069,140 @@ can't multiply sequence by non-int of type 'ParserController'
 [2024-10-08 19:54:21.995362] [message] Shutdown 127.0.0.1 port 7777
 [2024-10-08 19:54:21.995795] [message] Shutdown 127.0.0.1 port 7778
 [2024-10-08 19:54:21.996036] [message] Shutdown 127.0.0.1 port 7779
+[2024-10-14 14:34:03.500713] [message] Server listening on 127.0.0.1 port 7777
+[2024-10-14 14:34:03.501295] [message] Server listening on 127.0.0.1 port 7778
+[2024-10-14 14:34:03.501513] [message] Server listening on 127.0.0.1 port 7779
+[2024-10-14 14:34:24.790092] [message] New connection from 127.0.0.1 port 46396
+[2024-10-14 14:35:24.598719] [request_error] Connection 127.0.0.1 port 46396:
+'public_ip'
+[2024-10-14 14:37:32.393179] [message] Shutting down
+[2024-10-14 14:37:32.393520] [message] Shutdown 127.0.0.1 port 7778
+[2024-10-14 14:37:32.393731] [message] Shutdown 127.0.0.1 port 7779
+[2024-10-14 14:37:32.394234] [message] Shutdown 127.0.0.1 port 7777
+[2024-10-14 14:37:33.846887] [message] Server listening on 127.0.0.1 port 7777
+[2024-10-14 14:37:33.847178] [message] Server listening on 127.0.0.1 port 7778
+[2024-10-14 14:37:33.847407] [message] Server listening on 127.0.0.1 port 7779
+[2024-10-14 14:37:35.682710] [message] New connection from 127.0.0.1 port 38686
+[2024-10-14 14:38:16.559421] [message] Shutting down
+[2024-10-14 14:38:16.560083] [message] Shutdown 127.0.0.1 port 7778
+[2024-10-14 14:38:16.560654] [message] Shutdown 127.0.0.1 port 7779
+[2024-10-14 14:38:16.561720] [message] Shutdown 127.0.0.1 port 7777
+[2024-10-14 14:38:23.854189] [message] Server listening on 127.0.0.1 port 7777
+[2024-10-14 14:38:23.854558] [message] Server listening on 127.0.0.1 port 7778
+[2024-10-14 14:38:23.854866] [message] Server listening on 127.0.0.1 port 7779
+[2024-10-14 14:38:25.542039] [message] New connection from 127.0.0.1 port 58726
+[2024-10-14 14:39:24.611277] [request_error] Connection 127.0.0.1 port 58726:
+'public_ip'
+[2024-10-14 14:42:23.653396] [message] Shutting down
+[2024-10-14 14:42:23.653953] [message] Shutdown 127.0.0.1 port 7778
+[2024-10-14 14:42:23.654310] [message] Shutdown 127.0.0.1 port 7779
+[2024-10-14 14:42:23.655311] [message] Shutdown 127.0.0.1 port 7777
+[2024-10-14 14:42:25.983850] [message] Server listening on 127.0.0.1 port 7777
+[2024-10-14 14:42:25.984115] [message] Server listening on 127.0.0.1 port 7778
+[2024-10-14 14:42:25.984297] [message] Server listening on 127.0.0.1 port 7779
+[2024-10-14 14:42:27.973962] [message] New connection from 127.0.0.1 port 43566
+[2024-10-14 14:43:02.868269] [request_error] Connection 127.0.0.1 port 43566:
+'public_ip'
+[2024-10-14 14:43:59.715989] [message] Shutting down
+[2024-10-14 14:43:59.716288] [message] Shutdown 127.0.0.1 port 7778
+[2024-10-14 14:43:59.716540] [message] Shutdown 127.0.0.1 port 7779
+[2024-10-14 14:43:59.717131] [message] Shutdown 127.0.0.1 port 7777
+[2024-10-14 14:57:32.334624] [message] Server listening on 127.0.0.1 port 7777
+[2024-10-14 14:57:32.334887] [message] Server listening on 127.0.0.1 port 7778
+[2024-10-14 14:57:32.335087] [message] Server listening on 127.0.0.1 port 7779
+[2024-10-14 14:57:34.211539] [message] New connection from 127.0.0.1 port 43448
+[2024-10-14 14:58:23.079774] [request_error] Connection 127.0.0.1 port 43448:
+'public_ip'
+[2024-10-14 14:59:33.032394] [message] Shutting down
+[2024-10-14 14:59:33.032824] [message] Shutdown 127.0.0.1 port 7778
+[2024-10-14 14:59:33.033062] [message] Shutdown 127.0.0.1 port 7779
+[2024-10-14 14:59:33.033543] [message] Shutdown 127.0.0.1 port 7777
+[2024-10-14 14:59:34.278372] [message] Server listening on 127.0.0.1 port 7777
+[2024-10-14 14:59:34.278712] [message] Server listening on 127.0.0.1 port 7778
+[2024-10-14 14:59:34.279010] [message] Server listening on 127.0.0.1 port 7779
+[2024-10-14 14:59:36.471524] [message] New connection from 127.0.0.1 port 49062
+[2024-10-14 15:00:09.816421] [request_error] Connection 127.0.0.1 port 49062:
+'public_ip'
+[2024-10-14 15:00:33.427685] [request_error] Connection 127.0.0.1 port 49062:
+'public_ip'
+[2024-10-14 15:00:49.998069] [request_error] Connection 127.0.0.1 port 49062:
+'public_ip'
+[2024-10-14 15:01:22.385812] [message] Shutting down
+[2024-10-14 15:01:22.386134] [message] Shutdown 127.0.0.1 port 7778
+[2024-10-14 15:01:22.386316] [message] Shutdown 127.0.0.1 port 7779
+[2024-10-14 15:01:22.386866] [message] Shutdown 127.0.0.1 port 7777
+[2024-10-14 15:01:23.435197] [message] Server listening on 127.0.0.1 port 7777
+[2024-10-14 15:01:23.435417] [message] Server listening on 127.0.0.1 port 7778
+[2024-10-14 15:01:23.435608] [message] Server listening on 127.0.0.1 port 7779
+[2024-10-14 15:01:31.153766] [message] Shutting down
+[2024-10-14 15:01:31.154017] [message] Shutdown 127.0.0.1 port 7777
+[2024-10-14 15:01:31.154282] [message] Shutdown 127.0.0.1 port 7778
+[2024-10-14 15:01:31.154516] [message] Shutdown 127.0.0.1 port 7779
+[2024-10-14 15:02:09.643140] [message] Server listening on 127.0.0.1 port 7777
+[2024-10-14 15:02:09.643405] [message] Server listening on 127.0.0.1 port 7778
+[2024-10-14 15:02:09.643606] [message] Server listening on 127.0.0.1 port 7779
+[2024-10-14 15:02:11.730018] [message] New connection from 127.0.0.1 port 41784
+[2024-10-14 15:02:27.200901] [request_error] Connection 127.0.0.1 port 41784:
+'public_ip'
+[2024-10-14 15:03:11.241776] [message] Shutting down
+[2024-10-14 15:03:11.242177] [message] Shutdown 127.0.0.1 port 7778
+[2024-10-14 15:03:11.242401] [message] Shutdown 127.0.0.1 port 7779
+[2024-10-14 15:03:11.243152] [message] Shutdown 127.0.0.1 port 7777
+[2024-10-14 15:04:00.015936] [message] Server listening on 127.0.0.1 port 7777
+[2024-10-14 15:04:00.016209] [message] Server listening on 127.0.0.1 port 7778
+[2024-10-14 15:04:00.016420] [message] Server listening on 127.0.0.1 port 7779
+[2024-10-14 15:04:05.388221] [message] New connection from 127.0.0.1 port 42550
+[2024-10-14 15:04:30.855163] [request_error] Connection 127.0.0.1 port 42550:
+'public_ip'
+[2024-10-14 15:04:45.052666] [message] Shutting down
+[2024-10-14 15:04:45.053017] [message] Shutdown 127.0.0.1 port 7778
+[2024-10-14 15:04:45.053210] [message] Shutdown 127.0.0.1 port 7779
+[2024-10-14 15:04:45.053739] [message] Shutdown 127.0.0.1 port 7777
+[2024-10-14 15:05:02.900273] [message] Server listening on 127.0.0.1 port 7777
+[2024-10-14 15:05:02.900462] [message] Server listening on 127.0.0.1 port 7778
+[2024-10-14 15:05:02.900632] [message] Server listening on 127.0.0.1 port 7779
+[2024-10-14 15:05:06.306664] [message] New connection from 127.0.0.1 port 34830
+[2024-10-14 15:05:09.959632] [message] Shutting down
+[2024-10-14 15:05:09.959958] [message] Shutdown 127.0.0.1 port 7778
+[2024-10-14 15:05:09.960150] [message] Shutdown 127.0.0.1 port 7779
+[2024-10-14 15:05:09.960702] [message] Shutdown 127.0.0.1 port 7777
+[2024-10-14 15:05:15.975211] [message] Server listening on 127.0.0.1 port 7777
+[2024-10-14 15:05:15.975481] [message] Server listening on 127.0.0.1 port 7778
+[2024-10-14 15:05:15.975662] [message] Server listening on 127.0.0.1 port 7779
+[2024-10-14 15:05:17.732764] [message] New connection from 127.0.0.1 port 49636
+[2024-10-14 15:05:45.605636] [request_error] Connection 127.0.0.1 port 49636:
+'public_ip'
+[2024-10-14 15:07:14.710194] [message] Shutting down
+[2024-10-14 15:07:14.710567] [message] Shutdown 127.0.0.1 port 7778
+[2024-10-14 15:07:14.710769] [message] Shutdown 127.0.0.1 port 7779
+[2024-10-14 15:07:14.711323] [message] Shutdown 127.0.0.1 port 7777
+[2024-10-14 15:07:16.424941] [message] Server listening on 127.0.0.1 port 7777
+[2024-10-14 15:07:16.425225] [message] Server listening on 127.0.0.1 port 7778
+[2024-10-14 15:07:16.425439] [message] Server listening on 127.0.0.1 port 7779
+[2024-10-14 15:07:19.590635] [message] New connection from 127.0.0.1 port 40884
+[2024-10-14 15:07:34.774704] [request_error] Connection 127.0.0.1 port 40884:
+near "AND": syntax error
+[2024-10-14 15:08:57.565831] [message] Shutting down
+[2024-10-14 15:08:57.566196] [message] Shutdown 127.0.0.1 port 7778
+[2024-10-14 15:08:57.566489] [message] Shutdown 127.0.0.1 port 7779
+[2024-10-14 15:08:57.567190] [message] Shutdown 127.0.0.1 port 7777
+[2024-10-14 15:09:30.400693] [message] Server listening on 127.0.0.1 port 7777
+[2024-10-14 15:09:30.401220] [message] Server listening on 127.0.0.1 port 7778
+[2024-10-14 15:09:30.401461] [message] Server listening on 127.0.0.1 port 7779
+[2024-10-14 15:09:32.698311] [message] New connection from 127.0.0.1 port 46078
+[2024-10-14 15:09:49.083686] [request_error] Connection 127.0.0.1 port 46078:
+near "AND": syntax error
+[2024-10-14 15:10:59.549020] [message] Shutting down
+[2024-10-14 15:10:59.549427] [message] Shutdown 127.0.0.1 port 7778
+[2024-10-14 15:10:59.549661] [message] Shutdown 127.0.0.1 port 7779
+[2024-10-14 15:10:59.550305] [message] Shutdown 127.0.0.1 port 7777
+[2024-10-14 15:12:37.279732] [message] Server listening on 127.0.0.1 port 7777
+[2024-10-14 15:12:37.279979] [message] Server listening on 127.0.0.1 port 7778
+[2024-10-14 15:12:37.280186] [message] Server listening on 127.0.0.1 port 7779
+[2024-10-14 15:12:40.574771] [message] New connection from 127.0.0.1 port 59572
+[2024-10-14 15:13:50.397333] [message] Connection 127.0.0.1 port 59572 closed
+[2024-10-14 15:14:43.096334] [message] New connection from 127.0.0.1 port 41168
+[2024-10-14 15:15:26.917848] [message] Shutting down
+[2024-10-14 15:15:26.918313] [message] Shutdown 127.0.0.1 port 7778
+[2024-10-14 15:15:26.918535] [message] Shutdown 127.0.0.1 port 7779
+[2024-10-14 15:15:26.919105] [message] Shutdown 127.0.0.1 port 7777
