@@ -31,8 +31,10 @@ async def mod_chck(reader, writer, message, local_stack, state, loop, action="",
                         # request = NuMailRequest(full_email.group(2), 7777)
                         request = NuMailRequest("127.0.0.1", 7777)
                         await request.connect()
-                        print(await request.send("EHLO example.com"))
-                        request.close()
+                        # print(await request.send("EHLO example.com"))
+                        print("test1")
+                        await request.close()
+                        print("test2")
                     except Exception as e:
                         print(e)
 

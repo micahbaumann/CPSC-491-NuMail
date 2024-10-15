@@ -1,0 +1,3 @@
+[2024-10-15 01:48:16.863580] [numail] ['THIS IS WHERE THE MESSAGE ID WILL GO WHEN IMPLEMENTED', [['server', 'EHLO example.com\r\n'], ['server', '220 127.0.0.1 NuMail Server 1.0.0\r\n']]]
+[2024-10-15 01:49:30.965419] [numail] ['THIS IS WHERE THE MESSAGE ID WILL GO WHEN IMPLEMENTED', [['server', 'EHLO example.com\r\n'], ['server', '220 127.0.0.1 NuMail Server 1.0.0\r\n']]]
+[2024-10-15 01:51:20.914923] [numail] ['THIS IS WHERE THE MESSAGE ID WILL GO WHEN IMPLEMENTED', []]
