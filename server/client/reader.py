@@ -13,6 +13,8 @@ def read_numail(message: str):
     matches = re.search(r"^([23456][012345][0-9])[\ \-]([2456]\.[0-9][0-9]?[0-9]?\.[0-9][0-9]?[0-9]?)?(.*)$", message, re.MULTILINE)
     if matches:
         ret.append(matches.group(1))
+        ret.append(matches.group(2))
+        ret.append(matches.group(3))
         # Finish this (get other groups)
     return ret
 

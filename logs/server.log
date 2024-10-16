@@ -1393,3 +1393,34 @@ near "AND": syntax error
 [2024-10-15 19:22:24.892286] [message] Shutdown 127.0.0.1 port 7777
 [2024-10-15 19:22:24.892526] [message] Shutdown 127.0.0.1 port 7778
 [2024-10-15 19:22:24.892727] [message] Shutdown 127.0.0.1 port 7779
+[2024-10-16 14:35:05.470202] [message] Server listening on 127.0.0.1 port 7777
+[2024-10-16 14:35:05.471344] [message] Server listening on 127.0.0.1 port 7778
+[2024-10-16 14:35:05.471563] [message] Server listening on 127.0.0.1 port 7779
+[2024-10-16 14:35:08.409572] [error] NuMail Server Error 7.2.2: Port and/or address already in use
+[2024-10-16 14:35:20.462089] [message] New connection from 127.0.0.1 port 33160
+[2024-10-16 14:35:59.218498] [message] New connection from 127.0.0.1 port 41044
+[2024-10-16 14:35:59.220448] [message] Connection 127.0.0.1 port 41044 closed
+[2024-10-16 14:38:08.557313] [message] Shutting down
+[2024-10-16 14:38:08.557693] [message] Shutdown 127.0.0.1 port 7778
+[2024-10-16 14:38:08.557915] [message] Shutdown 127.0.0.1 port 7779
+[2024-10-16 14:38:08.558501] [message] Shutdown 127.0.0.1 port 7777
+[2024-10-16 14:38:10.070306] [message] Server listening on 127.0.0.1 port 7777
+[2024-10-16 14:38:10.070525] [message] Server listening on 127.0.0.1 port 7778
+[2024-10-16 14:38:10.070673] [message] Server listening on 127.0.0.1 port 7779
+[2024-10-16 14:38:12.547284] [message] New connection from 127.0.0.1 port 42374
+[2024-10-16 14:38:43.124088] [message] New connection from 127.0.0.1 port 46700
+[2024-10-16 14:38:43.125564] [message] Connection 127.0.0.1 port 46700 closed
+[2024-10-16 14:39:54.671648] [message] Shutting down
+[2024-10-16 14:39:54.672033] [message] Shutdown 127.0.0.1 port 7778
+[2024-10-16 14:39:54.672300] [message] Shutdown 127.0.0.1 port 7779
+[2024-10-16 14:39:54.672942] [message] Shutdown 127.0.0.1 port 7777
+[2024-10-16 14:40:42.038064] [message] Server listening on 127.0.0.1 port 7777
+[2024-10-16 14:40:42.038253] [message] Server listening on 127.0.0.1 port 7778
+[2024-10-16 14:40:42.038414] [message] Server listening on 127.0.0.1 port 7779
+[2024-10-16 14:40:50.719144] [message] New connection from 127.0.0.1 port 36226
+[2024-10-16 14:41:11.530105] [message] New connection from 127.0.0.1 port 41190
+[2024-10-16 14:41:11.531693] [message] Connection 127.0.0.1 port 41190 closed
+[2024-10-16 14:43:18.674645] [message] Shutting down
+[2024-10-16 14:43:18.675082] [message] Shutdown 127.0.0.1 port 7778
+[2024-10-16 14:43:18.675358] [message] Shutdown 127.0.0.1 port 7779
+[2024-10-16 14:43:18.676027] [message] Shutdown 127.0.0.1 port 7777

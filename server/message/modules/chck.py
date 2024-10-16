@@ -6,6 +6,7 @@ from server.message.MessageLine import MessageLine
 from config.config import server_settings
 from db.db import search_mailbox
 from server.client.client import NuMailRequest
+from server.client.reader import read_numail
 
 @numail_server_parser
 async def mod_chck(reader, writer, message, local_stack, state, loop, action="", what="", params=""):
@@ -31,8 +32,12 @@ async def mod_chck(reader, writer, message, local_stack, state, loop, action="",
                         # request = NuMailRequest(full_email.group(2), 7777)
                         request = NuMailRequest("localhost", 7778)
                         print(await request.connect())
-                        print(await request.send("EHLO example.com"))
-                        print("test1")
+                        message = await request.send("EHLO example.com")
+                        print(message)
+                        code, excode, msg = read_numail(message)
+                        print(code)
+                        print(excode)
+                        print(msg)
                         await request.close()
                         print("test2")
                     except Exception as e:
