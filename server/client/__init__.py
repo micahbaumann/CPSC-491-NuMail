@@ -1,3 +1,4 @@
-__all__ = ["client"]
+__all__ = ["client", "reader"]
 
 from . import client
+from . import reader

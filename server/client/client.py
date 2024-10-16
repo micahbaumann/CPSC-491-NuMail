@@ -36,8 +36,18 @@ class NuMailRequest:
     async def connect(self) -> None:
         try:
             self.reader, self.writer = await asyncio.open_connection(self.host, self.port)
+            data = await asyncio.wait_for(self.reader.read(int(server_settings["buffer"])), float(server_settings["send_timeout"]))
+            return_data = data.decode()
+            self.message_info.append("server", return_data)
+            return return_data
         except (ConnectionRefusedError, OSError) as e:
             raise NuMailError(code="7.6.1", message="Cannot connect to server")
+        except asyncio.TimeoutError:
+            raise NuMailError(code="7.6.5", message="Connection timeout")
+        except ConnectionResetError:
+            raise NuMailError(code="7.6.4", message="Connection reset")
+        except Exception as e:
+            raise NuMailError(code="7.6.0", message="NuMail request error")
     
     async def send(self, message: str) -> str:
         if not self.writer:
