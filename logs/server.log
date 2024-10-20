@@ -1424,3 +1424,10 @@ near "AND": syntax error
 [2024-10-16 14:43:18.675082] [message] Shutdown 127.0.0.1 port 7778
 [2024-10-16 14:43:18.675358] [message] Shutdown 127.0.0.1 port 7779
 [2024-10-16 14:43:18.676027] [message] Shutdown 127.0.0.1 port 7777
+[2024-10-19 23:19:20.149811] [message] Server listening on 127.0.0.1 port 7777
+[2024-10-19 23:19:20.150548] [message] Server listening on 127.0.0.1 port 7778
+[2024-10-19 23:19:20.150632] [message] Server listening on 127.0.0.1 port 7779
+[2024-10-19 23:19:26.031432] [message] Shutting down
+[2024-10-19 23:19:26.031642] [message] Shutdown 127.0.0.1 port 7777
+[2024-10-19 23:19:26.031738] [message] Shutdown 127.0.0.1 port 7778
+[2024-10-19 23:19:26.031828] [message] Shutdown 127.0.0.1 port 7779

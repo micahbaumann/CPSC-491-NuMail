@@ -9,7 +9,7 @@ from errors.nuerrors import NuMailError
 async def mod_auth(reader, writer, message, local_stack, state, loop, method="LOGIN"):
     if method == "LOGIN":
         if not state or state["mode"] == None:
-            writer.write(MessageLine(f"334 {base64.b64encode(b"Username:").decode('ascii')}", message).bytes())
+            writer.write(MessageLine(f"334 {base64.b64encode(b'Username:').decode('ascii')}", message).bytes())
             await writer.drain()
             state["mode"] = 0
         elif state["mode"] == 0:
@@ -18,7 +18,7 @@ async def mod_auth(reader, writer, message, local_stack, state, loop, method="LO
             except:
                 state["username"] = ""
             state["mode"] = 1
-            writer.write(MessageLine(f"334 {base64.b64encode(b"Password:").decode('ascii')}", message).bytes())
+            writer.write(MessageLine(f"334 {base64.b64encode(b'Password:').decode('ascii')}", message).bytes())
             await writer.drain()
         elif state["mode"] == 1:
             try:
