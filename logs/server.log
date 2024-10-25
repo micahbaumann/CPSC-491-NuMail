@@ -1468,3 +1468,19 @@ near "AND": syntax error
 [2024-10-23 15:43:01.345589] [message] Shutdown 127.0.0.1 port 7777
 [2024-10-23 15:43:01.345894] [message] Shutdown 127.0.0.1 port 7778
 [2024-10-23 15:43:01.346118] [message] Shutdown 127.0.0.1 port 7779
+[2024-10-24 19:27:16.688589] [message] Server listening on 127.0.0.1 port 7777
+[2024-10-24 19:27:16.689322] [message] Server listening on 127.0.0.1 port 7778
+[2024-10-24 19:27:16.689505] [message] Server listening on 127.0.0.1 port 7779
+[2024-10-24 19:27:21.862822] [message] Shutting down
+[2024-10-24 19:27:21.863115] [message] Shutdown 127.0.0.1 port 7777
+[2024-10-24 19:27:21.863299] [message] Shutdown 127.0.0.1 port 7778
+[2024-10-24 19:27:21.863472] [message] Shutdown 127.0.0.1 port 7779
+[2024-10-24 19:43:12.861872] [message] Server listening on 127.0.0.1 port 7777
+[2024-10-24 19:43:12.862106] [message] Server listening on 127.0.0.1 port 7778
+[2024-10-24 19:43:12.862386] [message] Server listening on 127.0.0.1 port 7779
+[2024-10-24 19:43:39.216564] [message] New connection from 127.0.0.1 port 41652
+[2024-10-24 19:45:15.702271] [message] Connection 127.0.0.1 port 41652 closed
+[2024-10-24 19:46:20.592520] [message] Shutting down
+[2024-10-24 19:46:20.592990] [message] Shutdown 127.0.0.1 port 7777
+[2024-10-24 19:46:20.593255] [message] Shutdown 127.0.0.1 port 7778
+[2024-10-24 19:46:20.593526] [message] Shutdown 127.0.0.1 port 7779
