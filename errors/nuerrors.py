@@ -36,6 +36,14 @@ NuMail DNS Resolver Errors
 """
 
 """
+NuMail Protocol Errors:
+    6.0.0 Catch all error
+Network Error:
+    6.5.1 Delivery status successful
+    6.5.2 Error connecting to server
+"""
+
+"""
 Exception class for NuMail
 """
 class NuMailError(Exception):
@@ -75,3 +83,7 @@ class NuMailError(Exception):
             "other": self.other,
             "shutdown": self.shutdown,
         }
+    
+    @staticmethod
+    def codeParts(code: str):
+        return code.split(".")

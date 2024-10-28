@@ -27,7 +27,7 @@ async def init_numail(request: NuMailRequest, self_id=None) -> list:
             #Finish
 
         else:
-            pass # Handel error her
+            pass # Handel error here
     else:
         pass # Handel error here
 

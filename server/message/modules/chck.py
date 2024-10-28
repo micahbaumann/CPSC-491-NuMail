@@ -38,6 +38,10 @@ async def mod_chck(reader, writer, message, local_stack, state, loop, action="",
                         message_send = await request.send("EHLO example.com")
                         print(message_send)
                         
+
+                        # Finish read_numail
+
+
                         code, excode, msg = read_numail(message_send)
                         print(code)
                         print(excode)
@@ -47,8 +51,23 @@ async def mod_chck(reader, writer, message, local_stack, state, loop, action="",
                         # Temp Output
                         writer.write(MessageLine(f"Done", message).bytes())
                         await writer.drain()
+                    except NuMailError as e:
+                        parts = NuMailError.codeParts(e.code)
+                        if parts and parts[1] == "6":
+                            # Implement errors for requests errors
+                            writer.write(MessageLine(f"451 6.5.2 Error connecting to server", message).bytes())
+                            await writer.drain()
+                        elif parts and parts[1] == "7":
+                            # Implement errors for DNS errors
+                            pass
+                            # writer.write(MessageLine(f"451 Requested action aborted: local error in processing", message).bytes())
+                            # await writer.drain()
+                        else:
+                            writer.write(MessageLine(f"451 Requested action aborted: local error in processing", message).bytes())
+                            await writer.drain()
                     except Exception as e:
-                        print(e)
+                        writer.write(MessageLine(f"451 Requested action aborted: local error in processing", message).bytes())
+                        await writer.drain()
 
 
 
