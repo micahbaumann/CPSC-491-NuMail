@@ -1,5 +1,4 @@
 import re
-import asyncio
 
 from server.message.server_parser import numail_server_parser
 from errors.nuerrors import NuMailError
