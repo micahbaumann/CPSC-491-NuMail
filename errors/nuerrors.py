@@ -27,6 +27,10 @@ NuMail Request Errors
     7.6.3 Connection not open
     7.6.4 Connection reset
     7.6.5 Connection timeout
+NuMail DNS Resolver Errors
+    7.7.0 NuMail DNS resolver error
+    7.7.1 DNS server returned answer with no data
+    7.7.2 DNS server not available
 """
 
 """
