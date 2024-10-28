@@ -1,4 +1,5 @@
 import re
+import asyncio
 
 from server.message.server_parser import numail_server_parser
 from errors.nuerrors import NuMailError
@@ -7,6 +8,7 @@ from config.config import server_settings
 from db.db import search_mailbox
 from server.client.client import NuMailRequest
 from server.client.reader import read_numail
+from server.client.dns import resolve_dns
 
 @numail_server_parser
 async def mod_chck(reader, writer, message, local_stack, state, loop, action="", what="", params=""):
@@ -29,6 +31,8 @@ async def mod_chck(reader, writer, message, local_stack, state, loop, action="",
                 else:
                     try:
                         print("test")
+                        dns = await asyncio.wait_for(resolve_dns("fasdfads.com", ["MX"]), float(server_settings["dns_timeout"]))
+                        print(dns)
                         # request = NuMailRequest(full_email.group(2), 7777)
                         request = NuMailRequest("localhost", 7778)
                         print(await request.connect())

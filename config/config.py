@@ -11,6 +11,7 @@ server_settings = {
     "buffer": 1024,
     "read_timeout": 300,
     "send_timeout": 300,
+    "dns_timeout": 120,
 }
 
 """
