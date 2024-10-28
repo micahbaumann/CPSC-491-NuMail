@@ -30,7 +30,7 @@ async def mod_chck(reader, writer, message, local_stack, state, loop, action="",
                 else:
                     try:
                         print("test")
-                        dns = await resolve_dns("fasdfads.com", ["MX"])
+                        dns = await resolve_dns("jodles.com", ["MX"])
                         print(dns)
                         # request = NuMailRequest(full_email.group(2), 7777)
                         request = NuMailRequest("localhost", 7778)
