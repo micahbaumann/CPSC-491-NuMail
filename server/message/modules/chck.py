@@ -31,7 +31,7 @@ async def mod_chck(reader, writer, message, local_stack, state, loop, action="",
                 else:
                     try:
                         print("test")
-                        dns = await asyncio.wait_for(resolve_dns("fasdfads.com", ["MX"]), float(server_settings["dns_timeout"]))
+                        dns = await resolve_dns("fasdfads.com", ["MX"])
                         print(dns)
                         # request = NuMailRequest(full_email.group(2), 7777)
                         request = NuMailRequest("localhost", 7778)
