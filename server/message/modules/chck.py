@@ -31,17 +31,31 @@ async def mod_chck(reader, writer, message, local_stack, state, loop, action="",
                 else:
                     try:
                         print("test")
-                        dns_rec = await resolve_dns("rutstech.com", ["MX", "TXT"])
+                        dns_rec = await resolve_dns("rutstech.com", ["MX"])
                         print(dns_rec)
                         # Sort list to order higher priority first
-                        mx = sorted(dns_rec["MX"], key=lambda x: x[0])
+                        mx = sorted(dns_rec["MX"], key=lambda x: x["priority"])
 
-                        for record in dns_rec["TXT"]:
+                        numail_dns_settings = {}
+                        try:
+                            dns_txt = await resolve_dns("_numail.rutstech.com", ["TXT"])
+
+                            for record in dns_txt["TXT"]:
+                                matches = re.finditer(r"\s*([a-z\-0-9]+)\s*=\s*([0-9a-zA-Z\-@!#$%^&*\(\)_+*/.<>\\?`~:'\"\[\]{}|]+)\s*;", record["text"])
+                                for match in matches:
+                                    numail_dns_settings[match.group(1)] = match.group(2)
+
+                            print(numail_dns_settings)
+                        except:
                             pass
 
                         print(mx)
+                        if "port" in numail_dns_settings.keys() and numail_dns_settings["port"].isdigit():
+                            port = int(numail_dns_settings["port"])
+                        else:
+                            port = 7777
                         # request = NuMailRequest(full_email.group(2), 7777)
-                        request = NuMailRequest("localhost", 7778)
+                        request = NuMailRequest("localhost", port)
                         print(await request.connect())
                         message_send = await request.send("EHLO example.com")
                         print(message_send)
@@ -79,6 +93,7 @@ async def mod_chck(reader, writer, message, local_stack, state, loop, action="",
                         
                         server_log.log(e, "error")
                     except Exception as e:
+                        server_log.log(e, "error")
                         writer.write(MessageLine(f"451 Requested action aborted: local error in processing", message).bytes())
                         await writer.drain()
 

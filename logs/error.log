@@ -1,3 +1,7 @@
 [2024-10-29 20:42:21.545845] [error] NuMail Server Error 7.7.0: NuMail DNS resolver error, "'ares_query_txt_result' object has no attribute 'priority'"
 [2024-10-29 20:45:36.469255] [error] NuMail Server Error 7.7.0: NuMail DNS resolver error, "'ares_query_txt_result' object has no attribute 'priority'"
 [2024-10-29 20:48:50.678266] [error] NuMail Server Error 7.7.0: NuMail DNS resolver error, "'ares_query_txt_result' object has no attribute 'priority'"
+[2024-10-30 02:46:39.601305] [error] NuMail Server Error 7.7.2: NuMail DNS resolver error, "(4, 'Domain name not found')"
+[2024-10-30 02:49:12.312383] [error] NuMail Server Error 7.7.2: NuMail DNS resolver error, "(4, 'Domain name not found')"
+[2024-10-30 02:50:24.110741] [error] NuMail Server Error 7.7.2: NuMail DNS resolver error, "(4, 'Domain name not found')"
+[2024-10-30 02:53:33.117512] [error] NuMail Server Error 7.7.2: NuMail DNS resolver error, "(4, 'Domain name not found')"
