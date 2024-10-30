@@ -1,11 +1,12 @@
 import aiodns
 import asyncio
 import ast
+import ipaddress
 
 from errors.nuerrors import NuMailError
 from config.config import server_settings
 
-async def resolve_dns(domain_name, records: list = ["MX"]):
+async def resolve_dns(domain_name: str, records: list = ["MX"], timeout: float | int = float(server_settings["dns_timeout"])):
     resolver = aiodns.DNSResolver()
 
     ret = {}
@@ -14,7 +15,7 @@ async def resolve_dns(domain_name, records: list = ["MX"]):
         try:
             # Resolve MX records (Mail Exchange servers)
             if record == "MX" or record == "TXT" or record == "A" or record == "AAAA" or record == "CNAME" or record == "NAPTR" or record == "NS" or record == "PTR" or record == "SOA" or record == "SRV":
-                resolved_records = await asyncio.wait_for(resolver.query(domain_name, record), float(server_settings["dns_timeout"]))
+                resolved_records = await asyncio.wait_for(resolver.query(domain_name, record), timeout)
 
             if record == "MX":
                 ret[record] = [{"host": entry.host, "priority": entry.priority, "ttl": entry.ttl} for entry in resolved_records]
@@ -50,3 +51,10 @@ async def resolve_dns(domain_name, records: list = ["MX"]):
             raise NuMailError(code="7.7.0", message=f"NuMail DNS resolver error, \"{e}\"" )
 
     return ret
+
+def is_ip(ip: str) -> bool:
+    try:
+        ipaddress.ip_address(ip)
+        return True
+    except:
+        return False
