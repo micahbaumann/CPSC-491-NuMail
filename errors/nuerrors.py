@@ -1,3 +1,5 @@
+from logger.logger import NuMailLogger, server_log
+
 """
 NuMail Server Errors:
     7.0.0: catch all error
@@ -43,6 +45,8 @@ Network Error:
     6.5.2 Error connecting to server
 """
 
+error_log = NuMailLogger("error.log")
+
 """
 Exception class for NuMail
 """
@@ -64,6 +68,7 @@ class NuMailError(Exception):
         self.file = file
         self.shutdown = shutdown
         super().__init__(f"NuMail Error {self.code}: {self.message}")
+        error_log.log(str(self), "error")
     
     """
     Returns the full description and error code in a string

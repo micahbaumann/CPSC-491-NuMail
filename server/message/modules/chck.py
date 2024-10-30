@@ -8,6 +8,7 @@ from db.db import search_mailbox
 from server.client.client import NuMailRequest
 from server.client.reader import read_numail
 from server.client.dns import resolve_dns
+from logger.logger import server_log
 
 @numail_server_parser
 async def mod_chck(reader, writer, message, local_stack, state, loop, action="", what="", params=""):
@@ -30,8 +31,15 @@ async def mod_chck(reader, writer, message, local_stack, state, loop, action="",
                 else:
                     try:
                         print("test")
-                        dns = await resolve_dns("jodles.com", ["MX"])
-                        print(dns)
+                        dns_rec = await resolve_dns("rutstech.com", ["MX", "TXT"])
+                        print(dns_rec)
+                        # Sort list to order higher priority first
+                        mx = sorted(dns_rec["MX"], key=lambda x: x[0])
+
+                        for record in dns_rec["TXT"]:
+                            pass
+
+                        print(mx)
                         # request = NuMailRequest(full_email.group(2), 7777)
                         request = NuMailRequest("localhost", 7778)
                         print(await request.connect())
@@ -59,12 +67,17 @@ async def mod_chck(reader, writer, message, local_stack, state, loop, action="",
                             await writer.drain()
                         elif parts and parts[1] == "7":
                             # Implement errors for DNS errors
-                            pass
-                            # writer.write(MessageLine(f"451 Requested action aborted: local error in processing", message).bytes())
-                            # await writer.drain()
+                            if parts[2] == "3" or parts[2] == "2":
+                                writer.write(MessageLine(f"520 6.5.2 Error connecting to server", message).bytes())
+                                await writer.drain()
+                            else:
+                                writer.write(MessageLine(f"451 6.5.2 Error connecting to server", message).bytes())
+                                await writer.drain()
                         else:
                             writer.write(MessageLine(f"451 Requested action aborted: local error in processing", message).bytes())
                             await writer.drain()
+                        
+                        server_log.log(e, "error")
                     except Exception as e:
                         writer.write(MessageLine(f"451 Requested action aborted: local error in processing", message).bytes())
                         await writer.drain()

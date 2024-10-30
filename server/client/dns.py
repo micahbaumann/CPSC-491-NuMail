@@ -14,12 +14,18 @@ async def resolve_dns(domain_name, records: list = ["MX"]):
         try:
             # Resolve MX records (Mail Exchange servers)
             resolved_records = await asyncio.wait_for(resolver.query(domain_name, record), float(server_settings["dns_timeout"]))
-            ret[record] = [(entry.priority, entry.host) for entry in resolved_records]
+            print(resolved_records)
+            if record == "MX":
+                ret[record] = [(entry.priority, entry.host) for entry in resolved_records]
+            elif record == "TXT":
+                ret[record] = [(entry.text) for entry in resolved_records]
         except aiodns.error.DNSError as e:
             if ast.literal_eval(str(e))[0] == 4:
                 raise NuMailError(code="7.7.2", message=f"NuMail DNS resolver error, \"{e}\"" )
             elif ast.literal_eval(str(e))[0] == 1:
                 raise NuMailError(code="7.7.3", message=f"NuMail DNS resolver error, \"{e}\"" )
+            elif ast.literal_eval(str(e))[0] == 12:
+                raise NuMailError(code="7.7.4", message=f"NuMail DNS resolver error, \"connection timed out\"" )
             else:
                 raise NuMailError(code="7.7.1", message=f"NuMail DNS resolver error, \"{e}\"" )
         except TimeoutError:

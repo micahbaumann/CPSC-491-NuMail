@@ -86,24 +86,24 @@ async def handle_request(reader, writer):
             if parse_end == "exit":
                 break
         except TimeoutError:
-            writer.write(MessageLine("500 Connection timed out", message_info).bytes())
+            writer.write(MessageLine("421 Connection timed out", message_info).bytes())
             await writer.drain()
             server_log.log(f"Connection {addr[0]} port {addr[1]} timeout", type="request_warning")
             break
         except UnicodeDecodeError as e:
-            writer.write(MessageLine("500 Invalid character", message_info).bytes())
+            writer.write(MessageLine("421 Invalid character", message_info).bytes())
             await writer.drain()
             server_log.log(f"Connection {addr[0]} port {addr[1]} invalid character", type="request_error")
             break
         except NuMailError as e:
-            writer.write(MessageLine("500 Unexpected error", message_info).bytes())
+            writer.write(MessageLine("421 Unexpected error", message_info).bytes())
             await writer.drain()
             server_log.log(f"Connection {addr[0]} port {addr[1]}:\n{e}", type="request_error")
             if e.shutdown == True:
                 raise e
             break
         except Exception as e:
-            writer.write(MessageLine("500 Unexpected error", message_info).bytes())
+            writer.write(MessageLine("421 Unexpected error", message_info).bytes())
             await writer.drain()
             server_log.log(f"Connection {addr[0]} port {addr[1]}:\n{e}", type="request_error")
             break
