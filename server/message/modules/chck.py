@@ -84,7 +84,7 @@ async def mod_chck(reader, writer, message, local_stack, state, loop, action="",
                             request_addr = DEBUG_VARS["server_addr"]
                         
                         loop_range = [request_addr]
-                        if len(mx) > 0:
+                        if len(mx) > 0 and "server_addr" not in DEBUG_VARS.keys():
                             loop_range = [domn["host"] for domn in mx]
                         
                         i = 1
