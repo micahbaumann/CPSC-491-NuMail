@@ -17,6 +17,7 @@ class NuMailMessage:
         self.is_send = None
         self.is_client = False
         self.mods = []
+        self.to_addr = ""
     
     """
     Returns the message stack.
@@ -153,6 +154,20 @@ class NuMailMessage:
     """
     def set_mods(self, mods:list) -> None:
         self.mods = mods
+
+    """
+    Returns the to address
+    """
+    def get_to_addr(self) -> bool | None:
+        return self.to_addr
+    
+    """
+    Sets the to address
+    Arguments:
+    to_addr: The address
+    """
+    def set_to_addr(self, to_addr:str) -> None:
+        self.to_addr = to_addr
     
     """
     Returns information in this object in a dictionary
@@ -169,5 +184,6 @@ class NuMailMessage:
             "from_addr": self.from_addr,
             "is_send": self.is_send,
             "is_client": self.is_client,
-            "mods": self.mods
+            "mods": self.mods,
+            "to_addr": self.to_addr
         }

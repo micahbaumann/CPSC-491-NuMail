@@ -131,6 +131,22 @@ async def numail_parse(reader, writer, message_stack):
                 else:
                     writer.write(MessageLine(f"504 \"{trim_message[5:]}\" not implemented", message_stack).bytes())
                     await writer.drain()
+            elif check_command(trim_message, "RCPT", 1):
+                if len(trim_message) > 7 and trim_message[5:8] == "TO:":
+                    message_stack.set_to_addr(trim_message[8:].strip())
+                    writer.write(MessageLine(f"250 2.1.5 {message_stack.get_to_addr().strip("<>")}... Recipient ok", message_stack).bytes())
+                    await writer.drain()
+                else:
+                    writer.write(MessageLine(f"504 \"{trim_message[5:]}\" not implemented", message_stack).bytes())
+                    await writer.drain()
+            elif check_command(trim_message, "MSGT", 1):
+                if trim_message[5:] == "MAIL":
+                    message_stack.numail["message_type"] = "mail"
+                    writer.write(MessageLine(f"250 message type set to regular mail", message_stack).bytes())
+                    await writer.drain()
+                else:
+                    writer.write(MessageLine(f"504 \"{trim_message[5:]}\" not implemented", message_stack).bytes())
+                    await writer.drain()
             else:
                 writer.write(MessageLine("500 Command unrecognized", message_stack).bytes())
                 await writer.drain()
