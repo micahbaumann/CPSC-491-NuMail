@@ -5,12 +5,12 @@ from config.config import server_settings
 from errors.nuerrors import NuMailError
 
 """
-Attempts to initializes a NuMail connection. Returns a list of if it's NuMail (True) and TBD
+Attempts to initializes a NuMail connection. Returns a if it's NuMail (True/False)
 Arguments:
 request: A NuMailRequest object
 self_id: An ID overide
 """
-async def init_numail(request: NuMailRequest, self_id=None) -> list:
+async def init_numail(request: NuMailRequest, self_id=None) -> bool:
     ret = False
     this_server = ""
     if self_id:
@@ -23,33 +23,55 @@ async def init_numail(request: NuMailRequest, self_id=None) -> list:
         this_server = server_settings["ip"]
     
     message_send = await request.send(f"EHLO {this_server}")
+    message_split = message_send.split("\r\n")
+    message_split = [i for i in message_split if i]
+    message_list = []
     try:
-        code, excode, msg, more = read_numail(message_send)
+        for message in message_split:
+            message_list.append(read_numail(message))
+    except NuMailError as e:
+        raise NuMailError(code="7.8.0", message=f"NuMail init error, \"{e}\"" )
+    except Exception as e:
+        raise NuMailError(code="7.8.0", message=f"NuMail init error, \"{e}\"" )
 
+    if len(message_list) > 0:
+        if message_list[0][0] == "250":
+            if len(message_list[0][2]) >= 6 and message_list[0][2][:6] == "NUMAIL":
+                message_send = await request.send(f"NUML")
+                message_split = message_send.split("\r\n")
+                message_split = [i for i in message_split if i]
+                message_list_numl = []
+                try:
+                    for message in message_split:
+                        message_list_numl.append(read_numail(message))
+                except NuMailError as e:
+                    raise NuMailError(code="7.8.0", message=f"NuMail init error, \"{e}\"" )
+                except Exception as e:
+                    raise NuMailError(code="7.8.0", message=f"NuMail init error, \"{e}\"" )
+                if len(message_list_numl) > 0:
+                    if message_list_numl[0][0] == "650":
+                        ret = True
+                else:
+                    raise NuMailError(code="7.8.0", message=f"NuMail init error1" )
 
+            else:
+                ret = False
+        else:
+            raise NuMailError(code="7.8.0", message=f"NuMail init error2" )
+    else:
+        raise NuMailError(code="7.8.0", message=f"NuMail init error3" )
 
-        # Make client accept multiple inputs. Do This by seperating message_send by new lines and processing each one.
+    mods = []
+    first = True
+    for message in message_list:
+        if first:
+            first = False
+            continue
+        mods.append(message[2])
+    
+    request.message_info.set_mods(mods)
 
-        print(message_send)
-        print(more)
-        print("Mods:")
-        print(msg)
-    except:
-        pass #finish
-
-    # if code == 250:
-    #     if len(msg) >= 6 and msg[:6] == "NUMAIL":
-    #         message_send = await request.send(f"NUML")
-    #         code, excode, msg, more = read_numail(message_send)
-    #         if code == 650:
-    #             ret = True
-
-    #     else:
-    #         pass # Handel error here
-    # else:
-    #     pass # Handel error here
-
-    return [ret, message_send]
+    return ret
 
 """
 Reads a message from NuMail and returns a list of the message parts

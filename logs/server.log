@@ -2242,3 +2242,485 @@ near "AND": syntax error
 [2024-11-04 02:45:24.805156] [message] Shutdown 127.0.0.1 port 7778
 [2024-11-04 02:45:24.805518] [message] Shutdown 127.0.0.1 port 7779
 [2024-11-04 02:45:24.806220] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-04 11:25:46.227725] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-04 11:25:46.229137] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-04 11:25:46.229287] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-04 11:25:49.404708] [message] New connection from 127.0.0.1 port 56360
+[2024-11-04 11:26:17.909066] [message] New connection from 127.0.0.1 port 52638
+[2024-11-04 11:26:17.911743] [message] Connection 127.0.0.1 port 52638 closed
+[2024-11-04 11:28:18.378205] [message] Shutting down
+[2024-11-04 11:28:18.378629] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-04 11:28:18.378912] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-04 11:28:18.379482] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-04 11:28:19.668669] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-04 11:28:19.668921] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-04 11:28:19.669152] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-04 11:28:21.060741] [message] New connection from 127.0.0.1 port 55518
+[2024-11-04 11:28:32.262854] [message] New connection from 127.0.0.1 port 48542
+[2024-11-04 11:28:32.264595] [message] Connection 127.0.0.1 port 48542 closed
+[2024-11-04 11:28:55.190683] [message] Shutting down
+[2024-11-04 11:28:55.191285] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-04 11:28:55.191880] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-04 11:28:55.192857] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-04 11:29:32.281660] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-04 11:29:32.281853] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-04 11:29:32.281991] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-04 11:29:33.493043] [message] New connection from 127.0.0.1 port 49996
+[2024-11-04 11:29:38.419089] [message] New connection from 127.0.0.1 port 57986
+[2024-11-04 11:29:38.420742] [message] Connection 127.0.0.1 port 57986 closed
+[2024-11-04 11:30:28.970698] [message] Shutting down
+[2024-11-04 11:30:28.971162] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-04 11:30:28.971434] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-04 11:30:28.972379] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-04 11:30:30.122581] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-04 11:30:30.122754] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-04 11:30:30.122918] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-04 11:30:31.305084] [message] New connection from 127.0.0.1 port 42948
+[2024-11-04 11:30:38.964160] [message] New connection from 127.0.0.1 port 42660
+[2024-11-04 11:30:38.966283] [message] Connection 127.0.0.1 port 42660 closed
+[2024-11-04 11:31:10.365274] [message] Shutting down
+[2024-11-04 11:31:10.365919] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-04 11:31:10.366308] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-04 11:31:10.366937] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-04 11:31:13.074582] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-04 11:31:13.074819] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-04 11:31:13.074993] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-04 11:31:14.082944] [message] New connection from 127.0.0.1 port 43184
+[2024-11-04 11:31:24.618454] [message] New connection from 127.0.0.1 port 33136
+[2024-11-04 11:31:24.620116] [message] Connection 127.0.0.1 port 33136 closed
+[2024-11-04 11:32:45.286853] [message] Shutting down
+[2024-11-04 11:32:45.287797] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-04 11:32:45.288530] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-04 11:32:45.289747] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-04 11:32:46.162734] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-04 11:32:46.163011] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-04 11:32:46.163267] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-04 11:32:47.822180] [message] New connection from 127.0.0.1 port 48538
+[2024-11-04 11:32:57.409075] [message] New connection from 127.0.0.1 port 37964
+[2024-11-04 11:32:57.412014] [message] Connection 127.0.0.1 port 37964 closed
+[2024-11-04 11:33:38.002716] [message] Shutting down
+[2024-11-04 11:33:38.003514] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-04 11:33:38.003908] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-04 11:33:38.004568] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-04 11:33:38.955388] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-04 11:33:38.955615] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-04 11:33:38.955760] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-04 11:33:41.915532] [message] New connection from 127.0.0.1 port 42050
+[2024-11-04 11:33:47.915020] [message] New connection from 127.0.0.1 port 55720
+[2024-11-04 11:33:47.916574] [message] Connection 127.0.0.1 port 55720 closed
+[2024-11-04 11:34:34.160066] [message] Shutting down
+[2024-11-04 11:34:34.160624] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-04 11:34:34.161104] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-04 11:34:34.162442] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-04 11:34:34.941803] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-04 11:34:34.941987] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-04 11:34:34.942222] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-04 11:34:36.092677] [message] New connection from 127.0.0.1 port 39992
+[2024-11-04 11:34:48.516763] [message] New connection from 127.0.0.1 port 33164
+[2024-11-04 11:34:48.519596] [message] Connection 127.0.0.1 port 33164 closed
+[2024-11-04 11:35:22.739905] [message] Shutting down
+[2024-11-04 11:35:22.740696] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-04 11:35:22.741130] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-04 11:35:22.741885] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-04 11:35:23.801751] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-04 11:35:23.801920] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-04 11:35:23.802050] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-04 11:35:25.280534] [message] New connection from 127.0.0.1 port 54218
+[2024-11-04 11:35:36.748233] [message] New connection from 127.0.0.1 port 56476
+[2024-11-04 11:35:36.749916] [message] Connection 127.0.0.1 port 56476 closed
+[2024-11-04 11:36:06.210557] [message] Shutting down
+[2024-11-04 11:36:06.211009] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-04 11:36:06.211363] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-04 11:36:06.212214] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-04 11:57:06.434852] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-04 11:57:06.435025] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-04 11:57:06.435144] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-04 11:57:09.198815] [message] New connection from 127.0.0.1 port 45050
+[2024-11-04 11:57:31.231492] [message] New connection from 127.0.0.1 port 60198
+[2024-11-04 11:57:31.267822] [message] New connection from 127.0.0.1 port 60200
+[2024-11-04 11:57:31.336211] [message] New connection from 127.0.0.1 port 60216
+[2024-11-04 11:57:31.358554] [message] New connection from 127.0.0.1 port 60226
+[2024-11-04 11:57:31.449446] [message] New connection from 127.0.0.1 port 60238
+[2024-11-04 11:57:31.471363] [message] New connection from 127.0.0.1 port 60246
+[2024-11-04 11:57:31.493504] [message] New connection from 127.0.0.1 port 60250
+[2024-11-04 11:57:31.581492] [message] New connection from 127.0.0.1 port 60260
+[2024-11-04 11:57:31.604744] [message] New connection from 127.0.0.1 port 60274
+[2024-11-04 11:57:31.630199] [message] New connection from 127.0.0.1 port 60278
+[2024-11-04 11:57:31.652491] [message] New connection from 127.0.0.1 port 60284
+[2024-11-04 11:57:31.675121] [message] New connection from 127.0.0.1 port 60296
+[2024-11-04 11:57:31.695748] [message] New connection from 127.0.0.1 port 60312
+[2024-11-04 11:57:31.716556] [message] New connection from 127.0.0.1 port 60324
+[2024-11-04 11:57:31.738718] [message] New connection from 127.0.0.1 port 60334
+[2024-11-04 11:57:31.768719] [message] New connection from 127.0.0.1 port 60336
+[2024-11-04 11:57:31.790548] [message] New connection from 127.0.0.1 port 60346
+[2024-11-04 11:57:31.857358] [message] New connection from 127.0.0.1 port 60354
+[2024-11-04 11:57:31.879859] [message] New connection from 127.0.0.1 port 60362
+[2024-11-04 11:57:31.903555] [message] New connection from 127.0.0.1 port 60372
+[2024-11-04 11:57:31.925161] [message] New connection from 127.0.0.1 port 60382
+[2024-11-04 11:57:31.945917] [message] New connection from 127.0.0.1 port 60386
+[2024-11-04 11:57:31.963827] [message] New connection from 127.0.0.1 port 60394
+[2024-11-04 11:57:31.986487] [message] New connection from 127.0.0.1 port 60402
+[2024-11-04 11:57:32.006040] [message] New connection from 127.0.0.1 port 60406
+[2024-11-04 11:57:32.028912] [message] New connection from 127.0.0.1 port 60416
+[2024-11-04 11:57:32.046875] [message] New connection from 127.0.0.1 port 60426
+[2024-11-04 11:57:32.069940] [message] New connection from 127.0.0.1 port 60432
+[2024-11-04 11:57:32.088338] [message] New connection from 127.0.0.1 port 60434
+[2024-11-04 11:57:32.107469] [message] New connection from 127.0.0.1 port 60442
+[2024-11-04 11:57:32.125302] [message] New connection from 127.0.0.1 port 60454
+[2024-11-04 11:57:32.143907] [message] New connection from 127.0.0.1 port 60462
+[2024-11-04 11:57:32.170088] [message] New connection from 127.0.0.1 port 60464
+[2024-11-04 11:57:32.188497] [message] New connection from 127.0.0.1 port 60466
+[2024-11-04 11:57:32.205749] [message] New connection from 127.0.0.1 port 60478
+[2024-11-04 11:57:32.223144] [message] New connection from 127.0.0.1 port 60482
+[2024-11-04 11:57:32.246437] [message] New connection from 127.0.0.1 port 60484
+[2024-11-04 11:57:32.264715] [message] New connection from 127.0.0.1 port 60498
+[2024-11-04 11:57:32.283410] [message] New connection from 127.0.0.1 port 60500
+[2024-11-04 11:57:32.301278] [message] New connection from 127.0.0.1 port 60514
+[2024-11-04 11:57:32.320704] [message] New connection from 127.0.0.1 port 60516
+[2024-11-04 11:57:32.339235] [message] New connection from 127.0.0.1 port 60520
+[2024-11-04 11:57:32.359988] [message] New connection from 127.0.0.1 port 60534
+[2024-11-04 11:57:32.377062] [message] New connection from 127.0.0.1 port 60540
+[2024-11-04 11:57:32.395472] [message] New connection from 127.0.0.1 port 60544
+[2024-11-04 11:57:32.414093] [message] New connection from 127.0.0.1 port 60552
+[2024-11-04 11:57:32.431771] [message] New connection from 127.0.0.1 port 60568
+[2024-11-04 11:57:32.451222] [message] New connection from 127.0.0.1 port 60580
+[2024-11-04 11:57:32.471229] [message] New connection from 127.0.0.1 port 60596
+[2024-11-04 11:57:32.493330] [message] New connection from 127.0.0.1 port 60608
+[2024-11-04 11:57:32.513313] [message] New connection from 127.0.0.1 port 60624
+[2024-11-04 11:57:32.531664] [message] New connection from 127.0.0.1 port 60636
+[2024-11-04 11:57:32.554095] [message] New connection from 127.0.0.1 port 60650
+[2024-11-04 11:57:32.573584] [message] New connection from 127.0.0.1 port 60656
+[2024-11-04 11:57:32.595012] [message] New connection from 127.0.0.1 port 60664
+[2024-11-04 11:57:32.612047] [message] New connection from 127.0.0.1 port 60672
+[2024-11-04 11:57:32.631203] [message] New connection from 127.0.0.1 port 60678
+[2024-11-04 11:57:32.648811] [message] New connection from 127.0.0.1 port 60682
+[2024-11-04 11:57:32.667500] [message] New connection from 127.0.0.1 port 60694
+[2024-11-04 11:57:32.687169] [message] New connection from 127.0.0.1 port 60708
+[2024-11-04 11:57:32.705379] [message] New connection from 127.0.0.1 port 60710
+[2024-11-04 11:57:32.723916] [message] New connection from 127.0.0.1 port 60726
+[2024-11-04 11:57:32.749578] [message] New connection from 127.0.0.1 port 60736
+[2024-11-04 11:57:32.772566] [message] New connection from 127.0.0.1 port 60750
+[2024-11-04 11:57:32.791292] [message] New connection from 127.0.0.1 port 60756
+[2024-11-04 11:57:32.809713] [message] New connection from 127.0.0.1 port 60768
+[2024-11-04 11:57:32.826492] [message] New connection from 127.0.0.1 port 60784
+[2024-11-04 11:57:32.845099] [message] New connection from 127.0.0.1 port 60800
+[2024-11-04 11:57:32.864064] [message] New connection from 127.0.0.1 port 60802
+[2024-11-04 11:57:32.883369] [message] New connection from 127.0.0.1 port 60814
+[2024-11-04 11:57:32.902433] [message] New connection from 127.0.0.1 port 60820
+[2024-11-04 11:57:32.921552] [message] New connection from 127.0.0.1 port 60832
+[2024-11-04 11:57:32.940136] [message] New connection from 127.0.0.1 port 60846
+[2024-11-04 11:57:32.960029] [message] New connection from 127.0.0.1 port 60862
+[2024-11-04 11:57:32.980616] [message] New connection from 127.0.0.1 port 60870
+[2024-11-04 11:57:32.998097] [message] New connection from 127.0.0.1 port 60884
+[2024-11-04 11:57:33.017500] [message] New connection from 127.0.0.1 port 60886
+[2024-11-04 11:57:33.035975] [message] New connection from 127.0.0.1 port 60892
+[2024-11-04 11:57:33.056281] [message] New connection from 127.0.0.1 port 60904
+[2024-11-04 11:57:33.077362] [message] New connection from 127.0.0.1 port 60916
+[2024-11-04 11:57:33.098600] [message] New connection from 127.0.0.1 port 60924
+[2024-11-04 11:57:33.121127] [message] New connection from 127.0.0.1 port 60928
+[2024-11-04 11:57:33.141339] [message] New connection from 127.0.0.1 port 60942
+[2024-11-04 11:57:33.159743] [message] New connection from 127.0.0.1 port 60954
+[2024-11-04 11:57:33.181061] [message] New connection from 127.0.0.1 port 60968
+[2024-11-04 11:57:33.204152] [message] New connection from 127.0.0.1 port 60978
+[2024-11-04 11:57:33.221945] [message] New connection from 127.0.0.1 port 60992
+[2024-11-04 11:57:33.241817] [message] New connection from 127.0.0.1 port 32776
+[2024-11-04 11:57:33.258756] [message] New connection from 127.0.0.1 port 32782
+[2024-11-04 11:57:33.279333] [message] New connection from 127.0.0.1 port 32784
+[2024-11-04 11:57:33.297508] [message] New connection from 127.0.0.1 port 32798
+[2024-11-04 11:57:33.317726] [message] New connection from 127.0.0.1 port 32808
+[2024-11-04 11:57:33.338691] [message] New connection from 127.0.0.1 port 32810
+[2024-11-04 11:57:33.359185] [message] New connection from 127.0.0.1 port 32826
+[2024-11-04 11:57:33.378117] [message] New connection from 127.0.0.1 port 32828
+[2024-11-04 11:57:33.398444] [message] New connection from 127.0.0.1 port 32832
+[2024-11-04 11:57:33.418921] [message] New connection from 127.0.0.1 port 32846
+[2024-11-04 11:57:33.435716] [message] New connection from 127.0.0.1 port 32852
+[2024-11-04 11:57:33.453857] [message] New connection from 127.0.0.1 port 32854
+[2024-11-04 11:57:33.474704] [message] New connection from 127.0.0.1 port 32870
+[2024-11-04 11:57:33.493969] [message] New connection from 127.0.0.1 port 32880
+[2024-11-04 11:57:33.511935] [message] New connection from 127.0.0.1 port 32890
+[2024-11-04 11:57:33.531549] [message] New connection from 127.0.0.1 port 32904
+[2024-11-04 11:57:33.551980] [message] New connection from 127.0.0.1 port 32916
+[2024-11-04 11:57:33.571450] [message] New connection from 127.0.0.1 port 32922
+[2024-11-04 11:57:33.593592] [message] New connection from 127.0.0.1 port 32934
+[2024-11-04 11:57:33.611224] [message] New connection from 127.0.0.1 port 32940
+[2024-11-04 11:57:33.633861] [message] New connection from 127.0.0.1 port 32954
+[2024-11-04 11:57:33.655320] [message] New connection from 127.0.0.1 port 32960
+[2024-11-04 11:57:33.674552] [message] New connection from 127.0.0.1 port 32970
+[2024-11-04 11:57:33.695497] [message] New connection from 127.0.0.1 port 32982
+[2024-11-04 11:57:33.718718] [message] New connection from 127.0.0.1 port 32994
+[2024-11-04 11:57:33.737923] [message] New connection from 127.0.0.1 port 33004
+[2024-11-04 11:57:33.755255] [message] New connection from 127.0.0.1 port 33006
+[2024-11-04 11:57:33.775511] [message] New connection from 127.0.0.1 port 33008
+[2024-11-04 11:57:33.795315] [message] New connection from 127.0.0.1 port 33022
+[2024-11-04 11:57:33.817817] [message] New connection from 127.0.0.1 port 33026
+[2024-11-04 11:57:33.840446] [message] New connection from 127.0.0.1 port 33032
+[2024-11-04 11:57:33.860258] [message] New connection from 127.0.0.1 port 33046
+[2024-11-04 11:57:33.880174] [message] New connection from 127.0.0.1 port 33062
+[2024-11-04 11:57:33.943509] [message] New connection from 127.0.0.1 port 33074
+[2024-11-04 11:57:33.964410] [message] New connection from 127.0.0.1 port 33080
+[2024-11-04 11:57:33.983738] [message] New connection from 127.0.0.1 port 33090
+[2024-11-04 11:57:34.005603] [message] New connection from 127.0.0.1 port 33100
+[2024-11-04 11:57:34.024930] [message] New connection from 127.0.0.1 port 33116
+[2024-11-04 11:57:34.044228] [message] New connection from 127.0.0.1 port 33132
+[2024-11-04 11:57:34.074211] [message] New connection from 127.0.0.1 port 33138
+[2024-11-04 11:57:34.093626] [message] New connection from 127.0.0.1 port 33142
+[2024-11-04 11:57:34.114360] [message] New connection from 127.0.0.1 port 33148
+[2024-11-04 11:57:34.135177] [message] New connection from 127.0.0.1 port 33160
+[2024-11-04 11:57:34.153940] [message] New connection from 127.0.0.1 port 33162
+[2024-11-04 11:57:34.178843] [message] New connection from 127.0.0.1 port 33176
+[2024-11-04 11:57:34.199460] [message] New connection from 127.0.0.1 port 33192
+[2024-11-04 11:57:34.220298] [message] New connection from 127.0.0.1 port 33202
+[2024-11-04 11:57:34.240093] [message] New connection from 127.0.0.1 port 33210
+[2024-11-04 11:57:34.260522] [message] New connection from 127.0.0.1 port 33226
+[2024-11-04 11:57:34.279695] [message] New connection from 127.0.0.1 port 33234
+[2024-11-04 11:57:34.299037] [message] New connection from 127.0.0.1 port 33248
+[2024-11-04 11:57:34.318174] [message] New connection from 127.0.0.1 port 33254
+[2024-11-04 11:57:34.336967] [message] New connection from 127.0.0.1 port 33256
+[2024-11-04 11:57:34.356171] [message] New connection from 127.0.0.1 port 33262
+[2024-11-04 11:57:34.379999] [message] New connection from 127.0.0.1 port 33266
+[2024-11-04 11:57:34.392512] [message] New connection from 127.0.0.1 port 33282
+[2024-11-04 11:57:34.410455] [message] New connection from 127.0.0.1 port 33290
+[2024-11-04 11:57:34.430811] [message] New connection from 127.0.0.1 port 33296
+[2024-11-04 11:57:34.450148] [message] New connection from 127.0.0.1 port 33308
+[2024-11-04 11:57:34.468949] [message] New connection from 127.0.0.1 port 33322
+[2024-11-04 11:57:34.483186] [message] New connection from 127.0.0.1 port 33338
+[2024-11-04 11:57:34.497751] [message] New connection from 127.0.0.1 port 33350
+[2024-11-04 11:57:34.519809] [message] New connection from 127.0.0.1 port 33356
+[2024-11-04 11:57:34.538080] [message] New connection from 127.0.0.1 port 33362
+[2024-11-04 11:57:34.557780] [message] New connection from 127.0.0.1 port 33368
+[2024-11-04 11:57:34.576069] [message] New connection from 127.0.0.1 port 33384
+[2024-11-04 11:57:34.593232] [message] New connection from 127.0.0.1 port 33400
+[2024-11-04 11:57:34.613399] [message] New connection from 127.0.0.1 port 33412
+[2024-11-04 11:57:34.633364] [message] New connection from 127.0.0.1 port 33420
+[2024-11-04 11:57:34.651718] [message] New connection from 127.0.0.1 port 33436
+[2024-11-04 11:57:34.670613] [message] New connection from 127.0.0.1 port 33442
+[2024-11-04 11:57:34.689100] [message] New connection from 127.0.0.1 port 33456
+[2024-11-04 11:57:34.708136] [message] New connection from 127.0.0.1 port 33460
+[2024-11-04 11:57:34.728824] [message] New connection from 127.0.0.1 port 33466
+[2024-11-04 11:57:34.743737] [message] New connection from 127.0.0.1 port 33470
+[2024-11-04 11:57:34.757931] [message] New connection from 127.0.0.1 port 33472
+[2024-11-04 11:57:34.775413] [message] New connection from 127.0.0.1 port 33476
+[2024-11-04 11:57:34.790766] [message] New connection from 127.0.0.1 port 33492
+[2024-11-04 11:57:34.804904] [message] New connection from 127.0.0.1 port 33498
+[2024-11-04 11:57:34.819584] [message] New connection from 127.0.0.1 port 33508
+[2024-11-04 11:57:34.838316] [message] New connection from 127.0.0.1 port 33524
+[2024-11-04 11:57:34.844646] [message] Shutting down
+[2024-11-04 11:57:34.844970] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-04 11:57:34.855631] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-04 11:57:34.856795] [error] NuMail Server Error 7.6.1: Cannot connect to server
+[2024-11-04 11:58:06.714995] [message] Shutting down
+[2024-11-04 11:58:06.715533] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-04 11:58:13.133402] [message] Shutting down
+[2024-11-04 11:58:13.709556] [message] Shutting down
+[2024-11-04 11:58:13.895320] [message] Shutting down
+[2024-11-04 11:58:14.061831] [message] Shutting down
+[2024-11-04 11:58:14.230776] [message] Shutting down
+[2024-11-04 11:58:14.403754] [message] Shutting down
+[2024-11-04 11:58:14.576461] [message] Shutting down
+[2024-11-04 11:58:14.745158] [message] Shutting down
+[2024-11-04 11:58:14.939228] [message] Shutting down
+[2024-11-04 11:58:17.114367] [message] Shutting down
+[2024-11-04 11:58:18.170373] [message] Shutting down
+[2024-11-04 11:58:18.886128] [message] Shutting down
+[2024-11-04 11:58:19.127592] [message] Shutting down
+[2024-11-04 11:58:19.319246] [message] Shutting down
+[2024-11-04 11:58:19.504496] [message] Shutting down
+[2024-11-04 11:58:46.245263] [message] Shutting down
+[2024-11-04 11:58:46.794172] [message] Shutting down
+[2024-11-04 11:58:47.558459] [message] Shutting down
+[2024-11-04 11:58:47.766408] [message] Shutting down
+[2024-11-04 11:58:47.934584] [message] Shutting down
+[2024-11-04 11:58:48.103425] [message] Shutting down
+[2024-11-04 12:01:28.235393] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-04 12:01:28.235564] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-04 12:01:28.235699] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-04 12:01:30.629782] [message] New connection from 127.0.0.1 port 60600
+[2024-11-04 12:01:43.243681] [message] New connection from 127.0.0.1 port 43664
+[2024-11-04 12:01:43.263412] [message] New connection from 127.0.0.1 port 43672
+[2024-11-04 12:01:43.284257] [message] New connection from 127.0.0.1 port 43682
+[2024-11-04 12:01:43.308637] [message] New connection from 127.0.0.1 port 43692
+[2024-11-04 12:01:43.328528] [message] New connection from 127.0.0.1 port 43696
+[2024-11-04 12:01:43.354180] [message] New connection from 127.0.0.1 port 43704
+[2024-11-04 12:01:43.379790] [message] New connection from 127.0.0.1 port 43720
+[2024-11-04 12:01:43.400874] [message] New connection from 127.0.0.1 port 43734
+[2024-11-04 12:01:43.421381] [message] New connection from 127.0.0.1 port 43746
+[2024-11-04 12:01:43.441142] [message] New connection from 127.0.0.1 port 43760
+[2024-11-04 12:01:43.458596] [message] New connection from 127.0.0.1 port 43770
+[2024-11-04 12:01:43.482410] [message] New connection from 127.0.0.1 port 43786
+[2024-11-04 12:01:43.505029] [message] New connection from 127.0.0.1 port 43796
+[2024-11-04 12:01:43.523880] [message] New connection from 127.0.0.1 port 43798
+[2024-11-04 12:01:43.541430] [message] New connection from 127.0.0.1 port 43800
+[2024-11-04 12:01:43.562480] [message] New connection from 127.0.0.1 port 43802
+[2024-11-04 12:01:43.580154] [message] New connection from 127.0.0.1 port 43808
+[2024-11-04 12:01:43.597996] [message] New connection from 127.0.0.1 port 43812
+[2024-11-04 12:01:43.620414] [message] New connection from 127.0.0.1 port 43824
+[2024-11-04 12:01:43.638390] [message] New connection from 127.0.0.1 port 43830
+[2024-11-04 12:01:43.655330] [message] New connection from 127.0.0.1 port 43836
+[2024-11-04 12:01:43.674332] [message] New connection from 127.0.0.1 port 43852
+[2024-11-04 12:01:43.692973] [message] New connection from 127.0.0.1 port 43858
+[2024-11-04 12:01:43.712304] [message] New connection from 127.0.0.1 port 43874
+[2024-11-04 12:01:43.731659] [message] New connection from 127.0.0.1 port 43878
+[2024-11-04 12:01:43.751846] [message] New connection from 127.0.0.1 port 43882
+[2024-11-04 12:01:43.771113] [message] New connection from 127.0.0.1 port 43894
+[2024-11-04 12:01:43.790327] [message] New connection from 127.0.0.1 port 43898
+[2024-11-04 12:01:43.810207] [message] New connection from 127.0.0.1 port 43904
+[2024-11-04 12:01:43.826582] [message] New connection from 127.0.0.1 port 43906
+[2024-11-04 12:01:43.847360] [message] New connection from 127.0.0.1 port 43908
+[2024-11-04 12:01:43.869253] [message] New connection from 127.0.0.1 port 43922
+[2024-11-04 12:01:43.893768] [message] New connection from 127.0.0.1 port 43928
+[2024-11-04 12:01:43.917380] [message] New connection from 127.0.0.1 port 43930
+[2024-11-04 12:01:43.937779] [message] New connection from 127.0.0.1 port 43934
+[2024-11-04 12:01:43.958280] [message] New connection from 127.0.0.1 port 43950
+[2024-11-04 12:01:43.975055] [message] New connection from 127.0.0.1 port 43952
+[2024-11-04 12:01:43.991587] [message] New connection from 127.0.0.1 port 43968
+[2024-11-04 12:01:44.011658] [message] New connection from 127.0.0.1 port 43976
+[2024-11-04 12:01:44.031063] [message] New connection from 127.0.0.1 port 43980
+[2024-11-04 12:01:44.051355] [message] New connection from 127.0.0.1 port 43996
+[2024-11-04 12:01:44.068905] [message] New connection from 127.0.0.1 port 44012
+[2024-11-04 12:01:44.088799] [message] New connection from 127.0.0.1 port 44024
+[2024-11-04 12:01:44.106958] [message] New connection from 127.0.0.1 port 44034
+[2024-11-04 12:01:44.124947] [message] New connection from 127.0.0.1 port 44040
+[2024-11-04 12:01:44.142692] [message] New connection from 127.0.0.1 port 44044
+[2024-11-04 12:01:44.161106] [message] New connection from 127.0.0.1 port 44052
+[2024-11-04 12:01:44.180055] [message] New connection from 127.0.0.1 port 44064
+[2024-11-04 12:01:44.200773] [message] New connection from 127.0.0.1 port 44068
+[2024-11-04 12:01:44.234006] [message] New connection from 127.0.0.1 port 44074
+[2024-11-04 12:01:44.255426] [message] New connection from 127.0.0.1 port 44086
+[2024-11-04 12:01:44.273758] [message] New connection from 127.0.0.1 port 44098
+[2024-11-04 12:01:44.288340] [message] New connection from 127.0.0.1 port 44102
+[2024-11-04 12:01:44.306571] [message] New connection from 127.0.0.1 port 44118
+[2024-11-04 12:01:44.325372] [message] New connection from 127.0.0.1 port 44130
+[2024-11-04 12:01:44.343116] [message] New connection from 127.0.0.1 port 44146
+[2024-11-04 12:01:44.370564] [message] New connection from 127.0.0.1 port 44152
+[2024-11-04 12:01:44.392461] [message] New connection from 127.0.0.1 port 44156
+[2024-11-04 12:01:44.410604] [message] New connection from 127.0.0.1 port 44170
+[2024-11-04 12:01:44.429667] [message] New connection from 127.0.0.1 port 44180
+[2024-11-04 12:01:44.448288] [message] New connection from 127.0.0.1 port 44188
+[2024-11-04 12:01:44.468941] [message] New connection from 127.0.0.1 port 44190
+[2024-11-04 12:01:44.489416] [message] New connection from 127.0.0.1 port 44206
+[2024-11-04 12:01:44.509598] [message] New connection from 127.0.0.1 port 44218
+[2024-11-04 12:01:44.529983] [message] New connection from 127.0.0.1 port 44224
+[2024-11-04 12:01:44.550599] [message] New connection from 127.0.0.1 port 44230
+[2024-11-04 12:01:44.571221] [message] New connection from 127.0.0.1 port 44242
+[2024-11-04 12:01:44.587105] [message] Shutting down
+[2024-11-04 12:01:44.587396] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-04 12:01:44.591351] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-04 12:01:44.592478] [error] NuMail Server Error 7.6.1: Cannot connect to server
+[2024-11-04 12:03:11.017423] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-04 12:03:11.017605] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-04 12:03:11.017745] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-04 12:03:12.281723] [message] New connection from 127.0.0.1 port 47562
+[2024-11-04 12:03:21.295408] [message] New connection from 127.0.0.1 port 35460
+[2024-11-04 12:03:21.307144] [error] 'str' object has no attribute 'append'
+[2024-11-04 12:03:21.307411] [request_error] Connection 127.0.0.1 port 47562:
+'str' object has no attribute 'append'
+[2024-11-04 12:03:21.308028] [message] Connection 127.0.0.1 port 35460 closed
+[2024-11-04 12:05:43.103617] [message] Shutting down
+[2024-11-04 12:05:43.104896] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-04 12:05:43.105384] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-04 12:05:43.106361] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-04 12:07:40.147053] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-04 12:07:40.147220] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-04 12:07:40.147387] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-04 12:07:46.117201] [message] New connection from 127.0.0.1 port 37712
+[2024-11-04 12:07:52.954600] [message] New connection from 127.0.0.1 port 34506
+[2024-11-04 12:07:52.956504] [message] Connection 127.0.0.1 port 34506 closed
+[2024-11-04 12:11:33.941562] [message] Shutting down
+[2024-11-04 12:11:33.942646] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-04 12:11:33.943225] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-04 12:11:33.944548] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-04 12:11:34.773490] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-04 12:11:34.773722] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-04 12:11:34.773903] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-04 12:11:36.881827] [message] New connection from 127.0.0.1 port 39712
+[2024-11-04 12:11:44.745699] [message] New connection from 127.0.0.1 port 34160
+[2024-11-04 12:11:44.747240] [error] 'str' object has no attribute 'append'
+[2024-11-04 12:11:44.747422] [request_error] Connection 127.0.0.1 port 39712:
+'str' object has no attribute 'append'
+[2024-11-04 12:11:44.747840] [message] Connection 127.0.0.1 port 34160 closed
+[2024-11-04 12:11:48.526133] [message] Shutting down
+[2024-11-04 12:11:48.526844] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-04 12:11:48.527366] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-04 12:11:48.528338] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-04 12:13:01.927650] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-04 12:13:01.927839] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-04 12:13:01.927972] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-04 12:13:03.545276] [message] New connection from 127.0.0.1 port 58242
+[2024-11-04 12:13:11.597919] [message] New connection from 127.0.0.1 port 33762
+[2024-11-04 12:13:11.599629] [error] 'str' object has no attribute 'append'
+[2024-11-04 12:13:11.599850] [request_error] Connection 127.0.0.1 port 58242:
+'str' object has no attribute 'append'
+[2024-11-04 12:13:11.600353] [message] Connection 127.0.0.1 port 33762 closed
+[2024-11-04 12:13:48.163458] [message] Shutting down
+[2024-11-04 12:13:48.164043] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-04 12:13:48.164621] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-04 12:13:48.165691] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-04 12:13:59.446243] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-04 12:13:59.446557] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-04 12:13:59.446738] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-04 12:14:00.635963] [message] New connection from 127.0.0.1 port 41790
+[2024-11-04 12:15:22.491077] [message] Shutting down
+[2024-11-04 12:15:22.491370] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-04 12:15:22.491620] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-04 12:15:22.492079] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-04 12:15:24.345340] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-04 12:15:24.345549] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-04 12:15:24.345787] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-04 12:15:25.875206] [message] New connection from 127.0.0.1 port 57616
+[2024-11-04 12:15:36.301178] [message] New connection from 127.0.0.1 port 41862
+[2024-11-04 12:15:36.303849] [message] Connection 127.0.0.1 port 41862 closed
+[2024-11-04 12:17:22.120778] [message] Shutting down
+[2024-11-04 12:17:22.121191] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-04 12:17:22.121476] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-04 12:17:22.122099] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-04 12:17:23.307342] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-04 12:17:23.307552] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-04 12:17:23.307697] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-04 12:17:24.353069] [message] New connection from 127.0.0.1 port 37876
+[2024-11-04 12:17:38.941957] [message] New connection from 127.0.0.1 port 55102
+[2024-11-04 12:17:38.944364] [error] 'str' object has no attribute 'append'
+[2024-11-04 12:17:38.944565] [request_error] Connection 127.0.0.1 port 37876:
+'str' object has no attribute 'append'
+[2024-11-04 12:17:38.945211] [message] Connection 127.0.0.1 port 55102 closed
+[2024-11-04 12:18:29.100004] [message] Shutting down
+[2024-11-04 12:18:29.100508] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-04 12:18:29.100947] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-04 12:18:29.101769] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-04 12:18:30.796542] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-04 12:18:30.796757] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-04 12:18:30.796925] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-04 12:18:32.134026] [message] New connection from 127.0.0.1 port 60124
+[2024-11-04 12:18:38.279241] [message] New connection from 127.0.0.1 port 53074
+[2024-11-04 12:18:38.281039] [error] 'str' object has no attribute 'append'
+[2024-11-04 12:18:38.281230] [request_error] Connection 127.0.0.1 port 60124:
+'str' object has no attribute 'append'
+[2024-11-04 12:18:38.281924] [message] Connection 127.0.0.1 port 53074 closed
+[2024-11-04 12:18:51.044329] [message] Shutting down
+[2024-11-04 12:18:51.045052] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-04 12:18:51.045632] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-04 12:18:51.046617] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-04 12:18:52.431886] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-04 12:18:52.432050] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-04 12:18:52.432180] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-04 12:18:54.078721] [message] New connection from 127.0.0.1 port 51706
+[2024-11-04 12:19:07.092759] [message] New connection from 127.0.0.1 port 39474
+[2024-11-04 12:19:07.094615] [error] 'str' object has no attribute 'append'
+[2024-11-04 12:19:07.094804] [request_error] Connection 127.0.0.1 port 51706:
+'str' object has no attribute 'append'
+[2024-11-04 12:19:07.095234] [message] Connection 127.0.0.1 port 39474 closed
+[2024-11-04 12:20:14.749226] [message] Shutting down
+[2024-11-04 12:20:14.750031] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-04 12:20:14.750787] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-04 12:20:14.751610] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-04 12:20:16.334839] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-04 12:20:16.335067] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-04 12:20:16.335220] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-04 12:20:19.333005] [message] New connection from 127.0.0.1 port 57398
+[2024-11-04 12:20:31.439377] [message] New connection from 127.0.0.1 port 54300
+[2024-11-04 12:20:31.442004] [message] Connection 127.0.0.1 port 54300 closed
+[2024-11-04 12:21:33.124881] [message] New connection from 127.0.0.1 port 39110
+[2024-11-04 12:21:33.128753] [message] Connection 127.0.0.1 port 39110 closed
+[2024-11-04 12:22:39.717110] [message] Shutting down
+[2024-11-04 12:22:39.717479] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-04 12:22:39.717706] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-04 12:22:39.718121] [message] Shutdown 127.0.0.1 port 7777

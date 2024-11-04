@@ -43,6 +43,11 @@ NuMail Reader Errors
 """
 NuMail Protocol Errors:
     6.0.0 Catch all error
+Mailbox status:
+    6.2.0 Mailbox error
+    6.2.1 Mailbox ok and receiving message type
+    6.2.2 Mailbox not ok and not receiving message type
+    6.2.3 Receiver not using NuMail
 Network Error:
     6.5.1 Delivery status successful
     6.5.2 Error connecting to server

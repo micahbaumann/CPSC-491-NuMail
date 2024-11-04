@@ -14,6 +14,7 @@ DEBUG_VARS = {
     "dns_addr": "rutstech.com",
     "server_addr": "localhost",
     "server_port": 7778,
+    "chck_addr": "127.0.0.1",
     }
 
 @numail_server_parser
@@ -37,7 +38,6 @@ async def mod_chck(reader, writer, message, local_stack, state, loop, action="",
                         await writer.drain()
                 else:
                     try:
-                        print("test")
                         mx = []
                         numail_dns_settings = {}
                         if not is_ip(email_domain):
@@ -83,7 +83,7 @@ async def mod_chck(reader, writer, message, local_stack, state, loop, action="",
                             request = NuMailRequest(domain, port)
                             
                             try:
-                                print(await request.connect())
+                                await request.connect()
                             except NuMailError as e:
                                 if i == loop_range_size:
                                     raise e
@@ -91,27 +91,33 @@ async def mod_chck(reader, writer, message, local_stack, state, loop, action="",
                                     i += 1
                                     continue
                             
-                            try:
-                                await init_numail(request)
-                            except:
-                                pass
-                            # message_send = await request.send("EHLO example.com")
-                            # print(message_send)
-                            
-
-                            # # Finish read_numail
-
-
-                            # code, excode, msg, more = read_numail(message_send)
-                            # print(code)
-                            # print(excode)
-                            # print(msg)
+                            init = await init_numail(request)
+                            if init:
+                                chck_address = email_domain
+                                if "chck_addr" in DEBUG_VARS.keys():
+                                    chck_address = DEBUG_VARS["chck_addr"]
+                                message_send = await request.send(f"CHCK RECEIVE MAIL: <{full_email.group(1)}@{chck_address}>")
+                                message_split = message_send.split("\r\n")
+                                message_split = [i for i in message_split if i]
+                                message_list = []
+                                for message_part in message_split:
+                                    message_list.append(read_numail(message_part))
+                                
+                                if len(message_list) > 0:
+                                    if message_list[0][1] == "6.2.1":
+                                        writer.write(MessageLine(f"250 6.2.1 {full_email.group(1)}@{email_domain}... Recipient ok and receiving", message).bytes())
+                                        await writer.drain()
+                                    else:
+                                        writer.write(MessageLine(f"500 6.2.2 {full_email.group(1)}@{email_domain}... Recipient not ok and not receiving", message).bytes())
+                                        await writer.drain()
+                                else:
+                                    writer.write(MessageLine(f"451 Requested action aborted: local error in processing", message).bytes())
+                                    await writer.drain()
+                            else:
+                                writer.write(MessageLine(f"500 6.2.3 {full_email.group(1)}@{email_domain}... Recipient not using NuMail", message).bytes())
+                                await writer.drain()
                             await request.close()
-                            print("test2")
-                            # Temp Output
-                            writer.write(MessageLine(f"Done", message).bytes())
-                            await writer.drain()
-
+                            
                             break
 
                     except NuMailError as e:
