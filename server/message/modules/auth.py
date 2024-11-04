@@ -5,6 +5,17 @@ from server.message.server_parser import numail_server_parser
 from db.db import check_user_pwd
 from errors.nuerrors import NuMailError
 
+"""
+Handels authentication of requests when nessesary. Returns if authentication was successful and if so, the username.
+Arguments:
+reader: An asyncio reader object
+writer: An asyncio writer object
+message: The message stack
+local_stack: A local message stack for within this funciton (from decorator)
+state: A list that can keep track of variables between loops (from decorator)
+loop: Controls the decorator loop (from decorator)
+method: The authentication method
+"""
 @numail_server_parser
 async def mod_auth(reader, writer, message, local_stack, state, loop, method="LOGIN"):
     if method == "LOGIN":
@@ -37,4 +48,4 @@ async def mod_auth(reader, writer, message, local_stack, state, loop, method="LO
             loop.returnLoop()
             return result
     else:
-        raise NuMailError(code="7.3.0", message="Module Error")
+        raise NuMailError(code="7.3.0", message="Module Error, \"Invalid Authentication method\"")

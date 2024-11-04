@@ -35,6 +35,9 @@ NuMail DNS Resolver Errors
     7.7.2 DNS server not available
     7.7.3 DNS server returned answer with no data
     7.7.4 Connection timed out
+NuMail Reader Errors
+    7.8.0 NuMail reader error
+    7.8.1 Invalid NuMail line
 """
 
 """

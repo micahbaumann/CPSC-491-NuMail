@@ -6,6 +6,13 @@ import ipaddress
 from errors.nuerrors import NuMailError
 from config.config import server_settings
 
+"""
+Resolves DNS records. Returns a dictionary of DNS records of each type found
+Arguments:
+domain_name: The domain to contact
+records: A list of the records to resolve
+timeout: How long before it stops searching for records
+"""
 async def resolve_dns(domain_name: str, records: list = ["MX"], timeout: float | int = float(server_settings["dns_timeout"])):
     resolver = aiodns.DNSResolver()
 
@@ -52,6 +59,11 @@ async def resolve_dns(domain_name: str, records: list = ["MX"], timeout: float |
 
     return ret
 
+"""
+Checks if a string is an IP address. Returns a Bool
+Arguments:
+ip: String with possible IP
+"""
 def is_ip(ip: str) -> bool:
     try:
         ipaddress.ip_address(ip)

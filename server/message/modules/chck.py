@@ -50,35 +50,35 @@ async def mod_chck(reader, writer, message, local_stack, state, loop, action="",
 
 
                         mx = []
+                        numail_dns_settings = {}
                         if not is_ip(email_domain):
                             try:
                                 dns_domain = email_domain
                                 if "dns_addr" in DEBUG_VARS.keys():
                                     dns_domain = DEBUG_VARS["dns_addr"]
-                                    
+
                                 dns_rec = await resolve_dns(dns_domain, ["MX"])
                                 mx = sorted(dns_rec["MX"], key=lambda x: x["priority"])
                             except:
                                 pass
 
-                        numail_dns_settings = {}
-                        try:
-                            dns_txt = await resolve_dns(f"_numail.{email_domain}", ["TXT"], 10)
+                            try:
+                                dns_txt = await resolve_dns(f"_numail.{dns_domain}", ["TXT"], 10)
 
-                            for record in dns_txt["TXT"]:
-                                matches = re.finditer(r"\s*([a-z\-0-9]+)\s*=\s*([0-9a-zA-Z\-@!#$%^&*\(\)_+*/.<>\\?`~:'\"\[\]{}|]+)\s*;", record["text"])
-                                for match in matches:
-                                    numail_dns_settings[match.group(1)] = match.group(2)
-                        except:
-                            pass
+                                for record in dns_txt["TXT"]:
+                                    matches = re.finditer(r"\s*([a-z\-0-9]+)\s*=\s*([0-9a-zA-Z\-@!#$%^&*\(\)_+*/.<>\\?`~:'\"\[\]{}|]+)\s*;", record["text"])
+                                    for match in matches:
+                                        numail_dns_settings[match.group(1)] = match.group(2)
+                            except:
+                                pass
 
                         if "server_port" in DEBUG_VARS.keys():
                             port = DEBUG_VARS["server_port"]
                         elif "port" in numail_dns_settings.keys() and numail_dns_settings["port"].isdigit():
                             port = int(numail_dns_settings["port"])
                         else:
-                            port = 7777
-
+                            port = 25
+                            
                         request_addr = email_domain
                         if "server_addr" in DEBUG_VARS.keys():
                             request_addr = DEBUG_VARS["server_addr"]

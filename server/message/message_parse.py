@@ -10,7 +10,13 @@ from server.message.modules.auth import mod_auth
 from server.message.modules.chck import mod_chck
 from db.db import get_mailbox
 
-
+"""
+Checks if commands are valid compared to a string
+Arguments:
+string: The command
+equals: The string to compare the command to
+commands: Controls how arguments are treated. 0 = Optional arguments. 1 = Must have arguments. 2 = No arguments.
+"""
 def check_command(string:str, equals:str, commands=2) -> bool:
     retn = None
     if commands == 0:
@@ -21,6 +27,13 @@ def check_command(string:str, equals:str, commands=2) -> bool:
         retn = string == equals
     return retn
 
+"""
+Handels NuMail requests
+Arguments:
+reader: An asyncio reader object
+writer: An asyncio writer object
+message_stack: The message stack
+"""
 async def numail_parse(reader, writer, message_stack):
     # writer.write(b"numail\r\n")
     # await writer.drain()
@@ -147,6 +160,13 @@ async def numail_parse(reader, writer, message_stack):
             break
     return "exit"
 
+"""
+Handels SMTP requests
+Arguments:
+reader: An asyncio reader object
+writer: An asyncio writer object
+message_stack: The message stack
+"""
 async def email_parse(reader, writer, message_stack):
     writer.write(b"email\r\n")
     await writer.drain()

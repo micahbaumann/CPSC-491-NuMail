@@ -7,6 +7,9 @@ from errors.nuerrors import NuMailError
 from logger.logger import server_log
 from config.config import server_settings
 
+"""
+Loop controler class
+"""
 class ParserController:
     def __init__(self) -> None:
         self.loop = 0
@@ -20,6 +23,9 @@ class ParserController:
     def exitLoop(self) -> None:
         self.loop = 2
 
+"""
+A wraper for module funcitons
+"""
 def numail_server_parser(func):
     @wraps(func)
     async def wrapper(*args, **kwargs):
