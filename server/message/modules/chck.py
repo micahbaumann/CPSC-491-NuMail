@@ -6,7 +6,7 @@ from server.message.MessageLine import MessageLine
 from config.config import server_settings
 from db.db import search_mailbox
 from server.client.client import NuMailRequest
-from server.client.reader import read_numail
+from server.client.reader import read_numail, init_numail
 from server.client.dns import resolve_dns, is_ip
 from logger.logger import server_log
 
@@ -38,17 +38,6 @@ async def mod_chck(reader, writer, message, local_stack, state, loop, action="",
                 else:
                     try:
                         print("test")
-
-
-
-
-
-                        # Test Logic START
-
-
-
-
-
                         mx = []
                         numail_dns_settings = {}
                         if not is_ip(email_domain):
@@ -78,7 +67,7 @@ async def mod_chck(reader, writer, message, local_stack, state, loop, action="",
                             port = int(numail_dns_settings["port"])
                         else:
                             port = 25
-                            
+
                         request_addr = email_domain
                         if "server_addr" in DEBUG_VARS.keys():
                             request_addr = DEBUG_VARS["server_addr"]
@@ -101,18 +90,22 @@ async def mod_chck(reader, writer, message, local_stack, state, loop, action="",
                                 else:
                                     i += 1
                                     continue
-
-                            message_send = await request.send("EHLO example.com")
-                            print(message_send)
+                            
+                            try:
+                                await init_numail(request)
+                            except:
+                                pass
+                            # message_send = await request.send("EHLO example.com")
+                            # print(message_send)
                             
 
-                            # Finish read_numail
+                            # # Finish read_numail
 
 
-                            code, excode, msg = read_numail(message_send)
-                            print(code)
-                            print(excode)
-                            print(msg)
+                            # code, excode, msg, more = read_numail(message_send)
+                            # print(code)
+                            # print(excode)
+                            # print(msg)
                             await request.close()
                             print("test2")
                             # Temp Output
@@ -120,13 +113,6 @@ async def mod_chck(reader, writer, message, local_stack, state, loop, action="",
                             await writer.drain()
 
                             break
-                        
-
-
-
-                        # Test Logic END
-
-
 
                     except NuMailError as e:
                         parts = NuMailError.codeParts(e.code)
