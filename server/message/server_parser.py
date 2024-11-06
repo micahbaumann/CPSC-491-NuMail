@@ -13,7 +13,7 @@ Loop controler class
 class ParserController:
     def __init__(self) -> None:
         self.loop = 0
-        self.trim = True
+        self.strip = True
     
     def continueLoop(self) -> None:
         self.loop = 0
@@ -24,8 +24,8 @@ class ParserController:
     def exitLoop(self) -> None:
         self.loop = 2
     
-    def trim(self, trim: bool = True) -> None:
-        self.loop = trim
+    def trim(self, strip: bool = True) -> None:
+        self.strip = strip
 
 """
 A wraper for module funcitons
@@ -49,15 +49,6 @@ def numail_server_parser(func):
                         data = await asyncio.wait_for(reader.read(int(server_settings["buffer"])), float(server_settings["read_timeout"]))
                         message = data.decode("ascii")
                         message_stack.append("client", message)
-
-
-
-                        # Fix this
-
-
-
-
-
                         if loop.trim == True:
                             trim_message = message.strip()
                         else:

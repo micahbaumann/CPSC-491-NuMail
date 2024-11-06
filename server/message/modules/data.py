@@ -9,8 +9,8 @@ async def mod_data(reader, writer, message, local_stack, state, loop):
         state["mode"] = 0
         return
     else:
-        print(f"'{local_stack[-1]}'")
-        if local_stack[-1] == '.':
+        print(f"'{local_stack[-1][:-2]}'")
+        if local_stack[-1] == '.\r\n':
             loop.returnLoop()
             writer.write(MessageLine(f"250 2.0.0 Message accepted for delivery", message).bytes())
             await writer.drain()
