@@ -17,6 +17,19 @@ DEBUG_VARS = {
     "chck_addr": "127.0.0.1",
     }
 
+"""
+Handels address checks when nessesary.
+Arguments:
+reader: An asyncio reader object
+writer: An asyncio writer object
+message: The message stack
+local_stack: A local message stack for within this funciton (from decorator)
+state: A list that can keep track of variables between loops (from decorator)
+loop: Controls the decorator loop (from decorator)
+action: The action to check for. Possibilities: RECEIVE
+what: The message type to look for. Possibilities: MAIL
+params: the parameters in string form of the command (the email in the format <user@domain/IP>)
+"""
 @numail_server_parser
 async def mod_chck(reader, writer, message, local_stack, state, loop, action="", what="", params=""):
     if action == "RECEIVE":

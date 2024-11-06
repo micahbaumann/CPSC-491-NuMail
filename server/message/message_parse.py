@@ -9,6 +9,7 @@ from config.config import server_settings
 from server.message.modules.auth import mod_auth
 from server.message.modules.chck import mod_chck
 from db.db import get_mailbox
+from server.message.modules.data import mod_data
 
 """
 Checks if commands are valid compared to a string
@@ -126,8 +127,7 @@ async def numail_parse(reader, writer, message_stack):
                     await writer.drain()
             elif check_command(trim_message, "CHCK", 1):
                 if len(trim_message) > 17 and trim_message[5:18] == "RECEIVE MAIL:":
-                    result = await mod_chck(reader=reader, writer=writer, message=message_stack, action="RECEIVE", what="MAIL", params=trim_message[18:])
-                    print(result)
+                    await mod_chck(reader=reader, writer=writer, message=message_stack, action="RECEIVE", what="MAIL", params=trim_message[18:])
                 else:
                     writer.write(MessageLine(f"504 \"{trim_message[5:]}\" not implemented", message_stack).bytes())
                     await writer.drain()
@@ -147,6 +147,10 @@ async def numail_parse(reader, writer, message_stack):
                 else:
                     writer.write(MessageLine(f"504 \"{trim_message[5:]}\" not implemented", message_stack).bytes())
                     await writer.drain()
+            elif check_command(trim_message, "DATA", 2):
+                writer.write(MessageLine(f"354 Enter mail, end with \".\" on a line by itself", message_stack).bytes())
+                await writer.drain()
+                await mod_data(reader=reader, writer=writer, message=message_stack)
             else:
                 writer.write(MessageLine("500 Command unrecognized", message_stack).bytes())
                 await writer.drain()
