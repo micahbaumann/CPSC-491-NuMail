@@ -151,6 +151,18 @@ async def numail_parse(reader, writer, message_stack):
                 writer.write(MessageLine(f"354 Enter mail, end with \".\" on a line by itself", message_stack).bytes())
                 await writer.drain()
                 await mod_data(reader=reader, writer=writer, message=message_stack)
+            elif check_command(trim_message, "DLVR", 2):
+
+
+
+
+                # Finish this, Also, make data deliver a message when nessesary
+
+
+
+
+                writer.write(MessageLine(f"DLVRing", message_stack).bytes())
+                await writer.drain()
             else:
                 writer.write(MessageLine("500 Command unrecognized", message_stack).bytes())
                 await writer.drain()

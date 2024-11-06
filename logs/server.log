@@ -3056,3 +3056,12 @@ object NoneType can't be used in 'await' expression
 [2024-11-06 01:06:09.455655] [message] Shutdown 127.0.0.1 port 7778
 [2024-11-06 01:06:09.455862] [message] Shutdown 127.0.0.1 port 7779
 [2024-11-06 01:06:09.456420] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-06 14:56:40.110301] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-06 14:56:40.111068] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-06 14:56:40.111273] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-06 14:56:49.230586] [message] New connection from 127.0.0.1 port 60924
+[2024-11-06 14:57:08.316332] [message] Connection 127.0.0.1 port 60924 closed
+[2024-11-06 14:57:10.171395] [message] Shutting down
+[2024-11-06 14:57:10.171911] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-06 14:57:10.172311] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-06 14:57:10.172638] [message] Shutdown 127.0.0.1 port 7779
