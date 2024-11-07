@@ -152,15 +152,10 @@ async def numail_parse(reader, writer, message_stack):
                 await writer.drain()
                 await mod_data(reader=reader, writer=writer, message=message_stack)
             elif check_command(trim_message, "DLVR", 2):
-
-
-
-
-                # Finish this, Also, make data deliver a message when nessesary
-
-
-
-
+                if message_stack.client_username != "":
+                    pass
+                else:
+                    pass
                 writer.write(MessageLine(f"DLVRing", message_stack).bytes())
                 await writer.drain()
             else:
