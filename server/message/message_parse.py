@@ -177,12 +177,25 @@ async def numail_parse(reader, writer, message_stack):
                         writer.write(MessageLine("400 6.5.2 No to address found or invalid to address", message_stack).bytes())
                         await writer.drain()
                     else:
-                        if to_parts[1] == server_settings["domain"] or to_parts[1] == server_settings["public_ip"] or to_parts[1] == server_settings["ip"]:
+                        to_mx = []
+                        try:
+                            to_dns_results = resolve_dns(to_parts[1], ["MX"])
+                            to_mx = sorted(to_dns_results["MX"], key=lambda x: x["priority"])
+                        except:
+                            pass
+                        
+                        def part_equals(domain: str, mx: list) -> bool:
+                            for server in mx:
+                                if server["host"] == domain:
+                                    return True
+                            return False
+
+                        if part_equals(server_settings["domain"], to_mx) or to_parts[1] == server_settings["domain"] or to_parts[1] == server_settings["public_ip"] or to_parts[1] == server_settings["ip"]:
                             
 
 
 
-                            pass # Being sent to this server
+                            pass # Being sent to this server ***ADD PARTS_EQUALS EVERYWHERE ELSE REQUIRED
 
 
 
@@ -197,7 +210,7 @@ async def numail_parse(reader, writer, message_stack):
                             #         from_real_ip = []
                             #         for domn in mx:
                             #             try:
-                            #                 dns_a = resolve_dns(domn, ["A"])
+                            #                 dns_a = resolve_dns(domn["host"], ["A"])
                             #             except:
                             #                 continue
                             #             from_real_ip.append(dns_a["host"])
