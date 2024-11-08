@@ -137,15 +137,15 @@ async def mod_chck(reader, writer, message, local_stack, state, loop, action="",
                         parts = NuMailError.codeParts(e.code)
                         if parts and parts[1] == "6":
                             # Implement errors for requests errors
-                            writer.write(MessageLine(f"451 6.5.2 Error connecting to server", message).bytes())
+                            writer.write(MessageLine(f"451 6.4.2 Error connecting to server", message).bytes())
                             await writer.drain()
                         elif parts and parts[1] == "7":
                             # Implement errors for DNS errors
                             if parts[2] == "3" or parts[2] == "2":
-                                writer.write(MessageLine(f"520 6.5.2 Error connecting to server", message).bytes())
+                                writer.write(MessageLine(f"520 6.4.2 Error connecting to server", message).bytes())
                                 await writer.drain()
                             else:
-                                writer.write(MessageLine(f"451 6.5.2 Error connecting to server", message).bytes())
+                                writer.write(MessageLine(f"451 6.4.2 Error connecting to server", message).bytes())
                                 await writer.drain()
                         else:
                             writer.write(MessageLine(f"451 Requested action aborted: local error in processing", message).bytes())

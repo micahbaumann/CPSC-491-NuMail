@@ -10,6 +10,7 @@ from server.message.modules.auth import mod_auth
 from server.message.modules.chck import mod_chck
 from db.db import get_mailbox
 from server.message.modules.data import mod_data
+from client.dns import resolve_dns, is_ip
 
 """
 Checks if commands are valid compared to a string
@@ -27,6 +28,11 @@ def check_command(string:str, equals:str, commands=2) -> bool:
     else:
         retn = string == equals
     return retn
+
+def parse_address(address: str) -> list:
+    full_email = re.search(r"^\s*([a-zA-Z0-9.!#$%&'*+\-\/=?^_`{|}~]+)@([a-zA-Z0-9._\-]+)\s*$", address.lower(), re.MULTILINE)
+    if full_email:
+        return [full_email.group(1), full_email.group(2)]
 
 """
 Handels NuMail requests
@@ -94,18 +100,18 @@ async def numail_parse(reader, writer, message_stack):
                         
                         if full_email:
                             mailbox = get_mailbox(user_name=message_stack.get_client_username(), mb_name=full_email.group(1))
-                            if mailbox and server_self == full_email.group(2):
-                                message_stack.set_from_addr(f"{full_email.group(1)}@{full_email.group(2)}")
-                                writer.write(MessageLine(f"250 2.1.0 {full_email.group(1)}@{full_email.group(2)}... Sender ok", message_stack).bytes())
+                            if mailbox and server_self == full_email.group(2).lower():
+                                message_stack.set_from_addr(f"{full_email.group(1).lower()}@{full_email.group(2).lower()}")
+                                writer.write(MessageLine(f"250 2.1.0 {full_email.group(1).lower()}@{full_email.group(2).lower()}... Sender ok", message_stack).bytes())
                                 await writer.drain()
                             else:
                                 writer.write(MessageLine(f"550 Invalid mailbox", message_stack).bytes())
                                 await writer.drain()
                         elif part_email:
-                            mailbox = get_mailbox(user_name=message_stack.get_client_username(), mb_name=part_email.group(1))
+                            mailbox = get_mailbox(user_name=message_stack.get_client_username().lower(), mb_name=part_email.group(1))
                             if mailbox:
-                                message_stack.set_from_addr(f"{part_email.group(1)}@{server_self}")
-                                writer.write(MessageLine(f"250 2.1.0 {part_email.group(1)}@{server_self}... Sender ok", message_stack).bytes())
+                                message_stack.set_from_addr(f"{part_email.group(1).lower()}@{server_self.lower()}")
+                                writer.write(MessageLine(f"250 2.1.0 {part_email.group(1).lower()}@{server_self}... Sender ok", message_stack).bytes())
                                 await writer.drain()
                             else:
                                 writer.write(MessageLine(f"550 Invalid mailbox", message_stack).bytes())
@@ -115,9 +121,9 @@ async def numail_parse(reader, writer, message_stack):
                             await writer.drain()
                     else:
                         full_email = re.search(r"^\s*<\s*([a-zA-Z0-9.!#$%&'*+\-/=?^_`{|}~]+)@([a-zA-Z0-9._\-]+)\s*>\s*$", trim_message[10:], re.MULTILINE)
-                        if full_email and full_email.group(2) == message_stack.get_client_self_id():
-                            message_stack.set_from_addr(f"{full_email.group(1)}@{full_email.group(2)}")
-                            writer.write(MessageLine(f"250 2.1.0 {full_email.group(1)}@{full_email.group(2)}... Sender ok", message_stack).bytes())
+                        if full_email and full_email.group(2).lower() == message_stack.get_client_self_id().lower():
+                            message_stack.set_from_addr(f"{full_email.group(1).lower()}@{full_email.group(2).lower()}")
+                            writer.write(MessageLine(f"250 2.1.0 {full_email.group(1).lower()}@{full_email.group(2).lower()}... Sender ok", message_stack).bytes())
                             await writer.drain()
                         else:
                             writer.write(MessageLine(f"501 Invalid parameters", message_stack).bytes())
@@ -133,8 +139,8 @@ async def numail_parse(reader, writer, message_stack):
                     await writer.drain()
             elif check_command(trim_message, "RCPT", 1):
                 if len(trim_message) > 7 and trim_message[5:8] == "TO:":
-                    message_stack.set_to_addr(trim_message[8:].strip())
-                    writer.write(MessageLine(f"250 2.1.5 {message_stack.get_to_addr().strip("<>")}... Recipient ok", message_stack).bytes())
+                    message_stack.set_to_addr(trim_message[8:].strip().lower())
+                    writer.write(MessageLine(f"250 2.1.5 {message_stack.get_to_addr().strip("<>").lower()}... Recipient ok", message_stack).bytes())
                     await writer.drain()
                 else:
                     writer.write(MessageLine(f"504 \"{trim_message[5:]}\" not implemented", message_stack).bytes())
@@ -152,12 +158,90 @@ async def numail_parse(reader, writer, message_stack):
                 await writer.drain()
                 await mod_data(reader=reader, writer=writer, message=message_stack)
             elif check_command(trim_message, "DLVR", 2):
-                if message_stack.client_username != "":
-                    pass
+                if message_stack.from_addr == "":
+                    writer.write(MessageLine("400 6.5.1 No from address found or invalid from address", message_stack).bytes())
+                    await writer.drain()
+                elif message_stack.to_addr == "":
+                    writer.write(MessageLine("400 6.5.2 No to address found or invalid to address", message_stack).bytes())
+                    await writer.drain()
+                elif message_stack.payload == "":
+                    writer.write(MessageLine("400 6.5.3 No body address found or invalid body", message_stack).bytes())
+                    await writer.drain()
                 else:
-                    pass
-                writer.write(MessageLine(f"DLVRing", message_stack).bytes())
-                await writer.drain()
+                    to_parts = parse_address(message_stack.to_addr)
+                    from_parts = parse_address(message_stack.from_addr)
+                    if from_parts:
+                        writer.write(MessageLine("400 6.5.1 No from address found or invalid from address", message_stack).bytes())
+                        await writer.drain()
+                    elif to_parts:
+                        writer.write(MessageLine("400 6.5.2 No to address found or invalid to address", message_stack).bytes())
+                        await writer.drain()
+                    else:
+                        if to_parts[1] == server_settings["domain"] or to_parts[1] == server_settings["public_ip"] or to_parts[1] == server_settings["ip"]:
+                            
+
+
+
+                            pass # Being sent to this server
+
+
+
+                            # error_exit = False
+                            # if is_ip(to_parts[1]):
+                            #     from_real_ip = [to_parts[1]]
+                            # else:
+                            #     try:
+                            #         dns_results = resolve_dns(to_parts[1], ["MX"])
+                            #         mx = sorted(dns_results["MX"], key=lambda x: x["priority"])
+                                    
+                            #         from_real_ip = []
+                            #         for domn in mx:
+                            #             try:
+                            #                 dns_a = resolve_dns(domn, ["A"])
+                            #             except:
+                            #                 continue
+                            #             from_real_ip.append(dns_a["host"])
+                                    
+                            #         if len(from_real_ip) == 0:
+                            #             raise NuMailError(code="7.7.2", message=f"NuMail DNS resolver error, \"no valid mail servers\"" )
+
+                            #     except NuMailError as e:
+                            #         error_exit = True
+                            #         parts = NuMailError.codeParts(e.code)
+                            #         if parts and parts[1] == "7":
+                            #             # Implement errors for DNS errors
+                            #             if parts[2] == "3" or parts[2] == "2":
+                            #                 writer.write(MessageLine(f"520 6.4.2 Error connecting to server", message_stack).bytes())
+                            #                 await writer.drain()
+                            #             else:
+                            #                 writer.write(MessageLine(f"451 6.4.2 Error connecting to server", message_stack).bytes())
+                            #                 await writer.drain()
+                            #         else:
+                            #             writer.write(MessageLine(f"451 Requested action aborted: local error in processing", message_stack).bytes())
+                            #             await writer.drain()
+                            #     except Exception as e:
+                            #         error_exit = True
+                            #         writer.write(MessageLine(f"451 Requested action aborted: local error in processing", message_stack).bytes())
+                            #         await writer.drain()
+                            
+                            # if not error_exit:
+                            #     if from_real_ip == server_settings["public_ip"] or from_real_ip == server_settings["ip"]:
+                            #         pass # from this server. Must figure out if it's sending or receiving
+                            #     else:
+                            #         pass # from outside. Receiving
+                        else:
+
+
+
+                            # Finish This
+
+
+
+
+                            pass # sending to another server (Check login)
+
+                    writer.write(MessageLine(f"DLVRing", message_stack).bytes())
+                    await writer.drain()
             else:
                 writer.write(MessageLine("500 Command unrecognized", message_stack).bytes())
                 await writer.drain()

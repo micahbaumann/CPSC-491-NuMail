@@ -3065,3 +3065,30 @@ object NoneType can't be used in 'await' expression
 [2024-11-06 14:57:10.171911] [message] Shutdown 127.0.0.1 port 7777
 [2024-11-06 14:57:10.172311] [message] Shutdown 127.0.0.1 port 7778
 [2024-11-06 14:57:10.172638] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-08 00:17:57.057987] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-08 00:17:57.058249] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-08 00:17:57.058369] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-08 00:18:12.478307] [message] New connection from 127.0.0.1 port 45618
+[2024-11-08 00:20:11.546451] [request_error] Connection 127.0.0.1 port 45618:
+'NoneType' object has no attribute 'group'
+[2024-11-08 00:20:11.546809] [message] Connection 127.0.0.1 port 45618 closed
+[2024-11-08 00:22:01.428907] [message] Shutting down
+[2024-11-08 00:22:01.429241] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-08 00:22:01.429451] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-08 00:22:01.429616] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-08 00:22:02.738745] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-08 00:22:02.738910] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-08 00:22:02.739027] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-08 00:22:04.001559] [message] New connection from 127.0.0.1 port 48112
+[2024-11-08 00:22:29.315510] [message] Shutting down
+[2024-11-08 00:22:29.315831] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-08 00:22:29.316016] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-08 00:22:29.316460] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-08 00:22:30.420503] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-08 00:22:30.420935] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-08 00:22:30.421122] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-08 00:22:31.509920] [message] New connection from 127.0.0.1 port 56706
+[2024-11-08 00:22:38.048253] [message] Shutting down
+[2024-11-08 00:22:38.048638] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-08 00:22:38.048884] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-08 00:22:38.049334] [message] Shutdown 127.0.0.1 port 7777

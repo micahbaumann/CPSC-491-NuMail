@@ -49,8 +49,12 @@ Mailbox status:
     6.2.2 Mailbox not ok and not receiving message type
     6.2.3 Receiver not using NuMail
 Network Error:
-    6.5.1 Delivery status successful
-    6.5.2 Error connecting to server
+    6.4.2 Error connecting to server
+Delivery Error:
+    6.5.0 Delivery Error
+    6.5.1 No from address found or invalid from address
+    6.5.2 No to address found or invalid to address
+    6.5.3 No body address found or invalid body
 """
 
 error_log = NuMailLogger("error.log")
