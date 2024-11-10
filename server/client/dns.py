@@ -75,7 +75,7 @@ def is_ip(ip: str) -> bool:
 """
 Decodes a string of NuMail configuration rules from a DNS server
 Arguments:
-ip: String with possible IP
+text: the text string
 """
 def decode_txt(text: str) -> dict:
     numail_dns_settings = {}

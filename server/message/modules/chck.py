@@ -37,7 +37,7 @@ async def mod_chck(reader, writer, message, local_stack, state, loop, action="",
             full_email = re.search(r"^\s*<\s*([a-zA-Z0-9.!#$%&'*+\-/=?^_`{|}~]+)@([a-zA-Z0-9._\-]+)\s*>\s*$", params, re.MULTILINE)
             if full_email:
                 email_domain = full_email.group(2)
-                if email_domain == server_settings["domain"] or email_domain == server_settings["public_ip"] or email_domain == server_settings["ip"]:
+                if email_domain == server_settings["visible_domain"] or email_domain == server_settings["domain"] or email_domain == server_settings["public_ip"] or email_domain == server_settings["ip"]:
                     mailbox = search_mailbox(full_email.group(1))
                     if mailbox:
                         if mailbox["mbReceive"]:

@@ -12,6 +12,7 @@ server_settings = {
     "read_timeout": 300,
     "send_timeout": 300,
     "dns_timeout": 120,
+    "visible_domain": "",
 }
 
 """

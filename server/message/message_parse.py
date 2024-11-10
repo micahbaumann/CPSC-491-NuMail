@@ -92,7 +92,9 @@ async def numail_parse(reader, writer, message_stack):
                         part_email = re.search(r"^\s*<\s*([a-zA-Z0-9.!#$%&'*+\-/=?^_`{|}~]+)\s*>\s*$", trim_message[10:], re.MULTILINE)
 
                         server_self = ""
-                        if "domain" in server_settings and server_settings["domain"]:
+                        if "visible_domain" in server_settings and server_settings["visible_domain"]:
+                            server_self = server_settings["visible_domain"]
+                        elif "domain" in server_settings and server_settings["domain"]:
                             server_self = server_settings["domain"]
                         elif "public_ip" in server_settings and server_settings["public_ip"]:
                             server_self = server_settings["public_ip"]
@@ -180,11 +182,10 @@ async def numail_parse(reader, writer, message_stack):
                     else:
                         to_mx = []
                         try:
-                            to_dns_results = await resolve_dns(to_parts[1], ["MX", "TXT"])
+                            to_dns_results = await resolve_dns(to_parts[1], ["MX"])
                             to_mx = sorted(to_dns_results["MX"], key=lambda x: x["priority"])
                         except:
                             pass
-
 
                         try:
                             to_dns_results_txt = await resolve_dns(to_parts[1], ["TXT"])
@@ -196,8 +197,8 @@ async def numail_parse(reader, writer, message_stack):
                                 if server["host"] == domain:
                                     return True
                             return False
-
-                        if part_equals(server_settings["domain"], to_mx) or to_parts[1] == server_settings["domain"] or to_parts[1] == server_settings["public_ip"] or to_parts[1] == server_settings["ip"]:
+                        
+                        if to_parts[1] == server_settings["visible_domain"] or part_equals(server_settings["domain"], to_mx) or to_parts[1] == server_settings["domain"] or to_parts[1] == server_settings["public_ip"] or to_parts[1] == server_settings["ip"]:
                             
 
 
