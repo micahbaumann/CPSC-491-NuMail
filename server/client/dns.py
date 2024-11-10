@@ -2,6 +2,7 @@ import aiodns
 import asyncio
 import ast
 import ipaddress
+import re
 
 from errors.nuerrors import NuMailError
 from config.config import server_settings
@@ -70,3 +71,16 @@ def is_ip(ip: str) -> bool:
         return True
     except:
         return False
+
+"""
+Decodes a string of NuMail configuration rules from a DNS server
+Arguments:
+ip: String with possible IP
+"""
+def decode_txt(text: str) -> dict:
+    numail_dns_settings = {}
+    for record in text:
+        matches = re.finditer(r"\s*([a-z\-0-9]+)\s*=\s*([0-9a-zA-Z\-@!#$%^&*\(\)_+*/.<>\\?`~:'\"\[\]{}|]+)\s*;", record["text"])
+        for match in matches:
+            numail_dns_settings[match.group(1)] = match.group(2)
+    return numail_dns_settings

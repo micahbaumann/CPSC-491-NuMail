@@ -10,7 +10,8 @@ from server.message.modules.auth import mod_auth
 from server.message.modules.chck import mod_chck
 from db.db import get_mailbox
 from server.message.modules.data import mod_data
-from client.dns import resolve_dns, is_ip
+from server.client.dns import resolve_dns, is_ip, decode_txt
+from server.client.reader import read_numail, init_numail
 
 """
 Checks if commands are valid compared to a string
@@ -117,7 +118,7 @@ async def numail_parse(reader, writer, message_stack):
                                 writer.write(MessageLine(f"550 Invalid mailbox", message_stack).bytes())
                                 await writer.drain()
                         else:
-                            writer.write(MessageLine(f"501 Invalid parameters", message_stack).bytes())
+                            writer.write(MessageLine(f"501 Invalid parameters1", message_stack).bytes())
                             await writer.drain()
                     else:
                         full_email = re.search(r"^\s*<\s*([a-zA-Z0-9.!#$%&'*+\-/=?^_`{|}~]+)@([a-zA-Z0-9._\-]+)\s*>\s*$", trim_message[10:], re.MULTILINE)
@@ -126,7 +127,7 @@ async def numail_parse(reader, writer, message_stack):
                             writer.write(MessageLine(f"250 2.1.0 {full_email.group(1).lower()}@{full_email.group(2).lower()}... Sender ok", message_stack).bytes())
                             await writer.drain()
                         else:
-                            writer.write(MessageLine(f"501 Invalid parameters", message_stack).bytes())
+                            writer.write(MessageLine(f"501 Invalid parameters2", message_stack).bytes())
                             await writer.drain()
                 else:
                     writer.write(MessageLine(f"504 \"{trim_message[5:]}\" not implemented", message_stack).bytes())
@@ -170,17 +171,23 @@ async def numail_parse(reader, writer, message_stack):
                 else:
                     to_parts = parse_address(message_stack.to_addr)
                     from_parts = parse_address(message_stack.from_addr)
-                    if from_parts:
+                    if not from_parts:
                         writer.write(MessageLine("400 6.5.1 No from address found or invalid from address", message_stack).bytes())
                         await writer.drain()
-                    elif to_parts:
+                    elif not to_parts:
                         writer.write(MessageLine("400 6.5.2 No to address found or invalid to address", message_stack).bytes())
                         await writer.drain()
                     else:
                         to_mx = []
                         try:
-                            to_dns_results = resolve_dns(to_parts[1], ["MX"])
+                            to_dns_results = await resolve_dns(to_parts[1], ["MX", "TXT"])
                             to_mx = sorted(to_dns_results["MX"], key=lambda x: x["priority"])
+                        except:
+                            pass
+
+
+                        try:
+                            to_dns_results_txt = await resolve_dns(to_parts[1], ["TXT"])
                         except:
                             pass
                         
@@ -204,13 +211,13 @@ async def numail_parse(reader, writer, message_stack):
                             #     from_real_ip = [to_parts[1]]
                             # else:
                             #     try:
-                            #         dns_results = resolve_dns(to_parts[1], ["MX"])
+                            #         dns_results = await resolve_dns(to_parts[1], ["MX"])
                             #         mx = sorted(dns_results["MX"], key=lambda x: x["priority"])
                                     
                             #         from_real_ip = []
                             #         for domn in mx:
                             #             try:
-                            #                 dns_a = resolve_dns(domn["host"], ["A"])
+                            #                 dns_a = await resolve_dns(domn["host"], ["A"])
                             #             except:
                             #                 continue
                             #             from_real_ip.append(dns_a["host"])
@@ -243,15 +250,21 @@ async def numail_parse(reader, writer, message_stack):
                             #     else:
                             #         pass # from outside. Receiving
                         else:
-
-
-
-                            # Finish This
-
-
-
-
-                            pass # sending to another server (Check login)
+                            # Being sent from this server
+                            # if message_stack.client_username:
+                            #     for domain in to_mx:
+                            #         request = NuMailRequest(domain, port)
+                            #         try:
+                            #             await request.connect()
+                            #         except NuMailError as e:
+                            #             if i == loop_range_size:
+                            #                 raise e
+                            #             else:
+                            #                 continue
+                            # else:
+                            #     writer.write(MessageLine(f"550 Not authorized to send from this address", message_stack).bytes())
+                            #     await writer.drain()
+                            print(decode_txt("port=7777;"))
 
                     writer.write(MessageLine(f"DLVRing", message_stack).bytes())
                     await writer.drain()

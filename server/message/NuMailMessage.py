@@ -167,8 +167,8 @@ class NuMailMessage:
     Arguments:
     to_addr: The address
     """
-    def set_to_addr(self, to_addr:str) -> None:
-        self.to_addr = to_addr
+    def set_to_addr(self, to_address:str) -> None:
+        self.to_addr = to_address
     
     """
     Returns the to payload

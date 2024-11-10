@@ -3092,3 +3092,121 @@ object NoneType can't be used in 'await' expression
 [2024-11-08 00:22:38.048638] [message] Shutdown 127.0.0.1 port 7778
 [2024-11-08 00:22:38.048884] [message] Shutdown 127.0.0.1 port 7779
 [2024-11-08 00:22:38.049334] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-09 22:27:54.272012] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-09 22:27:54.272099] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-09 22:27:54.272153] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-09 22:45:11.211288] [message] Shutting down
+[2024-11-09 22:45:11.213019] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-09 22:45:11.213163] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-09 22:45:11.213274] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-10 00:21:36.475377] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-10 00:21:36.475554] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-10 00:21:36.475619] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-10 00:21:39.108701] [message] New connection from 127.0.0.1 port 42466
+[2024-11-10 00:23:32.709741] [message] Shutting down
+[2024-11-10 00:23:32.709980] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-10 00:23:32.710063] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-10 00:23:32.710347] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-10 00:24:51.466775] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-10 00:24:51.466866] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-10 00:24:51.466927] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-10 00:24:54.419253] [message] New connection from 127.0.0.1 port 38080
+[2024-11-10 00:27:09.001222] [message] Shutting down
+[2024-11-10 00:27:09.001452] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-10 00:27:09.001538] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-10 00:27:09.001787] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-10 00:27:43.343208] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-10 00:27:43.343291] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-10 00:27:43.343356] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-10 00:27:45.093483] [message] New connection from 127.0.0.1 port 35528
+[2024-11-10 00:30:16.067426] [request_error] Connection 127.0.0.1 port 35528 invalid character
+[2024-11-10 00:30:16.067957] [message] Connection 127.0.0.1 port 35528 closed
+[2024-11-10 00:30:17.809424] [message] New connection from 127.0.0.1 port 52424
+[2024-11-10 00:34:14.442638] [message] Shutting down
+[2024-11-10 00:34:14.442881] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-10 00:34:14.443134] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-10 00:34:14.443486] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-10 00:34:15.741149] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-10 00:34:15.741233] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-10 00:34:15.741288] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-10 00:34:17.763021] [message] New connection from 127.0.0.1 port 41560
+[2024-11-10 00:36:04.799980] [message] Shutting down
+[2024-11-10 00:36:04.800249] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-10 00:36:04.800376] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-10 00:36:04.800691] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-10 00:36:14.687138] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-10 00:36:14.687219] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-10 00:36:14.687274] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-10 00:36:16.836451] [message] New connection from 127.0.0.1 port 59510
+[2024-11-10 00:36:54.449266] [message] Shutting down
+[2024-11-10 00:36:54.449462] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-10 00:36:54.449550] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-10 00:36:54.449771] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-10 00:36:55.868080] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-10 00:36:55.868162] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-10 00:36:55.868215] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-10 00:36:57.765760] [message] New connection from 127.0.0.1 port 53480
+[2024-11-10 00:39:39.928265] [message] Shutting down
+[2024-11-10 00:39:39.928537] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-10 00:39:39.928620] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-10 00:39:39.928860] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-10 00:40:54.207007] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-10 00:40:54.207092] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-10 00:40:54.207152] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-10 00:40:57.061983] [message] New connection from 127.0.0.1 port 36238
+[2024-11-10 00:42:44.704932] [message] Shutting down
+[2024-11-10 00:42:44.705499] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-10 00:42:44.705575] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-10 00:42:44.705831] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-10 00:42:45.898339] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-10 00:42:45.898424] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-10 00:42:45.898486] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-10 00:42:47.815834] [message] New connection from 127.0.0.1 port 48514
+[2024-11-10 00:42:53.162262] [message] Shutting down
+[2024-11-10 00:42:53.162456] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-10 00:42:53.162546] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-10 00:42:53.162770] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-10 00:43:41.040602] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-10 00:43:41.040691] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-10 00:43:41.040747] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-10 00:43:43.845563] [message] New connection from 127.0.0.1 port 36202
+[2024-11-10 00:44:51.719157] [request_error] Connection 127.0.0.1 port 36202 invalid character
+[2024-11-10 00:44:51.719394] [message] Connection 127.0.0.1 port 36202 closed
+[2024-11-10 00:44:53.314009] [message] New connection from 127.0.0.1 port 47990
+[2024-11-10 00:45:08.195585] [message] Shutting down
+[2024-11-10 00:45:08.196016] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-10 00:45:08.196241] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-10 00:45:08.196743] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-10 00:45:28.366001] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-10 00:45:28.366083] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-10 00:45:28.366146] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-10 00:45:30.181778] [message] New connection from 127.0.0.1 port 45926
+[2024-11-10 00:46:32.197749] [request_error] Connection 127.0.0.1 port 45926:
+name 're' is not defined
+[2024-11-10 00:46:32.202049] [message] Connection 127.0.0.1 port 45926 closed
+[2024-11-10 00:48:18.291519] [message] Shutting down
+[2024-11-10 00:48:18.291878] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-10 00:48:18.292066] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-10 00:48:18.292204] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-10 00:48:19.660731] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-10 00:48:19.660817] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-10 00:48:19.660881] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-10 00:48:21.749568] [message] New connection from 127.0.0.1 port 33746
+[2024-11-10 00:48:54.581781] [request_error] Connection 127.0.0.1 port 33746:
+name 're' is not defined
+[2024-11-10 00:48:54.582304] [message] Connection 127.0.0.1 port 33746 closed
+[2024-11-10 00:49:55.746120] [message] Shutting down
+[2024-11-10 00:49:55.746814] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-10 00:49:55.746977] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-10 00:49:55.747103] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-10 00:49:56.963766] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-10 00:49:56.963880] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-10 00:49:56.963961] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-10 00:49:58.535480] [message] New connection from 127.0.0.1 port 58330
+[2024-11-10 00:50:28.004512] [request_error] Connection 127.0.0.1 port 58330:
+string indices must be integers, not 'str'
+[2024-11-10 00:50:28.004740] [message] Connection 127.0.0.1 port 58330 closed
+[2024-11-10 00:51:34.124242] [message] Shutting down
+[2024-11-10 00:51:34.124561] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-10 00:51:34.124715] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-10 00:51:34.124859] [message] Shutdown 127.0.0.1 port 7779
