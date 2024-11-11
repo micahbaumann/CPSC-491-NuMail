@@ -79,8 +79,7 @@ text: the text string
 """
 def decode_txt(text: str) -> dict:
     numail_dns_settings = {}
-    for record in text:
-        matches = re.finditer(r"\s*([a-z\-0-9]+)\s*=\s*([0-9a-zA-Z\-@!#$%^&*\(\)_+*/.<>\\?`~:'\"\[\]{}|]+)\s*;", record["text"])
-        for match in matches:
-            numail_dns_settings[match.group(1)] = match.group(2)
+    matches = re.finditer(r"\s*([a-z\-0-9]+)\s*=\s*([0-9a-zA-Z\-@!#$%^&*\(\)_+*/.<>\\?`~:'\"\[\]{}|]+)\s*;", text)
+    for match in matches:
+        numail_dns_settings[match.group(1)] = match.group(2)
     return numail_dns_settings

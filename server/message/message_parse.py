@@ -11,7 +11,13 @@ from server.message.modules.chck import mod_chck
 from db.db import get_mailbox
 from server.message.modules.data import mod_data
 from server.client.dns import resolve_dns, is_ip, decode_txt
-from server.client.reader import read_numail, init_numail
+from server.client.reader import read_numail, init_numail, NuMailRequest
+
+
+DEBUG_VARS = {
+    "to_port": "7777",
+}
+
 
 """
 Checks if commands are valid compared to a string
@@ -188,9 +194,19 @@ async def numail_parse(reader, writer, message_stack):
                             pass
 
                         try:
-                            to_dns_results_txt = await resolve_dns(to_parts[1], ["TXT"])
+                            to_dns_results_txt = await resolve_dns(f"_numail.{to_parts[1]}", ["TXT"])
                         except:
                             pass
+                        numail_dns_settings = {}
+                        for record in to_dns_results_txt["TXT"]:
+                            numail_dns_settings += decode_txt(record["text"])
+                            
+                        if "to_port" in DEBUG_VARS.keys():
+                            port = DEBUG_VARS["to_port"]
+                        elif "port" in numail_dns_settings.keys() and numail_dns_settings["port"].isdigit():
+                            port = int(numail_dns_settings["port"])
+                        else:
+                            port = 25
                         
                         def part_equals(domain: str, mx: list) -> bool:
                             for server in mx:
@@ -252,20 +268,22 @@ async def numail_parse(reader, writer, message_stack):
                             #         pass # from outside. Receiving
                         else:
                             # Being sent from this server
-                            # if message_stack.client_username:
-                            #     for domain in to_mx:
-                            #         request = NuMailRequest(domain, port)
-                            #         try:
-                            #             await request.connect()
-                            #         except NuMailError as e:
-                            #             if i == loop_range_size:
-                            #                 raise e
-                            #             else:
-                            #                 continue
-                            # else:
-                            #     writer.write(MessageLine(f"550 Not authorized to send from this address", message_stack).bytes())
-                            #     await writer.drain()
-                            print(decode_txt("port=7777;"))
+                            if message_stack.client_username:
+                                i = 1
+                                loop_range_size = len(to_mx)
+                                for domain in to_mx:
+                                    request = NuMailRequest(domain, port)
+                                    try:
+                                        await request.connect()
+                                    except NuMailError as e:
+                                        if i == loop_range_size:
+                                            writer.write(MessageLine(f"550 Unable to connect to server", message_stack).bytes())
+                                            await writer.drain()
+                                        else:
+                                            continue
+                            else:
+                                writer.write(MessageLine(f"550 Not authorized to send from this address", message_stack).bytes())
+                                await writer.drain()
 
                     writer.write(MessageLine(f"DLVRing", message_stack).bytes())
                     await writer.drain()
