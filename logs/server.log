@@ -3418,3 +3418,26 @@ name 'record' is not defined
 [2024-11-11 12:01:18.476929] [message] Shutdown 127.0.0.1 port 7778
 [2024-11-11 12:01:18.482099] [message] Shutdown 127.0.0.1 port 7779
 [2024-11-11 12:01:18.482624] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-11 12:20:07.987022] [message] Server listening on 127.0.0.1 port 5555
+[2024-11-11 12:20:25.657331] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-11 12:20:25.657416] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-11 12:20:25.657477] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-11 12:21:10.524507] [message] Shutting down
+[2024-11-11 12:21:10.524759] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-11 12:21:10.524841] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-11 12:21:10.525205] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-11 12:21:13.398900] [message] Shutting down
+[2024-11-11 12:21:13.399398] [message] Shutdown 127.0.0.1 port 5555
+[2024-11-11 12:21:41.123039] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-11 12:21:41.123126] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-11 12:21:41.123189] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-11 12:21:44.125934] [message] Server listening on 127.0.0.1 port 5555
+[2024-11-11 12:21:47.103694] [message] New connection from 127.0.0.1 port 56352
+[2024-11-11 12:24:43.256703] [message] New connection from 127.0.0.1 port 42206
+[2024-11-11 12:24:43.257924] [message] Connection 127.0.0.1 port 42206 closed
+[2024-11-11 12:25:22.360033] [message] Shutting down
+[2024-11-11 12:25:22.360214] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-11 12:25:22.360300] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-11 12:25:22.360528] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-11 12:25:24.279080] [message] Shutting down
+[2024-11-11 12:25:24.279375] [message] Shutdown 127.0.0.1 port 5555
