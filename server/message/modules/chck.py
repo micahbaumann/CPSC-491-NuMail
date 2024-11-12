@@ -11,10 +11,10 @@ from server.client.dns import resolve_dns, is_ip
 from logger.logger import server_log
 
 DEBUG_VARS = {
-    "dns_addr": "rutstech.com",
-    "server_addr": "localhost",
-    "server_port": 7778,
-    "chck_addr": "127.0.0.1",
+    # "dns_addr": "rutstech.com",
+    # "server_addr": "localhost",
+    # "server_port": 7778,
+    # "chck_addr": "127.0.0.1",
     }
 
 """
@@ -66,6 +66,7 @@ async def mod_chck(reader, writer, message, local_stack, state, loop, action="",
 
                             try:
                                 dns_txt = await resolve_dns(f"_numail.{dns_domain}", ["TXT"], 10)
+                                print(dns_txt)
 
                                 for record in dns_txt["TXT"]:
                                     matches = re.finditer(r"\s*([a-z\-0-9]+)\s*=\s*([0-9a-zA-Z\-@!#$%^&*\(\)_+*/.<>\\?`~:'\"\[\]{}|]+)\s*;", record["text"])
@@ -94,6 +95,7 @@ async def mod_chck(reader, writer, message, local_stack, state, loop, action="",
                         for domain in loop_range:
                             # request = NuMailRequest(full_email.group(2), 7777)
                             request = NuMailRequest(domain, port)
+                            print(f"{domain} {port}")
                             
                             try:
                                 await request.connect()

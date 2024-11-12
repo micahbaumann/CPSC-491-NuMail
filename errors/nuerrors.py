@@ -55,6 +55,7 @@ Delivery Error:
     6.5.1 No from address found or invalid from address
     6.5.2 No to address found or invalid to address
     6.5.3 No body address found or invalid body
+    6.5.4 No message type found
 """
 
 error_log = NuMailLogger("error.log")

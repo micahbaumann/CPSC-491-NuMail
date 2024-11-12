@@ -15,7 +15,7 @@ from server.client.reader import read_numail, init_numail, NuMailRequest
 
 
 DEBUG_VARS = {
-    "to_port": "7777",
+    # "to_port": "7777",
 }
 
 
@@ -176,6 +176,9 @@ async def numail_parse(reader, writer, message_stack):
                 elif message_stack.payload == "":
                     writer.write(MessageLine("400 6.5.3 No body address found or invalid body", message_stack).bytes())
                     await writer.drain()
+                elif "message_type" not in message_stack.numail.keys() or not message_stack.numail["message_type"]:
+                    writer.write(MessageLine("400 6.5.4 No message type found", message_stack).bytes())
+                    await writer.drain()
                 else:
                     to_parts = parse_address(message_stack.to_addr)
                     from_parts = parse_address(message_stack.from_addr)
@@ -199,14 +202,14 @@ async def numail_parse(reader, writer, message_stack):
                             pass
                         numail_dns_settings = {}
                         for record in to_dns_results_txt["TXT"]:
-                            numail_dns_settings += decode_txt(record["text"])
+                            numail_dns_settings.update(decode_txt(record["text"]))
                             
                         if "to_port" in DEBUG_VARS.keys():
-                            port = DEBUG_VARS["to_port"]
+                            to_port = DEBUG_VARS["to_port"]
                         elif "port" in numail_dns_settings.keys() and numail_dns_settings["port"].isdigit():
-                            port = int(numail_dns_settings["port"])
+                            to_port = int(numail_dns_settings["port"])
                         else:
-                            port = 25
+                            to_port = 25
                         
                         def part_equals(domain: str, mx: list) -> bool:
                             for server in mx:
@@ -218,8 +221,9 @@ async def numail_parse(reader, writer, message_stack):
                             
 
 
-
-                            pass # Being sent to this server ***ADD PARTS_EQUALS EVERYWHERE ELSE REQUIRED
+                            pass
+                             # Being sent to this server ***ADD PARTS_EQUALS EVERYWHERE ELSE REQUIRED
+                            
 
 
 
@@ -272,20 +276,35 @@ async def numail_parse(reader, writer, message_stack):
                                 i = 1
                                 loop_range_size = len(to_mx)
                                 for domain in to_mx:
-                                    request = NuMailRequest(domain, port)
+                                    request = NuMailRequest(domain["host"], to_port)
                                     try:
                                         await request.connect()
                                     except NuMailError as e:
                                         if i == loop_range_size:
                                             writer.write(MessageLine(f"550 Unable to connect to server", message_stack).bytes())
                                             await writer.drain()
+                                            break
                                         else:
+                                            i += 1
                                             continue
+                                    
+                                    init = await init_numail(request)
+                                    to_numail = init != None
+
+
+                                    request.close()
+                                    break
                             else:
                                 writer.write(MessageLine(f"550 Not authorized to send from this address", message_stack).bytes())
                                 await writer.drain()
 
                     writer.write(MessageLine(f"DLVRing", message_stack).bytes())
+                    await writer.drain()
+            elif check_command(trim_message, "ATCH", 1):
+                if re.search(r"ATCH UPLOAD:.*", trim_message):
+                    pass
+                else:
+                    writer.write(MessageLine(f"504 \"{trim_message[5:]}\" not implemented", message_stack).bytes())
                     await writer.drain()
             else:
                 writer.write(MessageLine("500 Command unrecognized", message_stack).bytes())
