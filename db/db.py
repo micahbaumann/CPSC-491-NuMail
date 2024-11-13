@@ -87,6 +87,6 @@ def search_mailbox(mb_name: str) -> dict | bool:
         else:
             return False
 
-def receive_message(from_addr: str, to_addr: str, msgt: str, data: str) -> bool:
+def receive_message(from_addr: str, to_addr: str, msgt: str, data: str, deliveryConfirm: bool = True, readConfirm: bool = False) -> bool:
     with get_db() as db:
         pass

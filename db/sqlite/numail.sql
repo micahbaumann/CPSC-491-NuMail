@@ -54,7 +54,7 @@ CREATE TABLE Mailboxes (
 );
 
 CREATE TABLE Messages (
-    messageId INTEGER PRIMARY KEY NOT NULL UNIQUE,
+    messageId VARCHAR(255) PRIMARY KEY NOT NULL UNIQUE,
     messageTimestamp DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     messageType INTEGER NOT NULL DEFAULT 0,
     isSent BOOLEAN NOT NULL DEFAULT 0, -- 0 means you received the message
@@ -67,8 +67,10 @@ CREATE TABLE Messages (
 );
 
 CREATE TABLE Attachments (
-    attachmentId INTEGER PRIMARY KEY NOT NULL UNIQUE,
-    FOREIGN KEY (attachmentId) REFERENCES Messages(messageId)
+    attachmentId VARCHAR(255) PRIMARY KEY NOT NULL UNIQUE,
+    attachmentMessage VARCHAR(255) NOT NULL,
+    attachmentLocation VARCHAR(255),
+    FOREIGN KEY (attachmentMessage) REFERENCES Messages(messageId)
 );
 
 -- CREATE TABLE Enrollments (

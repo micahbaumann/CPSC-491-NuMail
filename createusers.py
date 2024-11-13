@@ -1,6 +1,5 @@
 from db.db import createUser, check_user_pwd, get_mailbox, create_mailbox, search_mailbox
 from errors.nuerrors import NuMailError
-from server.client.client import NuMailRequest
 
 try:
     print(createUser(
