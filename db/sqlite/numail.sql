@@ -55,6 +55,7 @@ CREATE TABLE Mailboxes (
 
 CREATE TABLE Messages (
     messageId VARCHAR(255) PRIMARY KEY NOT NULL UNIQUE,
+    messageMailbox INTEGER NOT NULL,
     messageTimestamp DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     messageType INTEGER NOT NULL DEFAULT 0,
     isSent BOOLEAN NOT NULL DEFAULT 0, -- 0 means you received the message
@@ -63,7 +64,7 @@ CREATE TABLE Messages (
     messageContent TEXT NOT NULL,
     deliveryConfirm BOOLEAN NOT NULL DEFAULT 1,
     readConfirm BOOLEAN NOT NULL DEFAULT 0,
-    FOREIGN KEY (messageId) REFERENCES Mailboxes(mailboxId)
+    FOREIGN KEY (messageMailbox) REFERENCES Mailboxes(mailboxId)
 );
 
 CREATE TABLE Attachments (
