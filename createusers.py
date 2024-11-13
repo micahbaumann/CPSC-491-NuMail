@@ -1,4 +1,4 @@
-from db.db import createUser, check_user_pwd, get_mailbox, create_mailbox, search_mailbox
+from db.db import createUser, check_user_pwd, get_mailbox, create_mailbox, search_mailbox, receive_message
 from errors.nuerrors import NuMailError
 
 try:
@@ -54,5 +54,21 @@ try:
 except NuMailError as e:
     print(e)
 except Exception as e:
+    print(e)
+
+try:
+    print(receive_message(
+        from_addr = "micah@numail.local",
+        to_addr = "micah@other.local",
+        msgt = "MAIL",
+        data = "fdasadfasdjkl;afsd",
+        deliveryConfirm = True,
+        readConfirm = False
+    ))
+except NuMailError as e:
+    print("NuMail Error:")
+    print(e)
+except Exception as e:
+    print("Exception:")
     print(e)
 

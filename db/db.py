@@ -1,6 +1,7 @@
 import sqlite3
 import contextlib
 import bcrypt
+import uuid
 
 from logger.logger import server_log
 from errors.nuerrors import NuMailError
@@ -89,4 +90,12 @@ def search_mailbox(mb_name: str) -> dict | bool:
 
 def receive_message(from_addr: str, to_addr: str, msgt: str, data: str, deliveryConfirm: bool = True, readConfirm: bool = False) -> bool:
     with get_db() as db:
-        pass
+        unique = False
+        while not unique:
+            msgid = uuid.uuid1().hex
+            msg_exists = db.execute("SELECT * FROM Messages WHERE messageId = ?", (msgid,)).fetchone()
+            if not msg_exists:
+                unique = True
+        
+        
+        
