@@ -62,7 +62,6 @@ CREATE TABLE Messages (
     messageFrom VARCHAR(100) NOT NULL,
     messageTo VARCHAR(100) NOT NULL,
     messageContent TEXT NOT NULL,
-    deliveryConfirm BOOLEAN NOT NULL DEFAULT 1,
     readConfirm BOOLEAN NOT NULL DEFAULT 0,
     FOREIGN KEY (messageMailbox) REFERENCES Mailboxes(mailboxId)
 );

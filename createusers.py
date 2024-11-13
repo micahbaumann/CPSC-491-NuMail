@@ -60,9 +60,8 @@ try:
     print(receive_message(
         from_addr = "micah@numail.local",
         to_addr = "micah@other.local",
-        msgt = "MAIL",
+        msgt = 0,
         data = "fdasadfasdjkl;afsd",
-        deliveryConfirm = True,
         readConfirm = False
     ))
 except NuMailError as e:

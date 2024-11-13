@@ -88,7 +88,7 @@ def search_mailbox(mb_name: str) -> dict | bool:
         else:
             return False
 
-def receive_message(from_addr: str, to_addr: str, msgt: str, data: str, deliveryConfirm: bool = True, readConfirm: bool = False) -> bool:
+def receive_message(from_addr: str, to_addr: str, msgt: int, data: str, readConfirm: bool = False, attachments: list = []) -> bool | list:
     with get_db() as db:
         unique = False
         while not unique:
@@ -97,5 +97,20 @@ def receive_message(from_addr: str, to_addr: str, msgt: str, data: str, delivery
             if not msg_exists:
                 unique = True
         
-        
+        to_mb = search_mailbox(to_addr.split('@')[0])
+        if to_mb:
+            db.execute("INSERT INTO Messages(messageId, messageMailbox, messageType, messageFrom, messageTo, messageContent, readConfirm) VALUES (?, ?, ?, ?, ?, ?, ?)", (msgid, to_mb["mailboxId"], msgt, from_addr, to_addr, data, readConfirm))
+            db.commit()
+            msg_exists = db.execute("SELECT * FROM Messages WHERE messageId = ?", (msgid,)).fetchone()
+            if msg_exists:
+
+
+                # handle attachments now
+
+
+                return dict(msg_exists)
+            else:
+                return False
+        else:
+            return False
         
