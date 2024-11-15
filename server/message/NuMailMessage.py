@@ -19,6 +19,7 @@ class NuMailMessage:
         self.mods = []
         self.to_addr = ""
         self.payload = ""
+        self.attachments = []
     
     """
     Returns the message stack.
@@ -145,7 +146,7 @@ class NuMailMessage:
     """
     Returns a list of mods this message supports
     """
-    def get_mods(self) -> bool | None:
+    def get_mods(self):
         return self.mods
     
     """
@@ -159,7 +160,7 @@ class NuMailMessage:
     """
     Returns the to address
     """
-    def get_to_addr(self) -> bool | None:
+    def get_to_addr(self):
         return self.to_addr
     
     """
@@ -173,7 +174,7 @@ class NuMailMessage:
     """
     Returns the to payload
     """
-    def get_payload(self) -> bool | None:
+    def get_payload(self):
         return self.payload
     
     """
@@ -183,6 +184,20 @@ class NuMailMessage:
     """
     def set_payload(self, data:str) -> None:
         self.payload = data
+    
+    """
+    Returns the attachments
+    """
+    def get_attachments(self):
+        return self.attachments
+    
+    """
+    Sets the attachments
+    Arguments:
+    attachments: The attachments
+    """
+    def set_attachments(self, attachments:list) -> None:
+        self.attachments = attachments
     
     """
     Returns information in this object in a dictionary
@@ -201,5 +216,6 @@ class NuMailMessage:
             "is_client": self.is_client,
             "mods": self.mods,
             "to_addr": self.to_addr,
-            "payload": self.payload
+            "payload": self.payload,
+            "attachments": self.attachments
         }

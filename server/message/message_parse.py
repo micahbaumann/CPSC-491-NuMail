@@ -12,6 +12,7 @@ from db.db import get_mailbox
 from server.message.modules.data import mod_data
 from server.client.dns import resolve_dns, is_ip, decode_txt
 from server.client.reader import read_numail, init_numail, NuMailRequest
+from server.message.modules.atch import mod_atch
 
 
 DEBUG_VARS = {
@@ -301,8 +302,18 @@ async def numail_parse(reader, writer, message_stack):
                     writer.write(MessageLine(f"DLVRing", message_stack).bytes())
                     await writer.drain()
             elif check_command(trim_message, "ATCH", 1):
-                if re.search(r"ATCH UPLOAD:.*", trim_message):
-                    pass
+                params = re.search(r"ATCH UPLOAD:(.*)", trim_message)
+                if params:
+                    expire, expire_on_retrieve = None
+                    ex = re.search(r"expire=([0-9]+)", params.group(1).strip().split(' '))
+                    if ex:
+                        expire = ex.group(1)
+                    
+                    er = re.search(r"expireOnRetrieve=([0-9]+)", params.group(1).strip().split(' '))
+                    if er:
+                        expire_on_retrieve = er.group(1)
+                    
+                    await mod_atch(reader=reader, writer=writer, message=message_stack, expire=expire, expire_on_retrieve=expire_on_retrieve)
                 else:
                     writer.write(MessageLine(f"504 \"{trim_message[5:]}\" not implemented", message_stack).bytes())
                     await writer.drain()

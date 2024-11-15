@@ -86,12 +86,7 @@ def create_mime_attachment(file_path, mime_type="application/octet-stream"):
         file_content = base64.b64encode(file.read()).decode("utf-8")
 
     # Create MIME headers
-    mime_headers = f"""
-Content-Type: {mime_type}; name="{file_name}"
-Content-Disposition: attachment; filename="{file_name}"
-Content-Transfer-Encoding: base64
-
-"""
+    mime_headers = f"""\r\nContent-Type: {mime_type}; name="{file_name}"\r\nContent-Disposition: attachment; filename="{file_name}"\r\nContent-Transfer-Encoding: base64\r\n\r\n"""
     # Combine headers and encoded content
     mime_message = mime_headers + file_content
     return mime_message

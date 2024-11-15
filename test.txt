@@ -1,0 +1,7 @@
+NuMail Server Error 7.4.1: User "micah" already exists
+False
+NuMail Server Error 7.5.1: Mailbox "micah" already exists
+{'mailboxId': 1, 'mbUser': 1, 'mbName': 'micah', 'mbType': 0, 'mbSend': 1, 'mbReceive': 1}
+{'mailboxId': 1, 'mbUser': 1, 'mbName': 'micah', 'mbType': 0, 'mbSend': 1, 'mbReceive': 1}
+{'messageId': '24103d79a32811efbf7a00155dd4d982', 'messageMailbox': 1, 'messageTimestamp': '2024-11-15 08:03:47', 'messageType': 0, 'isSent': 0, 'messageFrom': 'micah@numail.local', 'messageTo': 'micah@other.local', 'messageContent': 'fdasadfasdjkl;afsd', 'readConfirm': 0}
+[]

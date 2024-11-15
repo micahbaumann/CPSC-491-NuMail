@@ -38,6 +38,8 @@ NuMail DNS Resolver Errors
 NuMail Reader Errors
     7.8.0 NuMail reader error
     7.8.1 Invalid NuMail line
+NuMail Attachment Errors
+    7.8.0 NuMail attachment error
 """
 
 """
