@@ -9,6 +9,8 @@ from errors.nuerrors import NuMailError
 
 class Attachment:
     def __init__(self, data: str = "", data_raw = None, content_type: str = "", name: str = "", expire: int | None = None, expireOnRetrieve: bool = False) -> None:
+        self.expire = expire
+        self.expireOnRetrieve = expireOnRetrieve
         self.data_raw = self.content_type = self.name = self.location = None
         self.id = uuid.uuid1().hex
         self.attachments = []
@@ -66,7 +68,7 @@ class Attachment:
                                 self.content_type = contentType
                                 self.name = filename
                             else:
-                                self.attachments.append(Attachment(data_raw=payload, content_type=contentType, name=filename))
+                                self.attachments.append(Attachment(data_raw=payload, content_type=contentType, name=filename, expire=self.expire, expireOnRetrieve=self.expireOnRetrieve))
                         else:
                             raise NuMailError(code="7.9.0", message=f"NuMail attachment error")
                 i += 1

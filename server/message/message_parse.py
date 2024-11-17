@@ -316,10 +316,15 @@ async def numail_parse(reader, writer, message_stack):
                             elif er:
                                 expire_on_retrieve = er.group(1) == "TRUE"
                             else:
+                                notRead = True
                                 writer.write(MessageLine(f"501 Invalid parameters", message_stack).bytes())
                                 await writer.drain()
                     
                     if not notRead:
+                        writer.write(MessageLine(f"354 Enter attachment, end with \".\" on a line by itself", message_stack).bytes())
+                        await writer.drain()
+                        if not expire_on_retrieve:
+                            expire_on_retrieve = False
                         await mod_atch(reader=reader, writer=writer, message=message_stack, expire=expire, expire_on_retrieve=expire_on_retrieve)
                 else:
                     writer.write(MessageLine(f"504 \"{trim_message[5:]}\" not implemented", message_stack).bytes())

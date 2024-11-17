@@ -12,7 +12,7 @@ async def mod_atch(reader, writer, message, local_stack, state, loop, expire=Non
         return
     else:
         if local_stack[-1] == '.\r\n':
-            attachment = Attachment(data=state["data"])
+            attachment = Attachment(data=state["data"], expire=expire, expireOnRetrieve=expire_on_retrieve)
             message.attachments.append(attachment)
             if attachment.attachments:
                 for attch in attachment.attachments:
