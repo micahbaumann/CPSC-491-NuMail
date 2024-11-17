@@ -21,3 +21,7 @@ Remember add email spoofing IP checks
     ```
     nameserver 127.0.0.1
     ```
+
+## Base64 Username and Password
+Username: `bWljYWg=`  
+Password: `MTIzNDU=`

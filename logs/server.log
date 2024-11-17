@@ -3807,3 +3807,11 @@ expected string or bytes-like object, got 'list'
 [2024-11-17 03:14:53.816517] [message] Shutdown 127.0.0.1 port 7777
 [2024-11-17 03:14:53.816795] [message] Shutdown 127.0.0.1 port 7778
 [2024-11-17 03:14:53.816996] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-17 03:19:51.033954] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-17 03:19:51.034134] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-17 03:19:51.034203] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-17 03:19:53.164328] [message] New connection from 127.0.0.1 port 56018
+[2024-11-17 03:22:13.817713] [message] Shutting down
+[2024-11-17 03:22:13.818107] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-17 03:22:13.818282] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-17 03:22:13.818775] [message] Shutdown 127.0.0.1 port 7777

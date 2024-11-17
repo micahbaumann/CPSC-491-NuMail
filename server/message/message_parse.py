@@ -304,28 +304,32 @@ async def numail_parse(reader, writer, message_stack):
             elif check_command(trim_message, "ATCH", 1):
                 params = re.search(r"^ATCH UPLOAD(:(.*))*$", trim_message, re.MULTILINE)
                 if params:
-                    expire = expire_on_retrieve = None
-                    notRead = False
-                    if params.group(2):
-                        params_list = params.group(2).strip().split(' ')
-                        for param in params_list:
-                            ex = re.search(r"^expire=([0-9]+)$", param, re.MULTILINE)
-                            er = re.search(r"^expireOnRetrieve=((TRUE)|(FALSE))$", param, re.MULTILINE)
-                            if ex:
-                                expire = ex.group(1)
-                            elif er:
-                                expire_on_retrieve = er.group(1) == "TRUE"
-                            else:
-                                notRead = True
-                                writer.write(MessageLine(f"501 Invalid parameters", message_stack).bytes())
-                                await writer.drain()
-                    
-                    if not notRead:
-                        writer.write(MessageLine(f"354 Enter attachment, end with \".\" on a line by itself", message_stack).bytes())
+                    if message_stack.client_username:
+                        expire = expire_on_retrieve = None
+                        notRead = False
+                        if params.group(2):
+                            params_list = params.group(2).strip().split(' ')
+                            for param in params_list:
+                                ex = re.search(r"^expire=([0-9]+)$", param, re.MULTILINE)
+                                er = re.search(r"^expireOnRetrieve=((TRUE)|(FALSE))$", param, re.MULTILINE)
+                                if ex:
+                                    expire = ex.group(1)
+                                elif er:
+                                    expire_on_retrieve = er.group(1) == "TRUE"
+                                else:
+                                    notRead = True
+                                    writer.write(MessageLine(f"501 Invalid parameters", message_stack).bytes())
+                                    await writer.drain()
+                        
+                        if not notRead:
+                            writer.write(MessageLine(f"354 Enter attachment, end with \".\" on a line by itself", message_stack).bytes())
+                            await writer.drain()
+                            if not expire_on_retrieve:
+                                expire_on_retrieve = False
+                            await mod_atch(reader=reader, writer=writer, message=message_stack, expire=expire, expire_on_retrieve=expire_on_retrieve)
+                    else:
+                        writer.write(MessageLine(f"550 Not authorized to add attachment", message_stack).bytes())
                         await writer.drain()
-                        if not expire_on_retrieve:
-                            expire_on_retrieve = False
-                        await mod_atch(reader=reader, writer=writer, message=message_stack, expire=expire, expire_on_retrieve=expire_on_retrieve)
                 else:
                     writer.write(MessageLine(f"504 \"{trim_message[5:]}\" not implemented", message_stack).bytes())
                     await writer.drain()
