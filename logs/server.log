@@ -3622,3 +3622,155 @@ unsupported operand type(s) for +=: 'dict' and 'dict'
 [2024-11-12 19:55:04.681303] [message] Server listening on 127.0.0.1 port 5555
 [2024-11-12 19:55:06.119574] [message] Shutting down
 [2024-11-12 19:55:06.119848] [message] Shutdown 127.0.0.1 port 5555
+[2024-11-16 22:49:59.520640] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-16 22:49:59.520724] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-16 22:49:59.520779] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-16 22:50:19.152893] [message] New connection from 127.0.0.1 port 57176
+[2024-11-16 22:51:02.152023] [request_error] Connection 127.0.0.1 port 57176:
+cannot unpack non-iterable NoneType object
+[2024-11-16 22:51:02.152364] [message] Connection 127.0.0.1 port 57176 closed
+[2024-11-16 22:51:51.050200] [message] Shutting down
+[2024-11-16 22:51:51.050585] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-16 22:51:51.050799] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-16 22:51:51.050973] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-16 22:51:52.114542] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-16 22:51:52.114622] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-16 22:51:52.114685] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-16 22:51:53.736811] [message] New connection from 127.0.0.1 port 60034
+[2024-11-16 22:52:05.208702] [request_error] Connection 127.0.0.1 port 60034:
+cannot unpack non-iterable NoneType object
+[2024-11-16 22:52:05.209052] [message] Connection 127.0.0.1 port 60034 closed
+[2024-11-16 22:52:21.382926] [message] Shutting down
+[2024-11-16 22:52:21.383083] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-16 22:52:21.383171] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-16 22:52:21.383276] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-16 22:52:58.580261] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-16 22:52:58.580342] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-16 22:52:58.580405] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-16 22:53:00.314511] [message] New connection from 127.0.0.1 port 50438
+[2024-11-16 22:53:08.172801] [request_error] Connection 127.0.0.1 port 50438:
+cannot unpack non-iterable NoneType object
+[2024-11-16 22:53:08.173033] [message] Connection 127.0.0.1 port 50438 closed
+[2024-11-16 22:53:11.511495] [message] Shutting down
+[2024-11-16 22:53:11.511796] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-16 22:53:11.511988] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-16 22:53:11.512164] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-16 22:53:38.231377] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-16 22:53:38.231457] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-16 22:53:38.231508] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-16 22:53:40.155924] [message] New connection from 127.0.0.1 port 35604
+[2024-11-16 22:53:46.424430] [request_error] Connection 127.0.0.1 port 35604:
+cannot unpack non-iterable NoneType object
+[2024-11-16 22:53:46.424717] [message] Connection 127.0.0.1 port 35604 closed
+[2024-11-16 22:54:01.934490] [message] Shutting down
+[2024-11-16 22:54:01.934681] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-16 22:54:01.934785] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-16 22:54:01.934873] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-16 22:54:02.694234] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-16 22:54:02.694314] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-16 22:54:02.694375] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-16 22:54:04.369363] [message] New connection from 127.0.0.1 port 46332
+[2024-11-16 22:54:14.984890] [request_error] Connection 127.0.0.1 port 46332:
+cannot unpack non-iterable NoneType object
+[2024-11-16 22:54:14.985222] [message] Connection 127.0.0.1 port 46332 closed
+[2024-11-16 22:54:18.026011] [message] Shutting down
+[2024-11-16 22:54:18.026496] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-16 22:54:18.026761] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-16 22:54:18.027001] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-16 22:54:29.929250] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-16 22:54:29.929332] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-16 22:54:29.929384] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-16 22:54:31.453655] [message] New connection from 127.0.0.1 port 51916
+[2024-11-16 22:54:54.764915] [request_error] Connection 127.0.0.1 port 51916:
+cannot unpack non-iterable NoneType object
+[2024-11-16 22:54:54.765368] [message] Connection 127.0.0.1 port 51916 closed
+[2024-11-16 23:02:50.471958] [message] Shutting down
+[2024-11-16 23:02:50.472186] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-16 23:02:50.472266] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-16 23:02:50.472332] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-16 23:02:51.552759] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-16 23:02:51.552839] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-16 23:02:51.552903] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-16 23:02:53.723718] [message] New connection from 127.0.0.1 port 56604
+[2024-11-16 23:03:02.509007] [request_error] Connection 127.0.0.1 port 56604:
+cannot unpack non-iterable NoneType object
+[2024-11-16 23:03:02.509284] [message] Connection 127.0.0.1 port 56604 closed
+[2024-11-16 23:03:35.145444] [message] Shutting down
+[2024-11-16 23:03:35.145879] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-16 23:03:35.146144] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-16 23:03:35.146379] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-16 23:03:36.036325] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-16 23:03:36.036405] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-16 23:03:36.036468] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-16 23:03:38.023226] [message] New connection from 127.0.0.1 port 54242
+[2024-11-16 23:03:46.012450] [request_error] Connection 127.0.0.1 port 54242:
+cannot unpack non-iterable NoneType object
+[2024-11-16 23:03:46.012705] [message] Connection 127.0.0.1 port 54242 closed
+[2024-11-16 23:05:29.659070] [message] Shutting down
+[2024-11-16 23:05:29.659424] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-16 23:05:29.659625] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-16 23:05:29.659802] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-16 23:05:32.163014] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-16 23:05:32.163092] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-16 23:05:32.163145] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-16 23:05:38.475920] [message] New connection from 127.0.0.1 port 35512
+[2024-11-16 23:05:49.607863] [request_error] Connection 127.0.0.1 port 35512:
+cannot unpack non-iterable NoneType object
+[2024-11-16 23:05:49.608225] [message] Connection 127.0.0.1 port 35512 closed
+[2024-11-16 23:06:22.794591] [message] Shutting down
+[2024-11-16 23:06:22.794936] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-16 23:06:22.795142] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-16 23:06:22.795323] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-16 23:06:24.168447] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-16 23:06:24.168529] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-16 23:06:24.168591] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-16 23:06:31.035907] [message] New connection from 127.0.0.1 port 42264
+[2024-11-16 23:06:37.693311] [request_error] Connection 127.0.0.1 port 42264:
+cannot unpack non-iterable NoneType object
+[2024-11-16 23:06:37.693516] [message] Connection 127.0.0.1 port 42264 closed
+[2024-11-16 23:07:08.665753] [message] Shutting down
+[2024-11-16 23:07:08.665904] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-16 23:07:08.665984] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-16 23:07:08.666053] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-16 23:07:09.603888] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-16 23:07:09.604090] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-16 23:07:09.604158] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-16 23:07:19.177701] [message] New connection from 127.0.0.1 port 37392
+[2024-11-16 23:09:04.221129] [request_error] Connection 127.0.0.1 port 37392:
+expected string or bytes-like object, got 'list'
+[2024-11-16 23:09:04.221492] [message] Connection 127.0.0.1 port 37392 closed
+[2024-11-16 23:10:01.163147] [message] Shutting down
+[2024-11-16 23:10:01.163586] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-16 23:10:01.163845] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-16 23:10:01.164082] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-16 23:10:02.084144] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-16 23:10:02.084240] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-16 23:10:02.084308] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-16 23:10:04.173076] [message] New connection from 127.0.0.1 port 58144
+[2024-11-16 23:10:17.753231] [request_error] Connection 127.0.0.1 port 58144:
+expected string or bytes-like object, got 'list'
+[2024-11-16 23:10:17.753397] [message] Connection 127.0.0.1 port 58144 closed
+[2024-11-16 23:12:05.547298] [message] Shutting down
+[2024-11-16 23:12:05.547720] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-16 23:12:05.547964] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-16 23:12:05.548200] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-16 23:12:06.383997] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-16 23:12:06.384077] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-16 23:12:06.384127] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-16 23:12:08.361303] [message] New connection from 127.0.0.1 port 59480
+[2024-11-16 23:12:53.721456] [request_error] Connection 127.0.0.1 port 59480 invalid character
+[2024-11-16 23:13:10.999558] [request_error] Connection 127.0.0.1 port 59480 invalid character
+[2024-11-16 23:13:10.999958] [message] Connection 127.0.0.1 port 59480 closed
+[2024-11-16 23:13:24.279326] [message] Shutting down
+[2024-11-16 23:13:24.280213] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-16 23:13:24.280425] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-16 23:13:24.280577] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-16 23:16:15.208837] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-16 23:16:15.208908] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-16 23:16:15.208970] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-16 23:16:16.989175] [message] New connection from 127.0.0.1 port 54836
+[2024-11-16 23:18:01.033947] [request_error] Connection 127.0.0.1 port 54836 invalid character
+[2024-11-16 23:18:18.944568] [message] Shutting down
+[2024-11-16 23:18:18.945203] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-16 23:18:18.945285] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-16 23:18:18.945514] [message] Shutdown 127.0.0.1 port 7777
