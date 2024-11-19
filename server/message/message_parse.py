@@ -289,9 +289,37 @@ async def numail_parse(reader, writer, message_stack):
                                             i += 1
                                             continue
                                     
-                                    init = await init_numail(request)
-                                    to_numail = init != None
+                                    init = await init_numail(request) # bool
 
+                                    if init:
+                                        try:
+                                            chck = await request.send(f"CHCK RECEIVE {message_stack.numail["message_type"].upper()}: <{message_stack.to_addr}>")
+                                            if read_numail(chck)[0] != "250":
+                                                raise
+                                            await request.send(f"MAIL FROM: <{message_stack.from_addr}>")
+                                        except:
+                                            writer.write(MessageLine(f"450 Unable to connect to  \"{message_stack.to_addr}\"", message_stack).bytes())
+                                            await writer.drain()
+                                    else:
+
+
+
+
+
+
+                                        pass # If sending SMTP email
+
+
+
+
+
+
+
+
+
+
+
+                                    
 
                                     request.close()
                                     break
