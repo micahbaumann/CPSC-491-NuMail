@@ -8,14 +8,19 @@ from pathlib import Path
 from errors.nuerrors import NuMailError
 
 class Attachment:
-    def __init__(self, data: str = "", data_raw = None, content_type: str = "", name: str = "", expire: int | None = None, expireOnRetrieve: bool = False) -> None:
+    def __init__(self, data: str = "", data_raw = None, content_type: str = "", name: str = "", expire: int | None = None, expireOnRetrieve: bool = False, id: str = "", from_server: str = "") -> None:
         self.expire = expire
         self.expireOnRetrieve = expireOnRetrieve
         self.data_raw = self.content_type = self.name = self.location = None
         self.id = uuid.uuid1().hex
         self.attachments = []
-        
-        if data_raw and content_type and name:
+        self.retreive_file = False
+        self.from_server = from_server
+
+        if self.from_server and id:
+            self.id = id
+            self.retreive_file = True
+        elif data_raw and content_type and name:
             self.data_raw = data_raw
             self.content_type = content_type
             self.name = name
@@ -73,7 +78,7 @@ class Attachment:
                             raise NuMailError(code="7.9.0", message=f"NuMail attachment error")
                 i += 1
         
-        if self.data_raw and self.content_type and self.name:
+        if self.data_raw and self.content_type and self.name and not self.retreive_file:
             loop = True
             while loop:
                 try:
@@ -101,3 +106,13 @@ class Attachment:
     
     def __repr__(self):
         return repr(self.attachments)
+    
+    def retreive(self):
+
+
+
+        # Do this
+
+
+
+        pass
