@@ -3824,3 +3824,15 @@ expected string or bytes-like object, got 'list'
 [2024-11-19 15:12:23.881486] [message] Shutdown 127.0.0.1 port 7777
 [2024-11-19 15:12:23.881800] [message] Shutdown 127.0.0.1 port 7778
 [2024-11-19 15:12:23.882057] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-20 14:48:16.207301] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-20 14:48:16.209424] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-20 14:48:16.209661] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-20 14:48:47.592016] [error] NuMail Server Error 7.1.1: Error opening config file "/root/Desktop/Capstone Project/numail/CPSC-491-NuMail/settings2.conf"
+[2024-11-20 14:49:06.431804] [error] NuMail Server Error 7.1.1: Error opening config file "/root/Desktop/Capstone Project/numail/CPSC-491-NuMail/conf/settings2.conf"
+[2024-11-20 14:49:12.131989] [message] Server listening on 127.0.0.1 port 5555
+[2024-11-20 14:50:25.121698] [message] Shutting down
+[2024-11-20 14:50:25.122101] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-20 14:50:25.122563] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-20 14:50:25.123067] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-20 14:50:27.210622] [message] Shutting down
+[2024-11-20 14:50:27.211049] [message] Shutdown 127.0.0.1 port 5555
