@@ -13,6 +13,7 @@ from server.message.modules.data import mod_data
 from server.client.dns import resolve_dns, is_ip, decode_txt
 from server.client.reader import read_numail, init_numail, NuMailRequest
 from server.message.modules.atch import mod_atch
+from server.message.Attachment import Attachment
 
 
 DEBUG_VARS = {
@@ -149,7 +150,7 @@ async def numail_parse(reader, writer, message_stack):
                     await writer.drain()
             elif check_command(trim_message, "RCPT", 1):
                 if len(trim_message) > 7 and trim_message[5:8] == "TO:":
-                    message_stack.set_to_addr(trim_message[8:].strip().lower())
+                    message_stack.to_addr = trim_message[8:].strip().lower()
                     writer.write(MessageLine(f"250 2.1.5 {message_stack.get_to_addr().strip("<>").lower()}... Recipient ok", message_stack).bytes())
                     await writer.drain()
                 else:
@@ -318,11 +319,10 @@ async def numail_parse(reader, writer, message_stack):
                                                 raise
 
                                             for attachment in message_stack.attachments:
-                                                pass
                                                 # Send attachment
-                                                # atch = await request.send(f"ATCH")
-                                                # if read_numail(data)[0] != "354":
-                                                #     raise
+                                                atch = await request.send(f"ATCH FILE: {attachment.id} {message_stack.from_addr.split('@')[1]}")
+                                                if read_numail(data)[0] != "250":
+                                                    raise
                                         except:
                                             writer.write(MessageLine(f"450 Unable to connect to  \"{message_stack.to_addr}\"", message_stack).bytes())
                                             await writer.drain()
@@ -357,7 +357,7 @@ async def numail_parse(reader, writer, message_stack):
                     await writer.drain()
             elif check_command(trim_message, "ATCH", 1):
                 params = re.search(r"^ATCH UPLOAD(:(.*))*$", trim_message, re.MULTILINE)
-                params_attch = re.search(r"^ATCH: *(\S+) +(\S+)$", trim_message, re.MULTILINE)
+                params_attch = re.search(r"^ATCH FILE: *(\S+) +(\S+)$", trim_message, re.MULTILINE)
                 if params:
                     if message_stack.client_username:
                         expire = expire_on_retrieve = None
@@ -386,11 +386,11 @@ async def numail_parse(reader, writer, message_stack):
                         writer.write(MessageLine(f"550 Not authorized to add attachment", message_stack).bytes())
                         await writer.drain()
                 elif params_attch:
-                    attch_id = params.group(1).strip()
-                    attch_domain = params.group(2).strip()
-
-
-                    # Retrieve attachments and finish dlvr
+                    attch_id = params_attch.group(1).strip()
+                    attch_domain = params_attch.group(2).strip()
+                    message_stack.attachments.append(Attachment(id=attch_id, from_server=attch_domain))
+                    writer.write(MessageLine(f"250 Attachment {attch_id} attached", message_stack).bytes())
+                    await writer.drain()
                 else:
                     writer.write(MessageLine(f"504 \"{trim_message[5:]}\" not implemented", message_stack).bytes())
                     await writer.drain()
