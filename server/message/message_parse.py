@@ -323,6 +323,9 @@ async def numail_parse(reader, writer, message_stack):
                                                 atch = await request.send(f"ATCH FILE: {attachment.id} {message_stack.from_addr.split('@')[1]}")
                                                 if read_numail(data)[0] != "250":
                                                     raise
+                                            
+                                            writer.write(MessageLine(f"Done", message_stack).bytes())
+                                            await writer.drain()
                                         except:
                                             writer.write(MessageLine(f"450 Unable to connect to  \"{message_stack.to_addr}\"", message_stack).bytes())
                                             await writer.drain()
