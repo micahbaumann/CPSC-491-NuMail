@@ -68,18 +68,19 @@ class NuMailRequest:
     Arguments:
     message: a string to send
     """
-    async def send(self, message: str) -> str:
+    async def send(self, message: str, expect_response: bool = True) -> str | None:
         if not self.writer:
             raise NuMailError(code="7.6.2", message="Connection not open")
         else:
             try:
                 self.writer.write(MessageLine(message, self.message_info).bytes())
                 await self.writer.drain()
-                data = await asyncio.wait_for(self.reader.read(int(server_settings["buffer"])), float(server_settings["send_timeout"]))
-                return_data = data.decode()
+                if expect_response:
+                    data = await asyncio.wait_for(self.reader.read(int(server_settings["buffer"])), float(server_settings["send_timeout"]))
+                    return_data = data.decode()
 
-                self.message_info.append("server", return_data)
-                return return_data
+                    self.message_info.append("server", return_data)
+                    return return_data
             except asyncio.TimeoutError:
                 raise NuMailError(code="7.6.5", message="Connection timeout")
             except ConnectionResetError:

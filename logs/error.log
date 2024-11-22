@@ -455,3 +455,8 @@
 [2024-11-15 00:03:47.083211] [error] NuMail Server Error 7.5.1: Mailbox "micah" already exists
 [2024-11-20 14:48:47.590502] [error] NuMail Server Error 7.1.1: Error opening config file "/root/Desktop/Capstone Project/numail/CPSC-491-NuMail/settings2.conf"
 [2024-11-20 14:49:06.431572] [error] NuMail Server Error 7.1.1: Error opening config file "/root/Desktop/Capstone Project/numail/CPSC-491-NuMail/conf/settings2.conf"
+[2024-11-22 00:51:47.774369] [error] NuMail Server Error 7.6.0: NuMail request error
+[2024-11-22 00:54:11.112639] [error] NuMail Server Error 7.6.0: NuMail request error
+[2024-11-22 00:55:57.644743] [error] NuMail Server Error 7.6.0: NuMail request error
+[2024-11-22 00:58:09.095153] [error] NuMail Server Error 7.6.0: NuMail request error
+[2024-11-22 00:59:38.949787] [error] NuMail Server Error 7.6.0: NuMail request error
