@@ -4868,3 +4868,35 @@ cannot access local variable 'to_dns_results_txt' where it is not associated wit
 [2024-11-27 01:44:47.373891] [message] Shutdown 127.0.0.1 port 7778
 [2024-11-27 01:44:47.374209] [message] Shutdown 127.0.0.1 port 7779
 [2024-11-27 01:44:47.374721] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-27 01:49:42.322020] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-27 01:49:42.322221] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-27 01:49:42.322407] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-27 01:49:44.037062] [message] New connection from 127.0.0.1 port 43056
+[2024-11-27 01:49:46.655257] [message] Server listening on 127.0.0.1 port 5555
+[2024-11-27 01:50:33.050594] [message] New connection from 127.0.0.1 port 37222
+[2024-11-27 01:50:33.058197] [message] Connection 127.0.0.1 port 37222 closed
+[2024-11-27 01:51:34.081411] [message] Connection 127.0.0.1 port 43056 closed
+[2024-11-27 01:51:37.607270] [message] New connection from 127.0.0.1 port 38648
+[2024-11-27 01:51:56.609895] [request_error] Connection 127.0.0.1 port 38648 invalid character
+[2024-11-27 01:51:56.610165] [request_error] Connection 127.0.0.1 port 38648:
+too many values to unpack (expected 2)
+[2024-11-27 01:51:56.610735] [message] Connection 127.0.0.1 port 38648 closed
+[2024-11-27 01:51:57.484626] [message] Shutting down
+[2024-11-27 01:51:57.484865] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-27 01:51:57.485152] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-27 01:51:57.485351] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-27 01:51:59.378894] [message] Shutting down
+[2024-11-27 01:51:59.379675] [message] Shutdown 127.0.0.1 port 5555
+[2024-11-27 01:52:00.947589] [message] Server listening on 127.0.0.1 port 5555
+[2024-11-27 01:52:03.714015] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-27 01:52:03.714190] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-27 01:52:03.714393] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-27 01:52:05.998373] [message] New connection from 127.0.0.1 port 40960
+[2024-11-27 01:52:41.956304] [message] New connection from 127.0.0.1 port 59400
+[2024-11-27 01:52:41.963788] [message] Connection 127.0.0.1 port 59400 closed
+[2024-11-27 01:52:53.606499] [message] Shutting down
+[2024-11-27 01:52:53.606788] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-27 01:52:53.607011] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-27 01:52:53.607484] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-27 01:52:55.168234] [message] Shutting down
+[2024-11-27 01:52:55.168679] [message] Shutdown 127.0.0.1 port 5555

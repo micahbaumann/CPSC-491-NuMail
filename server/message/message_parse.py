@@ -349,10 +349,11 @@ async def numail_parse(reader, writer, message_stack):
                                                     raise
 
                                             dlvr = await request.send(f"DLVR")
-                                            if read_numail(dlvr)[0] != "250":
+                                            dlvr_parts = read_numail(dlvr)
+                                            if dlvr_parts[0] != "250":
                                                 raise
 
-                                            writer.write(MessageLine(f"Done", message_stack).bytes())
+                                            writer.write(MessageLine(f"250 6.5.1 {dlvr_parts[2].split()[0]} Message successfully delivered", message_stack).bytes())
                                             await writer.drain()
                                         except:
                                             writer.write(MessageLine(f"450 Unable to connect to  \"{message_stack.to_addr}\"", message_stack).bytes())
@@ -383,9 +384,6 @@ async def numail_parse(reader, writer, message_stack):
                             else:
                                 writer.write(MessageLine(f"550 Not authorized to send from this address", message_stack).bytes())
                                 await writer.drain()
-
-                    writer.write(MessageLine(f"DLVRing", message_stack).bytes())
-                    await writer.drain()
             elif check_command(trim_message, "ATCH", 1):
                 params = re.search(r"^ATCH UPLOAD(:(.*))*$", trim_message, re.MULTILINE)
                 params_attch = re.search(r"^ATCH FILE: *(\S+) +(\S+)$", trim_message, re.MULTILINE)
