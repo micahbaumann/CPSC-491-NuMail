@@ -68,19 +68,38 @@ class NuMailRequest:
     Arguments:
     message: a string to send
     """
-    async def send(self, message: str, expect_response: bool = True) -> str | None:
+    async def send(self, message: str) -> str | None:
         if not self.writer:
             raise NuMailError(code="7.6.2", message="Connection not open")
         else:
             try:
                 self.writer.write(MessageLine(message, self.message_info).bytes())
                 await self.writer.drain()
-                if expect_response:
-                    data = await asyncio.wait_for(self.reader.read(int(server_settings["buffer"])), float(server_settings["send_timeout"]))
-                    return_data = data.decode()
 
-                    self.message_info.append("server", return_data)
-                    return return_data
+                data = await asyncio.wait_for(self.reader.read(int(server_settings["buffer"])), float(server_settings["send_timeout"]))
+                return_data = data.decode()
+
+                self.message_info.append("server", return_data)
+                return return_data
+            except asyncio.TimeoutError:
+                raise NuMailError(code="7.6.5", message="Connection timeout")
+            except ConnectionResetError:
+                raise NuMailError(code="7.6.4", message="Connection reset")
+            except Exception as e:
+                raise NuMailError(code="7.6.0", message="NuMail request error")
+    
+    """
+    Sends a message on an open connection. Returns nothing
+    Arguments:
+    message: a string to send
+    """
+    async def push(self, message: str) -> None:
+        if not self.writer:
+            raise NuMailError(code="7.6.2", message="Connection not open")
+        else:
+            try:
+                self.writer.write(MessageLine(message, self.message_info).bytes())
+                await self.writer.drain()
             except asyncio.TimeoutError:
                 raise NuMailError(code="7.6.5", message="Connection timeout")
             except ConnectionResetError:

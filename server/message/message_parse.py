@@ -306,7 +306,6 @@ async def numail_parse(reader, writer, message_stack):
                                         else:
                                             i += 1
                                             continue
-                                    
                                     init = await init_numail(request) # bool
 
                                     if init:
@@ -330,13 +329,14 @@ async def numail_parse(reader, writer, message_stack):
                                             data = await request.send(f"DATA")
                                             if read_numail(data)[0] != "354":
                                                 raise
-                                            
+
                                             message_split = message_stack.payload.split("\r\n")
                                             for line in message_split:
                                                 send_line = line
                                                 if len(send_line) > 0 and send_line[0] == ".":
                                                     send_line = f".{send_line}"
-                                                await request.send(send_line, expect_response=False)
+                                                await request.push(send_line)
+
                                             payload = await request.send(".")
                                             if read_numail(payload)[0] != "250":
                                                 raise
@@ -347,9 +347,8 @@ async def numail_parse(reader, writer, message_stack):
                                                 print(atch)
                                                 if read_numail(atch)[0] != "250":
                                                     raise
-                                            
+
                                             dlvr = await request.send(f"DLVR")
-                                            print(dlvr)
                                             if read_numail(dlvr)[0] != "250":
                                                 raise
 
@@ -432,26 +431,26 @@ async def numail_parse(reader, writer, message_stack):
 
             
         except TimeoutError:
+            server_log.log(f"Connection {addr[0]} port {addr[1]} timeout", type="request_warning")
             writer.write(MessageLine("500 Connection timed out", message_stack).bytes())
             await writer.drain()
-            server_log.log(f"Connection {addr[0]} port {addr[1]} timeout", type="request_warning")
             break
         except UnicodeDecodeError as e:
+            server_log.log(f"Connection {addr[0]} port {addr[1]} invalid character", type="request_error")
             writer.write(MessageLine("500 Invalid character", message_stack).bytes())
             await writer.drain()
-            server_log.log(f"Connection {addr[0]} port {addr[1]} invalid character", type="request_error")
             break
         except NuMailError as e:
+            server_log.log(f"Connection {addr[0]} port {addr[1]}:\n{e}", type="request_error")
             writer.write(MessageLine("500 Unexpected error", message_stack).bytes())
             await writer.drain()
-            server_log.log(f"Connection {addr[0]} port {addr[1]}:\n{e}", type="request_error")
             if e.shutdown == True:
                 raise e
             break
         except Exception as e:
+            server_log.log(f"Connection {addr[0]} port {addr[1]}:\n{e}", type="request_error")
             writer.write(MessageLine("500 Unexpected error", message_stack).bytes())
             await writer.drain()
-            server_log.log(f"Connection {addr[0]} port {addr[1]}:\n{e}", type="request_error")
             break
     return "exit"
 
