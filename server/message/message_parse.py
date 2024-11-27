@@ -213,14 +213,14 @@ async def numail_parse(reader, writer, message_stack):
                             to_mx = sorted(to_dns_results["MX"], key=lambda x: x["priority"])
                         except:
                             pass
-
+                        
+                        numail_dns_settings = {}
                         try:
                             to_dns_results_txt = await resolve_dns(f"_numail.{to_parts[1]}", ["TXT"])
+                            for record in to_dns_results_txt["TXT"]:
+                                numail_dns_settings.update(decode_txt(record["text"]))
                         except:
                             pass
-                        numail_dns_settings = {}
-                        for record in to_dns_results_txt["TXT"]:
-                            numail_dns_settings.update(decode_txt(record["text"]))
                             
                         if "to_port" in DEBUG_VARS.keys():
                             to_port = DEBUG_VARS["to_port"]

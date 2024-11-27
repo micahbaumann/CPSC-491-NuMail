@@ -460,3 +460,21 @@
 [2024-11-22 00:55:57.644743] [error] NuMail Server Error 7.6.0: NuMail request error
 [2024-11-22 00:58:09.095153] [error] NuMail Server Error 7.6.0: NuMail request error
 [2024-11-22 00:59:38.949787] [error] NuMail Server Error 7.6.0: NuMail request error
+[2024-11-26 23:38:19.607401] [error] NuMail Server Error 7.7.1: NuMail DNS resolver error, "(11, 'Could not contact DNS servers')"
+[2024-11-26 23:38:19.609877] [error] NuMail Server Error 7.7.1: NuMail DNS resolver error, "(11, 'Could not contact DNS servers')"
+[2024-11-26 23:42:36.742972] [error] NuMail Server Error 7.7.1: NuMail DNS resolver error, "(11, 'Could not contact DNS servers')"
+[2024-11-26 23:42:36.744791] [error] NuMail Server Error 7.7.1: NuMail DNS resolver error, "(11, 'Could not contact DNS servers')"
+[2024-11-26 23:45:26.396960] [error] NuMail Server Error 7.7.1: NuMail DNS resolver error, "(11, 'Could not contact DNS servers')"
+[2024-11-26 23:45:26.398432] [error] NuMail Server Error 7.7.1: NuMail DNS resolver error, "(11, 'Could not contact DNS servers')"
+[2024-11-26 23:48:26.815014] [error] NuMail Server Error 7.7.1: NuMail DNS resolver error, "(11, 'Could not contact DNS servers')"
+[2024-11-26 23:48:26.816744] [error] NuMail Server Error 7.7.1: NuMail DNS resolver error, "(11, 'Could not contact DNS servers')"
+[2024-11-26 23:48:31.917770] [error] NuMail Server Error 7.6.1: Cannot connect to server
+[2024-11-26 23:52:18.981407] [error] NuMail Server Error 7.7.2: NuMail DNS resolver error, "(4, 'Domain name not found')"
+[2024-11-26 23:52:18.982473] [error] NuMail Server Error 7.7.2: NuMail DNS resolver error, "(4, 'Domain name not found')"
+[2024-11-26 23:52:23.987126] [error] NuMail Server Error 7.6.1: Cannot connect to server
+[2024-11-26 23:57:57.738810] [error] NuMail Server Error 7.7.2: NuMail DNS resolver error, "(4, 'Domain name not found')"
+[2024-11-26 23:57:57.742242] [error] NuMail Server Error 7.7.2: NuMail DNS resolver error, "(4, 'Domain name not found')"
+[2024-11-26 23:58:02.746128] [error] NuMail Server Error 7.6.1: Cannot connect to server
+[2024-11-26 23:58:20.227808] [error] NuMail Server Error 7.7.1: NuMail DNS resolver error, "(11, 'Could not contact DNS servers')"
+[2024-11-26 23:58:20.229498] [error] NuMail Server Error 7.7.1: NuMail DNS resolver error, "(11, 'Could not contact DNS servers')"
+[2024-11-26 23:58:25.233788] [error] NuMail Server Error 7.6.1: Cannot connect to server

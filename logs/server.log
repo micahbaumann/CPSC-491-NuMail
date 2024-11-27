@@ -4323,3 +4323,54 @@ cannot access local variable 'email_domain' where it is not associated with a va
 [2024-11-22 01:12:34.672171] [message] Shutdown 127.0.0.1 port 7777
 [2024-11-22 01:12:40.705187] [message] Shutting down
 [2024-11-22 01:12:40.705379] [message] Shutdown 127.0.0.1 port 5555
+[2024-11-26 23:34:40.965432] [message] Server listening on 127.0.0.1 port 5555
+[2024-11-26 23:34:49.383739] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-26 23:34:49.383962] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-26 23:34:49.384130] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-26 23:34:58.030612] [message] New connection from 127.0.0.1 port 55176
+[2024-11-26 23:38:19.610104] [request_error] Connection 127.0.0.1 port 55176:
+cannot access local variable 'to_dns_results_txt' where it is not associated with a value
+[2024-11-26 23:38:19.611893] [message] Connection 127.0.0.1 port 55176 closed
+[2024-11-26 23:41:07.985896] [message] Shutting down
+[2024-11-26 23:41:07.986271] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-26 23:41:07.986487] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-26 23:41:07.986686] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-26 23:41:10.050135] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-26 23:41:10.050341] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-26 23:41:10.050512] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-26 23:41:14.193686] [message] Shutting down
+[2024-11-26 23:41:14.194071] [message] Shutdown 127.0.0.1 port 5555
+[2024-11-26 23:41:15.411481] [message] Server listening on 127.0.0.1 port 5555
+[2024-11-26 23:41:22.920977] [message] New connection from 127.0.0.1 port 47142
+[2024-11-26 23:42:36.745051] [request_error] Connection 127.0.0.1 port 47142:
+cannot access local variable 'to_dns_results_txt' where it is not associated with a value
+[2024-11-26 23:42:36.745312] [message] Connection 127.0.0.1 port 47142 closed
+[2024-11-26 23:44:38.732685] [message] Shutting down
+[2024-11-26 23:44:38.733121] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-26 23:44:38.733645] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-26 23:44:38.734405] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-26 23:44:40.111250] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-26 23:44:40.111427] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-26 23:44:40.111558] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-26 23:44:45.302511] [message] Shutting down
+[2024-11-26 23:44:45.302973] [message] Shutdown 127.0.0.1 port 5555
+[2024-11-26 23:44:46.067943] [message] Server listening on 127.0.0.1 port 5555
+[2024-11-26 23:44:50.099879] [message] New connection from 127.0.0.1 port 52146
+[2024-11-26 23:46:39.010328] [message] Shutting down
+[2024-11-26 23:46:39.010593] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-26 23:46:39.010775] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-26 23:46:39.011201] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-26 23:46:45.258881] [message] Shutting down
+[2024-11-26 23:46:45.259247] [message] Shutdown 127.0.0.1 port 5555
+[2024-11-26 23:46:46.702262] [message] Server listening on 127.0.0.1 port 5555
+[2024-11-26 23:46:49.386464] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-26 23:46:49.386657] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-26 23:46:49.386950] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-26 23:46:50.455459] [message] New connection from 127.0.0.1 port 38806
+[2024-11-26 23:48:31.918106] [error] NuMail Server Error 7.6.1: Cannot connect to server
+[2024-11-26 23:52:23.987494] [error] NuMail Server Error 7.6.1: Cannot connect to server
+[2024-11-26 23:57:24.082413] [request_warning] Connection 127.0.0.1 port 38806 timeout
+[2024-11-26 23:57:24.084575] [message] Connection 127.0.0.1 port 38806 closed
+[2024-11-26 23:57:40.271359] [message] New connection from 127.0.0.1 port 46708
+[2024-11-26 23:58:02.746525] [error] NuMail Server Error 7.6.1: Cannot connect to server
+[2024-11-26 23:58:25.234230] [error] NuMail Server Error 7.6.1: Cannot connect to server
