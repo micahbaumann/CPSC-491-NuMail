@@ -238,7 +238,7 @@ async def numail_parse(reader, writer, message_stack):
                         if to_parts[1] == server_settings["visible_domain"] or part_equals(server_settings["domain"], to_mx) or to_parts[1] == server_settings["domain"] or to_parts[1] == server_settings["public_ip"] or to_parts[1] == server_settings["ip"]:
                             
 
-
+                            
                             writer.write(MessageLine(f"250 6.5.1 5246148245 Message successfully delivered TEST", message_stack).bytes())
                             await writer.drain()
                              # Being sent to this server ***ADD PARTS_EQUALS EVERYWHERE ELSE REQUIRED

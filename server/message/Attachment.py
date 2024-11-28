@@ -81,7 +81,7 @@ class Attachment:
                             else:
                                 self.attachments.append(Attachment(data_raw=payload, content_type=contentType, name=filename, expire=self.expire, expireOnRetrieve=self.expireOnRetrieve))
                         else:
-                            raise NuMailError(code="7.9.0", message=f"NuMail attachment error1")
+                            raise NuMailError(code="7.9.0", message=f"NuMail attachment error")
                 i += 1
         
         if self.data_raw and self.content_type and self.name and not self.retreive_file:
