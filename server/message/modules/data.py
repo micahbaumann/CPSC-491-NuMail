@@ -1,3 +1,4 @@
+import re
 from server.message.server_parser import numail_server_parser
 from server.message.MessageLine import MessageLine
 
@@ -12,9 +13,22 @@ async def mod_data(reader, writer, message, local_stack, state, loop):
     else:
         data_str = local_stack[-1]
         local_loop = False
-        if local_stack[-1].find("\r\n"):
-            data_str = local_stack[-1].split("\r\n")
+        parts = re.split(r'(\r\n)', data_str)
+        result = []
+        temp = ""
+        for part in parts:
+            temp += part
+            if part == '\r\n':
+                result.append(temp)
+                temp = ""
+
+        if temp:
+            result.append(temp)
+
+        if len(result) > 1:
             local_loop = True
+            data_str = result
+
         if local_loop:
             for data_line in data_str:
                 if data_line == '.\r\n' or data_line == '.':
@@ -30,15 +44,13 @@ async def mod_data(reader, writer, message, local_stack, state, loop):
                     
                     state["data"] += line
         else:
-            if data_str == '.\r\n':
-                print("p1")
+            if data_str == '.\r\n' or data_str == '.':
                 message.set_payload(state["data"])
                 loop.returnLoop()
                 writer.write(MessageLine(f"250 2.0.0 Message accepted for delivery", message).bytes())
                 await writer.drain()
                 return
             else:
-                print("p2")
                 line = data_str
                 if len(line) > 0 and line[0] == '.':
                     line = line[1:]

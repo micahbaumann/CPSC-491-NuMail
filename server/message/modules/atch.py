@@ -1,3 +1,4 @@
+import re
 from server.message.server_parser import numail_server_parser
 from server.message.MessageLine import MessageLine
 from server.message.Attachment import Attachment
@@ -13,12 +14,27 @@ async def mod_atch(reader, writer, message, local_stack, state, loop, expire=Non
     else:
         data_str = local_stack[-1]
         local_loop = False
-        if local_stack[-1].find("\r\n"):
-            data_str = local_stack[-1].split("\r\n")
+        parts = re.split(r'(\r\n)', data_str)
+        result = []
+        temp = ""
+        for part in parts:
+            temp += part
+            if part == '\r\n':
+                result.append(temp)
+                temp = ""
+
+        if temp:
+            result.append(temp)
+
+        if len(result) > 1:
             local_loop = True
+            data_str = result
+
         if local_loop:
             for data_line in data_str:
                 if data_line == '.\r\n' or data_line == '.':
+                    # with open("attch_output_3.txt", "w") as file:
+                    #     file.write(f"'{state["data"]}'")
                     attachment = Attachment(data=state["data"], expire=expire, expireOnRetrieve=expire_on_retrieve)
                     message.attachments.append(attachment)
                     if attachment.attachments:
@@ -43,7 +59,9 @@ async def mod_atch(reader, writer, message, local_stack, state, loop, expire=Non
                     
                     state["data"] += line
         else:
-            if data_str == '.\r\n':
+            if data_str == '.\r\n' or data_str == '.':
+                # with open("attch_output_3.txt", "w") as file:
+                #     file.write(f"'{state["data"]}'")
                 attachment = Attachment(data=state["data"], expire=expire, expireOnRetrieve=expire_on_retrieve)
                 message.attachments.append(attachment)
                 if attachment.attachments:

@@ -481,3 +481,38 @@
 [2024-11-27 00:08:20.669814] [error] NuMail Server Error 7.7.3: NuMail DNS resolver error, "(1, 'DNS server returned answer with no data')"
 [2024-11-27 00:08:20.860532] [error] NuMail Server Error 7.7.2: NuMail DNS resolver error, "(4, 'Domain name not found')"
 [2024-11-27 00:25:31.983252] [error] NuMail Server Error 7.6.1: Cannot connect to server
+[2024-11-27 15:14:06.395502] [error] NuMail Server Error 7.9.0: NuMail attachment error
+[2024-11-27 15:33:46.476667] [error] NuMail Server Error 7.9.0: NuMail attachment error3
+[2024-11-27 15:38:52.093460] [error] NuMail Server Error 7.9.0: NuMail attachment error3
+[2024-11-27 15:54:12.082817] [error] NuMail Server Error 7.9.0: NuMail attachment error
+[2024-11-27 16:12:57.193412] [error] NuMail Server Error 7.4.1: User "micah" already exists
+[2024-11-27 16:12:57.367564] [error] NuMail Server Error 7.5.1: Mailbox "micah" already exists
+[2024-11-27 16:16:20.953449] [error] NuMail Server Error 7.4.1: User "micah" already exists
+[2024-11-27 16:16:21.127378] [error] NuMail Server Error 7.5.1: Mailbox "micah" already exists
+[2024-11-27 16:16:32.440808] [error] NuMail Server Error 7.4.1: User "micah" already exists
+[2024-11-27 16:16:32.614977] [error] NuMail Server Error 7.5.1: Mailbox "micah" already exists
+[2024-11-27 16:17:23.514487] [error] NuMail Server Error 7.4.1: User "micah" already exists
+[2024-11-27 16:17:23.686446] [error] NuMail Server Error 7.5.1: Mailbox "micah" already exists
+[2024-11-27 16:19:28.577136] [error] NuMail Server Error 7.4.1: User "micah" already exists
+[2024-11-27 16:19:28.753993] [error] NuMail Server Error 7.5.1: Mailbox "micah" already exists
+[2024-11-27 16:19:50.386704] [error] NuMail Server Error 7.4.1: User "micah" already exists
+[2024-11-27 16:19:50.563697] [error] NuMail Server Error 7.5.1: Mailbox "micah" already exists
+[2024-11-27 16:20:05.447487] [error] NuMail Server Error 7.4.1: User "micah" already exists
+[2024-11-27 16:20:05.623399] [error] NuMail Server Error 7.5.1: Mailbox "micah" already exists
+[2024-11-27 16:20:21.945378] [error] NuMail Server Error 7.4.1: User "micah" already exists
+[2024-11-27 16:20:22.126771] [error] NuMail Server Error 7.5.1: Mailbox "micah" already exists
+[2024-11-27 16:20:51.474144] [error] NuMail Server Error 7.4.1: User "micah" already exists
+[2024-11-27 16:20:51.648317] [error] NuMail Server Error 7.5.1: Mailbox "micah" already exists
+[2024-11-27 16:21:10.357292] [error] NuMail Server Error 7.4.1: User "micah" already exists
+[2024-11-27 16:21:10.532120] [error] NuMail Server Error 7.5.1: Mailbox "micah" already exists
+[2024-11-27 16:24:41.908096] [error] NuMail Server Error 7.4.1: User "micah" already exists
+[2024-11-27 16:24:42.083444] [error] NuMail Server Error 7.5.1: Mailbox "micah" already exists
+[2024-11-27 16:25:16.169599] [error] NuMail Server Error 7.4.1: User "micah" already exists
+[2024-11-27 16:25:16.341802] [error] NuMail Server Error 7.5.1: Mailbox "micah" already exists
+[2024-11-27 16:25:39.432585] [error] NuMail Server Error 7.4.1: User "micah" already exists
+[2024-11-27 16:25:39.605088] [error] NuMail Server Error 7.5.1: Mailbox "micah" already exists
+[2024-11-27 16:26:15.512089] [error] NuMail Server Error 7.4.1: User "micah" already exists
+[2024-11-27 16:26:15.686551] [error] NuMail Server Error 7.5.1: Mailbox "micah" already exists
+[2024-11-27 16:27:11.895992] [error] NuMail Server Error 7.4.1: User "micah" already exists
+[2024-11-27 16:27:12.069759] [error] NuMail Server Error 7.5.1: Mailbox "micah" already exists
+[2024-11-27 17:12:27.041581] [error] NuMail Server Error 7.9.0: NuMail attachment error1

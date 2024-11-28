@@ -47,12 +47,15 @@ class Attachment:
                     
                     if encoding_match:
                         # Extract the payload (the actual base64-encoded data)
-                        payload_match = re.search(r'\r\n\r\n(.*)', part, re.DOTALL)
-                        if payload_match:
-                            raw_data = payload_match.group(1).strip()
+                        # with open("attch_output.txt", "w") as file:
+                        #     file.write(part)
+                        # payload_match = re.search(r'.*\r\n\r\n(.*)', part, re.DOTALL)
+                        payload_match = part.strip().split("\r\n\r\n", 1)
+                        if len(payload_match) == 2:
+                            raw_data = payload_match[1].strip()
 
                             if encoding == 'base64':
-                                payload = base64.b64decode(raw_data)
+                                payload = Attachment.safe_b64decode(raw_data)
                             elif encoding == 'quoted-printable':
                                 payload = quopri.decodestring(raw_data)
                             elif encoding in ['7bit', '8bit']:
@@ -62,12 +65,15 @@ class Attachment:
                             else:
                                 raise NuMailError(code="7.9.0", message=f"NuMail attachment error")
                             
-                            content_type_match = re.search(r'Content-Type:\s*([^\s;]+)', data)
+                            content_type_match = re.search(r'Content-Type:\s*([^\s;]+)', payload_match[0].strip())
                             if content_type_match:
                                 contentType = content_type_match.group(1)
                             else:
                                 raise NuMailError(code="7.9.0", message=f"NuMail attachment error")
                             
+                            with open("attch_output_2.txt", "w") as file:
+                                file.write(f"'{payload_match[0].strip()}'\r\n'{payload_match[1].strip()}")
+
                             if i == 0:
                                 self.data_raw = payload
                                 self.content_type = contentType
@@ -75,7 +81,7 @@ class Attachment:
                             else:
                                 self.attachments.append(Attachment(data_raw=payload, content_type=contentType, name=filename, expire=self.expire, expireOnRetrieve=self.expireOnRetrieve))
                         else:
-                            raise NuMailError(code="7.9.0", message=f"NuMail attachment error")
+                            raise NuMailError(code="7.9.0", message=f"NuMail attachment error1")
                 i += 1
         
         if self.data_raw and self.content_type and self.name and not self.retreive_file:
@@ -116,3 +122,10 @@ class Attachment:
 
 
         pass
+    
+    @staticmethod
+    def safe_b64decode(b64_string):
+        padding_needed = len(b64_string) % 4
+        if padding_needed:
+            b64_string += '=' * (4 - padding_needed)
+        return base64.b64decode(b64_string)
