@@ -8,7 +8,7 @@ from logger.logger import server_log
 from config.config import server_settings
 from server.message.modules.auth import mod_auth
 from server.message.modules.chck import mod_chck
-from db.db import get_mailbox
+from db.db import get_mailbox, send_message, msg_db_type, update_receiver, retreive_attachment, update_sent
 from server.message.modules.data import mod_data
 from server.client.dns import resolve_dns, is_ip, decode_txt
 from server.client.reader import read_numail, init_numail, NuMailRequest
@@ -292,88 +292,105 @@ async def numail_parse(reader, writer, message_stack):
                         else:
                             # Being sent from this server
                             if message_stack.client_username:
-                                i = 1
-                                loop_range_size = len(to_mx)
-                                for domain in to_mx:
-                                    request = NuMailRequest(domain["host"], to_port)
-                                    try:
-                                        await request.connect()
-                                    except NuMailError as e:
-                                        if i == loop_range_size:
-                                            writer.write(MessageLine(f"550 Unable to connect to server", message_stack).bytes())
-                                            await writer.drain()
-                                            break
-                                        else:
-                                            i += 1
-                                            continue
-                                    init = await init_numail(request) # bool
 
-                                    if init:
+                                # Upload to DB
+                                upload_status = send_message(
+                                    from_addr = message_stack.from_addr,
+                                    to_addr = message_stack.to_addr,
+                                    msgt = int(msg_db_type(message_stack.numail["message_type"].upper())),
+                                    data = message_stack.payload,
+                                    readConfirm = False,
+                                    receiver_id = None,
+                                    attachments = message_stack.attachments
+                                )
+                                
+                                if not upload_status:
+                                    writer.write(MessageLine(f"451 Requested action aborted: local error in processing", message_stack).bytes())
+                                    await writer.drain()
+                                else:
+                                    i = 1
+                                    loop_range_size = len(to_mx)
+                                    for domain in to_mx:
+                                        request = NuMailRequest(domain["host"], to_port)
                                         try:
-                                            chck = await request.send(f"CHCK RECEIVE {message_stack.numail["message_type"].upper()}: <{message_stack.to_addr}>")
-                                            if read_numail(chck)[0] != "250":
-                                                raise
+                                            await request.connect()
+                                        except NuMailError as e:
+                                            if i == loop_range_size:
+                                                writer.write(MessageLine(f"550 Unable to connect to server", message_stack).bytes())
+                                                await writer.drain()
+                                                break
+                                            else:
+                                                i += 1
+                                                continue
+                                        init = await init_numail(request) # bool
 
-                                            from_adr = await request.send(f"MAIL FROM: <{message_stack.from_addr}>")
-                                            if read_numail(from_adr)[0] != "250":
-                                                raise
-
-                                            to_adr = await request.send(f"RCPT TO: {message_stack.to_addr}")
-                                            if read_numail(to_adr)[0] != "250":
-                                                raise
-
-                                            msgt = await request.send(f"MSGT {message_stack.numail["message_type"].upper()}")
-                                            if read_numail(msgt)[0] != "250":
-                                                raise
-
-                                            data = await request.send(f"DATA")
-                                            if read_numail(data)[0] != "354":
-                                                raise
-
-                                            message_split = message_stack.payload.split("\r\n")
-                                            for line in message_split:
-                                                send_line = line
-                                                if len(send_line) > 0 and send_line[0] == ".":
-                                                    send_line = f".{send_line}"
-                                                await request.push(send_line)
-
-                                            payload = await request.send(".")
-                                            if read_numail(payload)[0] != "250":
-                                                raise
-
-                                            for attachment in message_stack.attachments:
-                                                # Send attachment
-                                                atch = await request.send(f"ATCH FILE: {attachment.id} {message_stack.from_addr.split('@')[1]}")
-                                                print(atch)
-                                                if read_numail(atch)[0] != "250":
+                                        if init:
+                                            try:
+                                                chck = await request.send(f"CHCK RECEIVE {message_stack.numail["message_type"].upper()}: <{message_stack.to_addr}>")
+                                                if read_numail(chck)[0] != "250":
                                                     raise
 
-                                            dlvr = await request.send(f"DLVR")
-                                            dlvr_parts = read_numail(dlvr)
-                                            if dlvr_parts[0] != "250":
-                                                raise
-                                            
+                                                from_adr = await request.send(f"MAIL FROM: <{message_stack.from_addr}>")
+                                                if read_numail(from_adr)[0] != "250":
+                                                    raise
 
-                                            
+                                                to_adr = await request.send(f"RCPT TO: {message_stack.to_addr}")
+                                                if read_numail(to_adr)[0] != "250":
+                                                    raise
 
-                                            writer.write(MessageLine(f"250 6.5.1 {dlvr_parts[2].split()[0]} Message successfully delivered", message_stack).bytes())
+                                                msgt = await request.send(f"MSGT {message_stack.numail["message_type"].upper()}")
+                                                if read_numail(msgt)[0] != "250":
+                                                    raise
+
+                                                data = await request.send(f"DATA")
+                                                if read_numail(data)[0] != "354":
+                                                    raise
+
+                                                message_split = message_stack.payload.split("\r\n")
+                                                for line in message_split:
+                                                    send_line = line
+                                                    if len(send_line) > 0 and send_line[0] == ".":
+                                                        send_line = f".{send_line}"
+                                                    await request.push(send_line)
+
+                                                payload = await request.send(".")
+                                                if read_numail(payload)[0] != "250":
+                                                    raise
+
+                                                for attachment in message_stack.attachments:
+                                                    # Send attachment
+                                                    atch = await request.send(f"ATCH FILE: {attachment.id} {message_stack.from_addr.split('@')[1]}")
+                                                    print(atch)
+                                                    if read_numail(atch)[0] != "250":
+                                                        raise
+
+                                                dlvr = await request.send(f"DLVR")
+                                                dlvr_parts = read_numail(dlvr)
+                                                if dlvr_parts[0] != "250":
+                                                    raise
+
+                                                writer.write(MessageLine(f"250 6.5.1 {dlvr_parts[2].split()[0]} Message successfully delivered", message_stack).bytes())
+                                                await writer.drain()
+                                                
+                                                update_receiver(upload_status["message"]["messageId"], dlvr_parts[2].split()[0])
+                                                update_sent(upload_status["message"]["messageId"])
+                                            except:
+                                                writer.write(MessageLine(f"450 Unable to connect to \"{message_stack.to_addr}\"", message_stack).bytes())
+                                                await writer.drain()
+                                        else:
+                                            # If sending SMTP email
+                                            writer.write(MessageLine(f"500 6.0.0 SMTP not supported. Unable to connect to \"{message_stack.to_addr}\"", message_stack).bytes())
                                             await writer.drain()
-                                        except:
-                                            writer.write(MessageLine(f"450 Unable to connect to \"{message_stack.to_addr}\"", message_stack).bytes())
-                                            await writer.drain()
-                                    else:
-                                        # If sending SMTP email
-                                        writer.write(MessageLine(f"500 6.0.0 SMTP not supported. Unable to connect to \"{message_stack.to_addr}\"", message_stack).bytes())
-                                        await writer.drain()
 
-                                    await request.close()
-                                    break
+                                        await request.close()
+                                        break
                             else:
                                 writer.write(MessageLine(f"550 Not authorized to send from this address", message_stack).bytes())
                                 await writer.drain()
             elif check_command(trim_message, "ATCH", 1):
                 params = re.search(r"^ATCH UPLOAD(:(.*))*$", trim_message, re.MULTILINE)
                 params_attch = re.search(r"^ATCH FILE: *(\S+) +(\S+)$", trim_message, re.MULTILINE)
+                params_info = re.search(r"^ATCH RETRIEVE INFO: *(\S+)$", trim_message, re.MULTILINE)
                 if params:
                     if message_stack.client_username:
                         expire = expire_on_retrieve = None
@@ -407,6 +424,25 @@ async def numail_parse(reader, writer, message_stack):
                     message_stack.attachments.append(Attachment(id=attch_id, from_server=attch_domain))
                     writer.write(MessageLine(f"250 Attachment {attch_id} attached", message_stack).bytes())
                     await writer.drain()
+                elif params_info:
+                    attch_id = params_info.group(1).strip()
+                    attch_info = retreive_attachment(attch_id)
+                    if attch_info:
+                        writer.write(MessageLine(f"250-Info retrieved", message_stack).bytes())
+                        if attch_info["attachmentExpire"]:
+                            attch_expr = attch_info["attachmentExpire"]
+                        else:
+                            attch_expr = ""
+                        writer.write(MessageLine(f"250-expire={attch_expr}", message_stack).bytes())
+                        if attch_info["attachmentExpireRet"]:
+                            attch_delete = "TRUE"
+                        else:
+                            attch_delete = "FALSE"
+                        writer.write(MessageLine(f"250 expireOnRetrieve={attch_delete}", message_stack).bytes())
+                        await writer.drain()
+                    else:
+                        writer.write(MessageLine(f"500 6.6.1 Unable to retreive attachment", message_stack).bytes())
+                        await writer.drain()
                 else:
                     writer.write(MessageLine(f"504 \"{trim_message[5:]}\" not implemented", message_stack).bytes())
                     await writer.drain()

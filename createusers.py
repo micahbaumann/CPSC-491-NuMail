@@ -1,6 +1,7 @@
-from db.db import createUser, check_user_pwd, get_mailbox, create_mailbox, search_mailbox, receive_message
+from db.db import createUser, check_user_pwd, get_mailbox, create_mailbox, search_mailbox, receive_message, send_message, msg_db_type, update_receiver, update_sent
 from errors.nuerrors import NuMailError
 from server.message.Attachment import Attachment
+import uuid
 
 try:
     print(createUser(
@@ -57,21 +58,73 @@ except NuMailError as e:
 except Exception as e:
     print(e)
 
-try:
-    print(receive_message(
-        from_addr = "micah@numail.local",
-        to_addr = "micah@other.local",
-        msgt = 0,
-        data = "fdasadfasdjkl;afsd",
-        readConfirm = False
-    ))
-except NuMailError as e:
-    print("NuMail Error:")
-    print(e)
-except Exception as e:
-    print("Exception:")
-    print(e)
+# try:
+#     print(receive_message(
+#         from_addr = "micah@numail.local",
+#         to_addr = "micah@other.local",
+#         msgt = 0,
+#         data = "fdasadfasdjkl;afsd",
+#         readConfirm = False
+#     ))
+# except NuMailError as e:
+#     print("NuMail Error:")
+#     print(e)
+# except Exception as e:
+#     print("Exception:")
+#     print(e)
 
+# try:
+#     print(msg_db_type("MAIL"))
+# except NuMailError as e:
+#     print("NuMail Error:")
+#     print(e)
+# except Exception as e:
+#     print("Exception:")
+#     print(e)
+
+
+
+# import createuserstxt
+# try:
+#     attachments = [
+#         Attachment(data=createuserstxt.image, expire="1654268545425186", expireOnRetrieve=True)
+#     ]
+#     send_status = send_message(
+#         from_addr = "micah@numail.local",
+#         to_addr = "micah@other.local",
+#         msgt = 0,
+#         data = "fdasadfasdjkl;afsd",
+#         readConfirm = False,
+#         receiver_id = None,
+#         attachments = attachments
+#     )
+#     print(send_status)
+# except NuMailError as e:
+#     print("NuMail Error:")
+#     print(e)
+# except Exception as e:
+#     print("Exception:")
+#     print(e)
+
+
+# try:
+#     print(update_receiver(send_status["message"]["messageId"], str(uuid.uuid1().hex) + "_TEST"))
+# except NuMailError as e:
+#     print("NuMail Error:")
+#     print(e)
+# except Exception as e:
+#     print("Exception:")
+#     print(e)
+
+
+# try:
+#     print(update_sent(send_status["message"]["messageId"]))
+# except NuMailError as e:
+#     print("NuMail Error:")
+#     print(e)
+# except Exception as e:
+#     print("Exception:")
+#     print(e)
 
 
 

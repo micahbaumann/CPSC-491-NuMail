@@ -5,7 +5,6 @@ import uuid
 
 from logger.logger import server_log
 from errors.nuerrors import NuMailError
-from server.message.Attachment import Attachment
 
 # def get_db():
 #     with contextlib.closing(sqlite3.connect("./sqlite/numail.db")) as db:
@@ -89,7 +88,7 @@ def search_mailbox(mb_name: str) -> dict | bool:
         else:
             return False
 
-def receive_message(from_addr: str, to_addr: str, msgt: int, data: str, readConfirm: bool = False, attachments: list = []) -> bool | list:
+def receive_message(from_addr: str, to_addr: str, msgt: int, data: str, readConfirm: bool = False, attachments: list = []) -> bool | dict:
     with get_db() as db:
         unique = False
         while not unique:
@@ -115,12 +114,7 @@ def receive_message(from_addr: str, to_addr: str, msgt: int, data: str, readConf
         else:
             return False
 
-def send_message(from_addr: str, to_addr: str, msgt: int, data: str, receiver_id: str, readConfirm: bool = False, attachments: list = []) -> bool | list:
-    if len(attachments) > 0:
-        allAttch = all(isinstance(item, Attachment) for item in attachments)
-        if not allAttch:
-            return False
-
+def send_message(from_addr: str, to_addr: str, msgt: int, data: str, receiver_id: str | None = None, readConfirm: bool = False, attachments: list = []) -> bool | dict:
     with get_db() as db:
         unique = False
         while not unique:
@@ -135,16 +129,62 @@ def send_message(from_addr: str, to_addr: str, msgt: int, data: str, receiver_id
             db.commit()
             msg_exists = db.execute("SELECT * FROM Messages WHERE messageId = ?", (msgid,)).fetchone()
             if msg_exists:
+                attch_exists = []
                 for attachment in attachments:
-                    db.execute("INSERT INTO Messages(attachmentId, attachmentMessage, attachmentLocation, attachmentExpire, attachmentExpireRet) VALUES (?, ?, ?, ?, ?)", (attachment.id, msgid, attachment.location, attachment.expire, attachment.expireOnRetrieve))
-                    db.commit()
+                    try:
+                        db.execute("INSERT INTO Attachments(attachmentId, attachmentMessage, attachmentLocation, attachmentExpire, attachmentExpireRet, attachmentName) VALUES (?, ?, ?, ?, ?, ?)", (attachment.id, msgid, str(attachment.location), attachment.expire, attachment.expireOnRetrieve, attachment.name))
+                        db.commit()
 
-                    attch_exists = db.execute("SELECT * FROM Messages WHERE messageId = ?", (msgid,)).fetchone()
-                    if not attch_exists:
+                        attchmt = db.execute("SELECT * FROM Attachments WHERE attachmentId = ?", (attachment.id,)).fetchone()
+                        if not attchmt:
+                            return False
+                        
+                        attch_exists.append(dict(attchmt))
+                    except Exception as e:
+                        print(e)
                         return False
 
-                return dict(msg_exists)
+                return {
+                    "message": dict(msg_exists),
+                    "attachments": attch_exists
+                }
             else:
                 return False
         else:
+            return False
+
+def update_receiver(message: str, receiver: str) -> bool:
+    with get_db() as db:
+        try:
+            db.execute("UPDATE Messages SET receiverId = ? WHERE messageId = ?", (receiver, message))
+            db.commit()
+            return True
+        except:
+            return False
+
+def update_sent(message: str, sent: bool = True) -> bool:
+    with get_db() as db:
+        try:
+            db.execute("UPDATE Messages SET messageSent = ? WHERE messageId = ?", (sent, message))
+            db.commit()
+            return True
+        except:
+            return False
+
+def msg_db_type(type: str) -> int | bool:
+    if type.upper() == "MAIL":
+        return 0
+    else:
+        return False
+
+def retreive_attachment(id: str) -> bool | dict:
+    with get_db() as db:
+        try:
+            attchmt = db.execute("SELECT * FROM Attachments WHERE attachmentId = ?", (id,)).fetchone()
+
+            if not attchmt:
+                return False
+            else:
+                return dict(attchmt)
+        except:
             return False

@@ -64,15 +64,18 @@ CREATE TABLE Messages (
     messageTo VARCHAR(100) NOT NULL,
     messageContent TEXT NOT NULL,
     readConfirm BOOLEAN NOT NULL DEFAULT 0,
+    messageSent BOOLEAN NOT NULL DEFAULT 0,
     FOREIGN KEY (messageMailbox) REFERENCES Mailboxes(mailboxId)
 );
 
 CREATE TABLE Attachments (
     attachmentId VARCHAR(255) PRIMARY KEY NOT NULL UNIQUE,
+    attachmentIdReceive VARCHAR(255) DEFAULT NULL,
     attachmentMessage VARCHAR(255) NOT NULL,
     attachmentLocation VARCHAR(255),
     attachmentExpire INTEGER DEFAULT NULL,
     attachmentExpireRet BOOLEAN NOT NULL DEFAULT 1,
+    attachmentName VARCHAR(255) NOT NULL,
     FOREIGN KEY (attachmentMessage) REFERENCES Messages(messageId)
 );
 

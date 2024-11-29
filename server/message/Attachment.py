@@ -71,8 +71,8 @@ class Attachment:
                             else:
                                 raise NuMailError(code="7.9.0", message=f"NuMail attachment error")
                             
-                            with open("attch_output_2.txt", "w") as file:
-                                file.write(f"'{payload_match[0].strip()}'\r\n'{payload_match[1].strip()}")
+                            # with open("attch_output_2.txt", "w") as file:
+                            #     file.write(f"'{payload_match[0].strip()}'\r\n'{payload_match[1].strip()}")
 
                             if i == 0:
                                 self.data_raw = payload

@@ -60,6 +60,9 @@ Delivery Error:
     6.5.2 No to address found or invalid to address
     6.5.3 No body address found or invalid body
     6.5.4 No message type found
+Attachment Error:
+    6.6.0 Attachment Error
+    6.6.1 Unable to retreive attachment
 """
 
 error_log = NuMailLogger("error.log")
