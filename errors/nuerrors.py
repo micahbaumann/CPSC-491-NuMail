@@ -45,6 +45,8 @@ NuMail Attachment Errors
 """
 NuMail Protocol Errors:
     6.0.0 Catch all error
+    6.0.1 SMTP not supported
+    6.0.2 NuMail not supported
 Mailbox status:
     6.2.0 Mailbox error
     6.2.1 Mailbox ok and receiving message type

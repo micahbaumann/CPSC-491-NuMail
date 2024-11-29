@@ -55,6 +55,7 @@ CREATE TABLE Mailboxes (
 
 CREATE TABLE Messages (
     messageId VARCHAR(255) PRIMARY KEY NOT NULL UNIQUE,
+    receiverId VARCHAR(255) DEFAULT NULL,
     messageMailbox INTEGER NOT NULL,
     messageTimestamp DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     messageType INTEGER NOT NULL DEFAULT 0,
@@ -70,6 +71,8 @@ CREATE TABLE Attachments (
     attachmentId VARCHAR(255) PRIMARY KEY NOT NULL UNIQUE,
     attachmentMessage VARCHAR(255) NOT NULL,
     attachmentLocation VARCHAR(255),
+    attachmentExpire INTEGER DEFAULT NULL,
+    attachmentExpireRet BOOLEAN NOT NULL DEFAULT 1,
     FOREIGN KEY (attachmentMessage) REFERENCES Messages(messageId)
 );
 

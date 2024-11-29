@@ -5,6 +5,7 @@ import uuid
 
 from logger.logger import server_log
 from errors.nuerrors import NuMailError
+from server.message.Attachment import Attachment
 
 # def get_db():
 #     with contextlib.closing(sqlite3.connect("./sqlite/numail.db")) as db:
@@ -113,4 +114,37 @@ def receive_message(from_addr: str, to_addr: str, msgt: int, data: str, readConf
                 return False
         else:
             return False
+
+def send_message(from_addr: str, to_addr: str, msgt: int, data: str, receiver_id: str, readConfirm: bool = False, attachments: list = []) -> bool | list:
+    if len(attachments) > 0:
+        allAttch = all(isinstance(item, Attachment) for item in attachments)
+        if not allAttch:
+            return False
+
+    with get_db() as db:
+        unique = False
+        while not unique:
+            msgid = uuid.uuid1().hex
+            msg_exists = db.execute("SELECT * FROM Messages WHERE messageId = ?", (msgid,)).fetchone()
+            if not msg_exists:
+                unique = True
         
+        to_mb = search_mailbox(to_addr.split('@')[0])
+        if to_mb:
+            db.execute("INSERT INTO Messages(messageId, receiverId, messageMailbox, messageType, messageFrom, messageTo, messageContent, readConfirm, isSent) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", (msgid, receiver_id, to_mb["mailboxId"], msgt, from_addr, to_addr, data, readConfirm, True))
+            db.commit()
+            msg_exists = db.execute("SELECT * FROM Messages WHERE messageId = ?", (msgid,)).fetchone()
+            if msg_exists:
+                for attachment in attachments:
+                    db.execute("INSERT INTO Messages(attachmentId, attachmentMessage, attachmentLocation, attachmentExpire, attachmentExpireRet) VALUES (?, ?, ?, ?, ?)", (attachment.id, msgid, attachment.location, attachment.expire, attachment.expireOnRetrieve))
+                    db.commit()
+
+                    attch_exists = db.execute("SELECT * FROM Messages WHERE messageId = ?", (msgid,)).fetchone()
+                    if not attch_exists:
+                        return False
+
+                return dict(msg_exists)
+            else:
+                return False
+        else:
+            return False

@@ -352,32 +352,19 @@ async def numail_parse(reader, writer, message_stack):
                                             dlvr_parts = read_numail(dlvr)
                                             if dlvr_parts[0] != "250":
                                                 raise
+                                            
+
+                                            
 
                                             writer.write(MessageLine(f"250 6.5.1 {dlvr_parts[2].split()[0]} Message successfully delivered", message_stack).bytes())
                                             await writer.drain()
                                         except:
-                                            writer.write(MessageLine(f"450 Unable to connect to  \"{message_stack.to_addr}\"", message_stack).bytes())
+                                            writer.write(MessageLine(f"450 Unable to connect to \"{message_stack.to_addr}\"", message_stack).bytes())
                                             await writer.drain()
                                     else:
-
-
-
-
-
-
-                                        pass # If sending SMTP email
-
-
-
-
-
-
-
-
-
-
-
-                                    
+                                        # If sending SMTP email
+                                        writer.write(MessageLine(f"500 6.0.0 SMTP not supported. Unable to connect to \"{message_stack.to_addr}\"", message_stack).bytes())
+                                        await writer.drain()
 
                                     await request.close()
                                     break

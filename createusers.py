@@ -75,35 +75,35 @@ except Exception as e:
 
 
 
-import base64
-def safe_b64decode(b64_string):
-        padding_needed = len(b64_string) % 4
-        if padding_needed:
-            b64_string += '=' * (4 - padding_needed)
-        return base64.b64decode(b64_string)
-def create_mime_attachment(file_path, mime_type="application/octet-stream"):
-    # Extract file name
-    file_name = file_path.split("/")[-1]
+# import base64
+# def safe_b64decode(b64_string):
+#         padding_needed = len(b64_string) % 4
+#         if padding_needed:
+#             b64_string += '=' * (4 - padding_needed)
+#         return base64.b64decode(b64_string)
+# def create_mime_attachment(file_path, mime_type="application/octet-stream"):
+#     # Extract file name
+#     file_name = file_path.split("/")[-1]
 
-    # Read and encode the file in base64
-    with open(file_path, "rb") as file:
-        file_content = base64.b64encode(file.read().strip()).decode("utf-8")
+#     # Read and encode the file in base64
+#     with open(file_path, "rb") as file:
+#         file_content = base64.b64encode(file.read().strip()).decode("utf-8")
     
-    with open("f_output.jpeg", "w") as file:
-        file.write(Attachment.safe_b64decode(file_content).decode("utf-8"))
+#     with open("f_output.jpeg", "w") as file:
+#         file.write(Attachment.safe_b64decode(file_content).decode("utf-8"))
 
-    # Create MIME headers
-    mime_headers = f"""\r\nContent-Type: {mime_type}; name="{file_name}"\r\nContent-Disposition: attachment; filename="{file_name}"\r\nContent-Transfer-Encoding: base64\r\n\r\n"""
-    # Combine headers and encoded content
-    mime_message = mime_headers + file_content
-    return mime_message
+#     # Create MIME headers
+#     mime_headers = f"""\r\nContent-Type: {mime_type}; name="{file_name}"\r\nContent-Disposition: attachment; filename="{file_name}"\r\nContent-Transfer-Encoding: base64\r\n\r\n"""
+#     # Combine headers and encoded content
+#     mime_message = mime_headers + file_content
+#     return mime_message
 
-# Example usage
-file_path = "test_file.jpeg"  # Replace with your file path
-mime_data = create_mime_attachment(file_path, "image/jpeg")
+# # Example usage
+# file_path = "test_file.jpeg"  # Replace with your file path
+# mime_data = create_mime_attachment(file_path, "image/jpeg")
 
-# Print the MIME-formatted data
-with open("mime_output.txt", "w") as file:
-    file.write(mime_data)
+# # Print the MIME-formatted data
+# with open("mime_output.txt", "w") as file:
+#     file.write(mime_data)
 
-print(list(Attachment(data=mime_data)))
+# print(list(Attachment(data=mime_data)))
