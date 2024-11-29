@@ -242,10 +242,24 @@ async def numail_parse(reader, writer, message_stack):
                                 to_addr = message_stack.to_addr,
                                 msgt = int(msg_db_type(message_stack.numail["message_type"].upper())),
                                 data = message_stack.payload,
-                                readConfirm = False,
+                                readConfirm = False, # DO READ CONFIRMAION here and in send
                                 attachments = message_stack.attachments
                             )
-                            
+
+
+
+
+
+
+                            # DO READ CONFIRMAION
+
+
+
+
+
+
+
+
                             if upload_status:
                                 writer.write(MessageLine(f"250 6.5.1 {upload_status["messageId"]} Message successfully delivered", message_stack).bytes())
                                 await writer.drain()
