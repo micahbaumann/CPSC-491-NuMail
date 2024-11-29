@@ -9,7 +9,7 @@ from logger.logger import server_log
 from config.config import server_settings
 from server.message.modules.auth import mod_auth
 from server.message.modules.chck import mod_chck
-from db.db import get_mailbox, send_message, msg_db_type, update_receiver, retreive_attachment, update_sent, retreive_attachment_file, update_retrieve
+from db.db import get_mailbox, send_message, msg_db_type, update_receiver, retreive_attachment, update_sent, retreive_attachment_file, update_retrieve, receive_message
 from server.message.modules.data import mod_data
 from server.client.dns import resolve_dns, is_ip, decode_txt
 from server.client.reader import read_numail, init_numail, NuMailRequest
@@ -237,59 +237,21 @@ async def numail_parse(reader, writer, message_stack):
                             return False
                         
                         if to_parts[1] == server_settings["visible_domain"] or part_equals(server_settings["domain"], to_mx) or to_parts[1] == server_settings["domain"] or to_parts[1] == server_settings["public_ip"] or to_parts[1] == server_settings["ip"]:
+                            upload_status = receive_message(
+                                from_addr = message_stack.from_addr,
+                                to_addr = message_stack.to_addr,
+                                msgt = int(msg_db_type(message_stack.numail["message_type"].upper())),
+                                data = message_stack.payload,
+                                readConfirm = False,
+                                attachments = message_stack.attachments
+                            )
                             
-
-                            
-                            writer.write(MessageLine(f"250 6.5.1 5246148245 Message successfully delivered TEST", message_stack).bytes())
-                            await writer.drain()
-                             # Being sent to this server ***ADD PARTS_EQUALS EVERYWHERE ELSE REQUIRED
-                            
-
-
-
-                            # error_exit = False
-                            # if is_ip(to_parts[1]):
-                            #     from_real_ip = [to_parts[1]]
-                            # else:
-                            #     try:
-                            #         dns_results = await resolve_dns(to_parts[1], ["MX"])
-                            #         mx = sorted(dns_results["MX"], key=lambda x: x["priority"])
-                                    
-                            #         from_real_ip = []
-                            #         for domn in mx:
-                            #             try:
-                            #                 dns_a = await resolve_dns(domn["host"], ["A"])
-                            #             except:
-                            #                 continue
-                            #             from_real_ip.append(dns_a["host"])
-                                    
-                            #         if len(from_real_ip) == 0:
-                            #             raise NuMailError(code="7.7.2", message=f"NuMail DNS resolver error, \"no valid mail servers\"" )
-
-                            #     except NuMailError as e:
-                            #         error_exit = True
-                            #         parts = NuMailError.codeParts(e.code)
-                            #         if parts and parts[1] == "7":
-                            #             # Implement errors for DNS errors
-                            #             if parts[2] == "3" or parts[2] == "2":
-                            #                 writer.write(MessageLine(f"520 6.4.2 Error connecting to server", message_stack).bytes())
-                            #                 await writer.drain()
-                            #             else:
-                            #                 writer.write(MessageLine(f"451 6.4.2 Error connecting to server", message_stack).bytes())
-                            #                 await writer.drain()
-                            #         else:
-                            #             writer.write(MessageLine(f"451 Requested action aborted: local error in processing", message_stack).bytes())
-                            #             await writer.drain()
-                            #     except Exception as e:
-                            #         error_exit = True
-                            #         writer.write(MessageLine(f"451 Requested action aborted: local error in processing", message_stack).bytes())
-                            #         await writer.drain()
-                            
-                            # if not error_exit:
-                            #     if from_real_ip == server_settings["public_ip"] or from_real_ip == server_settings["ip"]:
-                            #         pass # from this server. Must figure out if it's sending or receiving
-                            #     else:
-                            #         pass # from outside. Receiving
+                            if upload_status:
+                                writer.write(MessageLine(f"250 6.5.1 {upload_status["messageId"]} Message successfully delivered", message_stack).bytes())
+                                await writer.drain()
+                            else:
+                                writer.write(MessageLine(f"550 Unable to deliver message", message_stack).bytes())
+                                await writer.drain()
                         else:
                             # Being sent from this server
                             if message_stack.client_username:
@@ -361,7 +323,6 @@ async def numail_parse(reader, writer, message_stack):
                                                 for attachment in message_stack.attachments:
                                                     # Send attachment
                                                     atch = await request.send(f"ATCH FILE: {attachment.id} {message_stack.from_addr.split('@')[1]}")
-                                                    print(atch)
                                                     if read_numail(atch)[0] != "250":
                                                         raise
 

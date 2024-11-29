@@ -64,7 +64,8 @@ except Exception as e:
 #         to_addr = "micah@other.local",
 #         msgt = 0,
 #         data = "fdasadfasdjkl;afsd",
-#         readConfirm = False
+#         readConfirm = False,
+#         attachments=[]
 #     ))
 # except NuMailError as e:
 #     print("NuMail Error:")

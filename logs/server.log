@@ -5430,3 +5430,39 @@ NuMail Server Error 7.9.0: NuMail attachment error1
 [2024-11-29 01:22:11.086477] [message] Shutdown 127.0.0.1 port 7777
 [2024-11-29 01:22:13.049123] [message] Shutting down
 [2024-11-29 01:22:13.049425] [message] Shutdown 127.0.0.1 port 5555
+[2024-11-29 02:53:50.066789] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-29 02:53:50.067192] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-29 02:53:50.067260] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-29 02:53:58.703152] [message] Server listening on 127.0.0.1 port 5555
+[2024-11-29 02:54:07.950533] [message] New connection from 127.0.0.1 port 40616
+[2024-11-29 02:54:08.141446] [message] New connection from 127.0.0.1 port 57078
+[2024-11-29 02:54:08.144817] [request_error] Connection 127.0.0.1 port 57078:
+Error binding parameter 8: type 'list' is not supported
+[2024-11-29 02:54:08.144967] [message] Connection 127.0.0.1 port 57078 closed
+[2024-11-29 02:54:08.145688] [message] Connection 127.0.0.1 port 40616 closed
+[2024-11-29 02:55:10.959490] [message] New connection from 127.0.0.1 port 60784
+[2024-11-29 02:55:11.143596] [message] New connection from 127.0.0.1 port 56742
+[2024-11-29 02:55:11.146330] [request_error] Connection 127.0.0.1 port 56742:
+Error binding parameter 8: type 'list' is not supported
+[2024-11-29 02:55:11.146481] [message] Connection 127.0.0.1 port 56742 closed
+[2024-11-29 02:55:11.146743] [message] Connection 127.0.0.1 port 60784 closed
+[2024-11-29 02:56:20.188818] [message] Shutting down
+[2024-11-29 02:56:20.189078] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-29 02:56:20.189206] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-29 02:56:20.189330] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-29 02:56:22.607224] [message] Shutting down
+[2024-11-29 02:56:22.607740] [message] Shutdown 127.0.0.1 port 5555
+[2024-11-29 02:56:23.708285] [message] Server listening on 127.0.0.1 port 5555
+[2024-11-29 02:56:28.060736] [message] Server listening on 127.0.0.1 port 7777
+[2024-11-29 02:56:28.060826] [message] Server listening on 127.0.0.1 port 7778
+[2024-11-29 02:56:28.060891] [message] Server listening on 127.0.0.1 port 7779
+[2024-11-29 02:56:47.102535] [message] New connection from 127.0.0.1 port 47314
+[2024-11-29 02:56:47.298779] [message] New connection from 127.0.0.1 port 48640
+[2024-11-29 02:56:47.310116] [message] Connection 127.0.0.1 port 48640 closed
+[2024-11-29 02:56:47.310197] [message] Connection 127.0.0.1 port 47314 closed
+[2024-11-29 03:00:28.063077] [message] Shutting down
+[2024-11-29 03:00:28.063533] [message] Shutdown 127.0.0.1 port 7777
+[2024-11-29 03:00:28.063772] [message] Shutdown 127.0.0.1 port 7778
+[2024-11-29 03:00:28.063991] [message] Shutdown 127.0.0.1 port 7779
+[2024-11-29 03:00:30.142882] [message] Shutting down
+[2024-11-29 03:00:30.143346] [message] Shutdown 127.0.0.1 port 5555

@@ -3,6 +3,7 @@ import contextlib
 import bcrypt
 import uuid
 import base64
+import json
 
 from logger.logger import server_log
 from errors.nuerrors import NuMailError
@@ -100,15 +101,13 @@ def receive_message(from_addr: str, to_addr: str, msgt: int, data: str, readConf
         
         to_mb = search_mailbox(to_addr.split('@')[0])
         if to_mb:
-            db.execute("INSERT INTO Messages(messageId, messageMailbox, messageType, messageFrom, messageTo, messageContent, readConfirm) VALUES (?, ?, ?, ?, ?, ?, ?)", (msgid, to_mb["mailboxId"], msgt, from_addr, to_addr, data, readConfirm))
+            attch = []
+            for attachment in attachments:
+                attch.append([attachment.id, attachment.from_server])
+            db.execute("INSERT INTO Messages(messageId, messageMailbox, messageType, messageFrom, messageTo, messageContent, readConfirm, messageAttachments) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", (msgid, to_mb["mailboxId"], msgt, from_addr, to_addr, data, readConfirm, json.dumps(attch)))
             db.commit()
             msg_exists = db.execute("SELECT * FROM Messages WHERE messageId = ?", (msgid,)).fetchone()
             if msg_exists:
-
-
-                # handle attachments now
-
-
                 return dict(msg_exists)
             else:
                 return False
