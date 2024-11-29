@@ -76,6 +76,7 @@ CREATE TABLE Attachments (
     attachmentExpire INTEGER DEFAULT NULL,
     attachmentExpireRet BOOLEAN NOT NULL DEFAULT 1,
     attachmentName VARCHAR(255) NOT NULL,
+    attachmentRetrieved BOOLEAN NOT NULL DEFAULT 0,
     FOREIGN KEY (attachmentMessage) REFERENCES Messages(messageId)
 );
 

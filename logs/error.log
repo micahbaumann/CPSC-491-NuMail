@@ -549,3 +549,5 @@
 [2024-11-28 22:05:01.994554] [error] NuMail Server Error 7.5.1: Mailbox "micah" already exists
 [2024-11-28 22:05:08.669380] [error] NuMail Server Error 7.4.1: User "micah" already exists
 [2024-11-28 22:05:08.841435] [error] NuMail Server Error 7.5.1: Mailbox "micah" already exists
+[2024-11-29 01:00:19.262705] [error] NuMail Server Error 7.6.1: Cannot connect to server
+[2024-11-29 01:10:02.845385] [error] NuMail Server Error 7.6.1: Cannot connect to server

@@ -1,5 +1,6 @@
 import asyncio
 import re
+import time
 
 from server.message.MessageLine import MessageLine
 from server.message.NuMailMessage import NuMailMessage
@@ -8,7 +9,7 @@ from logger.logger import server_log
 from config.config import server_settings
 from server.message.modules.auth import mod_auth
 from server.message.modules.chck import mod_chck
-from db.db import get_mailbox, send_message, msg_db_type, update_receiver, retreive_attachment, update_sent
+from db.db import get_mailbox, send_message, msg_db_type, update_receiver, retreive_attachment, update_sent, retreive_attachment_file, update_retrieve
 from server.message.modules.data import mod_data
 from server.client.dns import resolve_dns, is_ip, decode_txt
 from server.client.reader import read_numail, init_numail, NuMailRequest
@@ -391,6 +392,7 @@ async def numail_parse(reader, writer, message_stack):
                 params = re.search(r"^ATCH UPLOAD(:(.*))*$", trim_message, re.MULTILINE)
                 params_attch = re.search(r"^ATCH FILE: *(\S+) +(\S+)$", trim_message, re.MULTILINE)
                 params_info = re.search(r"^ATCH RETRIEVE INFO: *(\S+)$", trim_message, re.MULTILINE)
+                params_retrieve = re.search(r"^ATCH RETRIEVE: *(\S+)$", trim_message, re.MULTILINE)
                 if params:
                     if message_stack.client_username:
                         expire = expire_on_retrieve = None
@@ -440,6 +442,40 @@ async def numail_parse(reader, writer, message_stack):
                             attch_delete = "FALSE"
                         writer.write(MessageLine(f"250 expireOnRetrieve={attch_delete}", message_stack).bytes())
                         await writer.drain()
+                    else:
+                        writer.write(MessageLine(f"500 6.6.1 Unable to retreive attachment", message_stack).bytes())
+                        await writer.drain()
+                elif params_retrieve:
+                    attch_id = params_retrieve.group(1).strip()
+                    attch_info = retreive_attachment(attch_id)
+                    if attch_info:
+                        if attch_info["attachmentExpire"] and int(attch_info["attachmentExpire"]) <= int(time.time()):
+                            writer.write(MessageLine(f"500 6.6.2 Attachment Expired", message_stack).bytes())
+                            await writer.drain()
+                        elif attch_info["attachmentRetrieved"]:
+                            writer.write(MessageLine(f"500 6.6.1 Unable to retreive attachment", message_stack).bytes())
+                            await writer.drain()
+                        else:
+                            attch_file = retreive_attachment_file(attch_id)
+                            if attch_file != False:
+                                if len(attch_file) > 0:
+                                    writer.write(MessageLine(f"250-Attachment retrieved", message_stack).bytes())
+                                    writer.write(MessageLine(f"250-Content-Type: image/jpeg; name=\"{attch_info["attachmentName"]}\"", message_stack).bytes())
+                                    writer.write(MessageLine(f"250-Content-Disposition: attachment; filename=\"{attch_info["attachmentName"]}\"", message_stack).bytes())
+                                    writer.write(MessageLine(f"250-Content-Transfer-Encoding: base64", message_stack).bytes())
+                                    writer.write(MessageLine(f"250-", message_stack).bytes())
+                                    await writer.drain()
+                                    writer.write(MessageLine(f"250 {attch_file}", message_stack).bytes())
+                                    await writer.drain()
+                                else:
+                                    writer.write(MessageLine(f"250 Attachment retrieved", message_stack).bytes())
+                                    await writer.drain()
+                                
+                                if attch_info["attachmentExpireRet"]:
+                                    update_retrieve(attch_id)
+                            else:
+                                writer.write(MessageLine(f"500 6.6.1 Unable to retreive attachment", message_stack).bytes())
+                                await writer.drain()
                     else:
                         writer.write(MessageLine(f"500 6.6.1 Unable to retreive attachment", message_stack).bytes())
                         await writer.drain()

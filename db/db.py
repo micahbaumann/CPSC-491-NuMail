@@ -2,6 +2,7 @@ import sqlite3
 import contextlib
 import bcrypt
 import uuid
+import base64
 
 from logger.logger import server_log
 from errors.nuerrors import NuMailError
@@ -186,5 +187,32 @@ def retreive_attachment(id: str) -> bool | dict:
                 return False
             else:
                 return dict(attchmt)
+        except:
+            return False
+
+def retreive_attachment_file(id: str) -> bool | str:
+    with get_db() as db:
+        try:
+            attchmt = db.execute("SELECT * FROM Attachments WHERE attachmentId = ?", (id,)).fetchone()
+
+            if not attchmt:
+                return False
+            else:
+                ret = ""
+                path = attchmt["attachmentLocation"]
+                with open(path, "rb") as file:
+                    file_contents = file.read()
+                    encoded = base64.b64encode(file_contents)
+                    ret =  encoded.decode('utf-8')
+                return ret
+        except Exception as e:
+            return False
+
+def update_retrieve(id: str, status: bool = True) -> bool:
+    with get_db() as db:
+        try:
+            db.execute("UPDATE Attachments SET attachmentRetrieved = ? WHERE attachmentId = ?", (status, id))
+            db.commit()
+            return True
         except:
             return False
