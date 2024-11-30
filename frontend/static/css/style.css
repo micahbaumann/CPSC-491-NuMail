@@ -1,0 +1,49 @@
+body {
+    font-family: "Jost", serif;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    width: 100%;
+    padding: 10px;
+    border-bottom: 1px solid black;
+    box-sizing: border-box;
+    display: flex;
+    height: 70px;
+    align-items: center;
+    position: fixed;
+    background-color: white;
+    top: 0;
+}
+
+.header h1 {
+    font-weight: normal;
+    margin: 0;
+}
+
+.main {
+    margin-top: 70px;
+    height: calc(100vh - 70px);
+}
+
+input[type=text], input[type=password] {
+    padding: 7px;
+    border: 2px black solid;
+    outline: none;
+}
+
+button, input[type=button], input[type=submit] {
+    padding: 10px;
+    background-color: black;
+    color: white;
+    border: 2px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+}
+
+button:active, input[type=button]:active, input[type=submit]:active {
+    background-color: white;
+    color: black;
+}
