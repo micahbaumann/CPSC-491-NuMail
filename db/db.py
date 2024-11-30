@@ -57,7 +57,7 @@ def check_user_pwd(user_name: str, password: str) -> bool:
             return bcrypt.checkpw(password.encode('utf-8'), user_pwd[0])
 
 
-def create_mailbox(mb_name: str, user_name: str, mb_type: int = 0, mb_send: bool = False, mb_receive: bool = False) -> None:
+def create_mailbox(mb_name: str, user_name: str, mb_type: int = 0, mb_send: bool = False, mb_receive: bool = False, read_confirm: bool = False) -> None:
     with get_db() as db:
         user_exists = db.execute("SELECT * FROM Users WHERE userName = ?", (user_name,)).fetchone()
         if not user_exists:
@@ -65,7 +65,7 @@ def create_mailbox(mb_name: str, user_name: str, mb_type: int = 0, mb_send: bool
         else:
             mb_exists = db.execute("SELECT * FROM Mailboxes WHERE mbName = ?", (mb_name,)).fetchone()
             if not mb_exists:
-                db.execute("INSERT INTO Mailboxes(mbUser, mbName, mbType, mbSend, mbReceive) VALUES (?, ?, ?, ?, ?)", (user_exists["userId"], mb_name, mb_type, mb_send, mb_receive))
+                db.execute("INSERT INTO Mailboxes(mbUser, mbName, mbType, mbSend, mbReceive, mbReadConf) VALUES (?, ?, ?, ?, ?, ?)", (user_exists["userId"], mb_name, mb_type, mb_send, mb_receive, read_confirm))
                 db.commit()
             else:
                 raise NuMailError(code="7.5.1", message=f"Mailbox \"{mb_name}\" already exists")

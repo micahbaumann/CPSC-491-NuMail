@@ -160,8 +160,11 @@ async def numail_parse(reader, writer, message_stack):
                     writer.write(MessageLine(f"504 \"{trim_message[5:]}\" not implemented", message_stack).bytes())
                     await writer.drain()
             elif check_command(trim_message, "CHCK", 1):
+                confirm = re.search(r"^CHCK READ CONFIRM:(.+)$", trim_message, re.MULTILINE)
                 if len(trim_message) > 17 and trim_message[5:18] == "RECEIVE MAIL:":
                     await mod_chck(reader=reader, writer=writer, message=message_stack, action="RECEIVE", what="MAIL", params=trim_message[18:])
+                elif confirm:
+                    await mod_chck(reader=reader, writer=writer, message=message_stack, action="RDCF", what="", params=confirm.group(1).strip())
                 else:
                     writer.write(MessageLine(f"504 \"{trim_message[5:]}\" not implemented", message_stack).bytes())
                     await writer.drain()
@@ -242,23 +245,9 @@ async def numail_parse(reader, writer, message_stack):
                                 to_addr = message_stack.to_addr,
                                 msgt = int(msg_db_type(message_stack.numail["message_type"].upper())),
                                 data = message_stack.payload,
-                                readConfirm = False, # DO READ CONFIRMAION here and in send
+                                readConfirm = message_stack.read_confirm,
                                 attachments = message_stack.attachments
                             )
-
-
-
-
-
-
-                            # DO READ CONFIRMAION
-
-
-
-
-
-
-
 
                             if upload_status:
                                 writer.write(MessageLine(f"250 6.5.1 {upload_status["messageId"]} Message successfully delivered", message_stack).bytes())
@@ -276,7 +265,7 @@ async def numail_parse(reader, writer, message_stack):
                                     to_addr = message_stack.to_addr,
                                     msgt = int(msg_db_type(message_stack.numail["message_type"].upper())),
                                     data = message_stack.payload,
-                                    readConfirm = False,
+                                    readConfirm = message_stack.read_confirm,
                                     receiver_id = None,
                                     attachments = message_stack.attachments
                                 )
@@ -457,6 +446,10 @@ async def numail_parse(reader, writer, message_stack):
                 else:
                     writer.write(MessageLine(f"504 \"{trim_message[5:]}\" not implemented", message_stack).bytes())
                     await writer.drain()
+            elif check_command(trim_message, "RDCF", 2):
+                message_stack.read_confirm = True
+                writer.write(MessageLine(f"250 6.2.1 Read confirmation set", message_stack).bytes())
+                await writer.drain()
             else:
                 writer.write(MessageLine("500 Command unrecognized", message_stack).bytes())
                 await writer.drain()

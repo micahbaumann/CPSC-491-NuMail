@@ -52,6 +52,8 @@ Mailbox status:
     6.2.1 Mailbox ok and receiving message type
     6.2.2 Mailbox not ok and not receiving message type
     6.2.3 Receiver not using NuMail
+    6.2.4 Mailbox ok and receiving read confirmations
+    6.2.5 Mailbox not ok and not receiving read confirmations
 Network Error:
     6.4.2 Error connecting to server
 Delivery Error:

@@ -20,6 +20,7 @@ class NuMailMessage:
         self.to_addr = ""
         self.payload = ""
         self.attachments = []
+        self.read_confirm = False
     
     """
     Returns the message stack.
@@ -198,6 +199,20 @@ class NuMailMessage:
     """
     def set_attachments(self, attachments:list) -> None:
         self.attachments = attachments
+
+    """
+    Returns the read reaturn
+    """
+    def get_read_confirm(self):
+        return self.read_confirm
+    
+    """
+    Sets the attachments
+    Arguments:
+    attachments: The attachments
+    """
+    def set_read_confirm(self, rr:bool) -> None:
+        self.read_confirm = rr
     
     """
     Returns information in this object in a dictionary
@@ -217,5 +232,6 @@ class NuMailMessage:
             "mods": self.mods,
             "to_addr": self.to_addr,
             "payload": self.payload,
-            "attachments": self.attachments
+            "attachments": self.attachments,
+            "read_confirm": self.read_confirm
         }

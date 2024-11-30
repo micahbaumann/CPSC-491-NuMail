@@ -32,7 +32,8 @@ try:
         user_name="micah",
         mb_name="micah",
         mb_send=True,
-        mb_receive=True
+        mb_receive=True,
+        read_confirm=True
     ))
 except NuMailError as e:
     print(e)
