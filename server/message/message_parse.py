@@ -448,7 +448,11 @@ async def numail_parse(reader, writer, message_stack):
                     await writer.drain()
             elif check_command(trim_message, "RDCF", 2):
                 message_stack.read_confirm = True
-                writer.write(MessageLine(f"250 6.2.1 Read confirmation set", message_stack).bytes())
+                writer.write(MessageLine(f"250 6.2.1 Read confirmation set", message_stack).bytes()) # FIX STATUS CODE
+                await writer.drain()
+            elif check_command(trim_message, "UNSB", 1):
+                # message_stack.unsubscribe = True
+                writer.write(MessageLine(f"250 6.2.1 Unsubscribe Link Set", message_stack).bytes()) # FIX STATUS CODE
                 await writer.drain()
             else:
                 writer.write(MessageLine("500 Command unrecognized", message_stack).bytes())

@@ -21,6 +21,7 @@ class NuMailMessage:
         self.payload = ""
         self.attachments = []
         self.read_confirm = False
+        self.unsubscribe = ""
     
     """
     Returns the message stack.
@@ -201,18 +202,32 @@ class NuMailMessage:
         self.attachments = attachments
 
     """
-    Returns the read reaturn
+    Returns the read return
     """
     def get_read_confirm(self):
         return self.read_confirm
     
     """
-    Sets the attachments
+    Sets the read confirm
     Arguments:
-    attachments: The attachments
+    rr: The boolean read confirm value
     """
     def set_read_confirm(self, rr:bool) -> None:
         self.read_confirm = rr
+    
+    """
+    Returns the unsubscribe link
+    """
+    def get_unsubscribe(self):
+        return self.unsubscribe
+    
+    """
+    Sets the unsubscribe link
+    Arguments:
+    link: The unsubscribe link
+    """
+    def set_unsubscribe(self, link:str) -> None:
+        self.unsubscribe = link
     
     """
     Returns information in this object in a dictionary
@@ -233,5 +248,6 @@ class NuMailMessage:
             "to_addr": self.to_addr,
             "payload": self.payload,
             "attachments": self.attachments,
-            "read_confirm": self.read_confirm
+            "read_confirm": self.read_confirm,
+            "unsubscribe": self.unsubscribe
         }
