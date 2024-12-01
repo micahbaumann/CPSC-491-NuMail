@@ -333,8 +333,8 @@ async def numail_parse(reader, writer, message_stack):
                                                 if read_numail(readconfirm)[0] != "250":
                                                     raise
 
-                                                readconfirm = await request.send("RDCF")
-                                                if read_numail(readconfirm)[0] != "250":
+                                                unsubscribe = await request.send(f"UNSB {message_stack.unsubscribe}")
+                                                if read_numail(unsubscribe)[0] != "250":
                                                     raise
 
 
