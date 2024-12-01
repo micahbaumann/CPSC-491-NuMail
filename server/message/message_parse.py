@@ -328,6 +328,15 @@ async def numail_parse(reader, writer, message_stack):
                                                     atch = await request.send(f"ATCH FILE: {attachment.id} {message_stack.from_addr.split('@')[1]}")
                                                     if read_numail(atch)[0] != "250":
                                                         raise
+                                                
+                                                readconfirm = await request.send("RDCF")
+                                                if read_numail(readconfirm)[0] != "250":
+                                                    raise
+
+                                                readconfirm = await request.send("RDCF")
+                                                if read_numail(readconfirm)[0] != "250":
+                                                    raise
+
 
                                                 dlvr = await request.send(f"DLVR")
                                                 dlvr_parts = read_numail(dlvr)
@@ -448,12 +457,17 @@ async def numail_parse(reader, writer, message_stack):
                     await writer.drain()
             elif check_command(trim_message, "RDCF", 2):
                 message_stack.read_confirm = True
-                writer.write(MessageLine(f"250 6.2.1 Read confirmation set", message_stack).bytes()) # FIX STATUS CODE
+                writer.write(MessageLine(f"250 Read confirmation set", message_stack).bytes())
                 await writer.drain()
             elif check_command(trim_message, "UNSB", 1):
-                # message_stack.unsubscribe = ""
-                writer.write(MessageLine(f"250 6.2.1 Unsubscribe Link Set", message_stack).bytes()) # FIX STATUS CODE
-                await writer.drain()
+                params = re.search(r"^UNSB (\S+)$", trim_message, re.MULTILINE)
+                if params:
+                    message_stack.unsubscribe = params.group(1)
+                    writer.write(MessageLine(f"250 Unsubscribe Link Set", message_stack).bytes())
+                    await writer.drain()
+                else:
+                    writer.write(MessageLine(f"501 Invalid parameters", message_stack).bytes())
+                    await writer.drain()
             else:
                 writer.write(MessageLine("500 Command unrecognized", message_stack).bytes())
                 await writer.drain()
