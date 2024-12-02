@@ -7,7 +7,9 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 @app.route("/")
 def index():
-    return "<p>Hello, World!</p>"
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    return render_template('index.html')
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -35,6 +37,24 @@ def login():
 def logout():
     session.pop('username', None)
     return redirect(url_for('login'))
+
+@app.route('/settings')
+def settings():
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    return "<p>Settings</p>"
+
+@app.route('/sent')
+def sent():
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    return "<p>Sent</p>"
+
+@app.route('/new')
+def new():
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    return "<p>New</p>"
 
 if __name__ == '__main__':
     app.run()

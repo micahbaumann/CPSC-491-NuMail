@@ -9,7 +9,6 @@
     <title>Login - NuMail Client</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">
-    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
 
 </head>
 <body>
@@ -28,23 +27,6 @@
     </div>
 
     <script>
-        // let form = document.getElementById("loginForm");
-        // form.addEventListener("submit", async function(e) {
-        //     e.preventDefault();
-        //     const formData = new FormData(form);
-        //     fetch("/login", {
-        //         method: "POST",
-        //         // Set the FormData instance as the request body
-        //         body: formData,
-        //     }).then(response => {
-        //         if (response.ok) {
-        //             const result = response.json(); // If the server responds with JSON
-        //             console.log('Success:', result);
-        //         } else {
-        //             console.error('Error:', response.status, response.statusText);
-        //         }
-        //     }).catch(error => console.log(error));
-        // });
         let form = document.getElementById("loginForm");
         form.addEventListener("submit", async function(e) {
             e.preventDefault();
