@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Message - NuMail Client</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/view.css') }}">
+
+</head>
+<body>
+    <div class="header">
+        <h1>NuMail Client</h1>
+        <div class="header-right">
+            <a href="/settings" class="button">Settings</a>
+            <a href="/logout" class="button">Logout</a>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-side-by-side">
+            <div class="sidebar">
+                <div class="sidebar-btn">
+                    <a href="/new" class="button">New Message</a>
+                </div>
+                <ul class="sidebar-list">
+                    <li><a href="/" class="sidebar-active">Inbox</a></li>
+                    <li><a href="/sent">Sent</a></li>
+                </ul>
+            </div>
+            <div class="main-content">
+                <div class="main-top">
+                    <button>Delete</button>
+                    <button>Unsubscribe</button>
+                    <button>Download Attachments</button>
+                </div>
+                <div class="info-box">
+                    <p>From: &lt;&gt;</p>
+                </div>
+                <div class="info-box">
+                    <p>To: </p>
+                </div>
+                <div class="info-box">
+                    <p>Subject: </p>
+                </div>
+                <div class="content-box">
+                    <p>This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content This is test content 
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

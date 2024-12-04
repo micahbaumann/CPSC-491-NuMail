@@ -57,10 +57,12 @@ def new():
     return "<p>New</p>"
 
 @app.route('/view/<id>')
-def view(id):
+def view(id=None):
     if 'username' not in session:
         return redirect(url_for('login'))
-    return f"<p>veiw {id}</p>"
+    
+    
+    return render_template('view.html', id=id)
 
 if __name__ == '__main__':
     app.run()
