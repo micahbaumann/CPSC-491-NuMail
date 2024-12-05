@@ -150,8 +150,8 @@ async def numail_parse(reader, writer, message_stack):
                                     client_self_true = True
                                     break
                         if full_email and (client_self_true or full_email.group(2).lower() == self_id_client):
-                            message_stack.set_from_addr(f"{email_domain}@{full_email.group(2).lower()}")
-                            writer.write(MessageLine(f"250 2.1.0 {email_domain}@{full_email.group(2).lower()}... Sender ok", message_stack).bytes())
+                            message_stack.set_from_addr(f"{full_email.group(1).lower()}@{full_email.group(2).lower()}")
+                            writer.write(MessageLine(f"250 2.1.0 {full_email.group(1).lower()}@{full_email.group(2).lower()}... Sender ok", message_stack).bytes())
                             await writer.drain()
                         else:
                             writer.write(MessageLine(f"501 Invalid parameters", message_stack).bytes())
@@ -246,12 +246,15 @@ async def numail_parse(reader, writer, message_stack):
                                 msgt = int(msg_db_type(message_stack.numail["message_type"].upper())),
                                 data = message_stack.payload,
                                 readConfirm = message_stack.read_confirm,
-                                attachments = message_stack.attachments
+                                attachments = message_stack.attachments,
+                                unsubscribe = message_stack.unsubscribe
                             )
 
                             if upload_status:
                                 writer.write(MessageLine(f"250 6.5.1 {upload_status["messageId"]} Message successfully delivered", message_stack).bytes())
                                 await writer.drain()
+
+
                             else:
                                 writer.write(MessageLine(f"550 Unable to deliver message", message_stack).bytes())
                                 await writer.drain()
@@ -267,7 +270,8 @@ async def numail_parse(reader, writer, message_stack):
                                     data = message_stack.payload,
                                     readConfirm = message_stack.read_confirm,
                                     receiver_id = None,
-                                    attachments = message_stack.attachments
+                                    attachments = message_stack.attachments,
+                                    unsubscribe = message_stack.unsubscribe
                                 )
                                 
                                 if not upload_status:
@@ -294,24 +298,30 @@ async def numail_parse(reader, writer, message_stack):
                                             try:
                                                 chck = await request.send(f"CHCK RECEIVE {message_stack.numail["message_type"].upper()}: <{message_stack.to_addr}>")
                                                 if read_numail(chck)[0] != "250":
+                                                    # print(0)
                                                     raise
-
+                                                
+                                                # print(1)
                                                 from_adr = await request.send(f"MAIL FROM: <{message_stack.from_addr}>")
                                                 if read_numail(from_adr)[0] != "250":
                                                     raise
 
+                                                # print(2)
                                                 to_adr = await request.send(f"RCPT TO: {message_stack.to_addr}")
                                                 if read_numail(to_adr)[0] != "250":
                                                     raise
 
+                                                # print(3)
                                                 msgt = await request.send(f"MSGT {message_stack.numail["message_type"].upper()}")
                                                 if read_numail(msgt)[0] != "250":
                                                     raise
 
+                                                # print(4)
                                                 data = await request.send(f"DATA")
                                                 if read_numail(data)[0] != "354":
                                                     raise
 
+                                                # print(5)
                                                 message_split = message_stack.payload.split("\r\n")
                                                 for line in message_split:
                                                     send_line = line
@@ -323,26 +333,32 @@ async def numail_parse(reader, writer, message_stack):
                                                 if read_numail(payload)[0] != "250":
                                                     raise
 
+                                                # print(6)
                                                 for attachment in message_stack.attachments:
                                                     # Send attachment
                                                     atch = await request.send(f"ATCH FILE: {attachment.id} {message_stack.from_addr.split('@')[1]}")
                                                     if read_numail(atch)[0] != "250":
                                                         raise
                                                 
-                                                readconfirm = await request.send("RDCF")
-                                                if read_numail(readconfirm)[0] != "250":
-                                                    raise
+                                                # print(7)
+                                                if message_stack.read_confirm:
+                                                    readconfirm = await request.send("RDCF")
+                                                    if read_numail(readconfirm)[0] != "250":
+                                                        raise
 
-                                                unsubscribe = await request.send(f"UNSB {message_stack.unsubscribe}")
-                                                if read_numail(unsubscribe)[0] != "250":
-                                                    raise
+                                                # print(8)
+                                                if message_stack.unsubscribe:
+                                                    unsubscribe = await request.send(f"UNSB {message_stack.unsubscribe}")
+                                                    if read_numail(unsubscribe)[0] != "250":
+                                                        raise
 
-
+                                                # print(9)
                                                 dlvr = await request.send(f"DLVR")
                                                 dlvr_parts = read_numail(dlvr)
                                                 if dlvr_parts[0] != "250":
                                                     raise
 
+                                                # print(10)
                                                 writer.write(MessageLine(f"250 6.5.1 {dlvr_parts[2].split()[0]} Message successfully delivered", message_stack).bytes())
                                                 await writer.drain()
                                                 

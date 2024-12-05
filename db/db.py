@@ -82,12 +82,54 @@ def get_mailbox(mb_name: str, user_name: str) -> dict | bool:
             else:
                 return False
 
+def get_user_mailboxes(user_name: str) -> dict | bool:
+    with get_db() as db:
+        username_exists = db.execute("SELECT * FROM Users WHERE userName = ?", (user_name,)).fetchone()
+        if not username_exists:
+            return False
+        else:
+            user_exists = db.execute("SELECT * FROM Mailboxes WHERE mbUser = ?", (dict(username_exists)["userId"],)).fetchall()
+            if not user_exists:
+                return False
+        return [dict(row) for row in user_exists]
+
 def get_message(message_id: str) -> dict | bool:
     with get_db() as db:
         message_exists = db.execute("SELECT * FROM Messages WHERE messageId = ?", (message_id,)).fetchone()
         if not message_exists:
             return False
-        return False
+        else:
+            return dict(message_exists)
+
+def get_user_messages(user_id: int | None = None, user_name: str = "") -> dict | bool:
+    with get_db() as db:
+        if user_id != None:
+            user_exists = db.execute("SELECT * FROM Mailboxes WHERE mbUser = ? AND mbReceive = TRUE", (user_id,)).fetchall()
+            if not user_exists:
+                return False
+        elif user_name:
+            username_exists = db.execute("SELECT * FROM Users WHERE userName = ?", (user_name,)).fetchone()
+            if not username_exists:
+                return False
+            else:
+                user_exists = db.execute("SELECT * FROM Mailboxes WHERE mbUser = ? AND mbReceive = TRUE", (dict(username_exists)["userId"],)).fetchall()
+                if not user_exists:
+                    return False
+        else:
+            return False
+        
+        mailboxes = [dict(row) for row in user_exists]
+        messages = []
+        for box in mailboxes:
+            message_exists = db.execute("SELECT * FROM Messages WHERE messageMailbox = ?", (box["mailboxId"],)).fetchall()
+            if message_exists:
+                messages += [dict(row) for row in message_exists]
+        
+        if len(messages) > 0:
+            return messages
+        else:
+            return False
+
 
 def search_mailbox(mb_name: str) -> dict | bool:
     with get_db() as db:
@@ -97,7 +139,7 @@ def search_mailbox(mb_name: str) -> dict | bool:
         else:
             return False
 
-def receive_message(from_addr: str, to_addr: str, msgt: int, data: str, readConfirm: bool = False, attachments: list = []) -> bool | dict:
+def receive_message(from_addr: str, to_addr: str, msgt: int, data: str, readConfirm: bool = False, attachments: list = [], unsubscribe: str = "") -> bool | dict:
     with get_db() as db:
         unique = False
         while not unique:
@@ -111,7 +153,7 @@ def receive_message(from_addr: str, to_addr: str, msgt: int, data: str, readConf
             attch = []
             for attachment in attachments:
                 attch.append([attachment.id, attachment.from_server])
-            db.execute("INSERT INTO Messages(messageId, messageMailbox, messageType, messageFrom, messageTo, messageContent, readConfirm, messageAttachments) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", (msgid, to_mb["mailboxId"], msgt, from_addr, to_addr, data, readConfirm, json.dumps(attch)))
+            db.execute("INSERT INTO Messages(messageId, messageMailbox, messageType, messageFrom, messageTo, messageContent, readConfirm, messageAttachments, messageUnsubscribe) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", (msgid, to_mb["mailboxId"], msgt, from_addr, to_addr, data, readConfirm, json.dumps(attch), unsubscribe))
             db.commit()
             msg_exists = db.execute("SELECT * FROM Messages WHERE messageId = ?", (msgid,)).fetchone()
             if msg_exists:
@@ -121,7 +163,7 @@ def receive_message(from_addr: str, to_addr: str, msgt: int, data: str, readConf
         else:
             return False
 
-def send_message(from_addr: str, to_addr: str, msgt: int, data: str, receiver_id: str | None = None, readConfirm: bool = False, attachments: list = []) -> bool | dict:
+def send_message(from_addr: str, to_addr: str, msgt: int, data: str, receiver_id: str | None = None, readConfirm: bool = False, attachments: list = [], unsubscribe: str = "") -> bool | dict:
     with get_db() as db:
         unique = False
         while not unique:
@@ -130,9 +172,9 @@ def send_message(from_addr: str, to_addr: str, msgt: int, data: str, receiver_id
             if not msg_exists:
                 unique = True
         
-        to_mb = search_mailbox(to_addr.split('@')[0])
-        if to_mb:
-            db.execute("INSERT INTO Messages(messageId, receiverId, messageMailbox, messageType, messageFrom, messageTo, messageContent, readConfirm, isSent) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", (msgid, receiver_id, to_mb["mailboxId"], msgt, from_addr, to_addr, data, readConfirm, True))
+        from_mb = search_mailbox(from_addr.split('@')[0])
+        if from_mb:
+            db.execute("INSERT INTO Messages(messageId, receiverId, messageMailbox, messageType, messageFrom, messageTo, messageContent, readConfirm, isSent, messageUnsubscribe) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (msgid, receiver_id, from_mb["mailboxId"], msgt, from_addr, to_addr, data, readConfirm, True, unsubscribe))
             db.commit()
             msg_exists = db.execute("SELECT * FROM Messages WHERE messageId = ?", (msgid,)).fetchone()
             if msg_exists:
@@ -196,6 +238,18 @@ def retreive_attachment(id: str) -> bool | dict:
         except:
             return False
 
+def retreive_message_attachments(id: str) -> bool | dict:
+    with get_db() as db:
+        try:
+            attchmt = db.execute("SELECT * FROM Attachments WHERE attachmentMessage = ?", (id,)).fetchall()
+
+            if not attchmt:
+                return False
+            else:
+                return [dict(row) for row in attchmt]
+        except:
+            return False
+
 def retreive_attachment_file(id: str) -> bool | str:
     with get_db() as db:
         try:
@@ -218,6 +272,15 @@ def update_retrieve(id: str, status: bool = True) -> bool:
     with get_db() as db:
         try:
             db.execute("UPDATE Attachments SET attachmentRetrieved = ? WHERE attachmentId = ?", (status, id))
+            db.commit()
+            return True
+        except:
+            return False
+        
+def delete_message(id: str):
+    with get_db() as db:
+        try:
+            db.execute("DELETE FROM Messages WHERE messageId = ?", (id,))
             db.commit()
             return True
         except:

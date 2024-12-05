@@ -1,4 +1,4 @@
-from db.db import createUser, check_user_pwd, get_mailbox, create_mailbox, search_mailbox, receive_message, send_message, msg_db_type, update_receiver, update_sent
+from db.db import createUser, check_user_pwd, get_mailbox, create_mailbox, search_mailbox, receive_message, send_message, msg_db_type, update_receiver, update_sent, get_user_messages, get_message, get_user_mailboxes
 from errors.nuerrors import NuMailError
 from server.message.Attachment import Attachment
 import uuid
@@ -11,6 +11,20 @@ try:
         isAdmin=True,
         first_name="Micah",
         last_name="Baumann"
+    ))
+except NuMailError as e:
+    print(e)
+except Exception as e:
+    print(e)
+
+try:
+    print(createUser(
+        user_name="user2",
+        display_name="User 2",
+        password="12345",
+        isAdmin=False,
+        first_name="User",
+        last_name="2"
     ))
 except NuMailError as e:
     print(e)
@@ -41,6 +55,19 @@ except Exception as e:
     print(e)
 
 try:
+    print(create_mailbox(
+        user_name="user2",
+        mb_name="user2",
+        mb_send=True,
+        mb_receive=True,
+        read_confirm=True
+    ))
+except NuMailError as e:
+    print(e)
+except Exception as e:
+    print(e)
+
+try:
     print(get_mailbox(
         user_name="micah",
         mb_name="micah"
@@ -53,6 +80,37 @@ except Exception as e:
 try:
     print(search_mailbox(
         mb_name="micah"
+    ))
+except NuMailError as e:
+    print(e)
+except Exception as e:
+    print(e)
+
+
+try:
+    print(get_user_messages(
+        user_name="micah"
+        # user_id=1
+    ))
+except NuMailError as e:
+    print(e)
+except Exception as e:
+    print(e)
+
+
+try:
+    print(get_message(
+        "3c6a6f92b2e011efb5ac994147454b15"
+    ))
+except NuMailError as e:
+    print(e)
+except Exception as e:
+    print(e)
+
+
+try:
+    print(get_user_mailboxes(
+        "micah"
     ))
 except NuMailError as e:
     print(e)

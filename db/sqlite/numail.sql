@@ -27,17 +27,6 @@ CREATE TABLE UserPermissions (
     FOREIGN KEY (permission) REFERENCES Permissions(permissionsId)
 );
 
--- CREATE TABLE Classes (
---     ClassID INT NOT NULL UNIQUE,
---     CourseCode VARCHAR(15) NOT NULL DEFAULT 'XXX 001',
---     SectionNumber INT NOT NULL,
---     Name VARCHAR(100) DEFAULT "Class",
---     MaximumEnrollment INT DEFAULT 30,
---     WaitlistCount INT DEFAULT 0,
---     WaitlistMaximum INT DEFAUlT 15,
---     PRIMARY KEY (ClassID, SectionNumber)
--- );
-
 CREATE TABLE UserSettings (
     userSettingsId INTEGER PRIMARY KEY NOT NULL UNIQUE,
     FOREIGN KEY (userSettingsId) REFERENCES Users(userId)
@@ -67,6 +56,7 @@ CREATE TABLE Messages (
     readConfirm BOOLEAN NOT NULL DEFAULT 0,
     messageSent BOOLEAN NOT NULL DEFAULT 0,
     messageAttachments TEXT DEFAULT NULL,
+    messageUnsubscribe VARCHAR(255) DEFAULT NULL,
     FOREIGN KEY (messageMailbox) REFERENCES Mailboxes(mailboxId)
 );
 
