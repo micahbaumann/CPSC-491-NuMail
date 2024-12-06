@@ -1,10 +1,14 @@
 import re
 import zipfile
 import io
+import asyncio
 
 from pathlib import Path
 from flask import Flask, render_template, session, redirect, url_for, request, jsonify, abort, send_file
-from db.db import check_user_pwd, get_message, get_user_mailboxes, retreive_message_attachments, delete_message
+from db.db import check_user_pwd, get_message, get_user_mailboxes, retreive_message_attachments, delete_message, send_message, msg_db_type
+from server.client.client import NuMailRequest
+from server.client.reader import init_numail
+from server.message.Attachment import Attachment
 
 app = Flask(__name__)
 
@@ -62,7 +66,7 @@ def new():
     return render_template('new.html', id="", message={}, subject="", message_body="", attachments=[])
 
 @app.route('/send', methods=['POST'])
-def send():
+async def send():
     if 'username' not in session:
         abort(403)
     
@@ -78,12 +82,53 @@ def send():
             "message": "Missing subject, from, to, or body"
         })
     
+    from_email = re.search(r"([a-zA-Z0-9.!#$%&'*+\-/=?^_`{|}~]+)@([a-zA-Z0-9._\-]+)$", from_field.strip(), re.MULTILINE)
+    if not from_email:
+        return jsonify({
+            "status": "error",
+            "message": "Invalid from address"
+        })
+    
+    to_email = re.search(r"([a-zA-Z0-9.!#$%&'*+\-/=?^_`{|}~]+)@([a-zA-Z0-9._\-]+)$", to_field.strip(), re.MULTILINE)
+    if not to_email:
+        return jsonify({
+            "status": "error",
+            "message": "Invalid to address"
+        })
+    
+    normalized_message = message.replace('\r\n', '\n').replace('\n', '\r\n')
+    normalized_message = f"Subject: {subject}\r\n\r\n" + normalized_message
+    
+    attachments = []
     uploaded_files = request.files.getlist('files[]')
     for file in uploaded_files:
+        if len(file.read()) > 0 and file.filename:
+            Attachment
         print(f"Validated file: {file.filename} (Size: {len(file.read())} bytes)")
 
+    try:
+        upload_status = send_message(
+            from_addr = from_email,
+            to_addr = to_email,
+            msgt = 0,
+            data = normalized_message,
+            readConfirm = read_confirm,
+            receiver_id = None,
+            attachments = message_stack.attachments
+        )
+        # request = NuMailRequest("127.0.0.1", 7777)
+        # await request.connect()
+        # await init_numail(request)
+        # print(await request.send(f"MAIL FROM: <micah@numail.local>"))
+    except:
+        return jsonify({
+            "status": "error",
+            "message": "Unable to send. Error in transport."
+        })
+
     return jsonify({
-        "status": "error"
+        "status": "error",
+        "message": "Sucess"
     })
 
 @app.route('/view/<id>')

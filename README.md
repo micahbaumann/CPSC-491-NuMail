@@ -25,3 +25,8 @@ Remember add email spoofing IP checks
 ## Base64 Username and Password
 Username: `bWljYWg=`  
 Password: `MTIzNDU=`
+
+## Start Flask
+```bash
+flask --app ui run --debug
+```
