@@ -5749,3 +5749,44 @@ Error binding parameter 8: type 'list' is not supported
 [2024-12-05 03:10:18.902225] [message] Shutdown 127.0.0.1 port 7779
 [2024-12-05 03:10:21.213844] [message] Shutting down
 [2024-12-05 03:10:21.214495] [message] Shutdown 127.0.0.1 port 5555
+[2024-12-05 23:56:46.955714] [message] Server listening on 127.0.0.1 port 7777
+[2024-12-05 23:56:46.956166] [message] Server listening on 127.0.0.1 port 7778
+[2024-12-05 23:56:46.956238] [message] Server listening on 127.0.0.1 port 7779
+[2024-12-06 00:02:47.572681] [message] Server listening on 127.0.0.1 port 5555
+[2024-12-06 00:06:01.211264] [message] New connection from 127.0.0.1 port 57408
+[2024-12-06 00:06:01.213229] [message] Connection 127.0.0.1 port 57408 closed
+[2024-12-06 00:07:11.410334] [message] New connection from 127.0.0.1 port 46326
+[2024-12-06 00:07:11.411976] [message] Connection 127.0.0.1 port 46326 closed
+[2024-12-06 00:07:56.356712] [message] New connection from 127.0.0.1 port 53718
+[2024-12-06 00:07:56.358092] [message] Connection 127.0.0.1 port 53718 closed
+[2024-12-06 00:08:38.680869] [message] New connection from 127.0.0.1 port 41208
+[2024-12-06 00:08:38.682424] [message] Connection 127.0.0.1 port 41208 closed
+[2024-12-06 00:09:09.396350] [message] New connection from 127.0.0.1 port 37736
+[2024-12-06 00:09:09.398146] [message] Connection 127.0.0.1 port 37736 closed
+[2024-12-06 00:11:01.813647] [message] Shutting down
+[2024-12-06 00:11:01.813855] [message] Shutdown 127.0.0.1 port 7777
+[2024-12-06 00:11:01.813936] [message] Shutdown 127.0.0.1 port 7778
+[2024-12-06 00:11:01.814003] [message] Shutdown 127.0.0.1 port 7779
+[2024-12-06 00:11:02.821946] [message] Server listening on 127.0.0.1 port 7777
+[2024-12-06 00:11:02.822032] [message] Server listening on 127.0.0.1 port 7778
+[2024-12-06 00:11:02.822096] [message] Server listening on 127.0.0.1 port 7779
+[2024-12-06 00:11:06.042884] [message] Shutting down
+[2024-12-06 00:11:06.043390] [message] Shutdown 127.0.0.1 port 5555
+[2024-12-06 00:11:07.078753] [message] Server listening on 127.0.0.1 port 5555
+[2024-12-06 00:11:13.079840] [message] New connection from 127.0.0.1 port 41228
+[2024-12-06 00:11:13.083105] [message] Connection 127.0.0.1 port 41228 closed
+[2024-12-06 00:12:33.374312] [message] New connection from 127.0.0.1 port 49672
+[2024-12-06 00:12:33.375843] [message] Connection 127.0.0.1 port 49672 closed
+[2024-12-06 00:14:09.327557] [message] Shutting down
+[2024-12-06 00:14:09.327746] [message] Shutdown 127.0.0.1 port 5555
+[2024-12-06 00:14:10.429089] [message] Server listening on 127.0.0.1 port 5555
+[2024-12-06 00:14:14.008288] [message] New connection from 127.0.0.1 port 54526
+[2024-12-06 00:14:14.010408] [message] Connection 127.0.0.1 port 54526 closed
+[2024-12-06 00:19:49.814029] [message] New connection from 127.0.0.1 port 42686
+[2024-12-06 00:19:49.828014] [message] Connection 127.0.0.1 port 42686 closed
+[2024-12-06 00:20:34.361826] [message] Shutting down
+[2024-12-06 00:20:34.362338] [message] Shutdown 127.0.0.1 port 5555
+[2024-12-06 00:20:40.422841] [message] Shutting down
+[2024-12-06 00:20:40.423117] [message] Shutdown 127.0.0.1 port 7777
+[2024-12-06 00:20:40.423264] [message] Shutdown 127.0.0.1 port 7778
+[2024-12-06 00:20:40.423386] [message] Shutdown 127.0.0.1 port 7779

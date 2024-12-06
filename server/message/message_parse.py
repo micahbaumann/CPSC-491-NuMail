@@ -149,6 +149,7 @@ async def numail_parse(reader, writer, message_stack):
                                 if domain["host"] == self_id_client:
                                     client_self_true = True
                                     break
+                                
                         if full_email and (client_self_true or full_email.group(2).lower() == self_id_client):
                             message_stack.set_from_addr(f"{full_email.group(1).lower()}@{full_email.group(2).lower()}")
                             writer.write(MessageLine(f"250 2.1.0 {full_email.group(1).lower()}@{full_email.group(2).lower()}... Sender ok", message_stack).bytes())

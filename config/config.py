@@ -13,6 +13,8 @@ server_settings = {
     "send_timeout": 300,
     "dns_timeout": 120,
     "visible_domain": "",
+    "attachment_expire": 3600,
+    "attachment_delete_on_expire": 1,
 }
 
 """

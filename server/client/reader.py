@@ -10,17 +10,21 @@ Arguments:
 request: A NuMailRequest object
 self_id: An ID overide
 """
-async def init_numail(request: NuMailRequest, self_id=None) -> bool:
+async def init_numail(request: NuMailRequest, self_id=None, local_server_settings: dict | None = None) -> bool:
+    if local_server_settings:
+        the_server_settings = local_server_settings
+    else:
+        the_server_settings = server_settings
     ret = False
     this_server = ""
     if self_id:
         this_server = self_id
-    elif server_settings["domain"] != None and server_settings["domain"] != "":
-        this_server = server_settings["domain"]
-    elif server_settings["public_ip"] != None and server_settings["public_ip"] != "":
-        this_server = server_settings["public_ip"]
+    elif the_server_settings["domain"] != None and the_server_settings["domain"] != "":
+        this_server = the_server_settings["domain"]
+    elif the_server_settings["public_ip"] != None and the_server_settings["public_ip"] != "":
+        this_server = the_server_settings["public_ip"]
     else:
-        this_server = server_settings["ip"]
+        this_server = the_server_settings["ip"]
     
     message_send = await request.send(f"EHLO {this_server}")
     message_split = message_send.split("\r\n")
