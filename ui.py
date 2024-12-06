@@ -135,10 +135,10 @@ async def send():
     attachments = []
     uploaded_files = request.files.getlist('files[]')
     for file in uploaded_files:
-        if len(file.read()) > 0 and file.filename:
-            data = f"Content-Disposition: attachment; filename=\"{file.filename}\"\r\nContent-Type: application/octet-stream\r\nContent-Transfer-Encoding: base64\r\n\r\n" + base64.b64encode(file.read()).decode("utf-8")
+        the_data = file.read()
+        if len(the_data) > 0 and file.filename:
+            data = f"Content-Disposition: attachment; filename=\"{file.filename}\"\r\nContent-Type: application/octet-stream\r\nContent-Transfer-Encoding: base64\r\n\r\n" + base64.b64encode(the_data).decode("utf-8")
             attachments.append(Attachment(data=data, expire=int(time.time()) + int(server_settings["attachment_expire"]), expireOnRetrieve=(int(server_settings["attachment_delete_on_expire"]) != 0)))
-            print(f"Validated file: {file.filename} (Size: {len(file.read())} bytes)")
 
     try:
         upload_status = send_message(

@@ -14,7 +14,7 @@ Remember add email spoofing IP checks
 
 ## To Run DNS Server
 1. 
-    ```
+    ```bash
     sudo nano /etc/resolv.conf
     ```
 2. Uncomment
@@ -29,4 +29,11 @@ Password: `MTIzNDU=`
 ## Start Flask
 ```bash
 flask --app ui run --debug
+```
+
+## Start Venv
+```bash
+python3.12 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
 ```
