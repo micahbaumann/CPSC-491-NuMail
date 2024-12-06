@@ -57,6 +57,7 @@ CREATE TABLE Messages (
     messageSent BOOLEAN NOT NULL DEFAULT 0,
     messageAttachments TEXT DEFAULT NULL,
     messageUnsubscribe VARCHAR(255) DEFAULT NULL,
+    messageRead BOOLEAN DEFAULT NULL,
     FOREIGN KEY (messageMailbox) REFERENCES Mailboxes(mailboxId)
 );
 

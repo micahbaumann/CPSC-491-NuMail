@@ -285,3 +285,12 @@ def delete_message(id: str):
             return True
         except:
             return False
+
+def update_read_confirm(id: str, from_addr: str, status: bool = True) -> bool:
+    with get_db() as db:
+        try:
+            db.execute("UPDATE Messages SET messageRead = ? WHERE receiverId = ? AND messageFrom = ?", (status, id, from_addr))
+            db.commit()
+            return True
+        except:
+            return False

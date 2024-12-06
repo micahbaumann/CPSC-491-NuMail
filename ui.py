@@ -289,7 +289,7 @@ async def send():
     })
 
 @app.route('/view/<id>')
-def view(id=None):
+async def view(id=None):
     if 'username' not in session:
         return redirect(url_for('login'))
     
@@ -303,9 +303,12 @@ def view(id=None):
             abort(404)
 
         found = False
+        read_con = False
         for box in mailboxes:
             if box["mailboxId"] == message["messageMailbox"]:
                 found = True
+                if box["mbReadConf"]:
+                    read_con = True
                 break
         
         if not found:
@@ -326,6 +329,134 @@ def view(id=None):
         attachment_list = retreive_message_attachments(id)
         if attachment_list:
             attachments_set = True
+        
+
+
+        # Figure out read confirmatons. In message_parse, this file, and db
+
+
+
+
+        # Send Read Confirmation
+        # if read_con:
+        #     to_mx = []
+        #     try:
+        #         to_dns_results = await resolve_dns(message["messageFrom"].split('@')[1], ["MX"])
+        #         to_mx = sorted(to_dns_results["MX"], key=lambda x: x["priority"])
+        #     except:
+        #         pass
+            
+        #     numail_dns_settings = {}
+        #     try:
+        #         to_dns_results_txt = await resolve_dns(f"_numail.{message["messageFrom"].split('@')[1]}", ["TXT"])
+        #         for record in to_dns_results_txt["TXT"]:
+        #             numail_dns_settings.update(decode_txt(record["text"]))
+        #     except:
+        #         pass
+                
+        #     if "port" in numail_dns_settings.keys() and numail_dns_settings["port"].isdigit():
+        #         to_port = int(numail_dns_settings["port"])
+        #     else:
+        #         to_port = 25
+
+        #     i = 1
+        #     loop_range_size = len(to_mx)
+        #     for domain in to_mx:
+        #         server_request = NuMailRequest(domain["host"], to_port)
+        #         try:
+        #             await server_request.connect()
+        #         except NuMailError as e:
+        #             if i == loop_range_size:
+        #                 # writer.write(MessageLine(f"550 Unable to connect to server", message_stack).bytes())
+        #                 # await writer.drain()
+        #                 print(2)
+        #                 return jsonify({
+        #                     "status": "error",
+        #                     "message": "Unable to send. Error in transport."
+        #                 })
+        #                 break
+        #             else:
+        #                 i += 1
+        #                 continue
+        #         init = await init_numail(server_request, local_server_settings=server_settings) # bool
+
+        #         if init:
+        #             try:
+        #                 chck = await server_request.send(f"CHCK RECEIVE MAIL: <{to_email}>")
+        #                 if read_numail(chck)[0] != "250":
+        #                     print(10)
+        #                     raise
+                        
+        #                 print(11)
+        #                 from_adr = await server_request.send(f"MAIL FROM: <{from_email}>")
+        #                 print(from_adr)
+        #                 print(from_email)
+        #                 if read_numail(from_adr)[0] != "250":
+        #                     raise
+
+        #                 print(12)
+        #                 to_adr = await server_request.send(f"RCPT TO: {to_email}")
+        #                 if read_numail(to_adr)[0] != "250":
+        #                     raise
+
+        #                 print(13)
+        #                 msgt = await server_request.send(f"MSGT MAIL")
+        #                 if read_numail(msgt)[0] != "250":
+        #                     raise
+
+        #                 print(14)
+        #                 data = await server_request.send(f"DATA")
+        #                 if read_numail(data)[0] != "354":
+        #                     raise
+
+        #                 print(15)
+        #                 message_split = normalized_message.split("\r\n")
+        #                 for line in message_split:
+        #                     send_line = line
+        #                     if len(send_line) > 0 and send_line[0] == ".":
+        #                         send_line = f".{send_line}"
+        #                     await server_request.push(send_line)
+
+        #                 payload = await server_request.send(".")
+        #                 if read_numail(payload)[0] != "250":
+        #                     raise
+
+        #                 print(16)
+        #                 for attachment in attachments:
+        #                     # Send attachment
+        #                     atch = await server_request.send(f"ATCH FILE: {attachment.id} {from_email.split('@')[1]}")
+        #                     if read_numail(atch)[0] != "250":
+        #                         raise
+                        
+        #                 print(17)
+        #                 if read_confirm:
+        #                     readconfirm = await server_request.send("RDCF")
+        #                     if read_numail(readconfirm)[0] != "250":
+        #                         raise
+
+        #                 print(19)
+        #                 dlvr = await server_request.send(f"DLVR")
+        #                 dlvr_parts = read_numail(dlvr)
+        #                 if dlvr_parts[0] != "250":
+        #                     raise
+
+        #                 update_receiver(upload_status["message"]["messageId"], dlvr_parts[2].split()[0])
+        #                 update_sent(upload_status["message"]["messageId"])
+        #             except:
+        #                 print(3)
+        #                 return jsonify({
+        #                     "status": "error",
+        #                     "message": "Unable to send. Error in transport."
+        #                 })
+        #         else:
+        #             print(4)
+        #             return jsonify({
+        #                 "status": "error",
+        #                 "message": "Unable to send. Error in transport."
+        #             })
+
+        #         await server_request.close()
+        #         break
     else:
         abort(404)
     return render_template('view.html', id=id, message=message, subject=subject.group(1), message_body=message_body, attachments=attachments_set)
