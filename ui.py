@@ -59,7 +59,32 @@ def sent():
 def new():
     if 'username' not in session:
         return redirect(url_for('login'))
-    return "<p>New</p>"
+    return render_template('new.html', id="", message={}, subject="", message_body="", attachments=[])
+
+@app.route('/send', methods=['POST'])
+def send():
+    if 'username' not in session:
+        abort(403)
+    
+    from_field = request.form.get('from')
+    to_field = request.form.get('to')
+    subject = request.form.get('subject')
+    message = request.form.get('data')
+    read_confirm = request.form.get('readConfirm')
+
+    if not from_field or not to_field or not subject or not message:
+        return jsonify({
+            "status": "error",
+            "message": "Missing subject, from, to, or body"
+        })
+    
+    uploaded_files = request.files.getlist('files[]')
+    for file in uploaded_files:
+        print(f"Validated file: {file.filename} (Size: {len(file.read())} bytes)")
+
+    return jsonify({
+        "status": "error"
+    })
 
 @app.route('/view/<id>')
 def view(id=None):
