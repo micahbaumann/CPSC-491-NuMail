@@ -333,6 +333,7 @@ async def view(id=None):
 
 
         # Figure out read confirmatons. In message_parse, this file, and db
+        # Considering Taking it out
 
 
 
