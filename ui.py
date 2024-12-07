@@ -65,7 +65,7 @@ def logout():
 def settings():
     if 'username' not in session:
         return redirect(url_for('login'))
-    return "<p>Settings</p>"
+    return render_template('settings.html')
 
 @app.route('/sent')
 def sent():
