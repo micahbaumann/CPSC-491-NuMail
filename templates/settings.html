@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - NuMail Client</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/new.css') }}">
+
+</head>
+<body>
+    <div class="header">
+        <h1>NuMail Client</h1>
+        <div class="header-right">
+            <a href="/settings" class="button">Settings</a>
+            <a href="/logout" class="button">Logout</a>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-side-by-side">
+            <div class="sidebar">
+                <div class="sidebar-btn">
+                    <a href="/new" class="button">New Message</a>
+                </div>
+                <ul class="sidebar-list">
+                    {% if not message["isSent"] %}
+                    <li><a href="/" class="sidebar-active">Inbox</a></li>
+                    <li><a href="/sent">Sent</a></li>
+                    {% else %}
+                    <li><a href="/">Inbox</a></li>
+                    <li><a href="/sent" class="sidebar-active">Sent</a></li>
+                    {% endif %}
+                    
+                </ul>
+            </div>
+            <div class="main-content">
+                <form id="newMessage">
+                    <div class="main-top">
+                        <button type="submit">Send</button>
+                        <a href="/" class="button" style="display: inline-block;">Delete</a>
+                        <a href="javascript:void(0)" onclick="toggleOverlay('readConfirm')" id="readConfirmBtn" class="button" style="display: inline-block;">Read Confirmation</a>
+                        <a href="javascript:void(0)" onclick="toggleOverlay('attachments')" id="attchBtn" class="button" style="display: inline-block;">Attachments</a>
+                    </div>
+                    <input type="text" placeholder="from" class="new-input" name="from">
+                    <input type="text" name="to" placeholder="To" class="new-input">
+                    <input type="text" name="subject" placeholder="Subject" class="new-input">
+                    <textarea name="data" class="data-box"></textarea>
+                    <div class="overlay" id="attachments">
+                        <div class="popup-box">
+                            <div class="popup-top">
+                                <button type="button" onclick="toggleOverlay('attachments')">Close</button>
+                            </div>
+                            <div class="popup-main" style="overflow-y: scroll; height: 100%;">
+                                <div id="fileInputs">
+                                </div>
+                                <button type="button" id="addFileButton">Add Another File</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="overlay" id="readConfirm">
+                        <div class="popup-box">
+                            <div class="popup-top">
+                                <button type="button" onclick="toggleOverlay('readConfirm')">Close</button>
+                            </div>
+                            <div class="popup-main">
+                                <input type="checkbox" name="readConfirm" id="readConfirmBox">
+                                <label for="readConfirmBox">Read Confirm</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/new.js') }}"></script>
+</body>
+</html>
