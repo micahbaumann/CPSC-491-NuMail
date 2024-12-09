@@ -360,3 +360,29 @@ if (document.getElementById("addEmail")) {
         document.getElementById("addEmail").style.display = "none";
     });
 }
+
+async function deleteAccount(id) {
+    
+    try {
+        const response = await fetch("/deleteuser/"+id, {
+            method: "POST"
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            console.log(result);
+            if (result.status === "success") {
+                alert(result.message || "Delete Successful!");
+                window.location.href = "/settings";
+            } else {
+                alert(result.message || "Delete failed!");
+            }
+        } else {
+            alert("Delete failed!");
+            console.error('Error:', response.status, response.statusText);
+        }
+    } catch (error) {
+        alert("Delete failed!");
+        console.error('Fetch error:', error);
+    }
+}

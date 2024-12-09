@@ -135,6 +135,15 @@ def delete_mailbox(mb_name: str) -> bool:
         except:
             return False
 
+def delete_user(user_id: str) -> bool:
+    with get_db() as db:
+        try:
+            db.execute("DELETE FROM Users WHERE userId = ?", (user_id,))
+            db.commit()
+            return True
+        except:
+            return False
+
 def get_user_mailboxes(user_name: str) -> list | bool:
     with get_db() as db:
         user_exists = db.execute("SELECT * FROM Users WHERE userName = ?", (user_name,)).fetchone()

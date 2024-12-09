@@ -64,9 +64,9 @@
                 <table class="admin-table">
                     {% for theUser in users %}
                         <tr>
-                            <td><a href="javascript:void(0);" onclick="toggleOverlay('userForm', {{theUser['userId']}})">{{theUser["displayName"]}}</a></td>
-                            <td><a href="javascript:void(0);" onclick="toggleOverlay('mailboxForm', {{theUser['userId']}})">Mailboxes</a></td>
-                            <td class="table-delete"><a href="javascript:void(0);">Delete</a></td>
+                            <td><a href="javascript:void(0);" onclick="toggleOverlay('userForm', '{{theUser['userId']}}')">{{theUser["displayName"]}}</a></td>
+                            <td><a href="javascript:void(0);" onclick="toggleOverlay('mailboxForm', '{{theUser['userId']}}')">Mailboxes</a></td>
+                            <td class="table-delete"><a href="javascript:void(0);" onclick="deleteAccount('{{theUser['userId']}}')">Delete</a></td>
                         </tr>
                     {% endfor %}
                 </table>

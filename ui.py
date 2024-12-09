@@ -6,7 +6,7 @@ import base64
 
 from pathlib import Path
 from flask import Flask, render_template, session, redirect, url_for, request, jsonify, abort, send_file
-from db.db import get_user_messages, createUser, get_user_id, create_mailbox, delete_mailbox, check_user_pwd, get_message, get_user_mailboxes, retreive_message_attachments, delete_message, send_message, msg_db_type, update_receiver, update_sent, get_user, get_all_users, get_all_user_mailboxes, update_user, get_user_mailboxes, update_send_receive
+from db.db import delete_user, get_user_messages, createUser, get_user_id, create_mailbox, delete_mailbox, check_user_pwd, get_message, get_user_mailboxes, retreive_message_attachments, delete_message, send_message, msg_db_type, update_receiver, update_sent, get_user, get_all_users, get_all_user_mailboxes, update_user, get_user_mailboxes, update_send_receive
 from server.client.client import NuMailRequest
 from server.client.reader import init_numail, read_numail
 from server.message.Attachment import Attachment
@@ -17,7 +17,7 @@ from server.client.dns import resolve_dns, decode_txt
 
 config_path = Path(__file__).parent / "config" / "ui.conf"
 server_config(config_path)
-print(server_config)
+# print(server_config)
 
 # DEBUG
 # server_settings = {
@@ -42,7 +42,7 @@ def index():
     if not messages:
         messages = []
 
-    print(messages)
+    # print(messages)
     return render_template('index.html', messages=messages, isSent=False)
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -192,7 +192,7 @@ def mbsettings():
         mailbox_names.append(mb["mbName"])
 
     input_fields = dict(request.form)
-    print(input_fields)
+    # print(input_fields)
     fields = []
     for key, value in input_fields.items():
         hidden = re.search(r"hidden_([a-zA-Z0-9._\-]+)$", key, re.MULTILINE)
@@ -216,6 +216,26 @@ def mbsettings():
             if f"delete_{field}" in input_fields:
                 delete_mailbox(field)
 
+    return jsonify({
+        "status": "success",
+    })
+
+@app.route('/deleteuser/<id>', methods=['POST'])
+def deleteuser(id=None):
+    if 'username' not in session:
+        abort(403)
+    
+    currentUser = get_user(session["username"])
+    if not currentUser:
+        abort(404)
+    
+    if currentUser["isAdmin"]:
+        if not delete_user(str(id)):
+            return jsonify({
+                "status": "error",
+            })
+
+        
     return jsonify({
         "status": "success",
     })
@@ -402,7 +422,7 @@ async def send():
         )
 
         if not upload_status:
-            print(1)
+            # print(1)
             return jsonify({
                 "status": "error",
                 "message": "Unable to send. Error in transport."
@@ -438,7 +458,7 @@ async def send():
                     if i == loop_range_size:
                         # writer.write(MessageLine(f"550 Unable to connect to server", message_stack).bytes())
                         # await writer.drain()
-                        print(2)
+                        # print(2)
                         return jsonify({
                             "status": "error",
                             "message": "Unable to send. Error in transport."
@@ -453,32 +473,32 @@ async def send():
                     try:
                         chck = await server_request.send(f"CHCK RECEIVE MAIL: <{to_email}>")
                         if read_numail(chck)[0] != "250":
-                            print(10)
+                            # print(10)
                             raise
                         
-                        print(11)
+                        # print(11)
                         from_adr = await server_request.send(f"MAIL FROM: <{from_email}>")
-                        print(from_adr)
-                        print(from_email)
+                        # print(from_adr)
+                        # print(from_email)
                         if read_numail(from_adr)[0] != "250":
                             raise
 
-                        print(12)
+                        # print(12)
                         to_adr = await server_request.send(f"RCPT TO: {to_email}")
                         if read_numail(to_adr)[0] != "250":
                             raise
 
-                        print(13)
+                        # print(13)
                         msgt = await server_request.send(f"MSGT MAIL")
                         if read_numail(msgt)[0] != "250":
                             raise
 
-                        print(14)
+                        # print(14)
                         data = await server_request.send(f"DATA")
                         if read_numail(data)[0] != "354":
                             raise
 
-                        print(15)
+                        # print(15)
                         message_split = normalized_message.split("\r\n")
                         for line in message_split:
                             send_line = line
@@ -490,20 +510,20 @@ async def send():
                         if read_numail(payload)[0] != "250":
                             raise
 
-                        print(16)
+                        # print(16)
                         for attachment in attachments:
                             # Send attachment
                             atch = await server_request.send(f"ATCH FILE: {attachment.id} {from_email.split('@')[1]}")
                             if read_numail(atch)[0] != "250":
                                 raise
                         
-                        print(17)
+                        # print(17)
                         if read_confirm:
                             readconfirm = await server_request.send("RDCF")
                             if read_numail(readconfirm)[0] != "250":
                                 raise
 
-                        print(19)
+                        # print(19)
                         dlvr = await server_request.send(f"DLVR")
                         dlvr_parts = read_numail(dlvr)
                         if dlvr_parts[0] != "250":
@@ -512,13 +532,13 @@ async def send():
                         update_receiver(upload_status["message"]["messageId"], dlvr_parts[2].split()[0])
                         update_sent(upload_status["message"]["messageId"])
                     except:
-                        print(3)
+                        # print(3)
                         return jsonify({
                             "status": "error",
                             "message": "Unable to send. Error in transport."
                         })
                 else:
-                    print(4)
+                    # print(4)
                     return jsonify({
                         "status": "error",
                         "message": "Unable to send. Error in transport."
@@ -527,7 +547,7 @@ async def send():
                 await server_request.close()
                 break
     except Exception as e:
-        print(5)
+        # print(5)
         return jsonify({
             "status": "error",
             "message": "Unable to send. Error in transport."
