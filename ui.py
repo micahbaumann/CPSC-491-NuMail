@@ -10,19 +10,24 @@ from db.db import get_user_messages, createUser, get_user_id, create_mailbox, de
 from server.client.client import NuMailRequest
 from server.client.reader import init_numail, read_numail
 from server.message.Attachment import Attachment
+from config.config import server_config, server_settings
 # from config.config import server_settings
 from errors.nuerrors import NuMailError
 from server.client.dns import resolve_dns, decode_txt
 
-#TEMP REPLACE
-server_settings = {
-    "visible_domain": "numail.local",
-    "attachment_expire": 3600,
-    "attachment_delete_on_expire": 1,
-    "domain": "mail.numail.local",
-    "public_ip": "127.0.0.1",
-    "ip": "127.0.0.1",
-}
+config_path = Path(__file__).parent / "config" / "ui.conf"
+server_config(config_path)
+print(server_config)
+
+# DEBUG
+# server_settings = {
+#     "visible_domain": "numail.local",
+#     "attachment_expire": 3600,
+#     "attachment_delete_on_expire": 1,
+#     "domain": "mail.numail.local",
+#     "public_ip": "127.0.0.1",
+#     "ip": "127.0.0.1",
+# }
 
 app = Flask(__name__)
 
