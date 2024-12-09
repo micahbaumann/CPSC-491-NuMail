@@ -18,8 +18,6 @@ if __name__ == "__main__":
             if config_path.exists():
                 server_config(config_path.resolve())
 
-        
-
         asyncio.run(main())
         
     except KeyboardInterrupt:

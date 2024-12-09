@@ -5831,3 +5831,18 @@ Error binding parameter 8: type 'list' is not supported
 [2024-12-09 02:44:17.427194] [message] Shutdown 127.0.0.1 port 7777
 [2024-12-09 02:44:17.427430] [message] Shutdown 127.0.0.1 port 7778
 [2024-12-09 02:44:17.427664] [message] Shutdown 127.0.0.1 port 7779
+[2024-12-09 02:47:33.557682] [message] Server listening on 127.0.0.1 port 7777
+[2024-12-09 02:47:33.559507] [message] Server listening on 127.0.0.1 port 7778
+[2024-12-09 02:47:33.559593] [message] Server listening on 127.0.0.1 port 7779
+[2024-12-09 02:47:33.809088] [message] Server listening on 127.0.0.1 port 7778
+[2024-12-09 02:47:33.809273] [message] Server listening on 127.0.0.1 port 7779
+[2024-12-09 02:47:33.809563] [message] Shutdown 127.0.0.1 port 7779
+[2024-12-09 02:47:33.809785] [message] Shutdown 127.0.0.1 port 7778
+[2024-12-09 02:47:33.810203] [error] NuMail Server Error 7.2.2: Port and/or address already in use
+[2024-12-09 02:49:33.625333] [message] Server listening on 127.0.0.1 port 7777
+[2024-12-09 02:49:33.625780] [message] Server listening on 127.0.0.1 port 7778
+[2024-12-09 02:49:33.625859] [message] Server listening on 127.0.0.1 port 7779
+[2024-12-09 02:49:35.572439] [message] Shutting down
+[2024-12-09 02:49:35.572786] [message] Shutdown 127.0.0.1 port 7777
+[2024-12-09 02:49:35.572989] [message] Shutdown 127.0.0.1 port 7778
+[2024-12-09 02:49:35.573167] [message] Shutdown 127.0.0.1 port 7779
