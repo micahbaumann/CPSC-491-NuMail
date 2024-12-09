@@ -473,17 +473,19 @@ async def numail_parse(reader, writer, message_stack):
                     writer.write(MessageLine(f"504 \"{trim_message[5:]}\" not implemented", message_stack).bytes())
                     await writer.drain()
             elif check_command(trim_message, "RDCF", 0):
-                params = re.search(r"^RDCF$", trim_message, re.MULTILINE)
-                params_return = re.search(r"^RDCF: (\S+)$", trim_message, re.MULTILINE)
-                if params:
-                    message_stack.read_confirm = True
-                    writer.write(MessageLine(f"250 Read confirmation set", message_stack).bytes())
-                    await writer.drain()
-                elif params_return:
-                    pass
-                else:
-                    writer.write(MessageLine(f"504 \"{trim_message[5:]}\" not implemented", message_stack).bytes())
-                    await writer.drain()
+                writer.write(MessageLine(f"504 \"{trim_message}\" not implemented", message_stack).bytes())
+                await writer.drain()
+                # params = re.search(r"^RDCF$", trim_message, re.MULTILINE)
+                # params_return = re.search(r"^RDCF: (\S+)$", trim_message, re.MULTILINE)
+                # if params:
+                #     message_stack.read_confirm = True
+                #     writer.write(MessageLine(f"250 Read confirmation set", message_stack).bytes())
+                #     await writer.drain()
+                # elif params_return:
+                #     pass
+                # else:
+                #     writer.write(MessageLine(f"504 \"{trim_message[5:]}\" not implemented", message_stack).bytes())
+                #     await writer.drain()
             elif check_command(trim_message, "UNSB", 1):
                 params = re.search(r"^UNSB (\S+)$", trim_message, re.MULTILINE)
                 if params:

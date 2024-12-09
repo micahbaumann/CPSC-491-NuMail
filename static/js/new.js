@@ -18,9 +18,11 @@ form.addEventListener("submit", async function(e) {
                 alert(result.message || "Send failed!");
             }
         } else {
+            alert("Send failed!");
             console.error('Error:', response.status, response.statusText);
         }
     } catch (error) {
+        alert("Send failed!");
         console.error('Fetch error:', error);
     }
 });
@@ -56,13 +58,11 @@ document.getElementById('addFileButton').addEventListener('click', function () {
   
     // Append wrapper to the container
     document.getElementById('fileInputs').appendChild(wrapper);
-  });
-  
-  // Event delegation to handle dynamically added "Remove" buttons
-  document.getElementById('fileInputs').addEventListener('click', function (event) {
+});
+
+document.getElementById('fileInputs').addEventListener('click', function (event) {
     if (event.target.classList.contains('removeFileButton')) {
-      // Remove the corresponding wrapper
-      const wrapper = event.target.parentElement;
-      wrapper.remove();
+        const wrapper = event.target.parentElement;
+        wrapper.remove();
     }
-  });
+});

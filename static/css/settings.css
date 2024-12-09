@@ -1,3 +1,98 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .settings-center {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.settings-center h1, .settings-center h2, .mbs {
+    font-weight: normal;
+    margin: 0;
+    margin-top: 10px;
+    border-bottom: 1px solid black;
+}
+
+.settingsForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.settingsForm > input, .settingsForm > .checkbox, .settingsForm > button {
+    margin-top: 10px;
+}
+
+.admin-table {
+    border-collapse: collapse;
+    margin: 10px 0;
+}
+
+.admin-table tr {
     border: solid 1px black;
+}
+
+.admin-table tr:nth-child(even) {
+    background-color: #e4e4e4;
+}
+
+.table-delete {
+    text-align: end;
+}
+
+.admin-table td {
+    padding: 5px;
+}
+
+.overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    z-index: 99999;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+.popup-box {
+    width: 50%;
+    height: 50%;
+    background-color: white;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.popup-top {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.popup-main {
+    overflow-y: scroll;
+}
+
+#addEmail {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.newMB {
+    display: flex;
+    flex-direction: column;
+}
+
+.addForm > * {
+    width: 100%;
+    margin-top: 10px;
+    box-sizing: border-box;
 }

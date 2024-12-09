@@ -9,20 +9,136 @@
     <title>Settings - NuMail Client</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/settings.css') }}">
-
+    <script>
+        const ALL_USERS = JSON.parse('{{users|tojson}}');
+        const ALL_MAILBOXES = JSON.parse('{{mailboxes|tojson}}');
+        const VISIBLE_DOMAIN = "{{domain}}";
+    </script>
 </head>
 <body>
     <div class="header">
         <h1>NuMail Client</h1>
         <div class="header-right">
-            <a href="/settings" class="button">Settings</a>
+            <a href="/" class="button">Back</a>
             <a href="/logout" class="button">Logout</a>
         </div>
     </div>
     <div class="main">
         <div class="settings-center">
-
+            <form id="settingsForm" class="settingsForm">
+                <h1>Account</h1>
+                <input type="hidden" name="user" value="{{user['userId']}}">
+                <input type="password" name="pwd" placeholder="New Password">
+                <input type="text" name="fname" placeholder="First Name" value="{{user['firstName'] if user['firstName']}}">
+                <input type="text" name="lname" placeholder="Last Name" value="{{user['lastName'] if user['lastName']}}">
+                <input type="text" name="displayName" placeholder="Display Name" value="{{user['displayName']}}">
+                <input type="text" name="company" placeholder="Company" value="{{user['company'] if user['company']}}">
+                {% if user['isAdmin'] %}
+                    <p>Role: Admin</p>
+                {% else %}
+                    <p>Role: User</p> 
+                {% endif %}
+                <button type="submit">Save</button>
+            </form>
+            {% if usermb %}
+                <form id="nmSettingsForm" class="settingsForm">
+                    <h1>NuMail Settings</h1>
+                    {% for mb in usermb %}
+                        <h2>{{mb["mbName"]}}@{{domain}}</h2>
+                        <input type="hidden" name="hidden_{{mb['mbName']}}" value="{{mb['mbName']}}">
+                        <div class="checkbox">
+                            <input type="checkbox" name="canSend_{{mb['mbName']}}" id="canSend_{{mb['mbName']}}" {{"checked" if mb["mbSend"]}}>
+                            <label for="canSend_{{mb['mbName']}}">Can Send</label>
+                        </div>
+                        <div class="checkbox">
+                            <input type="checkbox" name="canReceive_{{mb['mbName']}}" id="canReceive_{{mb['mbName']}}" {{"checked" if mb["mbReceive"]}}>
+                            <label for="canReceive_{{mb['mbName']}}">Can Receive</label>
+                        </div>
+                    {% endfor %}
+                    <button type="submit">Save</button>
+                </form>
+            {% endif %}
+           
+            {% if user["isAdmin"] %}
+                <h1>Admin Settings</h1>
+                <table class="admin-table">
+                    {% for theUser in users %}
+                        <tr>
+                            <td><a href="javascript:void(0);" onclick="toggleOverlay('userForm', {{theUser['userId']}})">{{theUser["displayName"]}}</a></td>
+                            <td><a href="javascript:void(0);" onclick="toggleOverlay('mailboxForm', {{theUser['userId']}})">Mailboxes</a></td>
+                            <td class="table-delete"><a href="javascript:void(0);">Delete</a></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                <button type="button" onclick="toggleOverlay('newUserForm')">Add User</button>
+            {% endif %}
         </div>
     </div>
+    {% if user["isAdmin"] %}
+        <div class="overlay" id="userForm">
+            <div class="popup-box">
+                <div class="popup-top">
+                    <button type="button" onclick="toggleOverlay('userForm')">Close</button>
+                </div>
+                <div class="popup-main">
+                    <form id="userSettingsForm" class="settingsForm">
+                        <h1>Account</h1>
+                        <input type="hidden" name="user" id="accountUser">
+                        <input type="password" name="pwd" placeholder="New Password">
+                        <input type="text" name="fname" placeholder="First Name" id="accountFName">
+                        <input type="text" name="lname" placeholder="Last Name" id="accountLName">
+                        <input type="text" name="displayName" placeholder="Display Name" id="accountDName">
+                        <input type="text" name="company" placeholder="Company" id="accountCompany">
+                        <div class="checkbox">
+                            <input type="checkbox" name="isAdmin" id="isAdmin">
+                            <label for="isAdmin">Is Admin</label>
+                        </div>
+                        <button type="submit">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="overlay" id="mailboxForm">
+            <div class="popup-box">
+                <div class="popup-top">
+                    <button type="button" onclick="toggleOverlay('mailboxForm', null, true)">Close</button>
+                </div>
+                <div class="popup-main">
+                    <form id="nmSettingsFormAccount" class="settingsForm">
+                        <div id="addMB"></div>
+                        <button type="submit">Save</button>
+                    </form>
+                    <div id="newMB"></div>
+                    <button type="button" id="addEmail">Add</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="overlay" id="newUserForm">
+            <div class="popup-box">
+                <div class="popup-top">
+                    <button type="button" onclick="toggleOverlay('newUserForm')">Close</button>
+                </div>
+                <div class="popup-main">
+                    <form id="createUserForm" class="settingsForm">
+                        <h1>Create Account</h1>
+                        <input type="password" name="pwd" placeholder="Password">
+                        <input type="text" name="uname" placeholder="Username (cannot be changed)">
+                        <input type="text" name="fname" placeholder="First Name">
+                        <input type="text" name="lname" placeholder="Last Name">
+                        <input type="text" name="displayName" placeholder="Display Name">
+                        <input type="text" name="company" placeholder="Company">
+                        <div class="checkbox">
+                            <input type="checkbox" name="isAdmin" id="isAdminNew">
+                            <label for="isAdminNew">Is Admin</label>
+                        </div>
+                        <button type="submit">Create</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <script src="{{ url_for('static', filename='js/settings.js') }}"></script>
 </body>
 </html>

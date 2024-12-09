@@ -608,3 +608,10 @@
 [2024-12-05 02:32:59.869755] [error] NuMail Server Error 7.4.1: User "user2" already exists
 [2024-12-05 02:33:00.042684] [error] NuMail Server Error 7.5.1: Mailbox "micah" already exists
 [2024-12-05 02:33:00.042921] [error] NuMail Server Error 7.5.1: Mailbox "user2" already exists
+[2024-12-09 01:24:53.375405] [error] NuMail Server Error 7.4.1: User "micah" already exists
+[2024-12-09 01:24:53.377388] [error] NuMail Server Error 7.4.1: User "user2" already exists
+[2024-12-09 01:24:53.550433] [error] NuMail Server Error 7.5.1: Mailbox "micah" already exists
+[2024-12-09 01:43:03.501290] [error] NuMail Server Error 7.5.1: Mailbox "user2" already exists
+[2024-12-09 02:03:38.408651] [error] NuMail Server Error 7.7.2: NuMail DNS resolver error, "(4, 'Domain name not found')"
+[2024-12-09 02:03:38.470296] [error] NuMail Server Error 7.7.2: NuMail DNS resolver error, "(4, 'Domain name not found')"
+[2024-12-09 02:31:15.690510] [error] NuMail Server Error 7.6.1: Cannot connect to server

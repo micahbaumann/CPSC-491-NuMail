@@ -41,7 +41,6 @@
                     <div class="main-top">
                         <button type="submit">Send</button>
                         <a href="/" class="button" style="display: inline-block;">Delete</a>
-                        <a href="javascript:void(0)" onclick="toggleOverlay('readConfirm')" id="readConfirmBtn" class="button" style="display: inline-block;">Read Confirmation</a>
                         <a href="javascript:void(0)" onclick="toggleOverlay('attachments')" id="attchBtn" class="button" style="display: inline-block;">Attachments</a>
                     </div>
                     <input type="text" placeholder="from" class="new-input" name="from">
@@ -60,17 +59,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="overlay" id="readConfirm">
-                        <div class="popup-box">
-                            <div class="popup-top">
-                                <button type="button" onclick="toggleOverlay('readConfirm')">Close</button>
-                            </div>
-                            <div class="popup-main">
-                                <input type="checkbox" name="readConfirm" id="readConfirmBox">
-                                <label for="readConfirmBox">Read Confirm</label>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </form>
             </div>
         </div>

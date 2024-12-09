@@ -47,9 +47,11 @@
                         alert(result.message || "Login failed!");
                     }
                 } else {
+                    alert("Login failed!");
                     console.error('Error:', response.status, response.statusText);
                 }
             } catch (error) {
+                alert("Login failed!");
                 console.error('Fetch error:', error);
             }
         });

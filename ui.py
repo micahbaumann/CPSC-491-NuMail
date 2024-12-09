@@ -6,7 +6,7 @@ import base64
 
 from pathlib import Path
 from flask import Flask, render_template, session, redirect, url_for, request, jsonify, abort, send_file
-from db.db import check_user_pwd, get_message, get_user_mailboxes, retreive_message_attachments, delete_message, send_message, msg_db_type, update_receiver, update_sent
+from db.db import get_user_messages, createUser, get_user_id, create_mailbox, delete_mailbox, check_user_pwd, get_message, get_user_mailboxes, retreive_message_attachments, delete_message, send_message, msg_db_type, update_receiver, update_sent, get_user, get_all_users, get_all_user_mailboxes, update_user, get_user_mailboxes, update_send_receive
 from server.client.client import NuMailRequest
 from server.client.reader import init_numail, read_numail
 from server.message.Attachment import Attachment
@@ -32,7 +32,13 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 def index():
     if 'username' not in session:
         return redirect(url_for('login'))
-    return render_template('index.html')
+    
+    messages = get_user_messages(user_name=session["username"])
+    if not messages:
+        messages = []
+
+    print(messages)
+    return render_template('index.html', messages=messages, isSent=False)
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -65,13 +71,252 @@ def logout():
 def settings():
     if 'username' not in session:
         return redirect(url_for('login'))
-    return render_template('settings.html')
+    
+    currentUser = get_user(session['username'])
+    if not currentUser:
+        abort(404)
+
+    if currentUser["isAdmin"]:
+        users = get_all_users()
+        mailboxes = get_all_user_mailboxes()
+    else:
+        users = []
+        mailboxes = []
+    
+    current_user_mb = get_user_mailboxes(session['username'])
+    if not current_user_mb:
+        current_user_mb = []
+    
+    users_serializable = []
+    for user in users:
+        users_serializable.append({
+            key: (value.decode('utf-8') if isinstance(value, bytes) else value)
+            for key, value in user.items()
+            if key != "password"
+        })
+    
+    mailbox_serializable = []
+    for box in mailboxes:
+        mailbox_serializable.append({
+            key: (value.decode('utf-8') if isinstance(value, bytes) else value)
+            for key, value in box.items()
+        })
+
+    return render_template('settings.html', domain=server_settings["visible_domain"], user=currentUser, users=users_serializable, mailboxes=mailbox_serializable, usermb=current_user_mb)
+
+@app.route('/usersettings', methods=['POST'])
+def usersettings():
+    if 'username' not in session:
+        abort(403)
+    
+    user_field = request.form.get('user')
+    pwd_field = request.form.get('pwd')
+    fname_field = request.form.get('fname')
+    lname_field = request.form.get('lname')
+    displayName_field = request.form.get('displayName')
+    company_field = request.form.get('company')
+    admin_field = request.form.get('isAdmin')
+
+    if not user_field:
+        return jsonify({
+            "status": "error",
+        })
+    
+    currentUser = get_user(session["username"])
+    if not currentUser or (str(currentUser["userId"]) != str(user_field) and not currentUser["isAdmin"]):
+        abort(403)
+
+    if fname_field:
+        if not update_user(user_field, "firstName", fname_field):
+            return jsonify({
+                "status": "error",
+                "message": "First Name Error"
+            })
+    
+    if lname_field:
+        if not update_user(user_field, "lastName", lname_field):
+            return jsonify({
+                "status": "error",
+                "message": "Last Name Error"
+            })
+
+    if displayName_field:
+        if not update_user(user_field, "displayName", displayName_field):
+            return jsonify({
+                "status": "error",
+                "message": "Display Name Error"
+            })
+    
+    if company_field:
+        if not update_user(user_field, "company", company_field):
+            return jsonify({
+                "status": "error",
+                "message": "Company Error"
+            })
+    
+    if pwd_field:
+        if not update_user(user_field, "password", pwd_field):
+            return jsonify({
+                "status": "error",
+                "message": "Password Error"
+            })
+
+    if currentUser["isAdmin"]:
+        if not update_user(user_field, "isAdmin", admin_field if admin_field else False):
+            return jsonify({
+                "status": "error",
+                "message": "Admin Error"
+            })
+
+    return jsonify({
+        "status": "success",
+    })
+
+@app.route('/mbsettings', methods=['POST'])
+def mbsettings():
+    if 'username' not in session:
+        abort(403)
+    
+    currentUser = get_user(session["username"])
+    mailboxes = get_user_mailboxes(session["username"])
+    if not currentUser or not mailboxes:
+        abort(404)
+
+    mailbox_names = []
+    for mb in mailboxes:
+        mailbox_names.append(mb["mbName"])
+
+    input_fields = dict(request.form)
+    print(input_fields)
+    fields = []
+    for key, value in input_fields.items():
+        hidden = re.search(r"hidden_([a-zA-Z0-9._\-]+)$", key, re.MULTILINE)
+        if hidden:
+            if value not in mailbox_names and not currentUser["isAdmin"]:
+                abort(403)
+            fields.append(value)
+    
+    for field in fields:
+        if f"canReceive_{field}" in input_fields:
+            update_send_receive(field, False, True)
+        else:
+            update_send_receive(field, False, False)
+
+        if f"canSend_{field}" in input_fields:
+            update_send_receive(field, True, True)
+        else:
+            update_send_receive(field, True, False)
+        
+        if currentUser["isAdmin"]:
+            if f"delete_{field}" in input_fields:
+                delete_mailbox(field)
+
+    return jsonify({
+        "status": "success",
+    })
+
+@app.route('/createmb', methods=['POST'])
+def createmb():
+    if 'username' not in session:
+        abort(403)
+
+    email_field = request.form.get("email")
+    uname_field = request.form.get("uid")
+    send_field = request.form.get("canSend")
+    receive_field = request.form.get("canReceive")
+
+    if not email_field:
+        return jsonify({
+            "status": "error",
+            "message": "Invalid Email"
+        })
+    
+    if not uname_field:
+        return jsonify({
+            "status": "error",
+        })
+    
+    currentUser = get_user(session["username"])
+    uid = get_user_id(uname_field)
+    if not currentUser or not uid:
+        abort(404)
+
+    try:
+        create_mailbox(
+            user_name=uid["userName"],
+            mb_name=email_field,
+            mb_send=True if send_field else False,
+            mb_receive=True if receive_field else False,
+            read_confirm=False
+        )
+    except:
+        return jsonify({
+            "status": "error",
+        })
+
+    return jsonify({
+        "status": "success",
+    })
+
+@app.route('/createuser', methods=['POST'])
+def createuser():
+    if 'username' not in session:
+        abort(403)
+
+    currentUser = get_user(session["username"])
+    if not currentUser:
+        abort(404)
+    
+    if not currentUser["isAdmin"]:
+        abort(403)
+
+    pwd_field = request.form.get("pwd")
+    uname_field = request.form.get("uname")
+    fname_field = request.form.get("fname")
+    lname_field = request.form.get("lname")
+    displayName_field = request.form.get("displayName")
+    company_field = request.form.get("company")
+    isAdmin_field = request.form.get("isAdmin")
+
+    if not pwd_field:
+        return jsonify({
+            "status": "error",
+            "message": "Invalid Password"
+        })
+    
+    if not uname_field:
+        return jsonify({
+            "status": "error",
+            "message": "Invalid Username"
+        })
+    
+    if not displayName_field:
+        return jsonify({
+            "status": "error",
+            "message": "Invalid Display Name"
+        })
+
+    try:
+        createUser(user_name=uname_field, display_name=displayName_field, password=pwd_field, isAdmin=True if isAdmin_field else False, first_name=fname_field, last_name=lname_field, company=company_field)
+    except:
+        return jsonify({
+            "status": "error",
+        })
+
+    return jsonify({
+        "status": "success",
+    })
 
 @app.route('/sent')
 def sent():
     if 'username' not in session:
         return redirect(url_for('login'))
-    return "<p>Sent</p>"
+    
+    messages = get_user_messages(user_name=session["username"])
+    if not messages:
+        messages = []
+        
+    return render_template('index.html', messages=messages, isSent=True)
 
 @app.route('/new')
 def new():
@@ -88,7 +333,7 @@ async def send():
     to_field = request.form.get('to')
     subject = request.form.get('subject')
     message = request.form.get('data')
-    read_confirm = request.form.get('readConfirm')
+    read_confirm = False
 
     if not from_field or not to_field or not subject or not message:
         return jsonify({
@@ -146,7 +391,7 @@ async def send():
             to_addr = to_email,
             msgt = 0,
             data = normalized_message,
-            readConfirm = read_confirm == True,
+            readConfirm = True if read_confirm else False,
             receiver_id = None,
             attachments = attachments
         )
@@ -284,8 +529,8 @@ async def send():
         })
 
     return jsonify({
-        "status": "error",
-        "message": "Sucess"
+        "status": "success",
+        "message": "Success"
     })
 
 @app.route('/view/<id>')
