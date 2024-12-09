@@ -84,6 +84,8 @@ def settings():
     if currentUser["isAdmin"]:
         users = get_all_users()
         mailboxes = get_all_user_mailboxes()
+        if not mailboxes:
+            mailboxes = []
     else:
         users = []
         mailboxes = []
@@ -229,13 +231,25 @@ def deleteuser(id=None):
     if not currentUser:
         abort(404)
     
+    user_to_delete = get_user_id(str(id))
+    if not user_to_delete:
+        return jsonify({
+            "status": "error",
+            "message": "User to delete does not exist"
+        })
+    
+    if user_to_delete["userName"] == "admin":
+        return jsonify({
+            "status": "error",
+            "message": "Unable to delete admin account"
+        })
+
     if currentUser["isAdmin"]:
         if not delete_user(str(id)):
             return jsonify({
                 "status": "error",
             })
 
-        
     return jsonify({
         "status": "success",
     })

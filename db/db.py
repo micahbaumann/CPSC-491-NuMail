@@ -98,7 +98,10 @@ def check_user_pwd(user_name: str, password: str) -> bool:
             return False
         else:
             user_pwd = db.execute("SELECT password FROM Users WHERE userName = ?", (user_name,)).fetchone()
-            return bcrypt.checkpw(password.encode('utf-8'), user_pwd[0])
+            encoded_user_pwd = user_pwd[0]
+            if type(encoded_user_pwd) != "bytes":
+                encoded_user_pwd = encoded_user_pwd.encode('utf-8')
+            return bcrypt.checkpw(password.encode('utf-8'), encoded_user_pwd)
 
 
 def create_mailbox(mb_name: str, user_name: str, mb_type: int = 0, mb_send: bool = False, mb_receive: bool = False, read_confirm: bool = False) -> None:

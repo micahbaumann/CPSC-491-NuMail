@@ -60,35 +60,37 @@ if (document.getElementById("createUserForm")) {
     });
 }
 
-let numailForm = document.getElementById("nmSettingsForm");
-numailForm.addEventListener("submit", async function(e) {
-    e.preventDefault();
-    const formData = new FormData(numailForm);
-    
-    try {
-        const response = await fetch("/mbsettings", {
-            method: "POST",
-            body: formData,
-        });
+if (document.getElementById("nmSettingsForm")) {
+    let numailForm = document.getElementById("nmSettingsForm");
+    numailForm.addEventListener("submit", async function(e) {
+        e.preventDefault();
+        const formData = new FormData(numailForm);
+        
+        try {
+            const response = await fetch("/mbsettings", {
+                method: "POST",
+                body: formData,
+            });
 
-        if (response.ok) {
-            const result = await response.json();
-            console.log(result);
-            if (result.status === "success") {
-                alert(result.message || "Update Successful!");
-                window.location.href = "/settings";
+            if (response.ok) {
+                const result = await response.json();
+                console.log(result);
+                if (result.status === "success") {
+                    alert(result.message || "Update Successful!");
+                    window.location.href = "/settings";
+                } else {
+                    alert(result.message || "Update failed!");
+                }
             } else {
-                alert(result.message || "Update failed!");
+                alert("Update failed!");
+                console.error('Error:', response.status, response.statusText);
             }
-        } else {
+        } catch (error) {
             alert("Update failed!");
-            console.error('Error:', response.status, response.statusText);
+            console.error('Fetch error:', error);
         }
-    } catch (error) {
-        alert("Update failed!");
-        console.error('Fetch error:', error);
-    }
-});
+    });
+}
 
 if (document.getElementById("nmSettingsFormAccount")) {
     let numailFormAccount = document.getElementById("nmSettingsFormAccount");

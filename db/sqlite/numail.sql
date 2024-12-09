@@ -73,44 +73,6 @@ CREATE TABLE Attachments (
     FOREIGN KEY (attachmentMessage) REFERENCES Messages(messageId)
 );
 
--- CREATE TABLE Enrollments (
---     EnrollmentID INTEGER         NOT NULL PRIMARY KEY AUTOINCREMENT,
---     StudentID INT                NOT NULL,
---     ClassID INT                  NOT NULL,
---     SectionNumber INT            NOT NULL,
---     EnrollmentStatus VARCHAR(25) NOT NULL DEFAULT "ENROLLED",
---     FOREIGN KEY (StudentID) REFERENCES Students(StudentID),
---     FOREIGN KEY (ClassID, SectionNumber) REFERENCES Classes(ClassID, SectionNumber)
--- );
-
--- CREATE TABLE Instructors (
---     InstructorID INTEGER PRIMARY KEY NOT NULL UNIQUE,
---     FOREIGN KEY (InstructorID) REFERENCES Users(UserId)
--- );
-
--- CREATE TABLE InstructorClasses (
---     InstructorClassesID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
---     InstructorID INT            NOT NULL,
---     ClassID INT                 NOT NULL,
---     SectionNumber INT           NOT NULL,
---     FOREIGN KEY (InstructorID) REFERENCES Instructors(InstructorID),
---     FOREIGN KEY (ClassID, SectionNumber) REFERENCES Classes(ClassID, SectionNumber)
--- );
-
--- CREATE TABLE Waitlists (
---     WaitlistID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
---     StudentID INT      NOT NULL,
---     ClassID INT        NOT NULL,
---     SectionNumber INT  NOT NULL,
---     Position INT       NOT NULL,
---     FOREIGN KEY (StudentID) REFERENCES Students(StudentID),
---     FOREIGN KEY (ClassID, SectionNumber) REFERENCES Classes(ClassID, SectionNumber)
--- );
-
--- CREATE TABLE Freeze (
---     IsFrozen BOOLEAN DEFAULT 0
--- );
-
--- INSERT INTO Freeze VALUES (0);
+INSERT INTO Users(userName, displayName, password, isAdmin) VALUES ("admin", "Admin", "$2b$12$Xoo6simQ/GCzqV9j.HGyCu35SDyQpKT0JtpJOhWCJcc60b12oe5y.", 1);
 
 COMMIT;
