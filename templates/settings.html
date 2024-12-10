@@ -29,17 +29,17 @@
                 <h1>Account</h1>
                 <input type="hidden" name="user" value="{{user['userId']}}">
                 <input type="hidden" name="self" value="true">
-                <label>Password</label>
+                <label>Password (required)</label>
                 <input type="password" name="pwd" placeholder="New Password">
                 <label>First Name</label>
                 <input type="text" name="fname" placeholder="First Name" value="{{user['firstName'] if user['firstName']}}">
                 <label>Last Name</label>
                 <input type="text" name="lname" placeholder="Last Name" value="{{user['lastName'] if user['lastName']}}">
-                <label>Display Name</label>
+                <label>Display Name (required)</label>
                 <input type="text" name="displayName" placeholder="Display Name" value="{{user['displayName']}}">
                 <label>Company</label>
                 <input type="text" name="company" placeholder="Company" value="{{user['company'] if user['company']}}">
-                <label>Username</label>
+                <label>Username (required)</label>
                 <input type="text" name="uname" placeholder="Username" value="{{user['userName'] if user['userName']}}">
                 {% if user['isAdmin'] %}
                     <p>Role: Admin</p>
@@ -52,15 +52,16 @@
                 <form id="nmSettingsForm" class="settingsForm">
                     <h1>NuMail Settings</h1>
                     {% for mb in usermb %}
+                        {% set theId = getId() %}
                         <h2>{{mb["mbName"]}}@{{domain}}</h2>
-                        <input type="hidden" name="hidden_{{mb['mbName']}}" value="{{mb['mbName']}}">
+                        <input type="hidden" name="hidden_{{ theId }}" value="{{mb['mbName']}}">
                         <div class="checkbox">
-                            <input type="checkbox" name="canSend_{{mb['mbName']}}" id="canSend_{{mb['mbName']}}" {{"checked" if mb["mbSend"]}}>
-                            <label for="canSend_{{mb['mbName']}}">Can Send</label>
+                            <input type="checkbox" name="canSend_{{ theId }}" id="canSend_{{ theId }}" {{"checked" if mb["mbSend"]}}>
+                            <label for="canSend_{{ theId }}">Can Send</label>
                         </div>
                         <div class="checkbox">
-                            <input type="checkbox" name="canReceive_{{mb['mbName']}}" id="canReceive_{{mb['mbName']}}" {{"checked" if mb["mbReceive"]}}>
-                            <label for="canReceive_{{mb['mbName']}}">Can Receive</label>
+                            <input type="checkbox" name="canReceive_{{ theId }}" id="canReceive_{{ theId }}" {{"checked" if mb["mbReceive"]}}>
+                            <label for="canReceive_{{ theId }}">Can Receive</label>
                         </div>
                     {% endfor %}
                     <button type="submit">Save</button>
@@ -92,17 +93,17 @@
                     <form id="userSettingsForm" class="settingsForm">
                         <h1>Account</h1>
                         <input type="hidden" name="user" id="accountUser">
-                        <label>Password</label>
+                        <label>Password (required)</label>
                         <input type="password" name="pwd" placeholder="New Password">
                         <label>First Name</label>
                         <input type="text" name="fname" placeholder="First Name" id="accountFName">
                         <label>Last Name</label>
                         <input type="text" name="lname" placeholder="Last Name" id="accountLName">
-                        <label>Display Name</label>
+                        <label>Display Name (required)</label>
                         <input type="text" name="displayName" placeholder="Display Name" id="accountDName">
                         <label>Company</label>
                         <input type="text" name="company" placeholder="Company" id="accountCompany">
-                        <label>Username</label>
+                        <label>Username (required)</label>
                         <input type="text" name="uname" placeholder="Username" id="accountUName">
                         <div class="checkbox">
                             <input type="checkbox" name="isAdmin" id="isAdmin">
@@ -138,11 +139,17 @@
                 <div class="popup-main">
                     <form id="createUserForm" class="settingsForm">
                         <h1>Create Account</h1>
+                        <label>Password (required)</label>
                         <input type="password" name="pwd" placeholder="Password">
-                        <input type="text" name="uname" placeholder="Username (cannot be changed)">
+                        <label>Username (required)</label>
+                        <input type="text" name="uname" placeholder="Username">
+                        <label>First Name</label>
                         <input type="text" name="fname" placeholder="First Name">
+                        <label>Last Name</label>
                         <input type="text" name="lname" placeholder="Last Name">
+                        <label>Display Name (required)</label>
                         <input type="text" name="displayName" placeholder="Display Name">
+                        <label>Company</label>
                         <input type="text" name="company" placeholder="Company">
                         <div class="checkbox">
                             <input type="checkbox" name="isAdmin" id="isAdminNew">
@@ -154,6 +161,14 @@
             </div>
         </div>
     {% endif %}
+    <script>
+        {% set curAllIds = getId(current=true) %}
+        var ids = [
+            {% for ind_id in curAllIds %}
+                "{{ind_id}}",
+            {% endfor %}
+        ];
+    </script>
     <script src="{{ url_for('static', filename='js/settings.js') }}"></script>
 </body>
 </html>

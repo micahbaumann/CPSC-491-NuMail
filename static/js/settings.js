@@ -1,3 +1,17 @@
+function genId(length = 10) {
+    let random = ""
+
+    while (random == "" || ids.indexOf(random) != -1) {
+        random = Array.from({ length }, () =>
+            'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+                .charAt(Math.floor(Math.random() * 62))
+        ).join('');
+    }
+
+    ids.push(random)
+    return random;
+}
+
 let selfForm = document.getElementById("settingsForm");
 selfForm.addEventListener("submit", async function(e) {
     e.preventDefault();
@@ -217,6 +231,7 @@ function toggleOverlay(overlayId, userId=null, close=false) {
 
         if (arrayUserId.length !== 0) {
             for (let index = 0; index < arrayUserId.length; index++) {
+                const theId = genId();
                 const element = ALL_MAILBOXES[arrayUserId[index]];
                 let parentContainer = document.getElementById('addMB');
 
@@ -228,7 +243,7 @@ function toggleOverlay(overlayId, userId=null, close=false) {
 
                 const hidden = document.createElement('input');
                 hidden.type = 'hidden';
-                hidden.name = "hidden_"+element["mbName"];
+                hidden.name = "hidden_"+theId;
                 hidden.value = element["mbName"];
                 
                 parentContainer.appendChild(hidden);
@@ -253,9 +268,9 @@ function toggleOverlay(overlayId, userId=null, close=false) {
                     return checkboxDiv;
                 }
 
-                const canSendCheckbox = createCheckbox('canSend_'+element["mbName"], 'canSendAccount_'+element["mbName"], 'Can Send', element["mbSend"]);
-                const canReceiveCheckbox = createCheckbox('canReceive_'+element["mbName"], 'canReceiveAccount_'+element["mbName"], 'Can Receive', element["mbReceive"]);
-                const deleteCheckbox = createCheckbox('delete_'+element["mbName"], 'delete_'+element["mbName"], 'Delete Mailbox', false);
+                const canSendCheckbox = createCheckbox('canSend_'+theId, 'canSendAccount_'+theId, 'Can Send', element["mbSend"]);
+                const canReceiveCheckbox = createCheckbox('canReceive_'+theId, 'canReceiveAccount_'+theId, 'Can Receive', element["mbReceive"]);
+                const deleteCheckbox = createCheckbox('delete_'+theId, 'delete_'+theId, 'Delete Mailbox', false);
 
                 parentContainer.appendChild(canSendCheckbox);
                 parentContainer.appendChild(canReceiveCheckbox);

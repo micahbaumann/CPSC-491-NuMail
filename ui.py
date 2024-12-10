@@ -3,6 +3,7 @@ import zipfile
 import io
 import time
 import base64
+import random
 
 from pathlib import Path
 from flask import Flask, render_template, session, redirect, url_for, request, jsonify, abort, send_file
@@ -109,7 +110,21 @@ def settings():
             for key, value in box.items()
         })
 
-    return render_template('settings.html', domain=server_settings["visible_domain"], user=currentUser, users=users_serializable, mailboxes=mailbox_serializable, usermb=current_user_mb)
+
+    ids = []
+
+    def getId(length = 10, current=False):
+        if current:
+            return ids
+        randomVal = ""
+        while randomVal == "" or randomVal in ids:
+            randomVal = ''.join(random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789') for _ in range(length))
+        
+        ids.append(randomVal)
+        return randomVal
+
+
+    return render_template('settings.html', domain=server_settings["visible_domain"], user=currentUser, users=users_serializable, mailboxes=mailbox_serializable, usermb=current_user_mb, getId=getId)
 
 @app.route('/usersettings', methods=['POST'])
 def usersettings():
@@ -230,28 +245,26 @@ def mbsettings():
     # print(input_fields)
     fields = []
     for key, value in input_fields.items():
-        hidden = re.search(r"hidden_([a-zA-Z0-9._\-]+)$", key, re.MULTILINE)
+        hidden = re.search(r"hidden_([a-zA-Z0-9]+)$", key, re.MULTILINE)
         if hidden:
             if value not in mailbox_names and not currentUser["isAdmin"]:
                 abort(403)
-            fields.append(value)
+            fields.append([hidden.group(1), value])
     
     for field in fields:
-        if f"canReceive_{field}" in input_fields:
-            update_send_receive(field, False, True)
+        if f"canReceive_{field[0]}" in input_fields:
+            update_send_receive(field[1], False, True)
         else:
-            update_send_receive(field, False, False)
+            update_send_receive(field[1], False, False)
 
-        if f"canSend_{field}" in input_fields:
-            update_send_receive(field, True, True)
+        if f"canSend_{field[0]}" in input_fields:
+            update_send_receive(field[1], True, True)
         else:
-            update_send_receive(field, True, False)
+            update_send_receive(field[1], True, False)
         
         if currentUser["isAdmin"]:
-            print(input_fields)
-            print(f"delete_{field}")
-            if f"delete_{field}" in input_fields:
-                delete_mailbox(field)
+            if f"delete_{field[0]}" in input_fields:
+                delete_mailbox(field[1])
 
     return jsonify({
         "status": "success",
