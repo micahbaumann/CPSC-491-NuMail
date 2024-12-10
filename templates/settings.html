@@ -28,10 +28,15 @@
             <form id="settingsForm" class="settingsForm">
                 <h1>Account</h1>
                 <input type="hidden" name="user" value="{{user['userId']}}">
+                <label>Password</label>
                 <input type="password" name="pwd" placeholder="New Password">
+                <label>First Name</label>
                 <input type="text" name="fname" placeholder="First Name" value="{{user['firstName'] if user['firstName']}}">
+                <label>Last Name</label>
                 <input type="text" name="lname" placeholder="Last Name" value="{{user['lastName'] if user['lastName']}}">
+                <label>Display Name</label>
                 <input type="text" name="displayName" placeholder="Display Name" value="{{user['displayName']}}">
+                <label>Company</label>
                 <input type="text" name="company" placeholder="Company" value="{{user['company'] if user['company']}}">
                 {% if user['isAdmin'] %}
                     <p>Role: Admin</p>
@@ -84,10 +89,15 @@
                     <form id="userSettingsForm" class="settingsForm">
                         <h1>Account</h1>
                         <input type="hidden" name="user" id="accountUser">
+                        <label>Password</label>
                         <input type="password" name="pwd" placeholder="New Password">
+                        <label>First Name</label>
                         <input type="text" name="fname" placeholder="First Name" id="accountFName">
+                        <label>Last Name</label>
                         <input type="text" name="lname" placeholder="Last Name" id="accountLName">
+                        <label>Display Name</label>
                         <input type="text" name="displayName" placeholder="Display Name" id="accountDName">
+                        <label>Company</label>
                         <input type="text" name="company" placeholder="Company" id="accountCompany">
                         <div class="checkbox">
                             <input type="checkbox" name="isAdmin" id="isAdmin">
