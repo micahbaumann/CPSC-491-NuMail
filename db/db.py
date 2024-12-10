@@ -4,7 +4,7 @@ import bcrypt
 import uuid
 import base64
 import json
-import datetime
+from datetime import datetime
 
 from logger.logger import server_log
 from errors.nuerrors import NuMailError
@@ -202,7 +202,7 @@ def get_user_messages(user_id: int | None = None, user_name: str = "") -> list |
         if len(messages) > 0:
             sorted_messages = sorted(
                 messages,
-                key=lambda x: datetime.strptime(x["messageTime"], "%Y-%m-%d %H:%M:%S"),
+                key=lambda x: datetime.strptime(x["messageTimestamp"], "%Y-%m-%d %H:%M:%S"),
                 reverse=True
             )
             return sorted_messages
