@@ -138,7 +138,7 @@ def usersettings():
     if not update_user_info:
         abort(403)
 
-    if uname_field and update_user_info["userName"] != uname_field:
+    if update_user_info["userName"] != uname_field:
         if update_user_info["userName"] == "admin":
             return jsonify({
                 "status": "error",
@@ -166,28 +166,28 @@ def usersettings():
         if str(currentUser["userId"]) == str(user_field):
             session["username"] = uname_field.strip()
 
-    if fname_field:
+    if fname_field != update_user_info["firstName"]:
         if not update_user(user_field, "firstName", fname_field):
             return jsonify({
                 "status": "error",
                 "message": "First Name Error"
             })
     
-    if lname_field:
+    if lname_field != update_user_info["lastName"]:
         if not update_user(user_field, "lastName", lname_field):
             return jsonify({
                 "status": "error",
                 "message": "Last Name Error"
             })
 
-    if displayName_field:
+    if displayName_field != update_user_info["displayName"]:
         if not update_user(user_field, "displayName", displayName_field):
             return jsonify({
                 "status": "error",
                 "message": "Display Name Error"
             })
     
-    if company_field:
+    if company_field != update_user_info["company"]:
         if not update_user(user_field, "company", company_field):
             return jsonify({
                 "status": "error",
@@ -248,6 +248,7 @@ def mbsettings():
             update_send_receive(field, True, False)
         
         if currentUser["isAdmin"]:
+            print(input_fields)
             if f"delete_{field}" in input_fields:
                 delete_mailbox(field)
 
@@ -298,6 +299,11 @@ def createmb():
     receive_field = request.form.get("canReceive")
 
     if not email_field:
+        return jsonify({
+            "status": "error",
+            "message": "Invalid Email"
+        })
+    elif not re.search(r"^[a-zA-Z0-9.!#$%&'*+\-/=?^_`{|}~]+$", email_field, re.MULTILINE):
         return jsonify({
             "status": "error",
             "message": "Invalid Email"
