@@ -99,7 +99,7 @@ def check_user_pwd(user_name: str, password: str) -> bool:
         else:
             user_pwd = db.execute("SELECT password FROM Users WHERE userName = ?", (user_name,)).fetchone()
             encoded_user_pwd = user_pwd[0]
-            if type(encoded_user_pwd) != "bytes":
+            if not isinstance(encoded_user_pwd, bytes):
                 encoded_user_pwd = encoded_user_pwd.encode('utf-8')
             return bcrypt.checkpw(password.encode('utf-8'), encoded_user_pwd)
 
