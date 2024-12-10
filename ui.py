@@ -540,7 +540,10 @@ async def send():
                     try:
                         chck = await server_request.send(f"CHCK RECEIVE MAIL: <{to_email}>")
                         if read_numail(chck)[0] != "250":
-                            # print(10)
+                            return jsonify({
+                                "status": "error",
+                                "message": "Unable to send. To address cannot receive."
+                            })
                             raise
                         
                         # print(11)
@@ -548,11 +551,19 @@ async def send():
                         # print(from_adr)
                         # print(from_email)
                         if read_numail(from_adr)[0] != "250":
+                            return jsonify({
+                                "status": "error",
+                                "message": "Unable to send. Invalid from address."
+                            })
                             raise
 
                         # print(12)
                         to_adr = await server_request.send(f"RCPT TO: {to_email}")
                         if read_numail(to_adr)[0] != "250":
+                            return jsonify({
+                                "status": "error",
+                                "message": "Unable to send. Invalid to address."
+                            })
                             raise
 
                         # print(13)
@@ -595,7 +606,8 @@ async def send():
                         dlvr_parts = read_numail(dlvr)
                         if dlvr_parts[0] != "250":
                             raise
-
+                        
+                        await server_request.send(f"QUIT")
                         update_receiver(upload_status["message"]["messageId"], dlvr_parts[2].split()[0])
                         update_sent(upload_status["message"]["messageId"])
                     except:
