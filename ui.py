@@ -249,6 +249,7 @@ def mbsettings():
         
         if currentUser["isAdmin"]:
             print(input_fields)
+            print(f"delete_{field}")
             if f"delete_{field}" in input_fields:
                 delete_mailbox(field)
 
