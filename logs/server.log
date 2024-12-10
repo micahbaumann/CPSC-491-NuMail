@@ -5868,3 +5868,16 @@ Error binding parameter 8: type 'list' is not supported
 [2024-12-10 15:20:49.036073] [message] Shutdown 127.0.0.1 port 7777
 [2024-12-10 15:20:49.036157] [message] Shutdown 127.0.0.1 port 7778
 [2024-12-10 15:20:49.036231] [message] Shutdown 127.0.0.1 port 7779
+[2024-12-10 15:21:02.612357] [message] Server listening on 127.0.0.1 port 7777
+[2024-12-10 15:21:02.612450] [message] Server listening on 127.0.0.1 port 7778
+[2024-12-10 15:21:02.612514] [message] Server listening on 127.0.0.1 port 7779
+[2024-12-10 15:22:11.889854] [message] New connection from 127.0.0.1 port 54872
+[2024-12-10 15:22:11.892634] [message] Connection 127.0.0.1 port 54872 closed
+[2024-12-10 15:22:33.466389] [message] New connection from 127.0.0.1 port 58764
+[2024-12-10 15:22:33.473226] [message] Connection 127.0.0.1 port 58764 closed
+[2024-12-10 15:24:27.678995] [message] New connection from 127.0.0.1 port 42354
+[2024-12-10 15:24:27.684055] [message] Connection 127.0.0.1 port 42354 closed
+[2024-12-10 15:33:29.967725] [message] Shutting down
+[2024-12-10 15:33:29.970030] [message] Shutdown 127.0.0.1 port 7777
+[2024-12-10 15:33:29.970201] [message] Shutdown 127.0.0.1 port 7778
+[2024-12-10 15:33:29.970336] [message] Shutdown 127.0.0.1 port 7779
