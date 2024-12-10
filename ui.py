@@ -123,6 +123,7 @@ def usersettings():
     displayName_field = request.form.get('displayName')
     company_field = request.form.get('company')
     admin_field = request.form.get('isAdmin')
+    uname_field = request.form.get('uname')
 
     if not user_field:
         return jsonify({
@@ -132,6 +133,38 @@ def usersettings():
     currentUser = get_user(session["username"])
     if not currentUser or (str(currentUser["userId"]) != str(user_field) and not currentUser["isAdmin"]):
         abort(403)
+    
+    update_user_info = get_user_id(user_field)
+    if not update_user_info:
+        abort(403)
+
+    if uname_field and update_user_info["userName"] != uname_field:
+        if update_user_info["userName"] == "admin":
+            return jsonify({
+                "status": "error",
+                "message": "Unable to change username"
+            })
+
+        if not re.search(r"^[0-9_a-zA-Z\-.]+$", uname_field.strip(), re.MULTILINE):
+            return jsonify({
+                "status": "error",
+                "message": "Username invalid"
+            })
+        
+        test_user = get_user(uname_field.strip())
+        if test_user:
+            return jsonify({
+                "status": "error",
+                "message": "Username taken"
+            })
+        if not update_user(user_field, "userName", uname_field.strip()):
+            return jsonify({
+                "status": "error",
+                "message": "Username Error"
+            })
+        
+        if str(currentUser["userId"]) == str(user_field):
+            session["username"] = uname_field.strip()
 
     if fname_field:
         if not update_user(user_field, "firstName", fname_field):
@@ -168,7 +201,7 @@ def usersettings():
                 "message": "Password Error"
             })
 
-    if currentUser["isAdmin"]:
+    if currentUser["isAdmin"] and not request.form.get('self'):
         if not update_user(user_field, "isAdmin", admin_field if admin_field else False):
             return jsonify({
                 "status": "error",

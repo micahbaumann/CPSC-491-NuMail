@@ -28,6 +28,7 @@
             <form id="settingsForm" class="settingsForm">
                 <h1>Account</h1>
                 <input type="hidden" name="user" value="{{user['userId']}}">
+                <input type="hidden" name="self" value="true">
                 <label>Password</label>
                 <input type="password" name="pwd" placeholder="New Password">
                 <label>First Name</label>
@@ -38,6 +39,8 @@
                 <input type="text" name="displayName" placeholder="Display Name" value="{{user['displayName']}}">
                 <label>Company</label>
                 <input type="text" name="company" placeholder="Company" value="{{user['company'] if user['company']}}">
+                <label>Username</label>
+                <input type="text" name="uname" placeholder="Username" value="{{user['userName'] if user['userName']}}">
                 {% if user['isAdmin'] %}
                     <p>Role: Admin</p>
                 {% else %}
@@ -99,6 +102,8 @@
                         <input type="text" name="displayName" placeholder="Display Name" id="accountDName">
                         <label>Company</label>
                         <input type="text" name="company" placeholder="Company" id="accountCompany">
+                        <label>Username</label>
+                        <input type="text" name="uname" placeholder="Username" id="accountUName">
                         <div class="checkbox">
                             <input type="checkbox" name="isAdmin" id="isAdmin">
                             <label for="isAdmin">Is Admin</label>

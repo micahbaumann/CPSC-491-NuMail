@@ -192,6 +192,10 @@ function toggleOverlay(overlayId, userId=null, close=false) {
                 document.getElementById("accountCompany").value = ALL_USERS[arrayUserId]["company"];
             }
 
+            if (ALL_USERS[arrayUserId]["userName"] !== null) {
+                document.getElementById("accountUName").value = ALL_USERS[arrayUserId]["userName"];
+            }
+
             document.getElementById("isAdmin").checked = ALL_USERS[arrayUserId]["isAdmin"];
 
             let overlay = document.getElementById(overlayId);
