@@ -130,8 +130,15 @@ class NuMailRequest:
             raise NuMailError(code="7.6.2", message="Connection not open")
         else:
             try:
-                self.writer.write(MessageLine(message, self.message_info).bytes())
-                await self.writer.drain()
+                # self.writer.write(MessageLine(message, self.message_info).bytes())
+                # await self.writer.drain()
+                total_size = len(message)
+                sent = 0
+                while sent < total_size:
+                    chunk = message[sent:sent + 1402]
+                    self.writer.write(MessageLine(chunk, self.message_info).bytes())
+                    await self.writer.drain()
+                    sent += len(chunk)
             except asyncio.TimeoutError:
                 raise NuMailError(code="7.6.5", message="Connection timeout")
             except ConnectionResetError:

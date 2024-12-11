@@ -6387,3 +6387,77 @@ a bytes-like object is required, not 'str'
 [2024-12-11 01:59:55.658245] [message] Shutdown 127.0.0.1 port 7777
 [2024-12-11 01:59:55.658650] [message] Shutdown 127.0.0.1 port 7778
 [2024-12-11 01:59:55.658897] [message] Shutdown 127.0.0.1 port 7779
+[2024-12-11 02:04:30.344124] [message] Server listening on 127.0.0.1 port 7777
+[2024-12-11 02:04:30.344408] [message] Server listening on 127.0.0.1 port 7778
+[2024-12-11 02:04:30.344619] [message] Server listening on 127.0.0.1 port 7779
+[2024-12-11 02:04:42.706562] [message] New connection from 127.0.0.1 port 55100
+[2024-12-11 02:04:43.317263] [message] Connection 127.0.0.1 port 55100 closed
+[2024-12-11 02:05:09.520812] [message] Shutting down
+[2024-12-11 02:05:09.521366] [message] Shutdown 127.0.0.1 port 7777
+[2024-12-11 02:05:09.521835] [message] Shutdown 127.0.0.1 port 7778
+[2024-12-11 02:05:09.522231] [message] Shutdown 127.0.0.1 port 7779
+[2024-12-11 02:06:40.730982] [message] Server listening on 127.0.0.1 port 7777
+[2024-12-11 02:06:40.731243] [message] Server listening on 127.0.0.1 port 7778
+[2024-12-11 02:06:40.731503] [message] Server listening on 127.0.0.1 port 7779
+[2024-12-11 02:07:19.123195] [message] New connection from 127.0.0.1 port 34786
+[2024-12-11 02:07:19.388125] [message] Connection 127.0.0.1 port 34786 closed
+[2024-12-11 02:08:14.416807] [message] New connection from 127.0.0.1 port 44424
+[2024-12-11 02:08:14.451823] [message] Connection 127.0.0.1 port 44424 closed
+[2024-12-11 02:08:31.472749] [message] New connection from 127.0.0.1 port 48412
+[2024-12-11 02:08:31.537720] [message] Connection 127.0.0.1 port 48412 closed
+[2024-12-11 02:08:55.658046] [message] New connection from 127.0.0.1 port 45592
+[2024-12-11 02:08:55.706718] [message] Connection 127.0.0.1 port 45592 closed
+[2024-12-11 02:08:57.803417] [message] New connection from 127.0.0.1 port 45606
+[2024-12-11 02:08:57.853441] [message] Connection 127.0.0.1 port 45606 closed
+[2024-12-11 02:09:00.380381] [message] New connection from 127.0.0.1 port 45612
+[2024-12-11 02:09:00.423367] [message] Connection 127.0.0.1 port 45612 closed
+[2024-12-11 02:09:02.702764] [message] New connection from 127.0.0.1 port 45626
+[2024-12-11 02:09:02.754278] [message] Connection 127.0.0.1 port 45626 closed
+[2024-12-11 02:09:04.990751] [message] New connection from 127.0.0.1 port 54902
+[2024-12-11 02:09:05.035300] [message] Connection 127.0.0.1 port 54902 closed
+[2024-12-11 02:13:45.722616] [message] New connection from 127.0.0.1 port 52192
+[2024-12-11 02:13:45.889521] [message] Connection 127.0.0.1 port 52192 closed
+[2024-12-11 02:13:47.671508] [message] New connection from 127.0.0.1 port 52200
+[2024-12-11 02:13:47.715143] [message] Connection 127.0.0.1 port 52200 closed
+[2024-12-11 02:13:49.400199] [message] New connection from 127.0.0.1 port 52212
+[2024-12-11 02:13:49.431819] [message] Connection 127.0.0.1 port 52212 closed
+[2024-12-11 02:13:50.705209] [message] New connection from 127.0.0.1 port 52222
+[2024-12-11 02:13:50.737681] [message] Connection 127.0.0.1 port 52222 closed
+[2024-12-11 02:13:51.706680] [message] New connection from 127.0.0.1 port 52228
+[2024-12-11 02:13:51.738651] [message] Connection 127.0.0.1 port 52228 closed
+[2024-12-11 02:14:01.143445] [message] New connection from 127.0.0.1 port 39282
+[2024-12-11 02:14:01.198943] [message] Connection 127.0.0.1 port 39282 closed
+[2024-12-11 02:14:02.761220] [message] New connection from 127.0.0.1 port 39284
+[2024-12-11 02:14:02.819694] [message] Connection 127.0.0.1 port 39284 closed
+[2024-12-11 02:14:04.212284] [message] New connection from 127.0.0.1 port 39300
+[2024-12-11 02:14:04.265727] [message] Connection 127.0.0.1 port 39300 closed
+[2024-12-11 02:14:05.773609] [message] New connection from 127.0.0.1 port 50358
+[2024-12-11 02:14:05.818924] [message] Connection 127.0.0.1 port 50358 closed
+[2024-12-11 02:14:07.269605] [message] New connection from 127.0.0.1 port 50360
+[2024-12-11 02:14:07.320655] [message] Connection 127.0.0.1 port 50360 closed
+[2024-12-11 02:14:54.391812] [message] New connection from 127.0.0.1 port 35994
+[2024-12-11 02:14:54.424738] [message] Connection 127.0.0.1 port 35994 closed
+[2024-12-11 02:14:56.648533] [message] New connection from 127.0.0.1 port 59798
+[2024-12-11 02:14:56.679152] [message] Connection 127.0.0.1 port 59798 closed
+[2024-12-11 02:14:57.952254] [message] New connection from 127.0.0.1 port 59810
+[2024-12-11 02:14:57.981534] [message] Connection 127.0.0.1 port 59810 closed
+[2024-12-11 02:14:59.692239] [message] New connection from 127.0.0.1 port 59816
+[2024-12-11 02:14:59.724202] [message] Connection 127.0.0.1 port 59816 closed
+[2024-12-11 02:15:02.761418] [message] New connection from 127.0.0.1 port 59818
+[2024-12-11 02:15:02.789916] [message] Connection 127.0.0.1 port 59818 closed
+[2024-12-11 02:15:05.483113] [message] New connection from 127.0.0.1 port 58984
+[2024-12-11 02:15:05.514285] [message] Connection 127.0.0.1 port 58984 closed
+[2024-12-11 02:15:07.171421] [message] New connection from 127.0.0.1 port 59000
+[2024-12-11 02:15:07.205744] [message] Connection 127.0.0.1 port 59000 closed
+[2024-12-11 02:15:08.897769] [message] New connection from 127.0.0.1 port 59016
+[2024-12-11 02:15:08.927462] [message] Connection 127.0.0.1 port 59016 closed
+[2024-12-11 02:15:10.307481] [message] New connection from 127.0.0.1 port 59026
+[2024-12-11 02:15:10.340036] [message] Connection 127.0.0.1 port 59026 closed
+[2024-12-11 02:15:11.431052] [message] New connection from 127.0.0.1 port 59034
+[2024-12-11 02:15:11.464688] [message] Connection 127.0.0.1 port 59034 closed
+[2024-12-11 02:15:12.546585] [message] New connection from 127.0.0.1 port 59048
+[2024-12-11 02:15:12.576912] [message] Connection 127.0.0.1 port 59048 closed
+[2024-12-11 02:15:46.176022] [message] Shutting down
+[2024-12-11 02:15:46.176307] [message] Shutdown 127.0.0.1 port 7777
+[2024-12-11 02:15:46.176497] [message] Shutdown 127.0.0.1 port 7778
+[2024-12-11 02:15:46.176722] [message] Shutdown 127.0.0.1 port 7779
