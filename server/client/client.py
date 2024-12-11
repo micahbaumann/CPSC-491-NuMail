@@ -75,12 +75,28 @@ class NuMailRequest:
             try:
                 self.writer.write(MessageLine(message, self.message_info).bytes())
                 await self.writer.drain()
+                
+                total_return = ""
 
                 data = await asyncio.wait_for(self.reader.read(int(server_settings["buffer"])), float(server_settings["send_timeout"]))
                 return_data = data.decode()
+                total_return += return_data
+                # line_data = return_data.split("\r\n")
 
-                self.message_info.append("server", return_data)
-                return return_data
+                # for line in line_data:
+                #     self.message_info.append("server", line)
+                
+                # while len(line_data[-1]) > 3 and line_data[-1][3] == "-":
+                #     data = await asyncio.wait_for(self.reader.read(int(server_settings["buffer"])), float(server_settings["send_timeout"]))
+                #     return_data = data.decode()
+                #     line_data = return_data.split("\r\n")
+
+                #     for line in line_data:
+                #         self.message_info.append("server", line)
+                    
+                #     total_return += return_data
+
+                return total_return
             except asyncio.TimeoutError:
                 raise NuMailError(code="7.6.5", message="Connection timeout")
             except ConnectionResetError:

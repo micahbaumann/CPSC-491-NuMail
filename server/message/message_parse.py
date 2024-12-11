@@ -241,6 +241,10 @@ async def numail_parse(reader, writer, message_stack):
                             return False
                         
                         if to_parts[1] == server_settings["visible_domain"] or part_equals(server_settings["domain"], to_mx) or to_parts[1] == server_settings["domain"] or to_parts[1] == server_settings["public_ip"] or to_parts[1] == server_settings["ip"]:
+                            for at in message_stack.attachments:
+                                print(str(at))
+                                await at.retreive()
+
                             upload_status = receive_message(
                                 from_addr = message_stack.from_addr,
                                 to_addr = message_stack.to_addr,

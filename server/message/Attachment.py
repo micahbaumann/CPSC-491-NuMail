@@ -6,6 +6,10 @@ import quopri
 from pathlib import Path
 
 from errors.nuerrors import NuMailError
+from server.client.reader import read_numail, init_numail, NuMailRequest
+from server.client.dns import resolve_dns, decode_txt
+
+DEBUG_VARS = {}
 
 class Attachment:
     def __init__(self, data: str = "", data_raw = None, content_type: str = "", name: str = "", expire: int | None = None, expireOnRetrieve: bool = False, id: str = "", from_server: str = "") -> None:
@@ -113,15 +117,74 @@ class Attachment:
     def __repr__(self):
         return repr(self.attachments)
     
-    def retreive(self):
+    def __str__(self):
+        return str({
+            "expire":self.expire,
+            "expireOnRetrieve":self.expireOnRetrieve,
+            "data_raw":self.data_raw,
+            "content_type":self.content_type,
+            "name":self.name,
+            "location":self.location,
+            "id":self.id,
+            "attachments":self.attachments,
+            "retreive_file":self.retreive_file,
+            "from_server":self.from_server,
+        })
+
+    async def retreive(self):
+        to_mx = []
+        try:
+            to_dns_results = await resolve_dns(self.from_server, ["MX"])
+            to_mx = sorted(to_dns_results["MX"], key=lambda x: x["priority"])
+        except:
+            pass
+        
+        
+        numail_dns_settings = {}
+        try:
+            to_dns_results_txt = await resolve_dns(f"_numail.{self.from_server}", ["TXT"])
+            for record in to_dns_results_txt["TXT"]:
+                numail_dns_settings.update(decode_txt(record["text"]))
+        except:
+            pass
+            
+        if "to_port" in DEBUG_VARS.keys():
+            to_port = DEBUG_VARS["to_port"]
+        elif "port" in numail_dns_settings.keys() and numail_dns_settings["port"].isdigit():
+            to_port = int(numail_dns_settings["port"])
+        else:
+            to_port = 25
 
 
+        i = 1
+        loop_range_size = len(to_mx)
+        for domain in to_mx:
+            request = NuMailRequest(domain["host"], to_port)
+            try:
+                await request.connect()
+            except NuMailError as e:
+                if i == loop_range_size:
+                    raise NuMailError(code="7.9.2", message=f"Unable to retrieve attachment, cannot connect to server: {e}" )
+                else:
+                    i += 1
+                    continue
+            init = await init_numail(request) # bool
 
-        # Do this
+            if init:
+                try:
+                    atch_ret = await request.send(f"ATCH RETRIEVE: {self.id}")
+                    if read_numail(atch_ret)[0] != "250":
+                        # print(0)
+                        raise
+                    print(len('250-Attachment retrieved\r\n250-Content-Type: image/jpeg; name="269 (2020_08_07 21_09_46 UTC).jpeg"\r\n250-Content-Disposition: attachment; filename="269 (2020_08_07 21_09_46 UTC).jpeg"\r\n250-Content-Transfer-Encoding: base64\r\n250-'))
+                    print(len(atch_ret))
+                except:
+                    raise NuMailError(code="7.9.2", message=f"Unable to retrieve attachment, cannot connect to server" )
+            else:
+                raise NuMailError(code="7.9.2", message=f"Unable to retrieve attachment, cannot connect to server" )
 
-
-
-        pass
+            await request.close()
+            break
     
     @staticmethod
     def safe_b64decode(b64_string):
