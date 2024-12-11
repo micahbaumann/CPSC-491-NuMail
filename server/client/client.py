@@ -73,28 +73,44 @@ class NuMailRequest:
             raise NuMailError(code="7.6.2", message="Connection not open")
         else:
             try:
-                self.writer.write(MessageLine(message, self.message_info).bytes())
-                await self.writer.drain()
+                total_size = len(message)
+                sent = 0
+                while sent < total_size:
+                    chunk = message[sent:sent + 1402]
+                    self.writer.write(MessageLine(chunk, self.message_info).bytes())
+                    await self.writer.drain()
+                    sent += len(chunk)
+
+                # self.writer.write(MessageLine(message, self.message_info).bytes())
+                # await self.writer.drain()
                 
                 total_return = ""
 
                 data = await asyncio.wait_for(self.reader.read(int(server_settings["buffer"])), float(server_settings["send_timeout"]))
                 return_data = data.decode()
+                # print(return_data)
                 total_return += return_data
-                # line_data = return_data.split("\r\n")
+                line_data = return_data.split("\r\n")
+                while("" in line_data):
+                    line_data.remove("")
 
-                # for line in line_data:
-                #     self.message_info.append("server", line)
-                
-                # while len(line_data[-1]) > 3 and line_data[-1][3] == "-":
-                #     data = await asyncio.wait_for(self.reader.read(int(server_settings["buffer"])), float(server_settings["send_timeout"]))
-                #     return_data = data.decode()
-                #     line_data = return_data.split("\r\n")
+                for line in line_data:
+                    self.message_info.append("server", line)
+                # print(f"yess {line_data[-1]} {len(line_data[-1])}")
+                # print(line_data)
+                while len(line_data[-1]) > 3 and line_data[-1][3] == "-":
+                    # print("yesss")
+                    data = await asyncio.wait_for(self.reader.read(int(server_settings["buffer"])), float(server_settings["send_timeout"]))
+                    return_data = data.decode()
+                    # print(return_data)
+                    line_data = return_data.split("\r\n")
+                    while("" in line_data):
+                        line_data.remove("")
 
-                #     for line in line_data:
-                #         self.message_info.append("server", line)
+                    for line in line_data:
+                        self.message_info.append("server", line)
                     
-                #     total_return += return_data
+                    total_return += return_data
 
                 return total_return
             except asyncio.TimeoutError:

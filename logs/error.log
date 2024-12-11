@@ -618,3 +618,9 @@
 [2024-12-09 02:47:33.806711] [error] NuMail Server Error 7.2.2: Port and/or address already in use
 [2024-12-10 14:06:18.542601] [error] NuMail Server Error 7.5.1: Mailbox "t2" already exists
 [2024-12-10 15:05:52.512073] [error] NuMail Server Error 7.5.1: Mailbox "user" already exists
+[2024-12-10 19:22:43.127132] [error] NuMail Server Error 7.7.2: NuMail DNS resolver error, "(4, 'Domain name not found')"
+[2024-12-10 19:22:43.157217] [error] NuMail Server Error 7.7.2: NuMail DNS resolver error, "(4, 'Domain name not found')"
+[2024-12-10 23:27:15.111664] [error] NuMail Server Error 7.6.0: NuMail request error
+[2024-12-10 23:27:15.111903] [error] NuMail Server Error 7.9.2: Unable to retrieve attachment, cannot connect to server
+[2024-12-10 23:27:44.720469] [error] NuMail Server Error 7.6.0: NuMail request error
+[2024-12-10 23:27:44.720643] [error] NuMail Server Error 7.9.2: Unable to retrieve attachment, cannot connect to server

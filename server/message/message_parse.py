@@ -459,8 +459,19 @@ async def numail_parse(reader, writer, message_stack):
                                     writer.write(MessageLine(f"250-Content-Transfer-Encoding: base64", message_stack).bytes())
                                     writer.write(MessageLine(f"250-", message_stack).bytes())
                                     await writer.drain()
-                                    writer.write(MessageLine(f"250 {attch_file}", message_stack).bytes())
-                                    await writer.drain()
+                                    total_size = len(attch_file)
+                                    sent = 0
+                                    # print(total_size)
+                                    while sent < total_size:
+                                        if sent >= total_size - 500:
+                                            chunk = f"250 {attch_file[sent:sent + 500 - 4]}"
+                                        else:
+                                            chunk = f"250-{attch_file[sent:sent + 500 - 4]}"
+                                        writer.write(MessageLine(chunk, message_stack).bytes())
+                                        # print(sent)
+                                        # print(chunk)
+                                        await writer.drain()
+                                        sent += len(chunk)
                                 else:
                                     writer.write(MessageLine(f"250 Attachment retrieved", message_stack).bytes())
                                     await writer.drain()

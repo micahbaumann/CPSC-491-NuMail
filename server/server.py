@@ -2,6 +2,7 @@ import asyncio
 import argparse
 import signal
 import ast
+import socket
 
 from pathlib import Path
 
@@ -147,6 +148,8 @@ async def background_server(ip, port):
         if server.is_serving():
             print(f"Server listening on {ip} port {port}")
             server_log.log(f"Server listening on {ip} port {port}")
+            # for sock in server.sockets:
+            #     sock.setsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF, int(server_settings["buffer"]))
         else:
             raise NuMailError(code="7.2.1", message="Error starting server")
         
