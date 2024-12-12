@@ -245,6 +245,9 @@ async def numail_parse(reader, writer, message_stack):
                                 print(str(at))
                                 await at.retreive()
 
+                            for at in message_stack.attachments:
+                                print(str(at))
+                            
                             upload_status = receive_message(
                                 from_addr = message_stack.from_addr,
                                 to_addr = message_stack.to_addr,
@@ -463,15 +466,15 @@ async def numail_parse(reader, writer, message_stack):
                                     sent = 0
                                     # print(total_size)
                                     while sent < total_size:
-                                        if sent >= total_size - 500:
-                                            chunk = f"250 {attch_file[sent:sent + 500 - 4]}"
+                                        if sent >= total_size - 74:
+                                            chunk = f"250 {attch_file[sent:sent + 74]}"
                                         else:
-                                            chunk = f"250-{attch_file[sent:sent + 500 - 4]}"
+                                            chunk = f"250-{attch_file[sent:sent + 74]}"
                                         writer.write(MessageLine(chunk, message_stack).bytes())
                                         # print(sent)
                                         # print(chunk)
                                         await writer.drain()
-                                        sent += len(chunk)
+                                        sent += len(chunk)-4
                                 else:
                                     writer.write(MessageLine(f"250 Attachment retrieved", message_stack).bytes())
                                     await writer.drain()

@@ -638,3 +638,7 @@
 [2024-12-11 03:09:40.494886] [error] NuMail Server Error 7.9.2: Unable to retrieve attachment, cannot connect to server
 [2024-12-11 03:09:47.386177] [error] NuMail Server Error 7.9.2: Unable to retrieve attachment, cannot connect to server
 [2024-12-11 03:10:04.880314] [error] NuMail Server Error 7.9.2: Unable to retrieve attachment, cannot connect to server
+[2024-12-11 11:48:04.975190] [error] NuMail Server Error 7.6.1: Cannot connect to server
+[2024-12-11 14:01:00.264011] [error] NuMail Server Error 7.6.0: NuMail request error
+[2024-12-11 14:01:00.264606] [error] NuMail Server Error 7.9.2: Unable to retrieve attachment, cannot connect to server
+[2024-12-11 16:10:17.478872] [error] NuMail Server Error 7.6.1: Cannot connect to server

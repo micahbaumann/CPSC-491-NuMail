@@ -76,7 +76,7 @@ class NuMailRequest:
                 total_size = len(message)
                 sent = 0
                 while sent < total_size:
-                    chunk = message[sent:sent + 1402]
+                    chunk = message[sent:sent + 74]
                     self.writer.write(MessageLine(chunk, self.message_info).bytes())
                     await self.writer.drain()
                     sent += len(chunk)
@@ -135,7 +135,7 @@ class NuMailRequest:
                 total_size = len(message)
                 sent = 0
                 while sent < total_size:
-                    chunk = message[sent:sent + 1402]
+                    chunk = message[sent:sent + 74]
                     self.writer.write(MessageLine(chunk, self.message_info).bytes())
                     await self.writer.drain()
                     sent += len(chunk)
