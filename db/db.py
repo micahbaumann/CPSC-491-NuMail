@@ -236,7 +236,25 @@ def receive_message(from_addr: str, to_addr: str, msgt: int, data: str, readConf
             db.commit()
             msg_exists = db.execute("SELECT * FROM Messages WHERE messageId = ?", (msgid,)).fetchone()
             if msg_exists:
-                return dict(msg_exists)
+                attch_exists = []
+                for attachment in attachments:
+                    try:
+                        db.execute("INSERT INTO Attachments(attachmentId, attachmentMessage, attachmentLocation, attachmentName) VALUES (?, ?, ?, ?)", (attachment.id, msgid, str(attachment.location), attachment.name))
+                        db.commit()
+
+                        attchmt = db.execute("SELECT * FROM Attachments WHERE attachmentId = ?", (attachment.id,)).fetchone()
+                        if not attchmt:
+                            return False
+                        
+                        attch_exists.append(dict(attchmt))
+                    except Exception as e:
+                        # print(e)
+                        return False
+                    
+                return {
+                    "message": dict(msg_exists),
+                    "attachments": attch_exists
+                }
             else:
                 return False
         else:

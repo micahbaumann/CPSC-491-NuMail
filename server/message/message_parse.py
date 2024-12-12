@@ -256,7 +256,7 @@ async def numail_parse(reader, writer, message_stack):
                             )
 
                             if upload_status:
-                                writer.write(MessageLine(f"250 6.5.1 {upload_status["messageId"]} Message successfully delivered", message_stack).bytes())
+                                writer.write(MessageLine(f"250 6.5.1 {upload_status["message"]["messageId"]} Message successfully delivered", message_stack).bytes())
                                 await writer.drain()
 
 
