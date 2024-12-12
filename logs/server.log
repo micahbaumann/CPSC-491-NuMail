@@ -7111,3 +7111,49 @@ NuMail Server Error 7.9.2: Unable to retrieve attachment, cannot connect to serv
 [2024-12-11 16:11:33.844700] [message] Shutdown 127.0.0.1 port 7777
 [2024-12-11 16:11:33.844933] [message] Shutdown 127.0.0.1 port 7778
 [2024-12-11 16:11:33.845269] [message] Shutdown 127.0.0.1 port 7779
+[2024-12-11 16:18:45.620970] [message] Server listening on 127.0.0.1 port 7777
+[2024-12-11 16:18:45.621187] [message] Server listening on 127.0.0.1 port 7778
+[2024-12-11 16:18:45.621376] [message] Server listening on 127.0.0.1 port 7779
+[2024-12-11 16:23:14.101153] [message] New connection from 127.0.0.1 port 52816
+[2024-12-11 16:23:14.133184] [message] Connection 127.0.0.1 port 52816 closed
+[2024-12-11 16:31:06.050970] [message] New connection from 127.0.0.1 port 59870
+[2024-12-11 16:31:06.081129] [message] Connection 127.0.0.1 port 59870 closed
+[2024-12-11 16:38:43.256752] [message] New connection from 127.0.0.1 port 54428
+[2024-12-11 16:38:43.290885] [message] Connection 127.0.0.1 port 54428 closed
+[2024-12-11 17:42:44.648022] [message] New connection from 127.0.0.1 port 53588
+[2024-12-11 17:42:44.681048] [message] Connection 127.0.0.1 port 53588 closed
+[2024-12-11 17:43:17.353535] [message] New connection from 127.0.0.1 port 58304
+[2024-12-11 17:43:17.390821] [message] Connection 127.0.0.1 port 58304 closed
+[2024-12-11 17:44:21.521766] [message] New connection from 127.0.0.1 port 51084
+[2024-12-11 17:44:21.554578] [message] Connection 127.0.0.1 port 51084 closed
+[2024-12-11 17:52:22.783922] [message] New connection from 127.0.0.1 port 57956
+[2024-12-11 17:52:22.820224] [message] Connection 127.0.0.1 port 57956 closed
+[2024-12-11 17:52:35.818394] [message] New connection from 127.0.0.1 port 46478
+[2024-12-11 17:52:35.847419] [message] Connection 127.0.0.1 port 46478 closed
+[2024-12-11 17:55:55.210346] [message] New connection from 127.0.0.1 port 38544
+[2024-12-11 17:55:55.245533] [message] Connection 127.0.0.1 port 38544 closed
+[2024-12-11 17:56:51.114886] [message] New connection from 127.0.0.1 port 52458
+[2024-12-11 17:56:51.292001] [message] Connection 127.0.0.1 port 52458 closed
+[2024-12-11 18:11:17.157411] [message] New connection from 127.0.0.1 port 58130
+[2024-12-11 18:11:17.193411] [message] Connection 127.0.0.1 port 58130 closed
+[2024-12-11 18:12:27.928146] [message] New connection from 127.0.0.1 port 59736
+[2024-12-11 18:12:27.970735] [message] Connection 127.0.0.1 port 59736 closed
+[2024-12-11 18:12:50.269593] [message] New connection from 127.0.0.1 port 52634
+[2024-12-11 18:12:50.306085] [message] Connection 127.0.0.1 port 52634 closed
+[2024-12-11 18:14:44.324323] [message] New connection from 127.0.0.1 port 37432
+[2024-12-11 18:14:44.357953] [message] Connection 127.0.0.1 port 37432 closed
+[2024-12-11 18:17:46.515454] [message] New connection from 127.0.0.1 port 44130
+[2024-12-11 18:17:46.549242] [message] Connection 127.0.0.1 port 44130 closed
+[2024-12-11 18:27:32.715776] [message] Shutting down
+[2024-12-11 18:27:32.720626] [message] Shutdown 127.0.0.1 port 7777
+[2024-12-11 18:27:32.721584] [message] Shutdown 127.0.0.1 port 7778
+[2024-12-11 18:27:32.722383] [message] Shutdown 127.0.0.1 port 7779
+[2024-12-11 18:27:34.554427] [message] Server listening on 127.0.0.1 port 7777
+[2024-12-11 18:27:34.554732] [message] Server listening on 127.0.0.1 port 7778
+[2024-12-11 18:27:34.554975] [message] Server listening on 127.0.0.1 port 7779
+[2024-12-11 18:28:06.713728] [message] New connection from 127.0.0.1 port 34248
+[2024-12-11 18:28:06.751838] [message] Connection 127.0.0.1 port 34248 closed
+[2024-12-11 18:35:01.524547] [message] Shutting down
+[2024-12-11 18:35:01.524809] [message] Shutdown 127.0.0.1 port 7777
+[2024-12-11 18:35:01.525038] [message] Shutdown 127.0.0.1 port 7778
+[2024-12-11 18:35:01.525234] [message] Shutdown 127.0.0.1 port 7779

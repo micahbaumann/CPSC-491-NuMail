@@ -178,12 +178,12 @@ class Attachment:
                     if read_numail(atch_ret)[0] != "250":
                         # print(0)
                         raise
-                    print(len('250-Attachment retrieved\r\n250-Content-Type: image/jpeg; name="269 (2020_08_07 21_09_46 UTC).jpeg"\r\n250-Content-Disposition: attachment; filename="269 (2020_08_07 21_09_46 UTC).jpeg"\r\n250-Content-Transfer-Encoding: base64\r\n250-'))
-                    print(len(atch_ret))
+                    # print(len('250-Attachment retrieved\r\n250-Content-Type: image/jpeg; name="269 (2020_08_07 21_09_46 UTC).jpeg"\r\n250-Content-Disposition: attachment; filename="269 (2020_08_07 21_09_46 UTC).jpeg"\r\n250-Content-Transfer-Encoding: base64\r\n250-'))
+                    # print(len(atch_ret))
                     # print(len(atch_ret.split("\r\n")))
                     # print(atch_ret.split("\r\n")[0])
-                    with open("attch_output_6.txt", "w") as file:
-                        file.write(atch_ret)
+                    # with open("attch_output_6.txt", "w") as file:
+                    #     file.write(atch_ret)
                     separated_split = atch_ret.split("\r\n")
                     separated_split.pop(0)
                     separated = [re.sub(r'^.{4}', '', s) for s in separated_split]
@@ -195,8 +195,12 @@ class Attachment:
 
                     newAttachment = Attachment(data=full, id=self.id)
                     self.data_raw = newAttachment.data_raw
-                    with open("attch_output_3.txt", "w") as file:
-                        file.write(full)
+                    self.id = newAttachment.id
+                    self.name = newAttachment.name
+                    self.content_type = newAttachment.content_type
+                    self.location = newAttachment.location
+                    # with open("attch_output_3.txt", "w") as file:
+                    #     file.write(full)
                 except:
                     raise NuMailError(code="7.9.2", message=f"Unable to retrieve attachment, cannot connect to server" )
             else:

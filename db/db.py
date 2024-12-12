@@ -57,7 +57,7 @@ def update_user(user: str, setting: str, value: str) -> bool:
                 db.commit()
                 return True
             except Exception as e:
-                print(e)
+                # print(e)
                 return False
         else:
             try:
@@ -65,7 +65,7 @@ def update_user(user: str, setting: str, value: str) -> bool:
                 db.commit()
                 return True
             except Exception as e:
-                print(e)
+                # print(e)
                 return False
 
 def get_user(user_name: str) -> bool | dict:
@@ -269,7 +269,7 @@ def send_message(from_addr: str, to_addr: str, msgt: int, data: str, receiver_id
                         
                         attch_exists.append(dict(attchmt))
                     except Exception as e:
-                        print(e)
+                        # print(e)
                         return False
 
                 return {

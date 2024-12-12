@@ -596,20 +596,23 @@ async def send():
                                 raise
                         
                         # print(17)
-                        if read_confirm:
-                            readconfirm = await server_request.send("RDCF")
-                            if read_numail(readconfirm)[0] != "250":
-                                raise
+                        # if read_confirm:
+                        #     readconfirm = await server_request.send("RDCF")
+                        #     if read_numail(readconfirm)[0] != "250":
+                        #         raise
 
-                        # print(19)
+                        # print(17)
                         dlvr = await server_request.send(f"DLVR")
                         dlvr_parts = read_numail(dlvr)
+                        # print(dlvr_parts)
                         if dlvr_parts[0] != "250":
                             raise
                         
+                        # print(18)
                         await server_request.send(f"QUIT")
                         update_receiver(upload_status["message"]["messageId"], dlvr_parts[2].split()[0])
                         update_sent(upload_status["message"]["messageId"])
+                        # print(19)
                     except:
                         # print(3)
                         return jsonify({
