@@ -7251,3 +7251,7 @@ Connection lost
 [2024-12-16 18:14:42.154919] [message] Server listening on 127.0.0.1 port 7779
 [2024-12-16 18:14:45.136647] [message] New connection from 127.0.0.1 port 47032
 [2024-12-16 18:15:19.680030] [message] Connection 127.0.0.1 port 47032 closed
+[2024-12-16 18:21:58.018841] [message] Shutting down
+[2024-12-16 18:21:58.019999] [message] Shutdown 127.0.0.1 port 7777
+[2024-12-16 18:21:58.020105] [message] Shutdown 127.0.0.1 port 7778
+[2024-12-16 18:21:58.020194] [message] Shutdown 127.0.0.1 port 7779
