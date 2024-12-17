@@ -80,7 +80,7 @@ async def numail_parse(reader, writer, message_stack):
             elif check_command(trim_message, "RSET", 0):
                 writer.write(MessageLine(f"250 Ok", message_stack).bytes())
                 await writer.drain()
-                return "continue"
+                return "reset"
             elif check_command(trim_message, "NOOP", 0):
                 writer.write(MessageLine(f"250 Ok", message_stack).bytes())
                 await writer.drain()

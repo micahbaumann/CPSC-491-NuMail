@@ -62,9 +62,23 @@ async def handle_request(reader, writer):
                     writer.write(MessageLine(f"650 NuMail1.0", message_info).bytes())
                     await writer.drain()
                     parse_end = await numail_parse(reader, writer, message_info)
+                    if parse_end == "reset":
+                        check_numail = False
+                        message_info = NuMailMessage()
+                        message_info.set_client_ip(addr)
+                        writer.write(MessageLine(f"220 {server_self} NuMail Server {NUMAIL_SERVER_VERSION}", message_info).bytes())
+                        await writer.drain()
+                        parse_end = "continue"
                 else:
                     message_info.set_type("email")
                     parse_end = await email_parse(reader, writer, message_info)
+                    if parse_end == "reset":
+                        check_numail = False
+                        message_info = NuMailMessage()
+                        message_info.set_client_ip(addr)
+                        writer.write(MessageLine(f"220 {server_self} NuMail Server {NUMAIL_SERVER_VERSION}", message_info).bytes())
+                        await writer.drain()
+                        parse_end = "continue"
 
             elif trim_message == "EHLO" or (len(trim_message) > 4 and trim_message[:5] == "EHLO "):
                 check_numail = True
@@ -77,6 +91,13 @@ async def handle_request(reader, writer):
             elif trim_message == "HELO" or (len(trim_message) > 4 and trim_message[:5] == "HELO "):
                 message_info.set_type("email")
                 parse_end = await email_parse(reader, writer, message_info)
+                if parse_end == "reset":
+                    check_numail = False
+                    message_info = NuMailMessage()
+                    message_info.set_client_ip(addr)
+                    writer.write(MessageLine(f"220 {server_self} NuMail Server {NUMAIL_SERVER_VERSION}", message_info).bytes())
+                    await writer.drain()
+                    parse_end = "continue"
             elif trim_message == "NOOP" or (len(trim_message) > 4 and trim_message[:5] == "NOOP "):
                 writer.write(MessageLine(f"250 Ok", message_info).bytes())
                 await writer.drain()
