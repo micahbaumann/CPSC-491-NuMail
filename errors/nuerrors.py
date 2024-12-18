@@ -56,15 +56,15 @@ Mailbox Status:
     6.2.3 Receiver not using NuMail
     6.2.4 Mailbox ok and receiving read confirmations
     6.2.5 Mailbox not ok and not receiving read confirmations
-Network Error:
+Network Errors:
     6.4.2 Error connecting to server
-Delivery Error:
+Delivery Errors:
     6.5.0 Delivery Error
     6.5.1 No from address found or invalid from address
     6.5.2 No to address found or invalid to address
     6.5.3 No body address found or invalid body
     6.5.4 No message type found
-Attachment Error:
+Attachment Errors:
     6.6.0 Attachment Error
     6.6.1 Unable to retreive attachment
     6.6.2 Attachment Expired
