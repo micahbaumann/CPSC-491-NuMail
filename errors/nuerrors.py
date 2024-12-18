@@ -66,7 +66,7 @@ Delivery Errors:
     6.5.4 No message type found
 Attachment Errors:
     6.6.0 Attachment Error
-    6.6.1 Unable to retreive attachment
+    6.6.1 Unable to retrieve attachment
     6.6.2 Attachment Expired
 """
 
