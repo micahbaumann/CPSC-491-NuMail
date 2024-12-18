@@ -169,17 +169,20 @@ async def mod_chck(reader, writer, message, local_stack, state, loop, action="",
         if full_email:
             email_domain = full_email.group(2).strip()
             if email_domain == server_settings["visible_domain"] or email_domain == server_settings["domain"] or email_domain == server_settings["public_ip"] or email_domain == server_settings["ip"]:
-                mailbox = search_mailbox(full_email.group(1))
-                if mailbox:
-                    if mailbox["mbReadConf"]:
-                        writer.write(MessageLine(f"250 6.2.4 {full_email.group(1)}@{email_domain}... Recipient ok and receiving read confirmations", message).bytes())
-                        await writer.drain()
-                    else:
-                        writer.write(MessageLine(f"500 6.2.5 {full_email.group(1)}@{email_domain}... Recipient not ok and not receiving read confirmations", message).bytes())
-                        await writer.drain()
-                else:
-                    writer.write(MessageLine(f"550 Invalid mailbox", message).bytes())
-                    await writer.drain()
+                # Read confirm not enabled on this server
+                writer.write(MessageLine(f"500 6.2.5 {full_email.group(1)}@{email_domain}... Recipient not ok and not receiving read confirmations", message).bytes())
+                await writer.drain()
+                # mailbox = search_mailbox(full_email.group(1))
+                # if mailbox:
+                #     if mailbox["mbReadConf"]:
+                #         writer.write(MessageLine(f"250 6.2.4 {full_email.group(1)}@{email_domain}... Recipient ok and receiving read confirmations", message).bytes())
+                #         await writer.drain()
+                #     else:
+                #         writer.write(MessageLine(f"500 6.2.5 {full_email.group(1)}@{email_domain}... Recipient not ok and not receiving read confirmations", message).bytes())
+                #         await writer.drain()
+                # else:
+                #     writer.write(MessageLine(f"550 Invalid mailbox", message).bytes())
+                #     await writer.drain()
             else:
                 try:
                     mx = []
