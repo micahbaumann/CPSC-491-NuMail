@@ -132,6 +132,7 @@ class NuMailRequest:
             try:
                 # self.writer.write(MessageLine(message, self.message_info).bytes())
                 # await self.writer.drain()
+                # print(message)
                 total_size = len(message)
                 sent = 0
                 while sent < total_size:

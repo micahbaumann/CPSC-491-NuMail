@@ -328,11 +328,19 @@ async def numail_parse(reader, writer, message_stack):
 
                                                 # print(5)
                                                 message_split = message_stack.payload.split("\r\n")
+                                                i = 0
                                                 for line in message_split:
+                                                    if line == "":
+                                                        i += 1
+                                                        continue
                                                     send_line = line
                                                     if len(send_line) > 0 and send_line[0] == ".":
                                                         send_line = f".{send_line}"
+                                                    
+                                                    if i+1 < len(message_split) and message_split[i+1] == "":
+                                                        send_line = f"{send_line}\r\n"
                                                     await request.push(send_line)
+                                                    i += 1
 
                                                 payload = await request.send(".")
                                                 if read_numail(payload)[0] != "250":
