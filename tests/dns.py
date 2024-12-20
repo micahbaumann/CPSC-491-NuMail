@@ -1,4 +1,4 @@
-# From Chatgpt
+# created based off of Chatgpt
 import asyncio
 import aiodns
 

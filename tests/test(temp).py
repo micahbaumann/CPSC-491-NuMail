@@ -1,4 +1,4 @@
-# From Chatgpt
+
 
 # import asyncio
 
@@ -113,7 +113,7 @@
 
 
 
-# NOT FROM CHAT GPT FROM https://superfastpython.com/asyncio-server-background-task/
+# FROM https://superfastpython.com/asyncio-server-background-task/
 # import asyncio
 # import signal
  
@@ -176,7 +176,7 @@
 #         print("Program interrupted, shutting down...")
 
 
-# FROM CHAT GPT based off of https://superfastpython.com/asyncio-server-background-task/
+# based off of https://superfastpython.com/asyncio-server-background-task/
 import asyncio
 import signal
 
